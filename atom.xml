@@ -4,7 +4,7 @@
   <title><![CDATA[@Lenciel]]></title>
   <link href="http://lenciel.github.io/atom.xml" rel="self"/>
   <link href="http://lenciel.github.io/"/>
-  <updated>2013-10-11T22:58:19+08:00</updated>
+  <updated>2013-10-11T23:01:02+08:00</updated>
   <id>http://lenciel.github.io/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -12,5 +12,2521 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[No Clock On My Business]]></title>
+    <link href="http://lenciel.github.io/2013/10/no-clock-on-my-business/"/>
+    <updated>2013-10-09T00:37:00+08:00</updated>
+    <id>http://lenciel.github.io/2013/10/no-clock-on-my-business</id>
+    <content type="html"><![CDATA[<p><img src="http://lenciel.github.io/downloads/images/no_clock_on_my_business.gif" alt="No Clock On My Business" title="Don't touch me..." /></p>
+
+<blockquote><p>&#8220;There is no clock on my business!&#8221;</p><footer><strong>Coen Brothers</strong> <cite><a href="http://www.imdb.com/title/tt1403865/">True Grit (2010)</a></cite></footer></blockquote>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[HTTPS WHAT?]]></title>
+    <link href="http://lenciel.github.io/2013/09/https-what/"/>
+    <updated>2013-09-10T13:28:00+08:00</updated>
+    <id>http://lenciel.github.io/2013/09/https-what</id>
+    <content type="html"><![CDATA[<p>最近NSA相关话题很火。很多IT从业者都知道，HTTPS可以保护用户敏感的数据，但是说起HTTPS <em>到底</em> 是如何工作的，其实心里并不清楚。</p>
+
+<p>使用HTTPS之后，数据是如何被保护的？Client和Server之间如果有人在hacking，HTTPS建立的连接凭什么就是安全的？什么是安全证书？为什么有时候我们需要付钱才能买到一个？</p>
+
+<h3 id="a-series-of-tubes">A Series of Tubes</h3>
+
+<p>当你访问网页的时候，你发出的请求其实要翻越各种网关走很长的路，这一路上都可能有妖魔鬼怪在等着搞你，的数据。</p>
+
+<p><img src="http://lenciel.github.io/downloads/images/series_of_tubes.png" alt="A series of tubes" title="Don't touch me…" /></p>
+
+<p>一般我们访问网页的时候，请求使用的是HTTP，也就是Client和Server之间的数据是明文传送的。<a href="http://security.stackexchange.com/a/18861/4327">HTTP没有使用任何加密的原因有很多</a>:</p>
+
+<ul>
+  <li>加密会消耗更多的计算能力</li>
+  <li>加密会消耗更多的带宽</li>
+  <li>加密破坏了Cache</li>
+</ul>
+
+<p>当然，还有一个很多开发组织羞于承认的原因，加密增加了开发的难度。但是，只要是负责任的Web应用开发者，都不会让你的密码等关键信息以明文的方式传来传去。</p>
+
+<h3 id="transport-layer-security-tls">Transport Layer Security (TLS)</h3>
+
+<p>TLS作为SSL的前驱协议，常常被用来实现对HTTP连接的加密（比如用来实现HTTPS）。TLS是传输层的，因此在<a href="http://en.wikipedia.org/wiki/OSI_model#Examples">OSI模型</a>里面比HTTP更底层，换句话说，在HTTP连接之前，先要进行TLS连接的建立。</p>
+
+<p>TLS是一种混合型的加密系统，也就是说它使用了多种加密技术体系，比如：</p>
+
+<blockquote>
+  <p><strong>Public Key Cryptography</strong> </p>
+
+  <p><strong>Symmetric Key Cryptography</strong> </p>
+</blockquote>
+
+<h3 id="public-key-encryption">Public Key Encryption</h3>
+
+<p><code>Public Key Encryption</code>使用公钥私钥进行加密解密：通信中的各方都有一对公钥私钥。明文信息用公钥加密成密文，密文用私钥解密成明文。</p>
+
+<p>这种加密系统理想之处在于，在一个公开的没有加密的连接中，可以迅速地为之前互不相干的通信双方建立起一个加密了的连接。</p>
+
+<p>当一条消息被加密成密文之后，<strong>只能使用</strong>加密用的公钥对应的私钥才能解密。这些钥匙的命名也体现了它们的使用场景：公钥可以被公开，但是私钥一定要收好。</p>
+
+<p>以CS架构的系统为例，Client和Server都可以使用自己的私钥，只要在session中双方都认可所谓的<code>shared secret key</code>。这样即使有人监听了Client和Server之间的通信，他也没法知道Client或者Server的私钥，同时也不知道session的密钥。</p>
+
+<p>这是怎么做到的? 数学!</p>
+
+<h4 id="diffie-hellman">Diffie-Hellman</h4>
+
+<p>这种交换通常使用所谓的<a href="http://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange">Diffie-Hellman密钥交换流程</a>。这套流程主要是让Client和Server之间生成一个<code>shared secret key</code>。</p>
+
+<p>假设Alice和Bob在做DH交换（不是Desperate Housewife），他们会先明文共享一个 <code>root</code>值 (一般是2、3或者5这样的整数)和一个大质数 (300%2B位整数)。</p>
+
+<p>如前所述，Alice和Bob还有自己的私钥(100%2B位的整数)，他们不能告诉对方私钥，而是通过双方共享的<code>root</code>和大质数计算出一个<code>mixture</code>：</p>
+
+<blockquote>
+  <p>Alice的mixture = (root的Alice私钥值次方) % 大质数
+Bob的mixture   = (root的Bob私钥值次方) % 大质数</p>
+</blockquote>
+
+<p>注意这里的%是模运算</p>
+
+<p>计算出<code>mixture</code>之后，Alice和Bob就把这个结果发送给对方，然后继续如下的计算：</p>
+
+<blockquote>
+  <p>Alice这边：(Bob的mixture的Alice私钥值次方) % 大质数
+Bob这边：(Alice的Bob私钥值次方) % 大质数</p>
+</blockquote>
+
+<p>这样在Bob和Alice两边独立计算，但得出的结果却是一致的：这就是<code>shared secret</code>了。可以看到这个流程的设计非常注意信息的保护：整个过程中双方没有交换自己的私钥，最后得到的<code>shared secret</code>也没在网络上发送。</p>
+
+<p>对数学计算不感冒的同学，下面这张Wikipedia的配图非常直观：</p>
+
+<p><img src="http://blog.hartleybrody.com/wp-content/uploads/2013/07/Diffie-Hellman_Key_Exchange.png" alt="Diffie-Hellman Key Exchange" /></p>
+
+<p>从图里可以看到，双方一开始共享的黄色，在最后生成了共享的褐色，而这期间交换的只有被称为<code>mixture</code>的中间产物：即使有人监听并拿到，也无所谓。</p>
+
+<h3 id="symmetric-key-encryption">Symmetric Key Encryption</h3>
+
+<p>前面说的这种流程每个session只用在初始化连接的时候发生一次。一旦生成了<code>shared secret</code>，Client和Server之间就可以使用<a href="http://en.wikipedia.org/wiki/Symmetric-key_cryptography">symmetric-key加密系统</a>了。</p>
+
+<p>这种使用<code>shared secret</code>的加密通信会涉及一系列的<a href="http://en.wikipedia.org/wiki/Cipher_suite">cipher suite</a>，也就是一系列的加密算法。</p>
+
+<h3 id="section">认证</h3>
+
+<p>Diffie-Hellman密钥交换流程没有解决认证的问题。这就好比我们拿起电话跟朋友打过去，先进行了DH交换，这样这次通话是其他人没法破解的。但是如果其实对方根本就不是朋友，那么还是白加密了。</p>
+
+<p>为了解决认证的问题，我们需要 <a href="http://en.wikipedia.org/wiki/Public_key_infrastructure">Public Key Infrastructure</a> 来确保对方是我们要通信的对象。这些infrastructure用来创建，管理，发放和注销签名证书：没错，就是你花钱买了才能让你的网站可以使用HTTPS的可恶的证书。</p>
+
+<p>证书是什么东西？为什么它可以让通信更安全？</p>
+
+<h3 id="section-1">证书</h3>
+
+<p>粗略地说，证书就是一个使用数字签名把机器的公钥和身份进行绑定的文件，来防止有人把自己的公钥亮出来冒充他人身份。在实际操作中，身份主要是通过域名来体现。</p>
+
+<p>大多数的web浏览器都会检查证书有没有使用可信的<code>Certificate Authority</code>或者说<code>CA</code>授权的签名。CA在授权之前，会进行人工检查，看证书申请者是否:</p>
+
+<ol>
+  <li>实际存在的人或者组织</li>
+  <li>对自己声称的身份，比如域名，有所有权</li>
+</ol>
+
+<p>一旦授权签名，就说明认定证书所有者的身份和它提供的公钥是绑定的。</p>
+
+<p>我们的浏览器都会添加一堆可信的CA证书，而如果访问的服务器不能返回可信的CA证书，浏览器就会提示用户。换句话说，即使一个恶意网站生成了绑定自己机器公钥的证书声称自己是facebook.com，因为这个证书不是可信CA的，浏览器也不会相信它。</p>
+
+<p><strong>增强型证书</strong></p>
+
+<p>除开一般的<code>X.509</code>证书，还有一种<a href="http://en.wikipedia.org/wiki/Extended_validation">增强型证书</a>提供一种更强的身份校验。</p>
+
+<p>要申请这种证书CA会进行更细致的检查，比如要求提供使用域名的账单等。一旦使用了这种证书，在有的浏览器工具栏上可以看到站点是绿色的。</p>
+
+<p><strong>一个服务器多个站点</strong></p>
+
+<p>一般如果多个网站使用同一个服务器来部署会使用<code>named virtual hosts</code>。但由于TLS握手发生在HTTP连接建立之前，所以可能会造出 <a href="http://en.wikipedia.org/wiki/Transport_Layer_Security#Support_for_name-based_virtual_servers">问题</a>。</p>
+
+<p>因此如果你的网站需要HTTPS，空间提供者都会要求你租用独立IP的服务器。</p>
+
+<p>—</p>
+
+<p>最后，Wikipedia是研究这种东西的好去处, 也可以看看 <a href="https://www.coursera.org/course/crypto">Coursera的这个课程</a> 。</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Secret Love]]></title>
+    <link href="http://lenciel.github.io/2013/08/secret-love/"/>
+    <updated>2013-08-26T21:59:00+08:00</updated>
+    <id>http://lenciel.github.io/2013/08/secret-love</id>
+    <content type="html"><![CDATA[<p><img src="http://lenciel.github.io/downloads/images/secret_love.gif" alt="Secret Love" title="Don't touch me..." /></p>
+
+<blockquote><p>&#8220;I think we’re just gonna have to be secretly in love with each other and leave it at that, Ritchie.&#8221;</p><footer><strong>Gwyneth Paltrow</strong> <cite><a href="http://www.imdb.com/title/tt0265666/">The Royal Tenenbaums(2001)</a></cite></footer></blockquote>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Butterick的实用字体设计]]></title>
+    <link href="http://lenciel.github.io/2013/08/buttericks-practical-typography/"/>
+    <updated>2013-08-26T11:11:00+08:00</updated>
+    <id>http://lenciel.github.io/2013/08/buttericks-practical-typography</id>
+    <content type="html"><![CDATA[<p>最近和一个朋友聊天，他说最近几年大概是Flat流行网页上除开字就没别的了，字体设计被各种强调。</p>
+
+<p>这位老大在上海经营自己的网页设计公司，但是大家够熟，本座就冒着班门弄斧的危险纠正了他一嘴：很多年前，<a href="http://www.theverge.com/2012/7/24/3177332/ia-oliver-reichenstein-writer-interview-good-design-is-invisible">Oliver Reichenstein</a>就说过”<a href="http://ia.net/blog/the-web-is-all-about-typography-period/">Web设计95%是字体设计</a>“了。而且这种观点还一直被<a href="http://www.smashingmagazine.com/2012/07/24/one-more-time-typography-is-the-foundation-of-web-design/">反复强调</a>。</p>
+
+<p>当然，设计师的世界里面可能这些都没有问题。但是现实是，设计师设计的Web只是Web中的%0.5，世界上还有大量的网页是被朋友这种小公司，甚至是程序员们自己设计出来的。而且，网页上可选的中文字体先天可选项就很少，所以字体设计或者说<code>Typography</code>虽然如此重要，其实主要是靠下面两个途径解决的：</p>
+
+<ul>
+  <li>研究开源的template</li>
+  <li>看淘宝、百度这些大站的设定</li>
+</ul>
+
+<p>但是借鉴得再多，不花时间总结，还是难成系统。最近看到一本Butterick的<a href="http://practicaltypography.com/typography-in-ten-minutes.html">好书</a>，对字体设计的原则做了一番高度归纳，并且声称：</p>
+
+<blockquote><p>this is a bold claim, but i stand be­hind it: if you learn and fol­low these five ty­pog­ra­phy rules, you will be a bet­ter ty­pog­ra­ph­er than 95% of pro­fes­sion­al writ­ers and 70% of pro­fes­sion­al de­sign­ers. (The rest of this book will raise you to the 99th per­centile in both categories.)</p></blockquote>
+
+<p>归纳出来的原则共有5条：</p>
+
+<ul>
+  <li>
+    <p>文档的字体设计主要取决于你<code>body</code>部分的设计。所以在任何一个项目里面，先把<code>body</code>部分弄好看了再花时间去看别的地方。</p>
+
+    <p>而<code>body</code>部分好看与否，主要取决于下面的四个方面：</p>
+  </li>
+  <li>
+    <p><code>point size</code>是指字体的大小。在印刷品中，最舒适的是10–12个point，而网页上则是15–25个pixels。不是每个font在指定的<code>point size</code>下大小都是一致的，所以有的适合需要对究竟用多大进行调整。</p>
+  </li>
+  <li>
+    <p><code>line spacing</code>是垂直方向上行间距。它的合理取值是字体的<code>point size</code>的120–145%。在文字处理器中不要用比值定行距，因为单行距太窄，1½又太松了。­在网页上用CSS的<code>line-height</code>来控制.</p>
+  </li>
+  <li>
+    <p><code>line length</code>是水平方向上文字块的宽度，它的合理取值是­­平均每行45–90个字，为了方便你可以用小写字母表来占位，一般来说2-3个排列是合适的：</p>
+
+    <p><code>
+ abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcd
+</code></p>
+
+    <p>在印刷品中，这一般意味着page的margin比传统的1个inch宽。
+ 在网页上，这主要是控制text block不要在页面上溢出。</p>
+  </li>
+  <li>
+    <p>最后是字体的选择。可能对一般设计者最简单高效的方法是停止使用系统自带的那些免费字体，购买专业字体设计公司的作品：这些专业的字体设计优良，而且通常也不贵。</p>
+
+    <p>即使你不愿意付费，试试在免费字体里面找找看，比如Google提供的字体。实在不行，至少不要用Times New Roman或者Arial了：这是懒惰的人才会不假思索考虑的字体。</p>
+  </li>
+</ul>
+
+<p>很有兴趣知道，中文设计圈子里面有没有类似的准则被归纳出来，毕竟12px宋体一统江湖这么多年了。简单Google之后看起来是没有什么变化的：</p>
+
+<ul>
+  <li><a href="http://www.zhihu.com/question/19680724">网页常用字体有哪些 - 知乎</a></li>
+  <li><a href="http://www.zhihu.com/question/20404847">中文的网页用什么字体最合适 - 知乎</a></li>
+</ul>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Eye In The Sky]]></title>
+    <link href="http://lenciel.github.io/2013/08/eye-in-the-sky/"/>
+    <updated>2013-08-25T21:50:00+08:00</updated>
+    <id>http://lenciel.github.io/2013/08/eye-in-the-sky</id>
+    <content type="html"><![CDATA[<p><img src="http://lenciel.github.io/downloads/images/eye_in_the_sky.gif" alt="Eye in the sky" title="Don't touch me..." /></p>
+
+<blockquote><p>&#8220;And the eye-in-the-sky is watching us all.&#8221;</p><footer><strong>Martin Scorsese</strong> <cite><a href="http://www.imdb.com/title/tt0112641/">Casino(1995)</a></cite></footer></blockquote>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Boolean Objects和Boolean Primitives]]></title>
+    <link href="http://lenciel.github.io/2013/08/boolean-objects-and-boolean-primitives/"/>
+    <updated>2013-08-21T11:31:00+08:00</updated>
+    <id>http://lenciel.github.io/2013/08/boolean-objects-and-boolean-primitives</id>
+    <content type="html"><![CDATA[<p>Javascript有一个小陷阱：每个primitive都有自己的constructor，但是这些constructor构造出来的却不是primitive。</p>
+
+<p>以boolean为例，大多数的代码里面用的是primitive值，比如：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="kd">var</span> <span class="nx">primitiveTrue</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class="line"><span class="kd">var</span> <span class="nx">primitiveFalse</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>但实际上javascript里面还有Boolean函数，可以返回一个boolean的primitive：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="kd">var</span> <span class="nx">functionTrue</span> <span class="o">=</span> <span class="nb">Boolean</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+</span><span class="line"><span class="kd">var</span> <span class="nx">functionFalse</span> <span class="o">=</span> <span class="nb">Boolean</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>不过，上面这个Boolean函数前面如果有<code>new</code>就是一个constructor了：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="kd">var</span> <span class="nx">constructorTrue</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Boolean</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+</span><span class="line"><span class="kd">var</span> <span class="nx">constructorFalse</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Boolean</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>比较tricky的地方在于，上面这种constructor返回的不是primitive，而是对象：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="c1">// Outputs: true</span>
+</span><span class="line"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">primitiveTrue</span><span class="p">);</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">// Outputs: true</span>
+</span><span class="line"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">functionTrue</span><span class="p">);</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">// Outputs: Boolean {}</span>
+</span><span class="line"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">constructorTrue</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>由于javascript的类型转换比较aggressive，比如你把一个int和string相加，这个int会自动转成string：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="c1">// Outputs: &quot;22&quot;</span>
+</span><span class="line"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;2&quot;</span> <span class="o">+</span> <span class="mi">2</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>所以使用constructor构造对象来作为条件判断的输入其实是比较危险的。因为一个对象被用来做条件判断时，它经常会被转成true：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="c1">// Outputs: &quot;Objects coerce to true.&quot;</span>
+</span><span class="line"><span class="k">if</span> <span class="p">({})</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Objects coerce to true.&quot;</span><span class="p">);</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>特别的，一个Boolean对象即使内部值是false，也会被强制转换成true：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="c1">// Outputs: &quot;My false Boolean object is truthy!&quot;</span>
+</span><span class="line"><span class="k">if</span> <span class="p">(</span><span class="nx">constructorFalse</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;My false Boolean object is truthy!&quot;</span><span class="p">);</span>
+</span><span class="line"><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class="line">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;My false Boolean object is falsy!&quot;</span><span class="p">);</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>如果你实在是要取一个Boolean对象的值需要用<code>valueOf</code>方法：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="c1">// Outputs: &quot;The value of my false Boolean object is falsy!&quot;</span>
+</span><span class="line"><span class="k">if</span> <span class="p">(</span><span class="nx">constructorFalse</span><span class="p">.</span><span class="nx">valueOf</span><span class="p">())</span> <span class="p">{</span>
+</span><span class="line">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;The value of my false Boolean object is truthy!&quot;</span><span class="p">);</span>
+</span><span class="line"><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class="line">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;The value of my false Boolean object is falsy!&quot;</span><span class="p">);</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>但是由于Boolean对象这么tricky，这种代码是非常不受欢迎的：事实上JSHint和JSLint这些工具发现你使用了Boolean的constructor就会报一个<code>potential error</code>。</p>
+
+<p>如果你要把一个其他类型的值转成boolean值，也不要用constructor，尽量直接用Boolean函数或者是用两个<code>!</code>操作符：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="c1">// Two approaches to coercing 0 into false</span>
+</span><span class="line"><span class="kd">var</span> <span class="nx">byFunction</span> <span class="o">=</span> <span class="nb">Boolean</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span><span class="line"><span class="kd">var</span> <span class="nx">byNotNot</span> <span class="o">=</span> <span class="o">!!</span><span class="mi">0</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>两种做法都不错，但是如果你看javascript代码比较多会发现后面这种使用更普遍：可能是因为能少打点儿字。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Raspberry Pi上使用HDMI转接VGA线]]></title>
+    <link href="http://lenciel.github.io/2013/08/using-raspberry-pi-with-hdmi-to-vga-adapter/"/>
+    <updated>2013-08-20T15:19:00+08:00</updated>
+    <id>http://lenciel.github.io/2013/08/using-raspberry-pi-with-hdmi-to-vga-adapter</id>
+    <content type="html"><![CDATA[<p><a href="http://www.raspberrypi.org/‎">Raspberry Pi</a>的默认提供了HDMI接口，遇到手边显示器比较老并且电视机也比较老就不好办。</p>
+
+<p>如果直接买一根<a href="http://item.jd.com/674899.html">HDMI转VGA的线</a>，直接连上去很可能是黑屏，这是因为默认的配置文件不支持这种连接方式，需要修改配置文件。</p>
+
+<p>需要修改的是 <code>/boot/config.txt</code>里面的几个配置值，具体的讨论<a href="http://www.raspberrypi.org/phpBB3/viewtopic.php?f=76&amp;t=33477">在这里</a>：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">disable_overscan=1
+</span><span class="line">hdmi_group=2
+</span><span class="line">hdmi_mode=35
+</span><span class="line">hdmi_drive=2</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>修改完毕之后重新启动就可以看到画面了。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Remember Me]]></title>
+    <link href="http://lenciel.github.io/2013/08/remember-me/"/>
+    <updated>2013-08-17T22:39:00+08:00</updated>
+    <id>http://lenciel.github.io/2013/08/remember-me</id>
+    <content type="html"><![CDATA[<p><img src="http://lenciel.github.io/downloads/images/remember_me.gif" alt="Remember Me" title="Don't touch me..." /></p>
+
+<blockquote><p>I wonder if it remembers me.</p><footer><strong>Bill Murray</strong> <cite><a href="http://www.imdb.com/title/tt0362270/">The Life Aquatic With Steve Zissou(2004)</a></cite></footer></blockquote>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[uWSGI, Gunincorn, 啥玩意儿?]]></title>
+    <link href="http://lenciel.github.io/2013/08/why-you-need-something-like-gunicorn/"/>
+    <updated>2013-08-01T14:36:00+08:00</updated>
+    <id>http://lenciel.github.io/2013/08/why-you-need-something-like-gunicorn</id>
+    <content type="html"><![CDATA[<p>因为nginx等优秀的开源项目，有不少本来不是做服务器的同学也可以写很多服务器端的程序了。但是在聊天中会发现，大家虽然写了不少代码，但是对wsgi是什么，gunicorn是什么，反向代理又是什么并不了解，也就是说对基本概念并没有一个全局的了解。</p>
+
+<h3 id="section">服务器</h3>
+
+<p>到了服务器组你会发现原来有各种各样的服务器，那些叫法很多是有历史沉淀的，不需要太深究能对上号就行，因为本来也是乱七八糟的。</p>
+
+<h4 id="http">HTTP服务器</h4>
+
+<p>如果网站是HTML/CSS/JS（不包括node.js这种<a href="http://en.wikipedia.org/wiki/Comparison_of_server-side_JavaScript_solutions">SSJS</a>）组成的，那么这是一个静态的网站。</p>
+
+<p>用户访问这个网站的时候，HTTP请求被浏览器发送，经过DNS等被送到网站的服务器。服务器处理HTTP请求，将浏览器能够处理的响应返回给用户的浏览器。所以这个场景下的服务器一般被称为HTTP服务器，常见的有Apache的httpd和Nginx。</p>
+
+<h4 id="application">Application服务器</h4>
+
+<p>如果你的网站是动态的，比如是用Django写的。</p>
+
+<p>那么客户端上来的请求要能够被Djano的Application处理。WSGI就是这样的<a href="http://en.wikipedia.org/wiki/Web_Server_Gateway_Interface">一个协议</a>：它是一个Python程序和用户请求之间的接口。WSGI服务器的作用就是接受并分析用户的请求，调用相应的python对象完成对请求的处理，然后返回相应的结果。</p>
+
+<p>WSGI服务器的选择很多，包括uWSGI和gunicorn。它们都可以处理所有的请求，包括确实应该由python对象处理的，也包括不该python对象处理的，比如静态的图像，css，js等文件。所有理论上你可以把整个动态网站都用WSGI服务器承载起来，也就是整个应用完全跑在Application服务器上。</p>
+
+<h4 id="section-1">代理服务器</h4>
+
+<p>代理无非是A来做B干的事情。在服务器语境下，代理就是一台服务器干另外一台服务器的事情。这个是平常不会有很多人聊到的，多说两句。</p>
+
+<h5 id="section-2">前向代理服务器</h5>
+
+<p>大多数的代理都是前向代理。假设网络上有三台机器:</p>
+
+<ul>
+  <li>X：你的电脑</li>
+  <li>Y：代理服务器，proxy.eg.org</li>
+  <li>Z：你实际想访问的服务器，www.eg.org</li>
+</ul>
+
+<p>没有代理的情况下，访问是 <code>X---&gt;Z</code>，但是在某些情况下，访问者会先让代理服务器从实际放内容的服务器把数据取回来，也就是<code>X---&gt;Y</code>，然后<code>Y----&gt;Z</code>，最后<code>X----&gt;Y</code> 。</p>
+
+<p>这里说的某些情况下典型的包括（作为天朝网民你居然没有领悟我很失望）：</p>
+
+<ol>
+  <li>X的网络管理员封了Z
+    <ul>
+      <li>Z可能是一个臭名昭著的病毒网站：<code>familypostcard2008.com</code>等</li>
+      <li>Z可能是一个让你上班精力分散的网站：<code>Facebook.com</code>等</li>
+      <li>Z可能是一个让你明白真相的网站：Hmmmm</li>
+    </ul>
+  </li>
+  <li>Z的网络管理员封了X
+    <ul>
+      <li>Z可能是一个论坛或者blog什么的，X在对它进行扫描</li>
+    </ul>
+  </li>
+</ol>
+
+<h5 id="section-3">反向代理服务器</h5>
+
+<p>没有代理的情况下，访问仍然是 <code>X---&gt;Z</code>，但是在某些情况下，Z的管理者决定限制资源被直接访问。用户必须现在Y上做访问，Y再访问Z。整个流程是<code>X---&gt;Y</code>，然后<code>Y----&gt;Z</code>，最后<code>X----&gt;Y</code> 。</p>
+
+<p>没错，细心的你注意到了，前向和反向代理服务器的流程都是<code>X--&gt;Y--&gt;Z</code>。没办法，代理就是这么个意思。它们两者的核心区别在于，用户对反向代理服务器的存在是无感的。换句话说，X不需要做特别的配置甚至不需要察觉Y的存在，就可以使用Y这个反向代理。这种请求方无感而被请求方反过来提供代理服务就是“反向”的意义所在。</p>
+
+<p>使用反向代理的典型场景当然是Z希望所有发给自己特定请求都从Y过一遍：</p>
+
+<ol>
+  <li>Z可能是一个超大的网站，每天有全世界各地的用户在访问。于是Z搭建了一个反向代理，把某个地域的用户的访问导入到离他最近的服务器上去处理。没有错，这就是CDN。</li>
+  <li>Z可能是一个坏坏的网站。它的拥有者希望把坏坏的数据放到特定的服务器，然后核心数据放到别的服务器。比如黄色网站，一般那些色情的内容放在一些专门的服务器上，即使被查封，也不会对其业务产生决定性的影响。</li>
+</ol>
+
+<p>继续我们前面的例子，很快你会发现uWSGI等应用服务器处理静态文件的请求的performance很废材，于是开始寻找直接用nginx来处理静态内容的办法。那么你就需要区分哪些请求是请求的静态页面，哪些是请求的动态内容。</p>
+
+<p>然后你就会发现，原来nginx不止是一个HTTP服务器，它还是一个<a href="http://en.wikipedia.org/wiki/Reverse_proxy">反向代理服务器</a>：它可以把请求重定向到uWSGI或者任何别的服务器，然后把下游服务器的响应集成再返回给用户。于是你就可以配置对静态内容的请求直接在nginx完成，而动态内容的请求发送给uWSGI服务器。</p>
+
+<h4 id="section-4">负载均衡服务器</h4>
+
+<p>在我自己的心中，负责均衡服务器不过是反向代理的一种（你看CDN我也觉得是反向代理的一种），但是很多地方这种服务器是被拿出来专门讨论的。</p>
+
+<p>随着你的网站访问量不断增大，你用一个nginx集中所有的请求再分发就显得性能不够了。这个时候你可以配置专门用于进行请求分发处理的负载均衡服务器，比如<a href="http://haproxy.1wt.eu/">HAProxy</a>，而负载均衡服务器背后是集群。</p>
+
+<h4 id="section-5">缓存服务器</h4>
+
+<p>随着网站访问量的继续增大，你的VPS流量又扛不住了。你调查发现有一些多媒体文件被经常请求，这个时候你部署了缓存服务器。</p>
+
+<p>“缓存”这个经常被提到的术语，核心就是把常用的信息放在一个读取成本很低地方(比如内存中或者是虚拟内存中），从而避免每次查找它的时候昂贵的操作。比如HTTP缓存解决的是在服务器上找信息的过程。而Redis或者Memcached这些缓存则是解决在数据库里面找信息的过程。
+面。</p>
+
+<h3 id="uwsgigunicorn">那，我们为什么需要uwsgi或者gunicorn?</h3>
+
+<p>一句话：因为你需要有东西在服务器上运行Python，但是Python不是处理所有的请求都很强。</p>
+
+<p>那么是选uWSGI还是Gunicorn？我觉得都可以，还是那句老话，不是它们好不好的问题，是你够不够好的问题，毕竟代码都摆在那里的。</p>
+
+<p>不过Gunicorn可以多说几句。它的崛起在我看来是有时代背景的：在过去，我们部署一个应用的时候，几乎总是要分布在多台机器的（比如4台HTTP服务器把动态请求分发到两台Application服务器上，并且它们都访问一个数据库服务器）。但是随着机器的能力在增强，而互联网应用的覆盖面从业务逻辑极其复杂的银行业电信业到了送盒饭选泡面的小行业，越来越多的Application服务器和Web服务器合体了（以django圈子举例，有httpd+mod_wsgi或者Nginx+mod_uwsgi）。而且很多时候这种小应用的数据库也host在同一台机器上。</p>
+
+<p>Gunicorn（从Ruby下面的Unicorn得到的启发）应运而生：依赖Nginx的代理行为，同Nginx进行功能上的分离。由于不需要直接处理用户来的请求（都被Nginx先处理），Gunicorn不需要完成相关的功能，其内部逻辑非常简单：接受从Nginx来的动态请求，处理完之后返回给Nginx，由后者返回给用户。</p>
+
+<p>由于功能定位很明确，Gunicorn得以用纯Python开发：大大缩短了开发时间的同时，性能上也不会很掉链子。同时，它也可以配合Nginx的代理之外的别的Proxy模块工作，其配置也相应比较简单。</p>
+
+<p>配置上的简单，大概是它流行的最大的原因。</p>
+
+<h3 id="good-refs">Good Refs</h3>
+
+<h4 id="section-6">正向代理服务器软件</h4>
+
+<ul>
+  <li><a href="http://www.jmarshall.com/tools/cgiproxy/">cgi-proxy</a></li>
+  <li><a href="http://sourceforge.net/projects/poxy">phproxy</a> (中断了)</li>
+  <li><a href="http://www.glype.com/">glype</a></li>
+  <li><a href="http://en.cship.org/wiki/Category%3aWebproxy">Internet censorship wiki: List of Web Proxies</a></li>
+</ul>
+
+<h4 id="section-7">反向代理服务器软件</h4>
+
+<ul>
+  <li><a href="http://wiki.apache.org/cocoon/ApacheModProxy">apache mod_proxy</a></li>
+  <li><a href="http://www.squid-cache.org/">squid</a></li>
+  <li><a href="http://nginx.net/">HAProxy</a></li>
+  <li><a href="http://www.danga.com/perlbal/">perlbal</a></li>
+  <li><a href="http://portfusion.sf.net/">portfusion</a></li>
+  <li><a href="http://www.apsis.ch/pound/">pound</a></li>
+</ul>
+
+<h4 id="tcp">TCP上的反向代理服务器软件</h4>
+
+<ul>
+  <li><a href="http://www.inlab.de/balance.html">balance</a></li>
+  <li><a href="http://www.delegate.org/delegate/nvproxy/">delegate</a></li>
+  <li><a href="http://siag.nu/pen/">pen</a></li>
+  <li><a href="http://portfusion.sf.net/">portfusion</a></li>
+  <li><a href="http://web.archive.org/web/20080113185334/http://plb.sunsite.dk/index.html">pure load balancer</a></li>
+  <li><a href="http://pythondirector.sourceforge.net/">python director</a></li>
+</ul>
+
+<h4 id="section-8">其他</h4>
+
+<ul>
+  <li><a href="http://en.wikipedia.org/wiki/Content_Delivery_Network">Wikipedia - Content Delivery Network</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Category%3aReverse_proxy">Wikipedia - Category:Reverse_proxy</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Load_balancing_%28computing%29">Wikipedia - Load Balancing</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/Scalability">Wikipedia - Scalability</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Except For Greed and Disgust]]></title>
+    <link href="http://lenciel.github.io/2013/07/except-for-greed-and-disgust/"/>
+    <updated>2013-07-27T23:57:00+08:00</updated>
+    <id>http://lenciel.github.io/2013/07/except-for-greed-and-disgust</id>
+    <content type="html"><![CDATA[<p><img src="http://lenciel.github.io/downloads/images/american_psycho_jump.gif" alt="Except For Greed and Disgust" title="Don't touch me..." /></p>
+
+<blockquote><p>I have all the characteristics of a human being: flesh, blood, skin, hair … but not a single, clear, identifiable emotion, except for greed and disgust.</p><footer><strong>Mary Harron</strong> <cite><a href="http://www.imdb.com/title/tt0144084/">American Psycho(2000)</a></cite></footer></blockquote>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Cryptography and Python]]></title>
+    <link href="http://lenciel.github.io/2013/07/cryptography-and-python/"/>
+    <updated>2013-07-25T15:13:00+08:00</updated>
+    <id>http://lenciel.github.io/2013/07/cryptography-and-python</id>
+    <content type="html"><![CDATA[<p>这周我们的一个项目里面需要调用第三方接口。对方的安全机制是调用时要进行加密和校验，但它们的文档没有描述具体是怎么加密的，而是给了一段代码：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+<span class="line-number">47</span>
+<span class="line-number">48</span>
+<span class="line-number">49</span>
+<span class="line-number">50</span>
+<span class="line-number">51</span>
+<span class="line-number">52</span>
+<span class="line-number">53</span>
+<span class="line-number">54</span>
+<span class="line-number">55</span>
+<span class="line-number">56</span>
+<span class="line-number">57</span>
+<span class="line-number">58</span>
+<span class="line-number">59</span>
+<span class="line-number">60</span>
+<span class="line-number">61</span>
+<span class="line-number">62</span>
+<span class="line-number">63</span>
+<span class="line-number">64</span>
+<span class="line-number">65</span>
+<span class="line-number">66</span>
+<span class="line-number">67</span>
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="kd">private</span> <span class="kd">static</span> <span class="n">BASE64Encoder</span> <span class="n">base64</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BASE64Encoder</span><span class="o">();</span>
+</span><span class="line"><span class="c1">//  private static byte[] myIV = { 50, 51, 52, 53, 54, 55, 56, 57 };</span>
+</span><span class="line"><span class="c1">//  private static byte[] myIV = null;</span>
+</span><span class="line"><span class="c1">//  private static String strkey = &quot;W9qPIzjaVGKUp7CKRk/qpCkg/SCMkQRu&quot;; // 字节数必须是8的倍数</span>
+</span><span class="line"><span class="c1">//密钥</span>
+</span><span class="line"><span class="kd">private</span> <span class="kd">static</span> <span class="n">String</span> <span class="n">strkey</span> <span class="o">=</span> <span class="s">&quot;NDg5MDY2NjczMxxxxXXXXXyNzUzNTg2&quot;</span><span class="o">;</span>
+</span><span class="line"><span class="kd">private</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">removeBR</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">    <span class="n">StringBuffer</span> <span class="n">sf</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">(</span><span class="n">str</span><span class="o">);</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">sf</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="o">++</span><span class="n">i</span><span class="o">)</span>
+</span><span class="line">    <span class="o">{</span>
+</span><span class="line">      <span class="k">if</span> <span class="o">(</span><span class="n">sf</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">==</span> <span class="sc">&#39;\n&#39;</span><span class="o">)</span>
+</span><span class="line">      <span class="o">{</span>
+</span><span class="line">        <span class="n">sf</span> <span class="o">=</span> <span class="n">sf</span><span class="o">.</span><span class="na">deleteCharAt</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+</span><span class="line">      <span class="o">}</span>
+</span><span class="line">    <span class="o">}</span>
+</span><span class="line">    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">sf</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="o">++</span><span class="n">i</span><span class="o">)</span>
+</span><span class="line">    <span class="o">{</span>
+</span><span class="line">      <span class="k">if</span> <span class="o">(</span><span class="n">sf</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">==</span> <span class="sc">&#39;\r&#39;</span><span class="o">)</span>
+</span><span class="line">      <span class="o">{</span>
+</span><span class="line">        <span class="n">sf</span> <span class="o">=</span> <span class="n">sf</span><span class="o">.</span><span class="na">deleteCharAt</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+</span><span class="line">      <span class="o">}</span>
+</span><span class="line">    <span class="o">}</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">sf</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+</span><span class="line"><span class="o">}</span>
+</span><span class="line">
+</span><span class="line"><span class="kd">private</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">desEncrypt</span><span class="o">(</span><span class="n">String</span> <span class="n">input</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span>
+</span><span class="line"><span class="o">{</span>
+</span><span class="line">
+</span><span class="line">    <span class="n">BASE64Decoder</span> <span class="n">base64d</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BASE64Decoder</span><span class="o">();</span>
+</span><span class="line">    <span class="n">DESedeKeySpec</span> <span class="n">p8ksp</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class="line">    <span class="n">p8ksp</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DESedeKeySpec</span><span class="o">(</span><span class="n">base64d</span><span class="o">.</span><span class="na">decodeBuffer</span><span class="o">(</span><span class="n">strkey</span><span class="o">));</span>
+</span><span class="line">    <span class="n">Key</span> <span class="n">key</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class="line">    <span class="n">key</span> <span class="o">=</span> <span class="n">SecretKeyFactory</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="s">&quot;DESede&quot;</span><span class="o">).</span><span class="na">generateSecret</span><span class="o">(</span><span class="n">p8ksp</span><span class="o">);</span>
+</span><span class="line">
+</span><span class="line">    <span class="kt">byte</span><span class="o">[]</span> <span class="n">plainBytes</span> <span class="o">=</span> <span class="o">(</span><span class="kt">byte</span><span class="o">[])</span><span class="kc">null</span><span class="o">;</span>
+</span><span class="line">    <span class="n">Cipher</span> <span class="n">cipher</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class="line">    <span class="kt">byte</span><span class="o">[]</span> <span class="n">cipherText</span> <span class="o">=</span> <span class="o">(</span><span class="kt">byte</span><span class="o">[])</span><span class="kc">null</span><span class="o">;</span>
+</span><span class="line">    <span class="c1">//“算法/模式/填充”</span>
+</span><span class="line">    <span class="n">plainBytes</span> <span class="o">=</span> <span class="n">input</span><span class="o">.</span><span class="na">getBytes</span><span class="o">(</span><span class="s">&quot;UTF8&quot;</span><span class="o">);</span>
+</span><span class="line">    <span class="n">cipher</span> <span class="o">=</span> <span class="n">Cipher</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="s">&quot;DESede/ECB/PKCS5Padding&quot;</span><span class="o">);</span>
+</span><span class="line">    <span class="n">SecretKeySpec</span> <span class="n">myKey</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SecretKeySpec</span><span class="o">(</span><span class="n">key</span><span class="o">.</span><span class="na">getEncoded</span><span class="o">(),</span> <span class="s">&quot;DESede&quot;</span><span class="o">);</span>
+</span><span class="line"> <span class="c1">//       IvParameterSpec ivspec = new IvParameterSpec(myIV);</span>
+</span><span class="line">    <span class="n">cipher</span><span class="o">.</span><span class="na">init</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">myKey</span><span class="o">);</span>
+</span><span class="line">    <span class="n">cipherText</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="na">doFinal</span><span class="o">(</span><span class="n">plainBytes</span><span class="o">);</span>
+</span><span class="line">    <span class="k">return</span> <span class="nf">removeBR</span><span class="o">(</span><span class="n">base64</span><span class="o">.</span><span class="na">encode</span><span class="o">(</span><span class="n">cipherText</span><span class="o">));</span>
+</span><span class="line"><span class="o">}</span>
+</span><span class="line">
+</span><span class="line"><span class="kd">private</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">desDecrypt</span><span class="o">(</span><span class="n">String</span> <span class="n">cipherText</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span>
+</span><span class="line"><span class="o">{</span>
+</span><span class="line">
+</span><span class="line">    <span class="n">BASE64Decoder</span> <span class="n">base64d</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BASE64Decoder</span><span class="o">();</span>
+</span><span class="line">    <span class="n">DESedeKeySpec</span> <span class="n">p8ksp</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class="line">    <span class="n">p8ksp</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DESedeKeySpec</span><span class="o">(</span><span class="n">base64d</span><span class="o">.</span><span class="na">decodeBuffer</span><span class="o">(</span><span class="n">strkey</span><span class="o">));</span>
+</span><span class="line">    <span class="n">Key</span> <span class="n">key</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class="line">    <span class="n">key</span> <span class="o">=</span> <span class="n">SecretKeyFactory</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="s">&quot;DESede&quot;</span><span class="o">).</span><span class="na">generateSecret</span><span class="o">(</span><span class="n">p8ksp</span><span class="o">);</span>
+</span><span class="line">
+</span><span class="line">    <span class="n">Cipher</span> <span class="n">cipher</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class="line">    <span class="kt">byte</span><span class="o">[]</span> <span class="n">inPut</span> <span class="o">=</span> <span class="n">base64d</span><span class="o">.</span><span class="na">decodeBuffer</span><span class="o">(</span><span class="n">cipherText</span><span class="o">);</span>
+</span><span class="line">    <span class="c1">//“算法/模式/填充”</span>
+</span><span class="line">    <span class="n">cipher</span> <span class="o">=</span> <span class="n">Cipher</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="s">&quot;DESede/ECB/PKCS5Padding&quot;</span><span class="o">);</span>
+</span><span class="line">    <span class="n">SecretKeySpec</span> <span class="n">myKey</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SecretKeySpec</span><span class="o">(</span><span class="n">key</span><span class="o">.</span><span class="na">getEncoded</span><span class="o">(),</span> <span class="s">&quot;DESede&quot;</span><span class="o">);</span>
+</span><span class="line"> <span class="c1">//       IvParameterSpec ivspec = new IvParameterSpec(myIV);</span>
+</span><span class="line">    <span class="n">cipher</span><span class="o">.</span><span class="na">init</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="n">myKey</span><span class="o">);</span>
+</span><span class="line">    <span class="kt">byte</span><span class="o">[]</span> <span class="n">output</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="na">doFinal</span><span class="o">(</span><span class="n">inPut</span><span class="o">);</span>
+</span><span class="line">    <span class="k">return</span> <span class="k">new</span> <span class="nf">String</span><span class="o">(</span><span class="n">output</span><span class="o">,</span> <span class="s">&quot;UTF8&quot;</span><span class="o">);</span>
+</span><span class="line"><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>很明显，在提供文档的同学看来大家都是JEE程序员。仔细看了半天这两个函数<code>desEncrypt</code>和<code>desDecrypt</code>外加Google，才明白是<code>DES3</code>算法。</p>
+
+<p>接着这份文档的后面还有另一个对加密的描述也是代码，不过这次比较明显是MD5：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="nf">MD5</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span>
+</span><span class="line"><span class="o">{</span>
+</span><span class="line">  <span class="kt">char</span> <span class="n">hexDigits</span><span class="o">[]</span> <span class="o">=</span> <span class="o">{</span>
+</span><span class="line">    <span class="sc">&#39;0&#39;</span><span class="o">,</span> <span class="sc">&#39;1&#39;</span><span class="o">,</span> <span class="sc">&#39;2&#39;</span><span class="o">,</span> <span class="sc">&#39;3&#39;</span><span class="o">,</span> <span class="sc">&#39;4&#39;</span><span class="o">,</span> <span class="sc">&#39;5&#39;</span><span class="o">,</span> <span class="sc">&#39;6&#39;</span><span class="o">,</span> <span class="sc">&#39;7&#39;</span><span class="o">,</span> <span class="sc">&#39;8&#39;</span><span class="o">,</span> <span class="sc">&#39;9&#39;</span><span class="o">,</span>
+</span><span class="line">    <span class="sc">&#39;a&#39;</span><span class="o">,</span> <span class="sc">&#39;b&#39;</span><span class="o">,</span> <span class="sc">&#39;c&#39;</span><span class="o">,</span> <span class="sc">&#39;d&#39;</span><span class="o">,</span> <span class="sc">&#39;e&#39;</span><span class="o">,</span> <span class="sc">&#39;f&#39;</span>
+</span><span class="line">    <span class="o">};</span>
+</span><span class="line">  <span class="kt">char</span> <span class="n">str</span><span class="o">[]</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class="line">  <span class="kt">byte</span> <span class="n">strTemp</span><span class="o">[]</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">getBytes</span><span class="o">();</span>
+</span><span class="line">  <span class="n">MessageDigest</span> <span class="n">mdTemp</span><span class="o">;</span>
+</span><span class="line">  <span class="k">try</span> <span class="o">{</span>
+</span><span class="line">    <span class="n">mdTemp</span> <span class="o">=</span> <span class="n">MessageDigest</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="s">&quot;MD5&quot;</span><span class="o">);</span>
+</span><span class="line">    <span class="n">mdTemp</span><span class="o">.</span><span class="na">update</span><span class="o">(</span><span class="n">strTemp</span><span class="o">);</span>
+</span><span class="line">    <span class="kt">byte</span> <span class="n">md</span><span class="o">[]</span> <span class="o">=</span> <span class="n">mdTemp</span><span class="o">.</span><span class="na">digest</span><span class="o">();</span>
+</span><span class="line">    <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+</span><span class="line">    <span class="n">str</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">char</span><span class="o">[</span><span class="n">j</span> <span class="o">*</span> <span class="mi">2</span><span class="o">];</span>
+</span><span class="line">    <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class="line">    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
+</span><span class="line">    <span class="o">{</span>
+</span><span class="line">      <span class="kt">byte</span> <span class="n">b</span> <span class="o">=</span> <span class="n">md</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+</span><span class="line">      <span class="n">str</span><span class="o">[</span><span class="n">k</span><span class="o">++]</span> <span class="o">=</span> <span class="n">hexDigits</span><span class="o">[</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="mi">4</span> <span class="o">&amp;</span> <span class="mh">0xf</span><span class="o">];</span>
+</span><span class="line">      <span class="n">str</span><span class="o">[</span><span class="n">k</span><span class="o">++]</span> <span class="o">=</span> <span class="n">hexDigits</span><span class="o">[</span><span class="n">b</span> <span class="o">&amp;</span> <span class="mh">0xf</span><span class="o">];</span>
+</span><span class="line">    <span class="o">}</span>
+</span><span class="line">  <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">NoSuchAlgorithmException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="line">    <span class="c1">// TODO Auto-generated catch block</span>
+</span><span class="line">    <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+</span><span class="line">  <span class="o">}</span>
+</span><span class="line">
+</span><span class="line">  <span class="k">return</span> <span class="k">new</span> <span class="nf">String</span><span class="o">(</span><span class="n">str</span><span class="o">);</span>
+</span><span class="line"><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>这些算法用python来实现当然就简单多了:MD5就是一句话，看起来非常复杂的DES3也不过几句话:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="kn">from</span> <span class="nn">pyDes</span> <span class="kn">import</span> <span class="n">triple_des</span><span class="p">,</span> <span class="n">ECB</span><span class="p">,</span> <span class="n">PAD_PKCS5</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">base64</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">datetime</span>
+</span><span class="line">
+</span><span class="line"><span class="n">input_str</span> <span class="o">=</span> <span class="s">&quot;test string&quot;</span>
+</span><span class="line">
+</span><span class="line"><span class="n">key_base64_str</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="s">&quot;NDg5MDY2NjczMxxxxXXXXXyNzUzNTg2&quot;</span><span class="p">,</span> <span class="s">&quot;utf-8&quot;</span><span class="p">)</span>
+</span><span class="line"><span class="n">key_bytes</span> <span class="o">=</span> <span class="n">key_base64_str</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
+</span><span class="line"><span class="n">k</span> <span class="o">=</span> <span class="n">triple_des</span><span class="p">(</span><span class="n">key_bytes</span><span class="p">,</span> <span class="n">ECB</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">padmode</span><span class="o">=</span><span class="n">PAD_PKCS5</span><span class="p">)</span>
+</span><span class="line"><span class="n">d</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">k</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">input_str</span><span class="p">))</span>
+</span><span class="line"><span class="k">print</span> <span class="n">d</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>当然，要明白这些算法究竟怎么回事才叫认真负责的态度。</p>
+
+<h2 id="hash"><strong>Hash</strong></h2>
+
+<p>hash就是给输入的字符串生成一个固定长度的字符串（被称为hash值）。理想的hash要满足：</p>
+
+<ul>
+  <li>根据生成的字符串非常难猜到输入的字符串</li>
+  <li>任意两个不同的字符串不会生成相同的hash值</li>
+  <li>如果输入字符串没有变生成的hash值应该不会变</li>
+</ul>
+
+<p><img src="http://lenciel.github.io/downloads/images/hash.png" alt="hash" title="Don't touch me..." /></p>
+
+<p>hash函数可以被用来计算checksum，也可以用来进行数字签名和认证。</p>
+
+<h3 id="md5"><strong>MD5</strong></h3>
+
+<p>1991年面世的一种hash算法，生成的字符串长度为128bit。</p>
+
+<p>它的算法详情可以看<a href="http://tools.ietf.org/html/rfc1321">这里</a>，简单说如下：</p>
+
+<ul>
+  <li>首先需要对字符串进行扩展，使其位长对512求余的结果等于448。因此，位长（Bits Length）将被扩展至N*512+448，N为一个非负整数，N可以是零。填充的方法一般是在信息的后面填充一个1和无数个0，直到满足上面的条件时才停止用0对信息的填充。</li>
+  <li>然后，在这个结果后面附加一个以64位二进制表示的填充前信息长度。经过这两步的处理，现在的位长是 <code>N*512+448+64 = (N+1）*512</code>，即长度恰好是512的整数倍。</li>
+  <li>最后以512位分组来处理输入的信息，且每一分组又被划分为16个32位子分组，经过了一系列的处理后，算法的输出由四个32位分组组成，将这四个32位分组级联后将生成一个128位散列值。</li>
+</ul>
+
+<p>MD5对碰撞攻击(不同的输入生成相同的hash)等攻击的抵抗力比较差。</p>
+
+<p>在python中使用MD5:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="kn">import</span> <span class="nn">os</span>
+</span><span class="line"><span class="kn">from</span> <span class="nn">Crypto.Hash</span> <span class="kn">import</span> <span class="n">MD5</span>
+</span><span class="line">
+</span><span class="line"><span class="k">def</span> <span class="nf">get_file_checksum</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+</span><span class="line">    <span class="n">h</span> <span class="o">=</span> <span class="n">MD5</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+</span><span class="line">    <span class="n">chunk_size</span> <span class="o">=</span> <span class="mi">8192</span>
+</span><span class="line">    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span><span class="line">        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+</span><span class="line">            <span class="n">chunk</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">chunk_size</span><span class="p">)</span>
+</span><span class="line">            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+</span><span class="line">                <span class="k">break</span>
+</span><span class="line">            <span class="n">h</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">h</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section"><strong>加密算法</strong></h2>
+
+<p>加密算法使用key把输入的文本变成加密的文本。有两种加密的方式：分块和流。分块处理的单位是固定大小比如8或者16个bytes，流则是一个一个byte。只有知道了解密的<code>key</code>才能对加密的文本进行解密。</p>
+
+<h3 id="section-1"><em>分块</em></h3>
+
+<p>DES是分块加密的一种，其处理对象的大小是8个bytes。DES最简单的模式是所谓的<code>ECB( electronic code book)模式</code>，也就是每个block都是独立加密，最后组成整个加密后的文本。</p>
+
+<p><img src="http://lenciel.github.io/downloads/images/block_cipher_ebc.png" alt="ecb" title="Don't touch me..." /></p>
+
+<p>使用pycrpto对文本使用<code>DES/ECB</code>加密很简单。假设key是<code>10234567</code>，而我们要加密的文本是<code>abcdefgh</code>，那么：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">Crypto.Cipher</span> <span class="kn">import</span> <span class="n">DES</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">des</span> <span class="o">=</span> <span class="n">DES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s">&#39;01234567&#39;</span><span class="p">,</span> <span class="n">DES</span><span class="o">.</span><span class="n">MODE_ECB</span><span class="p">)</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">text</span> <span class="o">=</span> <span class="s">&#39;abcdefgh&#39;</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">cipher_text</span> <span class="o">=</span> <span class="n">des</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">cipher_text</span>
+</span><span class="line"><span class="s">&#39;</span><span class="se">\xec\xc2\x9e\xd9</span><span class="s">] a</span><span class="se">\xd0</span><span class="s">&#39;</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">des</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">cipher_text</span><span class="p">)</span>
+</span><span class="line"><span class="s">&#39;abcdefgh&#39;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>比<code>ECB</code>更健壮的是<code>CFB (Cipher feedback)</code>模式，也就是先组合前面加密的文本和待加密的文本，然后进行加密。</p>
+
+<p><img src="http://lenciel.github.io/downloads/images/block_cipher_cfb.png" alt="cfb" title="Don't touch me..." /></p>
+
+<p>下面的例子说明了算法的工作流程：待加密的是<code>abcdefghijklmnop</code>，两倍8bytes。首先生成一个随机的字符串作为初始的<code>iv</code>来生成两个<code>DES</code>对象，一个用来加密一个用来解密。之所以需要这两个对象，是因为<code>feedback</code>值会随着block被加密后变化。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">Crypto.Cipher</span> <span class="kn">import</span> <span class="n">DES</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">Crypto</span> <span class="kn">import</span> <span class="n">Random</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">iv</span> <span class="o">=</span> <span class="n">Random</span><span class="o">.</span><span class="n">get_random_bytes</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">des1</span> <span class="o">=</span> <span class="n">DES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s">&#39;01234567&#39;</span><span class="p">,</span> <span class="n">DES</span><span class="o">.</span><span class="n">MODE_CFB</span><span class="p">,</span> <span class="n">iv</span><span class="p">)</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">des2</span> <span class="o">=</span> <span class="n">DES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s">&#39;01234567&#39;</span><span class="p">,</span> <span class="n">DES</span><span class="o">.</span><span class="n">MODE_CFB</span><span class="p">,</span> <span class="n">iv</span><span class="p">)</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">text</span> <span class="o">=</span> <span class="s">&#39;abcdefghijklmnop&#39;</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">cipher_text</span> <span class="o">=</span> <span class="n">des1</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">cipher_text</span>
+</span><span class="line"><span class="s">&quot;?</span><span class="se">\\\x8e\x86\xeb\xab\x8b\x97</span><span class="s">&#39;</span><span class="se">\xa1</span><span class="s">W</span><span class="se">\xde\x89</span><span class="s">!</span><span class="se">\xc3</span><span class="s">d&quot;</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">des2</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">cipher_text</span><span class="p">)</span>
+</span><span class="line"><span class="s">&#39;abcdefghijklmnop&#39;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="section-2"><em>流</em></h3>
+
+<p>这些算法基于一个个bytes，所以block的大小总是1 byte。pycrypto提供了两个这样的算法：<code>ARC4</code> 和 <code>XOR</code>。这种基于流的算法只有一种模式：<code>ECB</code>。</p>
+
+<p>下面是一个<code>ARC4</code>的算法，使用了key <code>01234567</code>:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">Crypto.Cipher</span> <span class="kn">import</span> <span class="n">ARC4</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">obj1</span> <span class="o">=</span> <span class="n">ARC4</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s">&#39;01234567&#39;</span><span class="p">)</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">obj2</span> <span class="o">=</span> <span class="n">ARC4</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s">&#39;01234567&#39;</span><span class="p">)</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">text</span> <span class="o">=</span> <span class="s">&#39;abcdefghijklmnop&#39;</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">cipher_text</span> <span class="o">=</span> <span class="n">obj1</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">cipher_text</span>
+</span><span class="line"><span class="s">&#39;</span><span class="se">\xf0\xb7\x90</span><span class="s">{#ABXY9</span><span class="se">\xd0</span><span class="s">6</span><span class="se">\x9f\xc0\x8c</span><span class="s"> &#39;</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">obj2</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">cipher_text</span><span class="p">)</span>
+</span><span class="line"><span class="s">&#39;abcdefghijklmnop&#39;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="section-3"><strong>应用程序</strong></h3>
+
+<p>在程序里面我们常常使用DES3对文件进行加密解密操作。一般来说操作对象是文件时，总是分成一个个chunck来处理以免占用太多内存。如果读入的chunck少于16bytes，就需要扩展它才能进行加密。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="kn">import</span> <span class="nn">os</span>
+</span><span class="line"><span class="kn">from</span> <span class="nn">Crypto.Cipher</span> <span class="kn">import</span> <span class="n">DES3</span>
+</span><span class="line">
+</span><span class="line"><span class="k">def</span> <span class="nf">encrypt_file</span><span class="p">(</span><span class="n">in_filename</span><span class="p">,</span> <span class="n">out_filename</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">iv</span><span class="p">):</span>
+</span><span class="line">    <span class="n">des3</span> <span class="o">=</span> <span class="n">DES3</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">DES3</span><span class="o">.</span><span class="n">MODE_CFB</span><span class="p">,</span> <span class="n">iv</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">in_filename</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">in_file</span><span class="p">:</span>
+</span><span class="line">        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">out_filename</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">out_file</span><span class="p">:</span>
+</span><span class="line">            <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+</span><span class="line">                <span class="n">chunk</span> <span class="o">=</span> <span class="n">in_file</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">chunk_size</span><span class="p">)</span>
+</span><span class="line">                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+</span><span class="line">                    <span class="k">break</span>
+</span><span class="line">                <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span> <span class="o">%</span> <span class="mi">16</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+</span><span class="line">                    <span class="n">chunk</span> <span class="o">+=</span> <span class="s">&#39; &#39;</span> <span class="o">*</span> <span class="p">(</span><span class="mi">16</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span> <span class="o">%</span> <span class="mi">16</span><span class="p">)</span>
+</span><span class="line">                <span class="n">out_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">des3</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">chunk</span><span class="p">))</span>
+</span><span class="line">
+</span><span class="line"><span class="k">def</span> <span class="nf">decrypt_file</span><span class="p">(</span><span class="n">in_filename</span><span class="p">,</span> <span class="n">out_filename</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">iv</span><span class="p">):</span>
+</span><span class="line">    <span class="n">des3</span> <span class="o">=</span> <span class="n">DES3</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">DES3</span><span class="o">.</span><span class="n">MODE_CFB</span><span class="p">,</span> <span class="n">iv</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">in_filename</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">in_file</span><span class="p">:</span>
+</span><span class="line">        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">out_filename</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">out_file</span><span class="p">:</span>
+</span><span class="line">            <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+</span><span class="line">                <span class="n">chunk</span> <span class="o">=</span> <span class="n">in_file</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">chunk_size</span><span class="p">)</span>
+</span><span class="line">                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+</span><span class="line">                    <span class="k">break</span>
+</span><span class="line">                <span class="n">out_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">des3</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">chunk</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>有了上面定义的这两个函数我们可以这样使用它们：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="kn">from</span> <span class="nn">Crypto</span> <span class="kn">import</span> <span class="n">Random</span>
+</span><span class="line"><span class="n">iv</span> <span class="o">=</span> <span class="n">Random</span><span class="o">.</span><span class="n">get_random_bytes</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+</span><span class="line"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;to_enc.txt&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span><span class="line">    <span class="k">print</span> <span class="s">&#39;to_enc.txt: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span><span class="line"><span class="n">encrypt_file</span><span class="p">(</span><span class="s">&#39;to_enc.txt&#39;</span><span class="p">,</span> <span class="s">&#39;to_enc.enc&#39;</span><span class="p">,</span> <span class="mi">8192</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">iv</span><span class="p">)</span>
+</span><span class="line"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;to_enc.enc&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span><span class="line">    <span class="k">print</span> <span class="s">&#39;to_enc.enc: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span><span class="line"><span class="n">decrypt_file</span><span class="p">(</span><span class="s">&#39;to_enc.enc&#39;</span><span class="p">,</span> <span class="s">&#39;to_enc.dec&#39;</span><span class="p">,</span> <span class="mi">8192</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">iv</span><span class="p">)</span>
+</span><span class="line"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;to_enc.dec&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span><span class="line">    <span class="k">print</span> <span class="s">&#39;to_enc.dec: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>程序的输出如下：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line">to_enc.txt: this content needs to be encrypted.
+</span><span class="line">
+</span><span class="line">to_enc.enc: ??~?E??.??<span class="o">]</span>!<span class="o">=)</span>??<span class="err">&quot;</span>t?
+</span><span class="line">                                JpDw???R?UN0?<span class="o">=</span>??R?UN0?<span class="o">}</span>0r?FV9
+</span><span class="line">to_enc.dec: this content needs to be encrypted.
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="public-key-algorithms"><strong>Public-key algorithms</strong></h2>
+
+<p>上面提到的加密算法的一大问题是双方都需要知道key。而<code>public-key算法</code>提供了两个key，一个用来加密，一个用来解密。 </p>
+
+<p><img src="http://lenciel.github.io/downloads/images/public_private_key.png" alt="ecb" title="Don't touch me..." /></p>
+
+<h3 id="publicprivate-key"><strong>public/private key</strong></h3>
+
+<p>使用pycrpto很容易就可以生成一对<code>private/public key</code>，生成key的时候必须规定key的长度，越长越安全。除开长度，还需要设定生成key的方法。下面是一个使用RSA生成1024bit长度key的过程：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">Crypto.PublicKey</span> <span class="kn">import</span> <span class="n">RSA</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">Crypto</span> <span class="kn">import</span> <span class="n">Random</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">random_generator</span> <span class="o">=</span> <span class="n">Random</span><span class="o">.</span><span class="n">new</span><span class="p">()</span><span class="o">.</span><span class="n">read</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">key</span> <span class="o">=</span> <span class="n">RSA</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="n">random_generator</span><span class="p">)</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">key</span>
+</span><span class="line"><span class="o">&lt;</span><span class="n">_RSAobj</span> <span class="nd">@0x7f60cf1b57e8</span> <span class="n">n</span><span class="p">(</span><span class="mi">1024</span><span class="p">),</span><span class="n">e</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">private</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>key对象有一系列的方法：
+- <code>can_encrypt()</code> 返回是否能用key来加密数据 
+- <code>can_sign()</code> 返回是否能用key来进行签名
+- <code>has_private()</code> 返回是否有private key</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">key</span><span class="o">.</span><span class="n">can_encrypt</span><span class="p">()</span>
+</span><span class="line"><span class="bp">True</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">key</span><span class="o">.</span><span class="n">can_sign</span><span class="p">()</span>
+</span><span class="line"><span class="bp">True</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">key</span><span class="o">.</span><span class="n">has_private</span><span class="p">()</span>
+</span><span class="line"><span class="bp">True</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="section-4"><strong>加密</strong></h3>
+
+<p>现在我们有了一对key，我们就可以加密一些数据了。加密的时候使用的是公钥: <code>public key</code> ：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">public_key</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">publickey</span><span class="p">()</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">enc_data</span> <span class="o">=</span> <span class="n">public_key</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="s">&#39;abcdefgh&#39;</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">enc_data</span>
+</span><span class="line"><span class="p">(</span><span class="s">&#39;</span><span class="se">\x11\x86\x8b\xfa\x82\xdf\xe3</span><span class="s">sN ~@</span><span class="se">\xdb</span><span class="s">P</span><span class="se">\x85</span>
+</span><span class="line">\<span class="n">x93</span>\<span class="n">xe6</span>\<span class="n">xb9</span>\<span class="n">xe9</span>\<span class="n">x95I</span>\<span class="n">xa7</span>\<span class="n">xadQ</span>\<span class="n">x08</span>\<span class="n">xe5</span>\<span class="n">xc8</span><span class="err">$</span><span class="mi">9</span>\<span class="n">x81K</span>\<span class="n">xa0</span>\<span class="n">xb5</span>\<span class="n">xee</span>\<span class="n">x1e</span>\<span class="n">xb5r</span>
+</span><span class="line">\<span class="n">x9bH</span><span class="p">)</span>\<span class="n">xd8</span>\<span class="n">xeb</span>\<span class="n">x03</span>\<span class="n">xf3</span>\<span class="n">x86</span>\<span class="n">xb5</span>\<span class="n">x03</span>\<span class="n">xfd</span>\<span class="n">x97</span>\<span class="n">xe6</span><span class="o">%</span>\<span class="n">x9e</span>\<span class="n">xf7</span>\<span class="n">x11</span><span class="o">=</span>\<span class="n">xa1Y</span><span class="o">&lt;</span>\<span class="n">xdc</span>
+</span><span class="line">\<span class="n">x94</span>\<span class="n">xf0</span>\<span class="n">x7f7</span><span class="err">@</span>\<span class="n">x9c</span>\<span class="n">x02suc</span>\<span class="n">xcc</span>\<span class="n">xc2j</span>\<span class="n">x0c</span>\<span class="n">xce</span>\<span class="n">x92</span>\<span class="n">x8d</span>\<span class="n">xdc</span>\<span class="n">x00uL</span>\<span class="n">xd6</span><span class="o">.</span>
+</span><span class="line">\<span class="n">x84</span><span class="o">~/</span>\<span class="n">xed</span>\<span class="n">xd7</span>\<span class="n">xc5</span>\<span class="n">xbe</span>\<span class="n">xd2</span>\<span class="n">x98</span>\<span class="n">xec</span>\<span class="n">xe4</span>\<span class="n">xda</span>\<span class="n">xd1L</span>\<span class="n">rM</span><span class="err">`</span>\<span class="n">x88</span>\<span class="n">x13V</span>\<span class="n">xe1M</span>\<span class="n">n</span> <span class="n">X</span>
+</span><span class="line">\<span class="n">xce</span>\<span class="n">x13</span> \<span class="n">xaf</span>\<span class="n">x10</span><span class="o">|</span>\<span class="n">x80</span>\<span class="n">x0e</span>\<span class="n">x14</span>\<span class="n">xbc</span>\<span class="n">x14</span>\<span class="n">x1ec</span>\<span class="n">xf6Rs</span>\<span class="n">xbb</span>\<span class="n">x93</span>\<span class="n">x06</span>\<span class="n">xbe</span><span class="s">&#39;,)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="section-5"><strong>解密</strong></h3>
+
+<p>只要有用于解密的私钥(private key)解密是很简单的：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">key</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">enc_data</span><span class="p">)</span>
+</span><span class="line"><span class="s">&#39;abcdefgh&#39;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="section-6"><strong>签名</strong></h3>
+
+<p>对信息进行签名，可以用来验证信息的作者，让我们相信它的来源。下面这个例子展示了如何先算出信息的hash值，然后送给RSA key的<code>sign()</code>方法。使用其他算法如<code>DSA</code>或者是<code>ElGamal</code>也类似。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">Crypto.Hash</span> <span class="kn">import</span> <span class="n">MD5</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">Crypto.PublicKey</span> <span class="kn">import</span> <span class="n">RSA</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">Crypto</span> <span class="kn">import</span> <span class="n">Random</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">key</span> <span class="o">=</span> <span class="n">RSA</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="n">random_generator</span><span class="p">)</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">text</span> <span class="o">=</span> <span class="s">&#39;abcdefgh&#39;</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="nb">hash</span> <span class="o">=</span> <span class="n">MD5</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">digest</span><span class="p">()</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="nb">hash</span>
+</span><span class="line"><span class="s">&#39;</span><span class="se">\xe8\xdc</span><span class="s">@</span><span class="se">\x81\xb1</span><span class="s">44</span><span class="se">\xb4</span><span class="s">Q</span><span class="se">\x89\xa7</span><span class="s"> </span><span class="se">\xb7</span><span class="s">{h</span><span class="se">\x18</span><span class="s">&#39;</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">signature</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="nb">hash</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">)</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">signature</span>
+</span><span class="line"><span class="p">(</span><span class="mi">1549358700992033008647390368952919655009213441715588267926189797</span>
+</span><span class="line"><span class="mi">14352832388210003027089995136141364041133696073722879839526120115</span>
+</span><span class="line"><span class="mi">25996986614087200336035744524518268136542404418603981729787438986</span>
+</span><span class="line"><span class="mi">50177007820700181992412437228386361134849096112920177007759309019</span>
+</span><span class="line"><span class="il">6400328917297225219942913552938646767912958849053L</span><span class="p">,)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="section-7"><strong>验证</strong></h3>
+
+<p>只要有公钥，验证信息就很简单了。未加密的文本和签名一起被发送给接收方。接收方计算hash值然后调用公钥的<code>verify()</code>方法来进行验证：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">text</span> <span class="o">=</span> <span class="s">&#39;abcdefgh&#39;</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="nb">hash</span> <span class="o">=</span> <span class="n">MD5</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">digest</span><span class="p">()</span>
+</span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">public_key</span><span class="o">.</span><span class="n">verify</span><span class="p">(</span><span class="nb">hash</span><span class="p">,</span> <span class="n">signature</span><span class="p">)</span>
+</span><span class="line"><span class="bp">True</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Doomsday Machines]]></title>
+    <link href="http://lenciel.github.io/2013/07/doomsday-machines/"/>
+    <updated>2013-07-23T23:25:00+08:00</updated>
+    <id>http://lenciel.github.io/2013/07/doomsday-machines</id>
+    <content type="html"><![CDATA[<p><img src="http://lenciel.github.io/downloads/images/dr_strangelove_doomsday_machine.gif" alt="doomsday machines" title="Don't touch me..." /></p>
+
+<blockquote><p>Gee, I wish we had one of them doomsday machines.</p><footer><strong>Stanley Kubrick</strong> <cite><a href="http://www.imdb.com/title/tt0057012/">Fight Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb(1964)</a></cite></footer></blockquote>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[关掉Zsh对指定命令的自动纠错]]></title>
+    <link href="http://lenciel.github.io/2013/07/stop-specific-zsh-shell-auto-correct/"/>
+    <updated>2013-07-23T14:47:00+08:00</updated>
+    <id>http://lenciel.github.io/2013/07/stop-specific-zsh-shell-auto-correct</id>
+    <content type="html"><![CDATA[<p>工作机器切换到Mac之后我一直在自用并在团队中推广 <a href="https://github.com/lenciel/oh-my-zsh"><code>oh-my-zsh</code></a>。99%的时间本座对它是如此满意，除开有的时候它的服务太主动了一些。</p>
+
+<p>比如今天在用<code>curl</code>试用一个接口的时候，我测试用的payload放在一个<code>payload.json</code>文件里面，所以命令是：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">curl -H "Content-Type: application/json" -X POST -d @payload.json  http://xxx.xxx.xxx/xxx/StartServiceServlet</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>然后它就一直提示：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">zsh: correct '@payload.json' to 'payload.json' [nyae]?</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>一，直，提，示。</p>
+
+<p>跑到代码里面去看了一下，要关掉这种自动纠错的提示可以配置 <code>~/.oh-my-zsh/lib/correction.zsh</code>：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">alias curl='nocorrect curl'</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>整个世界清静了…</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[We Are Men]]></title>
+    <link href="http://lenciel.github.io/2013/07/we-are-men/"/>
+    <updated>2013-07-22T21:24:00+08:00</updated>
+    <id>http://lenciel.github.io/2013/07/we-are-men</id>
+    <content type="html"><![CDATA[<p><img src="http://lenciel.github.io/downloads/images/fight_club.gif" alt="we are men" title="Don't touch me..." /></p>
+
+<blockquote><p>Yes, we’re men. Men is what we are.</p><footer><strong>Palahniuk</strong> <cite><a href="http://en.wikipedia.org/wiki/Fight_Club">Fight Club(1999)</a></cite></footer></blockquote>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Oauth: Introduction and Tips]]></title>
+    <link href="http://lenciel.github.io/2013/07/oauth-introduction-and-tips/"/>
+    <updated>2013-07-22T09:53:00+08:00</updated>
+    <id>http://lenciel.github.io/2013/07/oauth-introduction-and-tips</id>
+    <content type="html"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#table-of-contents">Table Of Contents</a>    <ul>
+      <li><a href="#terminology--reference">Terminology / Reference</a>        <ul>
+          <li><a href="#signed-requests">Signed Requests</a>            <ul>
+              <li><a href="#signature-base-string">Signature Base String</a>                <ul>
+                  <li><a href="#signing-key">Signing Key</a></li>
+                </ul>
+              </li>
+              <li><a href="#signature">Signature编码</a>                <ul>
+                  <li><a href="#plaintext">PLAINTEXT</a></li>
+                  <li><a href="#hmac-sha1">HMAC-SHA1</a></li>
+                  <li><a href="#rsa-sha1">RSA-SHA1</a></li>
+                </ul>
+              </li>
+              <li><a href="#oauth">OAuth请求头</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#oauth-10a-one-legged">OAuth 1.0a (one-legged)</a></li>
+      <li><a href="#oauth-10a-two-legged">OAuth 1.0a (two-legged)</a></li>
+      <li><a href="#oauth-10a-three-legged">OAuth 1.0a (three-legged)</a></li>
+      <li><a href="#oauth-10a-echo">OAuth 1.0a (Echo)</a></li>
+      <li><a href="#oauth-10a-xauth">OAuth 1.0a (xAuth)</a></li>
+      <li><a href="#oauth-2-two-legged">OAuth 2 (two-legged)</a>        <ul>
+          <li><a href="#client-credentials">Client Credentials</a></li>
+          <li><a href="#resource-owner-password">Resource Owner Password</a></li>
+        </ul>
+      </li>
+      <li><a href="#oauth-2-three-legged">OAuth 2 (three-legged)</a></li>
+      <li><a href="#oauth-2-refresh-token">OAuth 2 (refresh token)</a></li>
+      <li><a href="#tips--tricks">Tips &amp; Tricks</a>        <ul>
+          <li><a href="#access-tokenrefresh-key">生成Access Token和Refresh Key</a>            <ul>
+              <li><a href="#section">例子</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#references">References</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="table-of-contents">Table Of Contents</h1>
+
+<h2 id="terminology--reference">Terminology / Reference</h2>
+
+<ul>
+  <li>Signed / Signature
+    <ul>
+      <li>由一系列的HTTP request元素组成的一个字符串。</li>
+    </ul>
+
+    <p>这里说的HTTP request元素一般包括了<code>Request Method</code> <code>&amp;</code> <code>URL Query</code> <code>&amp;</code> <code>Parameters</code>, 并且这些元素用(<code>consumer_secret</code> <code>&amp;</code> <code>token_secret</code>)组成的key进行了加密。In some cases this may be the key, plaintext, or may use simply the <code>consumer_secret</code>, for RSA encryption.</p>
+  </li>
+  <li>Consumer Secret
+    <ul>
+      <li>由应用提供出来作为OAuth握手的保密的token</li>
+    </ul>
+  </li>
+  <li>Consumer Key
+    <ul>
+      <li>由应用随Consumer Secret一起提供，用来做OAuth的握手的key</li>
+    </ul>
+  </li>
+  <li>Nonce / UID
+    <ul>
+      <li>通常<code>32</code>个字符长度，由<code>a-zA-Z0-9</code>中的字符生成的一个独一无二的ID</li>
+    </ul>
+  </li>
+  <li>OAuth Token
+    <ul>
+      <li>由服务器或者是其他Endpoint发送的，用来作为Request或者Access的token</li>
+    </ul>
+  </li>
+  <li>OAuth Token Secret
+    <ul>
+      <li>作为特定token的响应被发送，用来进行 <code>exchanges / refreshing</code>.</li>
+    </ul>
+  </li>
+  <li>Query
+    <ul>
+      <li>URL中的用 <code>?</code> 符号隔开的一些键值对部分。键和值之间用 <code>=</code> 分隔，例如 <code>?query=looks&amp;like=this</code></li>
+    </ul>
+  </li>
+  <li>Parameter / Argument
+    <ul>
+      <li>一般指Query中的键，比如 <code>oauth_token="helloWorld"</code> 中 <code>oauth_token</code> 被称为一个 <code>parameter</code> 或者 <code>argument</code> 而 <code>helloWorld</code> 则是它的值。</li>
+    </ul>
+  </li>
+  <li>PLAINTEXT
+    <ul>
+      <li>使用普通文本作为Signature的保存方式</li>
+    </ul>
+  </li>
+  <li>HMAC-SHA1 <sup id="fnref:8"><a href="#fn:8" rel="footnote">1</a></sup>
+    <ul>
+      <li>Signature的保存方式，基于Secure Hash Algorithm(1)，是加密的文本</li>
+    </ul>
+  </li>
+  <li>RSA-SHA1 <sup id="fnref:9"><a href="#fn:9" rel="footnote">2</a></sup>
+    <ul>
+      <li>Signature的保存方式，基于Secure Hash Algorithm(1)，由一对public/ private的key组成。</li>
+    </ul>
+  </li>
+  <li>Service
+    <ul>
+      <li>服务方指信息的提供者，在OAuth语境中，Facebook/Twitter/腾讯/新浪等就是一个个的Service</li>
+    </ul>
+  </li>
+  <li>Signature Method
+    <ul>
+      <li>OAuth接受的加密算法，包括: PLAINTEXT, HMAC-SHA1和RSA-SHA1</li>
+    </ul>
+  </li>
+  <li>Value
+    <ul>
+      <li>键值对中的值</li>
+    </ul>
+  </li>
+  <li>URL / URI
+    <ul>
+      <li>URL是URI的一种，你应该懂的吧</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="signed-requests">Signed Requests</h3>
+
+<blockquote>
+  <p>本章描述的是OAuth 1.0</p>
+</blockquote>
+
+<p>对request签名(Sign)是非常重要的，本章主要解释签名流程和各个参数的作用。从数据流上来说，签名的过程就是把应用所获取和所生成的信息放到一个地方去：可以是通过 <code>OAuth</code> 头，也可以是 <code>Query</code> 字符串。</p>
+
+<h4 id="signature-base-string">Signature Base String</h4>
+
+<p>签名的基本组成有：request的 <code>Method</code>，request的 <code>URL</code> (如果是 <code>OAuth Echo</code>则是 <code>credentials uri</code>) 和 request的 <code>Query String</code>。没有加密前它看起来会是下面这样 (例子来自 <a href="https://dev.twitter.com/docs/auth/creating-signature">twitter</a>):</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">POST&amp;https%3A%2F%2Fapi.twitter.com%2F1%2Fstatuses%2Fupdate.json&amp;include_entities%3Dtrue%26oauth_consumer_key%3Dxvz1evFS4wEEPTGEFPHBog%26oauth_nonce%3DkYjzVBB8Y0ZFabxSWbWovY3uYSQ2pTgmZeNu2VS4cg%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1318622958%26oauth_token%3D370773112-GmHxMAgYyLbNEtIKZeRNFsMKPR9EyMZeS9weJAEb%26oauth_version%3D1.0%26status%3DHello%2520Ladies%2520%252B%2520Gentlemen%252C%2520a%2520signed%2520OAuth%2520request%2521</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h5 id="signing-key">Signing Key</h5>
+
+<p>上面的 <code>signature base</code> 字符串会被加密。加密时用到的key就是 <em>signing key</em> ， 是由OAuth <code>Consumer Secret</code> 和 <code>Token Secret</code> 用 <code>&amp;</code> 字符连接起来组成的:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">kAcSOqF21Fu85e7zjz7ZN2U4ZRhfV3WpwPAoE3Z7kBw&amp;LswwdoUaIvS8ltyTt5jkRh4J50vUPVVHtR2YPi5kE</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<hr />
+
+<p><strong>Note:</strong> 如果是使用RSA或者xAuth， <code>signing key</code> 可能只有 <code>Consumer Secret</code> 部分外加一个可以省略的 <code>&amp;</code> 。 更多相关信息可以从mashape-oauth/lib/oauth.js的 <a href="https://github.com/Mashape/mashape-oauth/blob/master/lib/oauth.js#L233">233</a>行和 <a href="https://github.com/Mashape/mashape-oauth/blob/master/lib/oauth.js#L238">238</a>行了解。</p>
+
+<hr />
+
+<h4 id="signature">Signature编码</h4>
+
+<p>有了 <code>signature base string</code> 和 <code>signature key</code> 之后，就需要从这两个字符串中提取信息完成编码。编码的方式共有三种：PLAINTEXT, HMAC, 或者是 RSA。</p>
+
+<h5 id="plaintext">PLAINTEXT</h5>
+
+<p>没有任何编码，直接传 <code>Signature Key</code></p>
+
+<h5 id="hmac-sha1">HMAC-SHA1</h5>
+
+<p>这种编码方式下，二进制格式的key被用来更新base，然后被编码成 <code>Base64</code> 放到<code>signature string</code>里面：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">tnnArxj06cWHq44gCs1OSKk/jLY=</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h5 id="rsa-sha1">RSA-SHA1</h5>
+
+<p>这种更复杂但是更安全的方式是根据<code>Signature Base</code>来生成一对<code>private key</code>和<code>public key</code>进行加密。</p>
+
+<p>然后在服务端，会用key来验证编码后的 <code>oauth_signature</code> 字段。</p>
+
+<p><strong>Note:</strong> mashape-oauth/tests/oauth.js的第<a href="https://github.com/Mashape/mashape-oauth/blob/master/tests/oauth.js#L74">74</a>行说明了如何使用生成的<code>private key</code>来对<code>signature base</code>进行编码。</p>
+
+<h4 id="oauth">OAuth请求头</h4>
+
+<p>OAuth请求头包括了<code>oauth_signature</code> 和 <code>oauth_signature_method</code> 等参数及值。这些<code>oauth_*</code> 参数一般会用名字和其他<a href="https://github.com/Mashape/mashape-oauth/blob/master/lib/oauth.js#L111">复杂的规则</a>排序，相互之间用 <code>,</code> 或者是空格分隔。下面是一个取得Twitter的Request Token的例子:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+</pre></td><td class="code"><pre><code class="http"><span class="line"><span class="nf">POST</span> <span class="nn">/oauth/request_token</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</span><span class="line"><span class="na">User-Agent</span><span class="o">:</span> <span class="l">themattharris&#39; HTTP Client</span>
+</span><span class="line"><span class="na">Host</span><span class="o">:</span> <span class="l">api.twitter.com</span>
+</span><span class="line"><span class="na">Accept</span><span class="o">:</span> <span class="l">*/*</span>
+</span><span class="line"><span class="err">Authorization:</span>
+</span><span class="line">        OAuth oauth_callback=&quot;http%3A%2F%2Flocalhost%2Fsign-in-with-twitter%2F&quot;,
+</span><span class="line">              oauth_consumer_key=&quot;cChZNFj6T5R0TigYB9yd1w&quot;,
+</span><span class="line">              oauth_nonce=&quot;ea9ec8429b68d6b77cd5600adbbb0456&quot;,
+</span><span class="line">              oauth_signature=&quot;F1Li3tvehgcraF8DMJ7OyxO4w9Y%3D&quot;,
+</span><span class="line">              oauth_signature_method=&quot;HMAC-SHA1&quot;,
+</span><span class="line">              oauth_timestamp=&quot;1318467427&quot;,
+</span><span class="line">              oauth_version=&quot;1.0&quot;
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><code>oauth_callback</code> 是整个认证过程完毕后的回调地址，默认情况下服务方会提供一个 <code>oauth_callback_confirmed</code> token。</p>
+
+<p>下面是一个<code>response</code>的例子：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+</pre></td><td class="code"><pre><code class="http"><span class="line"><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+</span><span class="line"><span class="na">Date</span><span class="o">:</span> <span class="l">Thu, 13 Oct 2011 00:57:06 GMT</span>
+</span><span class="line"><span class="na">Status</span><span class="o">:</span> <span class="l">200 OK</span>
+</span><span class="line"><span class="na">Content-Type</span><span class="o">:</span> <span class="l">text/html; charset=utf-8</span>
+</span><span class="line"><span class="na">Content-Length</span><span class="o">:</span> <span class="l">146</span>
+</span><span class="line"><span class="na">Pragma</span><span class="o">:</span> <span class="l">no-cache</span>
+</span><span class="line"><span class="na">Expires</span><span class="o">:</span> <span class="l">Tue, 31 Mar 1981 05:00:00 GMT</span>
+</span><span class="line"><span class="na">Cache-Control</span><span class="o">:</span> <span class="l">no-cache, no-store, must-revalidate, pre-check=0, post-check=0</span>
+</span><span class="line"><span class="na">Vary</span><span class="o">:</span> <span class="l">Accept-Encoding</span>
+</span><span class="line"><span class="na">Server</span><span class="o">:</span> <span class="l">tfe</span>
+</span><span class="line">
+</span><span class="line">oauth_token=NPcudxy0yU5T3tBzho7iCotZ3cnetKwcTIRlX0iwRl0<span class="err">&amp;</span>
+</span><span class="line">oauth_token_secret=veNRnAWe6inFuo8o2u8SLLZLjolYDmDP7SzL0YfYI<span class="err">&amp;</span>
+</span><span class="line">oauth_callback_confirmed=true
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>可以看到, <code>200</code> response 以及 <code>oauth_token</code>, <code>oauth_token_secret</code> 和 <code>oauth_callback_confirmed</code> 参数表示这次OAuth请求是成功的。接下来你就可以用 <code>oauth_token_secret</code> 来生成你的签名作为 <code>access token</code> 然后使用 <code>oauth_token</code>参数发送出去进行认证。</p>
+
+<p>一般来说, <code>oauth_token</code> 发送的格式是 <code>?oauth_token=[token]</code> ，在认证的endpoint收到之后会进行一次 <code>3-Legged OAuth 1.0a</code> 并返回 <code>oauth_token</code> 和 <code>oauth_verifier</code>。返回的参数也会被用到 <code>Access Token</code> request<sup id="fnref:1"><a href="#fn:1" rel="footnote">3</a></sup>中去。</p>
+
+<h2 id="oauth-10a-one-legged">OAuth 1.0a (one-legged)</h2>
+
+<p>一般被叫成 <code>two-legged</code> 的OAuth其实是只有一步的。</p>
+
+<p><img src="http://lenciel.github.io/downloads/images/oauth_flow_1.png" align="right" /></p>
+
+<ol>
+  <li>应用发送一个 <strong>signed</strong> request 到服务提供商，request里包括:
+    <ul>
+      <li><code>oauth_token</code> <em>Empty String</em></li>
+      <li><code>oauth_consumer_key</code></li>
+      <li><code>oauth_timestamp</code></li>
+      <li><code>oauth_nonce</code></li>
+      <li><code>oauth_signature</code></li>
+      <li><code>oauth_signature_method</code></li>
+      <li><code>oauth_version</code> <em>Optional</em></li>
+    </ul>
+  </li>
+  <li>服务提供商验证后，提供相应的资源供应用访问。</li>
+  <li>应用请求可以访问的资源。</li>
+</ol>
+
+<p>这种最简单的方式当然也是安全是漏洞最多的方式。通常如果你都已经想到要用OAuth了，就不该考虑这么简陋的方式了。</p>
+
+<hr />
+
+<p><strong>Note:</strong> Google 要求请求里面要带一个不是<code>oauth</code>开头的参数叫 <code>xoauth_requester_id</code><sup id="fnref:2"><a href="#fn:2" rel="footnote">4</a></sup>，这个要求在OAuth2里面过期了。</p>
+
+<hr />
+
+<h2 id="oauth-10a-two-legged">OAuth 1.0a (two-legged)</h2>
+
+<p>真正的<code>two-legged</code>是1.0a版本的OAuth。</p>
+
+<p><img src="http://lenciel.github.io/downloads/images/oauth_flow_2.png" align="right" /></p>
+
+<ol>
+  <li>应用发送一个 <strong>signed</strong> request到服务提供商请求一个 <code>Request Token</code>，request里包括:
+    <ul>
+      <li><code>oauth_consumer_key</code></li>
+      <li><code>oauth_timestamp</code></li>
+      <li><code>oauth_nonce</code></li>
+      <li><code>oauth_signature</code></li>
+      <li><code>oauth_signature_method</code></li>
+      <li><code>oauth_version</code> <em>可选</em></li>
+    </ul>
+  </li>
+  <li>服务提供商返回 <code>Request Token</code>:
+    <ul>
+      <li><code>oauth_token</code></li>
+      <li><code>oauth_token_secret</code></li>
+      <li>… 其他额外的参数</li>
+    </ul>
+  </li>
+  <li>应用再次发送<strong>signed</strong> request来用<code>Request Token</code>换<code>Access Token</code>，请求中包括：
+    <ul>
+      <li><code>oauth_token</code> <em>Request Token</em></li>
+      <li><code>oauth_consumer_key</code></li>
+      <li><code>oauth_nonce</code></li>
+      <li><code>oauth_signature</code></li>
+      <li><code>oauth_signature_method</code></li>
+      <li><code>oauth_version</code></li>
+    </ul>
+  </li>
+  <li>服务提供商返回 <code>Access Token</code> 和 <code>Token Secret</code>，整个payload的参数和第二步一样主要是<code>oauth_token</code>和<code>oauth_token_secret</code>。</li>
+  <li>应用使用<code>oauth_token</code> 和 <code>oauth_token_secret</code> 来访问被权限保护的资源。</li>
+</ol>
+
+<p>这里我们可以看到安全性被增强了，而应用开发者不会有太多的工作，用户更是完全觉察不到。</p>
+
+<h2 id="oauth-10a-three-legged">OAuth 1.0a (three-legged)</h2>
+
+<p>最完备同时也是带来最多麻烦的一个版本，特别是引入了需要用户操作来确认的部分，增加了开发和交互上的复杂度。一开始推出的时候，让很多用户感到不知所措。</p>
+
+<p><img src="http://lenciel.github.io/downloads/images/oauth_flow_3.png" align="right" /></p>
+
+<ol>
+  <li>应用发送一个 <strong>signed</strong> request到服务提供商请求一个 <code>Request Token</code>，request里包括:
+    <ul>
+      <li><code>oauth_consumer_key</code></li>
+      <li><code>oauth_timestamp</code></li>
+      <li><code>oauth_nonce</code></li>
+      <li><code>oauth_signature</code></li>
+      <li><code>oauth_signature_method</code></li>
+      <li><code>oauth_version</code> <em>Optional</em></li>
+      <li><code>oauth_callback</code></li>
+    </ul>
+  </li>
+  <li>服务提供商返回 <code>Request Token</code>:
+    <ul>
+      <li><code>oauth_token</code></li>
+      <li><code>oauth_token_secret</code></li>
+      <li><code>oauth_callback_confirmed</code></li>
+      <li>… Additional Parameters / Arguments</li>
+    </ul>
+  </li>
+  <li>返回包含下面参数的url
+    <ul>
+      <li><code>oauth_token</code></li>
+    </ul>
+  </li>
+  <li>弹出窗口访问返回的url，要求用户授权</li>
+  <li>用户授权</li>
+  <li>返回到应用中，并保存下面的参数:
+    <ul>
+      <li><code>oauth_token</code></li>
+      <li><code>oauth_verifier</code></li>
+    </ul>
+  </li>
+  <li>应用发送<strong>signed</strong> request，用<code>Request Token</code> / <code>Verifier</code> 换 <code>Access Token</code>, 请求中包括：
+    <ul>
+      <li><code>oauth_token</code> <em>Request Token;</em></li>
+      <li><code>oauth_consumer_key</code></li>
+      <li><code>oauth_nonce</code></li>
+      <li><code>oauth_signature</code></li>
+      <li><code>oauth_signature_method</code></li>
+      <li><code>oauth_version</code></li>
+      <li><code>oauth_verifier</code></li>
+    </ul>
+  </li>
+  <li>服务提供商返回 <code>Access Token</code> 和 <code>Token Secret</code>，整个payload的参数和第二步一样主要是<code>oauth_token</code>和<code>oauth_token_secret</code>。</li>
+  <li>应用使用<code>oauth_token</code> 和 <code>oauth_token_secret</code> 来访问被权限保护的资源。</li>
+</ol>
+
+<hr />
+
+<p><strong>Note:</strong> 在<em>第6步</em> 如果 <code>oauth_verifier</code> 没有被发送，那么就会认证失败。只有极少数的实现可以接受只发送<code>oauth_token</code>，这样的服务提供商被认为是不完整的实现了OAuth 1.0a 3-Legged。</p>
+
+<hr />
+
+<h2 id="oauth-10a-echo">OAuth 1.0a (Echo)</h2>
+
+<p>非主流的一种实现，但是确实是存在的：发明者是Twitter的Raffi。这种实现允许在首次发送的请求token里面多带两个header，这样可以通过代理的方式在代理服务商那里对原始服务商的用户进行认证。</p>
+
+<p><img src="http://lenciel.github.io/downloads/images/oauth_flow_4.png" align="right" /></p>
+
+<ol>
+  <li>应用发送一个 <strong>signed</strong> request到代理服务提供商，request里包括:
+    <ul>
+      <li><code>oauth_consumer_key</code></li>
+      <li><code>oauth_timestamp</code></li>
+      <li><code>oauth_nonce</code></li>
+      <li><code>oauth_signature</code></li>
+      <li><code>oauth_signature_method</code></li>
+      <li><code>oauth_version</code> <em>Optional</em></li>
+      <li><code>oauth_callback</code></li>
+    </ul>
+
+    <p>还包括额外的header:
+ - <code>X-Auth-Service-Provider</code>
+ - <code>X-Verify-Credentials-Authorization</code></p>
+  </li>
+  <li>代理服务商拿到额外的header信息到原始服务商认证</li>
+  <li>代理服务商认证通过后，可以返回受限资源的url给应用。</li>
+</ol>
+
+<h2 id="oauth-10a-xauth">OAuth 1.0a (xAuth)</h2>
+
+<p>xAuth是一种桌面程序或者手机程序（没有使用webview等控件不能完成完整流程的程序）使用的OAuth方式。它通过提供用户的<code>email</code>和<code>password</code>给服务器提供商来换取<code>access token</code>。 </p>
+
+<p>这种方式返回的一般是具有只读性质的access token，并且这种token能操作的资源也是有限的。比如Twitter的DM（类似私信）就不能使用xAuth而必须用完整的<code>three-legged</code>流程获取token才能取到。</p>
+
+<p><img src="http://lenciel.github.io/downloads/images/oauth_flow_5.png" align="right" /></p>
+
+<ol>
+  <li>应用请求用户的Credentials</li>
+  <li>应用发送一个 <strong>signed</strong> request到服务提供商请求一个 <code>Access Token</code>，request里包括:
+    <ul>
+      <li><code>oauth_consumer_key</code></li>
+      <li><code>oauth_timestamp</code></li>
+      <li><code>oauth_nonce</code></li>
+      <li><code>oauth_signature</code></li>
+      <li><code>oauth_signature_method</code></li>
+      <li><code>oauth_version</code> <em>Optional</em></li>
+      <li><code>oauth_callback</code></li>
+    </ul>
+
+    <p>额外还包括:
+ - <code>x_auth_mode</code> = <code>client_auth</code>
+ - <code>x_auth_username</code>
+ - <code>x_auth_password</code>
+ - <code>x_auth_permission</code> <em>可选;</em><sup id="fnref:3"><a href="#fn:3" rel="footnote">5</a></sup></p>
+  </li>
+  <li>服务提供商验证用户的Credentials之后返回Access Token
+    <ul>
+      <li><code>oauth_token</code></li>
+      <li><code>oauth_token_secret</code></li>
+    </ul>
+  </li>
+  <li>应用使用<code>Access Token</code>来访问被权限保护的资源。</li>
+</ol>
+
+<h2 id="oauth-2-two-legged">OAuth 2 (two-legged)</h2>
+
+<p>目前为止最容易解释的一种流程，也被称为 <em>Client Credentials</em> 认证流程<sup id="fnref:4"><a href="#fn:4" rel="footnote">6</a></sup>，也有一种 <em>Resource Owner Password</em> 流程属于这类。</p>
+
+<h3 id="client-credentials">Client Credentials</h3>
+
+<ol>
+  <li>应用发送请求给服务提供商:
+    <ul>
+      <li><code>grant_type</code> = <code>client_credentials</code></li>
+    </ul>
+  </li>
+</ol>
+
+<p>如果不是用的 <code>Authorization</code> header:
+  - <code>client_id</code>
+  - <code>client_secret</code>
+2. 应用服务商返回 <code>Access Token</code>等信息:
+    - <code>access_token</code>
+    - <code>expires_in</code>
+    - <code>token_type</code></p>
+
+<h3 id="resource-owner-password">Resource Owner Password</h3>
+
+<p>基本上就是 <code>OAuth 1.0a Echo</code> 流程，但是去掉了签名等复杂的部分。</p>
+
+<ol>
+  <li>应用向resource owner（一般就是用户)请求credentials
+    <ul>
+      <li><code>username</code></li>
+      <li><code>password</code></li>
+    </ul>
+  </li>
+  <li>应用向服务提供商发送request，请求内容为:
+    <ul>
+      <li><code>grant_type</code> = <code>password</code></li>
+      <li><code>username</code></li>
+      <li><code>password</code></li>
+    </ul>
+
+    <p>其格式如下:</p>
+
+    <p><code>
+ grant_type=password&amp;username=my_username&amp;password=my_password
+</code></p>
+
+    <p>如果不是用的 <code>Authorization</code> header, 下面的也需要被放到request里面:
+ - <code>client_id</code>
+ - <code>client_secret</code></p>
+
+    <p>整个加起来回是：</p>
+
+    <p><code>
+ grant_type=password&amp;username=my_username&amp;password=my_password&amp;client_id=random_string&amp;client_secret=random_secret
+</code></p>
+  </li>
+  <li>应用服务商返回 <code>Access Token</code>等信息:
+    <ul>
+      <li><code>access_token</code></li>
+      <li><code>expires_in</code></li>
+      <li><code>token_type</code></li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="oauth-2-three-legged">OAuth 2 (three-legged)</h2>
+
+<p>同样去掉了很多复杂的步骤。</p>
+
+<ol>
+  <li>应用把用户引导到认证页面:
+    <ul>
+      <li><code>client_id</code></li>
+      <li><code>redirect_uri</code></li>
+      <li><code>response_type</code><sup id="fnref:5"><a href="#fn:5" rel="footnote">7</a></sup></li>
+      <li><code>state</code> <em>可选;</em> 防止CSRF<sup id="fnref:6"><a href="#fn:6" rel="footnote">8</a></sup></li>
+      <li><code>scope</code> <em>可选;</em> 你可以获取的资源范围</li>
+    </ul>
+
+    <p>一个例子（为了可读性没有进行Encode）:</p>
+
+    <p><code>
+https://oauth_service/login/oauth/authorize?client_id=3MVG9lKcPoNINVB&amp;redirect_uri=http://localhost/oauth/code_callback&amp;scope=user
+</code></p>
+  </li>
+  <li>用户登录到服务中，批准应用申请权限。</li>
+  <li>服务提供商把用户重定向到 <code>redirect_url</code> 并带上:
+    <ul>
+      <li><code>code</code></li>
+      <li><code>state</code></li>
+    </ul>
+  </li>
+  <li>应用使用 <code>code</code> 用来请求 <code>Access Token</code>:
+    <ul>
+      <li><code>client_id</code></li>
+      <li><code>client_secret</code></li>
+      <li><code>code</code></li>
+      <li><code>redirect_uri</code> <em>可选;</em><sup id="fnref:7"><a href="#fn:7" rel="footnote">9</a></sup></li>
+      <li><code>grant_type</code> = <code>"authorization_code"</code> [^7]</li>
+    </ul>
+  </li>
+  <li>如果 <code>client_id</code> 和 <code>client_secret</code> 正确，服务提供商调用回调到 <code>redirect_url</code> 返回 <code>access_token</code>等信息:
+    <ul>
+      <li><code>access_token</code></li>
+      <li><code>expires_in</code></li>
+      <li><code>refresh_token</code></li>
+    </ul>
+  </li>
+  <li>应用保存 <code>access_token</code> 并使用。
+    <ul>
+      <li>一般来说保存到session或者是cookie里，然后放在 <code>Authorization: [Bearer] access_token</code> header里面用，其中<code>[Bearer]</code>是 <code>Header Authorization Bearer Name</code>，如<code>Bearer</code>, <code>OAuth</code>, <code>MAC</code>等。</li>
+    </ul>
+  </li>
+</ol>
+
+<hr />
+
+<p><strong>有趣的事实:</strong> 有些RFC里面的规定，比如scope的分隔符用空格等，根本没有人遵守。所以开发者根本不知道API会在下个版本变成什么样子。</p>
+
+<hr />
+
+<h2 id="oauth-2-refresh-token">OAuth 2 (refresh token)</h2>
+
+<p>在OAuth2中，<code>access_token</code>一般是有有效期的。一个过期的token被使用时，服务器会返回一个token过期的错误，并带上<code>refresh_token</code>。应用使用<code>refresh token</code>获取新的<code>access_token</code>会比前面描述的流程简单得多。</p>
+
+<ol>
+  <li>发送请求到服务提供商的<code>Refresh Token URI</code>:
+    <ul>
+      <li><code>grant_type</code> = <code>"refresh_token"</code></li>
+      <li><code>scope</code> <em>可选;</em> 更新时不能指定之前没有的scope</li>
+      <li><code>refresh_token</code></li>
+      <li><code>client_id</code></li>
+      <li><code>client_secret</code></li>
+    </ul>
+  </li>
+  <li>服务提供商验证参数后返回:
+    <ul>
+      <li><code>access_token</code></li>
+      <li><code>issued_at</code></li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="tips--tricks">Tips &amp; Tricks</h2>
+
+<h3 id="access-tokenrefresh-key">生成Access Token和Refresh Key</h3>
+
+<p>最好使用uuid，也就是固定长度的随机字符组成的字符串。</p>
+
+<h4 id="section">例子</h4>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="kd">var</span> <span class="nx">OAuth</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;mashape-oauth&#39;</span><span class="p">).</span><span class="nx">OAuth</span><span class="p">,</span>
+</span><span class="line">    <span class="nx">access_token</span> <span class="o">=</span> <span class="nx">OAuth</span><span class="p">.</span><span class="nx">nonce</span><span class="p">(</span><span class="cm">/* Length, Default 32 */</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="references">References</h2>
+
+<ol>
+  <li><a href="http://www.flickr.com/services/api/auth.oauth.html">Authorizing with OAuth</a> - Flickr Documentation</li>
+  <li><a href="https://confluence.atlassian.com/display/BITBUCKET/OAuth+on+Bitbucket">OAuth on Bitbucket</a> - Bitbucket Documentation</li>
+  <li><a href="https://dev.twitter.com/docs/auth/oauth">OAuth Documentation</a> - Twitter Documentation</li>
+  <li><a href="http://2.bp.blogspot.com/-Va1Rp3-r898/TZiVh9xEJDI/AAAAAAAAAMw/8ImBIW_dXuY/s1600/OAuth-legs.png">OAuth Extended Flows</a></li>
+  <li><a href="https://code.google.com/p/oauth-php/wiki/ConsumerHowTo#Two-legged_OAuth">2-Legged OAuth</a> - OAuth-PHP</li>
+  <li><a href="http://oauth.googlecode.com/svn/spec/ext/consumer_request/1.0/drafts/2/spec.html">OAuth for Consumer Requests</a></li>
+  <li><a href="http://term.ie/oauth/example/">OAuth Example</a> - term.ie</li>
+  <li><a href="http://hueniverse.com/oauth/guide/">OAuth 1.0 Guide</a> - Heuniverse</li>
+  <li><a href="http://oauth.net/core/diagram.png">OAuth 1.0a Diagram</a></li>
+  <li><a href="http://wiki.oauth.net">OAuth Wiki</a></li>
+  <li><a href="http://architects.dzone.com/articles/2-legged-oauth-oauth-10-and-20">2-Legged OAuth 1.0 &amp; 2.0</a> - DZone</li>
+  <li><a href="https://developers.google.com/accounts/docs/OAuth">OAuth</a> &amp; <a href="https://developers.google.com/accounts/docs/OAuth2">OAuth2</a> - Google Documentation</li>
+  <li><a href="http://blog.nerdbank.net/2011/06/what-is-2-legged-oauth.html">What is 2-legged OAuth?</a> - Nerdbank</li>
+  <li><a href="http://en.wikipedia.org/wiki/OAuth#List_of_OAuth_service_providers">List of Service Providers</a> - Wikipedia</li>
+  <li><a href="http://developers.mobypicture.com/documentation/authentication/oauth-echo/">OAuth Echo</a> - mobypicture</li>
+  <li><a href="https://dev.twitter.com/docs/auth/oauth/oauth-echo">OAuth Echo</a> - Twitter</li>
+  <li><a href="http://developer.vimeo.com/apis/advanced">Advanced API</a> - Vimeo Developer();</li>
+  <li><a href="https://dev.twitter.com/docs/oauth/xauth">About xAuth</a> - Twitter xAuth Documentation</li>
+  <li><a href="https://dev.twitter.com/docs/auth/implementing-sign-twitter">Implementing Sign-in</a> - Twitter Sign-in Documentation</li>
+  <li><a href="http://tools.ietf.org/html/rfc6749">RFC6749</a> - IETF</li>
+  <li><a href="http://developer.github.com/v3/oauth/">Web Application Flow</a> - Github OAuth2</li>
+  <li><a href="http://www.salesforce.com/us/developer/docs/api_rest/Content/quickstart_oauth.htm">OAuth2 Quickstart</a> - Salesforce</li>
+  <li><a href="https://developers.geoloqi.com/api/authentication">Authentication Mechanisms</a> - Geoloqi</li>
+  <li><a href="http://www.salesforce.com/us/developer/docs/api_rest/Content/intro_understanding_web_server_oauth_flow.htm">Understanding Web Server OAuth Flow</a> - Salesforce</li>
+  <li><a href="http://blog.springsource.org/2011/11/30/10317/">CSRF &amp; OAuth2</a> - Springsource</li>
+  <li><a href="https://tools.ietf.org/html/draft-ietf-oauth-v2-31">OAuth v2-31</a> - IETF</li>
+  <li><a href="http://techblog.hybris.com/2012/06/11/oauth2-resource-owner-password-flow/">Resource Owner Flow</a> - Hybris</li>
+</ol>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:8">
+      <p><a href="http://en.wikipedia.org/wiki/Hash-based_message_authentication_code">Hash based message authentication code</a>.<a href="#fnref:8" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:9">
+      <p><a href="http://en.wikipedia.org/wiki/RSA_(algorithm\)">RSA Algorithm</a>.<a href="#fnref:9" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:1">
+      <p><a href="https://dev.twitter.com/docs/auth/implementing-sign-twitter">Implementing sign twitter</a>.<a href="#fnref:1" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p><a href="https://developers.google.com/google-apps/gmail/oauth_protocol#oauth_request_url">Oauth request url</a>.<a href="#fnref:2" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:3">
+      <p><a href="http://developer.vimeo.com/apis/advanced">Vimeo API Advanced</a><a href="#fnref:3" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:4">
+      <p><a href="https://tools.ietf.org/html/draft-ietf-oauth-v2-31#section-4.4">IETF OATUH V2 Section 4.4</a>.<a href="#fnref:4" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:5">
+      <p><a href="http://tools.ietf.org/html/draft-ietf-oauth-v2-31#section-4.1.1">IETF OATUH V2 Section 4.1.1</a>.<a href="#fnref:5" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:6">
+      <p><a href="http://blog.springsource.org/2011/11/30/10317/">CROSS SITE REQUEST FORGERY AND OAUTH2</a>.<a href="#fnref:6" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:7">
+      <p><a href="http://tools.ietf.org/html/rfc6749#section-4.1.3">RFC6749</a>.<a href="#fnref:7" rel="reference">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[tmux: Introduction and Tips]]></title>
+    <link href="http://lenciel.github.io/2013/07/tmux-introduction-and-tips/"/>
+    <updated>2013-07-21T14:02:00+08:00</updated>
+    <id>http://lenciel.github.io/2013/07/tmux-introduction-and-tips</id>
+    <content type="html"><![CDATA[<p><img src="http://lenciel.github.io/downloads/images/tmux_tips_1.png" alt="tmux screenshot 1" title="Don't touch me..." /></p>
+
+<h3 id="section"><strong>简介</strong></h3>
+
+<p><code>tmux</code> ,其实就是 <code>terminal multiplexer</code> 的简称。使用tmux你可以把多个任务同时运行起来，使用不同的 <code>tmux</code> 窗口来查看它们。你也可以 <code>detach</code> 一个 <code>session</code>，也就是让一个窗口的活动，比如编译这种耗时你又不希望断开的活动，放到后台去运行。如果你使用过 <code>screen</code> 对 <code>detach</code> 一个 <code>session</code> 应该非常熟悉。其实初用 <code>tmux</code> 的时候，它很大程度上就像一个 <code>GNU-Session</code> 外加很多窗口管理的功能。而且由于 <code>tmux</code> 使用了 <code>client-server</code> 架构，我们可以在一个总控的地方去操作所有的窗口和pannel，甚至可以在一个窗口里面切换不同的 <code>session</code>。</p>
+
+<h4 id="tmux"><strong>tmux的安装</strong></h4>
+
+<p>用你的Linux package manager或者如果你和我一样在OSX可以用<code>brew</code>。另外，iTerm2<a href="http://code.google.com/p/iterm2/wiki/TmuxIntegration">集成了</a>对<code>tmux</code>的支持，它也是很多Mac上的<a href="http://tangledhelix.com/blog/2012/04/28/iterm2-keymaps-for-tmux/">程序员</a>最爱的Terminal。</p>
+
+<h4 id="session"><strong>创建一个具名的Session</strong></h4>
+
+<p>由于使用 <code>tmux</code> 可以在一个电脑上创建多个 <code>session</code> ，为了更好的管理它们我们一般可以使用名字来辨识这些 <code>session</code> 。
+比如下面的命令可以创建一个叫 <code>basic</code> 的 <code>session</code>：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>tmux -new -s basic
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>回车之后就会进入一个新的 <code>session</code> 里面。可以看到具名的<code>session</code>的<code>terminal</code>和正常打开<code>iTerm2</code>大致相同，没有特别之处。
+这个时候我们敲<code>exit</code>就会回到原来的<code>terminal</code>中去。</p>
+
+<h4 id="detaching--attaching"><strong>Detaching 和 Attaching</strong></h4>
+
+<p>使用<code>tmux</code>一大好处就是我们可以启动<code>terminal</code>，运行一个任务在后台，然后<code>detach</code>这个<code>session</code>。如果在一般的<code>session</code>里面工作，一旦我们关闭了窗口，跑在里面的所有程序都会被退出。
+但是如果是使用了<code>detach</code>，我们可以再<code>attach</code>回去。下面演示一个例子。</p>
+
+<p>在创建的具名<code>session</code> “basic”里面运行<code>top</code>，然后使用<code>Ctrl-b + d</code>来<code>detach</code>这个<code>session</code>。</p>
+
+<p>首先来学习一下<code>Ctrl+b</code>这样的<code>Command Prefix</code>。因为<code>tmux</code>是一个terminal管家，我们需要有一个办法告诉<code>tmux</code>我们敲击的是需要<code>tmux</code>处理的命令还是传给terminal的。如果定义了<code>Ctrl-b</code>为命令前缀，就是说我们一定要先敲这个前缀，然后执行一个命令，比如<code>d</code>，表示我们要<code>detach</code>。要记住前缀输入之后要松开手，不要在不松手的情况下发命令给<code>tmux</code>。</p>
+
+<p>由于这个前缀是可以自定义的，所以后面我们记为<code>Prefix</code>而不再用<code>Ctrl-b</code>。</p>
+
+<p>然后我们可以使用下面的命令对<code>session</code>进行<code>list</code>、<code>attach</code>和<code>delete</code>：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>tmux ls
+</span><span class="line">0: 1 windows <span class="o">(</span>created Thu Sep 27 10:16:16 2012<span class="o">)</span> <span class="o">[</span>121x22<span class="o">]</span>
+</span><span class="line">basic: 1 windows <span class="o">(</span>created Thu Sep 27 14:32:50 2012<span class="o">)</span> <span class="o">[</span>122x22<span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>可以看到目前有两个存活的<code>session</code>，一个是刚刚创建的<code>basic</code></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>tmux <span class="nb">kill</span>-session -t 0
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>杀掉我们不需要的那个</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>tmux ls
+</span><span class="line">basic: 1 windows <span class="o">(</span>created Thu Sep 27 14:32:50 2012<span class="o">)</span> <span class="o">[</span>122x22<span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>再次attach的时候可以不带<code>-t</code>，因为只有<code>basic</code>这个<code>session</code>还活着。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>tmux attach
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>后面我们可以看到在session之间进行切换还有更多更方便的办法。</p>
+
+<h4 id="section-1"><strong>窗口</strong></h4>
+
+<p>很多时候我们都需要打开窗口运行多个任务。这种情况比较适用于<code>tmux</code>的窗口概念：用起来和现代操作系统里面的<code>tab</code>类似。</p>
+
+<p>新建一个窗口很容易</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line">tmux new -s windows -n shell
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><code>-s</code>是对<code>session</code>进行命名的，<code>-n</code>是用来对窗口进行命名的。</p>
+
+<ul>
+  <li>在当前的<code>session</code>里面新建一个窗口: <code>Prefix+C</code></li>
+  <li>要给窗口命名：<code>Prefix+</code></li>
+  <li>在已有的窗口间跳转： <code>Prefix+n/Prefix+p</code></li>
+  <li>窗口较多的时候跳转： <code>Prefix+序列号</code></li>
+  <li>要关掉窗口： <code>exit</code>或者<code>Prefix+&amp;</code></li>
+  <li>要搜索窗口：<code>Prefix+f</code>或者 <code>Prefix+w</code></li>
+</ul>
+
+<h4 id="section-2"><strong>分栏</strong></h4>
+
+<ul>
+  <li>竖分: <code>Prefix+%</code></li>
+  <li>横分: <code>Prefix+"</code>   </li>
+  <li>在分栏中切换: <code>Prefix+o</code>   </li>
+  <li>在分栏中切换: <code>Prefix+方向键</code></li>
+  <li>在不同的布局间切换: <code>Prefix+space</code></li>
+  <li>关闭: <code>Prefix+x</code></li>
+</ul>
+
+<h4 id="section-3"><strong>命令行模式</strong></h4>
+
+<p><code>Prefix+:</code></p>
+
+<h4 id="section-4"><strong>取得所有的快捷键</strong></h4>
+
+<p><code>Prefix+?</code></p>
+
+<p>二、配置tmux</p>
+
+<p>首先在系统设置里面把<code>CapsLock</code>这枚废材按键map成<code>ctrl</code>。然后是把Prefix配置成<code>ctrl+a</code>而不是<code>ctrl+b</code>，这样主要是为了按起来方便顺手。</p>
+
+<p>另外可以让窗口的序列号从1开始分配，这样初始窗口不会是0，那个你需要手伸很远才能按到的键。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nb">set</span> -g base-index 1
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>同理分栏的序列号也可以从1开始：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line">setw -g pane-base-index 1
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>另外一般需要把发送命令的延迟设置为没延迟</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nb">set</span> -sg escape-time 1
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>完整的配置文件在<a href="https://github.com/lenciel/oh-my-zsh/blob/master/dot_files/tmux.conf">这里</a>：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span> (tmux.conf)</span> <a href="http://lenciel.github.io/downloads/code/tmux.conf">download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+<span class="line-number">47</span>
+<span class="line-number">48</span>
+<span class="line-number">49</span>
+<span class="line-number">50</span>
+<span class="line-number">51</span>
+<span class="line-number">52</span>
+<span class="line-number">53</span>
+<span class="line-number">54</span>
+<span class="line-number">55</span>
+<span class="line-number">56</span>
+<span class="line-number">57</span>
+<span class="line-number">58</span>
+<span class="line-number">59</span>
+<span class="line-number">60</span>
+<span class="line-number">61</span>
+<span class="line-number">62</span>
+<span class="line-number">63</span>
+<span class="line-number">64</span>
+<span class="line-number">65</span>
+<span class="line-number">66</span>
+<span class="line-number">67</span>
+<span class="line-number">68</span>
+<span class="line-number">69</span>
+<span class="line-number">70</span>
+<span class="line-number">71</span>
+<span class="line-number">72</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="c"># zsh is kinda tight</span>
+</span><span class="line"><span class="nb">set</span>-option -g default-shell <span class="nv">$SHELL</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># copy and paster</span>
+</span><span class="line"><span class="nb">set</span>-option -g default-command <span class="s2">&quot;reattach-to-user-namespace -l zsh&quot;</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># look good</span>
+</span><span class="line"><span class="nb">set</span> -g default-terminal <span class="s2">&quot;screen-256color&quot;</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># act like GNU screen</span>
+</span><span class="line"><span class="nb">set</span> -g prefix C-a
+</span><span class="line">unbind C-b
+</span><span class="line">
+</span><span class="line"><span class="nb">set</span> -sg escape-time 1
+</span><span class="line"><span class="nb">set</span> -g base-index 1
+</span><span class="line">setw -g pane-base-index 1
+</span><span class="line">
+</span><span class="line"><span class="nb">bind </span>r <span class="nb">source</span>-file ~/.tmux.conf <span class="se">\;</span> display <span class="s2">&quot;Reloaded!&quot;</span>
+</span><span class="line">
+</span><span class="line"><span class="nb">bind</span> - split-window -v
+</span><span class="line"><span class="nb">bind</span> | split-window -h
+</span><span class="line">
+</span><span class="line"><span class="c"># act like vim</span>
+</span><span class="line">setw -g mode-keys vi
+</span><span class="line"><span class="nb">bind </span>h <span class="k">select</span>-pane -L
+</span><span class="line"><span class="nb">bind </span>j <span class="k">select</span>-pane -D
+</span><span class="line"><span class="nb">bind </span>k <span class="k">select</span>-pane -U
+</span><span class="line"><span class="nb">bind </span>l <span class="k">select</span>-pane -R
+</span><span class="line"><span class="nb">bind</span> -r C-h <span class="k">select</span>-window -t :-
+</span><span class="line"><span class="nb">bind</span> -r C-l <span class="k">select</span>-window -t :+
+</span><span class="line">unbind <span class="o">[</span>
+</span><span class="line"><span class="nb">bind</span> <span class="sb">`</span> copy-mode
+</span><span class="line">unbind p
+</span><span class="line"><span class="nb">bind </span>p paste-buffer
+</span><span class="line"><span class="nb">bind</span> -t vi-copy v begin-selection
+</span><span class="line"><span class="nb">bind</span> -t vi-copy y copy-selection
+</span><span class="line">
+</span><span class="line"><span class="c"># after copying to a tmux buffer, hit y again to copy to clipboard</span>
+</span><span class="line"><span class="nb">bind </span>y run <span class="s2">&quot;tmux save-buffer - | reattach-to-user-namespace pbcopy&quot;</span>
+</span><span class="line">
+</span><span class="line"><span class="c"># resize pane</span>
+</span><span class="line"><span class="nb">bind</span> -r H resize-pane -L 5
+</span><span class="line"><span class="nb">bind</span> -r J resize-pane -D 5
+</span><span class="line"><span class="nb">bind</span> -r K resize-pane -U 5
+</span><span class="line"><span class="nb">bind</span> -r L resize-pane -R 5
+</span><span class="line">
+</span><span class="line"><span class="c"># enable mouse</span>
+</span><span class="line">setw -g mode-mouse on
+</span><span class="line"><span class="nb">set</span> -g mouse-select-pane on
+</span><span class="line"><span class="nb">set</span> -g mouse-resize-pane on
+</span><span class="line"><span class="nb">set</span> -g mouse-select-window on
+</span><span class="line">
+</span><span class="line">
+</span><span class="line">setw -g window-status-fg cyan
+</span><span class="line">setw -g window-status-bg default
+</span><span class="line">setw -g window-status-attr dim
+</span><span class="line">setw -g window-status-current-fg white
+</span><span class="line">setw -g window-status-current-bg red
+</span><span class="line">setw -g window-status-current-att bright
+</span><span class="line">
+</span><span class="line"><span class="nb">set</span> -g status-interval 60
+</span><span class="line"><span class="nb">set</span> -g status-justify centre
+</span><span class="line">setw -g monitor-activity on
+</span><span class="line"><span class="nb">set</span> -g visual-activity on
+</span><span class="line">
+</span><span class="line"><span class="nb">set</span> -g terminal-overrides <span class="s2">&quot;xterm*:XT:smcup@:rmcup@:kUPS=\eOA:kDN5=\eOB:kLFT5=\eOD:kRIT5=\eOC&quot;</span>
+</span><span class="line"><span class="nb">set</span> -g <span class="nb">history</span>-limit 30000
+</span><span class="line">setw -g alternate-screen on
+</span><span class="line"><span class="nb">set</span> -s escape-time 50
+</span><span class="line">
+</span><span class="line"><span class="nb">set</span>-window-option -g window-status-current-format <span class="s2">&quot;#[fg=colour235, bg=colour27]⮀#[fg=colour255, bg=colour27] #I ⮁ #W #[fg=colour27, bg=colour235]⮀&quot;</span>
+</span><span class="line"><span class="nb">source</span> <span class="s2">&quot;/Users/lenciel/Library/Python/2.7/lib/python/site-packages/powerline/bindings/tmux/powerline.conf&quot;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[1984]]></title>
+    <link href="http://lenciel.github.io/2013/07/big-brother/"/>
+    <updated>2013-07-20T01:11:00+08:00</updated>
+    <id>http://lenciel.github.io/2013/07/big-brother</id>
+    <content type="html"><![CDATA[<p><img src="http://lenciel.github.io/downloads/images/1984.gif" alt="1984" title="Don't touch me..." /></p>
+
+<blockquote><p>&#8220;From the age of Big Brother, from the age of the Thought Police, from a dead man … greetings.&#8221;</p><footer><strong>George Orwell</strong> <cite>Nineteen Eighty-Four (1984)</cite></footer></blockquote>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Go And Love More]]></title>
+    <link href="http://lenciel.github.io/2013/07/go-and-love-more/"/>
+    <updated>2013-07-18T21:14:00+08:00</updated>
+    <id>http://lenciel.github.io/2013/07/go-and-love-more</id>
+    <content type="html"><![CDATA[<p><img src="http://lenciel.github.io/downloads/images/go_and_love_more.gif" alt="Go and love more" title="Don't touch me..." /></p>
+
+<blockquote><p>&#8220;Go and love some more.&#8221;</p><footer><strong>Hal Ashby</strong> <cite><a href="http://en.wikipedia.org/wiki/Harold_and_Maude">Harold and Maude(1971)</a></cite></footer></blockquote>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Market Research, Wireframing and Desgin]]></title>
+    <link href="http://lenciel.github.io/2013/07/market-research/"/>
+    <updated>2013-07-15T15:04:00+08:00</updated>
+    <id>http://lenciel.github.io/2013/07/market-research</id>
+    <content type="html"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#table-of-contents">Table Of Contents</a>    <ul>
+      <li><a href="#section"><strong>点子，执行力和市场</strong></a>        <ul>
+          <li><a href="#section-1"><strong>点子</strong></a></li>
+          <li><a href="#section-2"><strong>执行力</strong></a></li>
+          <li><a href="#section-3"><strong>市场</strong></a></li>
+          <li><a href="#section-4"><strong>那么究竟什么是最重要的：产品/点子，执行力/团队，还是市场?</strong></a></li>
+          <li><a href="#section-5"><strong>点子迷宫</strong></a></li>
+          <li><a href="#section-6"><strong>执行力</strong></a></li>
+        </ul>
+      </li>
+      <li><a href="#section-7"><strong>你的目标市场</strong></a>        <ul>
+          <li><a href="#vs-"><strong>创业公司 vs. 小型企业</strong></a></li>
+          <li><a href="#section-8"><strong>创业公司必须清楚自己的成本和利润</strong></a></li>
+          <li><a href="#section-9"><strong>创业公司必须清楚经济体的规模</strong></a></li>
+        </ul>
+      </li>
+      <li><a href="#section-10"><strong>市场调查</strong></a>        <ul>
+          <li><a href="#section-11"><strong>市场调查工具</strong></a></li>
+          <li><a href="#section-12"><strong>如何确定产品层次</strong></a></li>
+        </ul>
+      </li>
+      <li><a href="#wireframecopywritingdesign"><strong>Wireframe，Copywriting和Design</strong></a>        <ul>
+          <li><a href="#wireframe"><strong>Wireframe</strong></a></li>
+          <li><a href="#copywriting"><strong>Copywriting</strong></a></li>
+          <li><a href="#design"><strong>Design</strong></a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="table-of-contents">Table Of Contents</h2>
+
+<h4 id="section"><strong>点子，执行力和市场</strong></h4>
+
+<p>Quora上有一个著名的<a href="http://www.quora.com/Startup-Advice-and-Strategy/As-first-time-entrepreneurs-what-part-of-the-process-are-people-often-completely-blind-to/answer/Mike-Sellers">问答</a>，Mike Sellers的答案里面有一部分在江湖上流传很广：</p>
+
+<blockquote><p>An idea is not a mockup<br />A mockup is not a prototype <br />A prototype is not a program <br />A program is not a product <br />A product is not a business <br />And a business is not profits</p></blockquote>
+
+<p>这里描述了一个从点子到产品到盈利的状态机，在每个阶段，都有很多人失败了，无法进入下一个阶段。失败的原因，主要是因为面对的系统足够复杂时，可能会有不可预见的各种<a href="http://www.maa.org/devlin/devlin_05_03.html">缺陷</a>。特别是对我们搞技术的而言，虽然可能走完Program这个阶段，但是后面的三个阶段才是真正考验的开始。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>阶段</th>
+      <th>完成的条件</th>
+      <th>完成需要的最短时间</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Idea</td>
+      <td>有一个赚钱的点子</td>
+      <td>1分钟</td>
+    </tr>
+    <tr>
+      <td>Mockup</td>
+      <td>所有流程的Wireframe</td>
+      <td>1天+</td>
+    </tr>
+    <tr>
+      <td>Prototype</td>
+      <td>跑通最关键流程的一个丑陋的实现</td>
+      <td>1周+</td>
+    </tr>
+    <tr>
+      <td>Program</td>
+      <td>有测试并覆盖了所有流程的完整实现</td>
+      <td>2-4周+</td>
+    </tr>
+    <tr>
+      <td>Product</td>
+      <td>工业设计，专利，定价，生产等</td>
+      <td>3-6月+</td>
+    </tr>
+    <tr>
+      <td>Business</td>
+      <td>注册，监管机构备案，工资公司准备金等</td>
+      <td>6-12月+</td>
+    </tr>
+    <tr>
+      <td>Profits</td>
+      <td>以超过成本的价格售出产品</td>
+      <td>1年-正无穷</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>从完成各个stage需要的时间可以看出，成功的企业都不是只有一个好点子：在状态机的前端，一定是一大堆好的点子。这些点子中的致命缺陷一定要在下面的某个stage才会暴露出来，但足够多的点子是基础。建议有一个专门的地方，<code>Google Docs</code> 也好， <code>OmniFocus</code> 也好，就是个简单的txt也好，保存和整理自己的点子，并且记录这些点子被推动到哪个阶段了。</p>
+
+<h5 id="section-1"><strong>点子</strong></h5>
+
+<p>一说到开自己的公司，最重要的似乎就是一个好的点子。这就是为什么很多人觉得自己和扎克伯格之间就差一个点子而已<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>；也是为什么那么多完全不生产产品的<a href="http://www.npr.org/blogs/money/2013/06/07/188370495/when-patents-attack-part-two">知识产权风投公司</a>靠着专利费<a href="http://www.plainsite.org/articles/article.html?id=2">活得好好</a>的。换句话来说，在很多人看来，只要有了好点子，如何实现并且推向市场就只是一些细节的问题了。</p>
+
+<h5 id="section-2"><strong>执行力</strong></h5>
+
+<p><a href="http://www.wired.com/wired/archive//6.11/metcalfe_pr.html">Bob Metcalfe</a>，以太网的发明者，3Com的创始人却有另一种认识：</p>
+
+<blockquote><p>Metcalfe says his proudest accomplishment at the company was as head of sales and marketing. He claims credit for bringing revenue from zero to more than $1 million a month by 1984. And he&#8217;s careful to point out that it was this aptitude - not his skill as an inventor - that earned him his fortune.</p><p>&#8220;Flocks of MIT engineers come over here,&#8221; Metcalfe tells me, leading me up the back staircase at Beacon Street. &#8220;I love them, so I invite them. They look at this and say, &#8216;Wow! What a great house! I want to invent something like Ethernet.&#8221;&#8217; The walls of the narrow stairway are lined with photos and framed documents, like the first stock certificate issued at 3Com, four Ethernet patents, a photo of Metcalfe and Boggs, and articles Metcalfe has written for The New York Times and The Wall Street Journal.</p><p>&#8220;I have to sit&#8217;em down for an hour and say, &#8216;No, I don&#8217;t have this house because I invented Ethernet. I have this house because I went to Cleveland and Schenectady and places like that. I sold Ethernet for a decade. That&#8217;s why I have this house. It had nothing to do with that brainstorm in 1973.&#8221;&#8217;</p></blockquote>
+
+<p>从一定程度上这种认识反应了另一种普遍的观点： <strong>执行力，而不是点子，才是创业的关键</strong> 。这种在Hacker News上被<a href="https://www.google.com.hk/search?q=site%3Anews.ycombinator.com+idea+not+execution&amp;qscrl=1">一而再再而三的提及</a>的观点确实是有道理的：冒出一个“创建社交网络”的点子很简单，但是要把它涉及的各种细节，大到是采用<a href="https://www.facebook.com/">对称</a>还是<a href="https://twitter.com/">非对称</a>的社交网络小到“Poke”应该怎么实现，考虑清楚，就不那么容易了。而即使考虑清楚上线后用户也很多，怎么把流行转化成盈利就更加艰难了：看看Second Life或者Digg的下场多么凄惨。</p>
+
+<p>所以如果你开始创业，不妨提醒一下自己：点子或者甚至是专利并没必要放在那么至高无上的位置，能work的prototype要重要得多。可能在你游说投资者的时候，专利显得你的技术比较有门槛有防御性。但是一方面，如果你的东西被别人听到或者看过就能很容易的复制，可能也确实说明了产品的技术门槛比较低。另一方面，“我有一个创建养宠物的人的社交网络的点子”和“我开发了一个可以让养宠物的人快速找到信赖的兽医的系统“相比，后者对投资人的说服力要大多了。</p>
+
+<p>因此创业的时候，你的点子可以大方的拿出来和周围的人讨论，他们会给你一些你意想不到的角度的意见。当然，有一种讨论是例外的，那就是在类似<a href="https://news.ycombinator.com/item?id=3639175">Hacker News</a>这样的创业社区里面。除非你的开发已经到了适合曝光原型的阶段，一般来说最好不要太早曝光你在做的事情。</p>
+
+<p>这也是另一个对创业者来说执行力比点子更重要的原因：一旦你的点子被市场证明是可行的，就会有模仿者。不管多么伟大的社会，一旦一种商业模式被验证，就会有人开始跟进：这是因为找到一个solution比<a href="http://en.wikipedia.org/wiki/Primality_test">验证一个solution</a>难多了。所有跟进的人在抄袭你的核心功能时，都会加上他们自己独特的改进，这个竞争的过程中你必须有很强的执行力才能保持领先并脱颖而出。从Google战胜AltaVista，Facebook战胜Myspace和Friendster的过程都验证了这点。这也是为什么保持专注，不断努力的实现<a href="http://www.ashmaurya.com/2009/11/achievingproductmarketfit/">product-market fit</a>而不要惊动竞争对手显得特别关键的原因。</p>
+
+<h5 id="section-3"><strong>市场</strong></h5>
+
+<p>除开前面两个观点之外，还有一种观点。站在投资者角度，可以把”点子”对应到”产品”，把”执行力”对应到”团队”。也就是说，一个足够好的团队是可以推动各种执行层面的细节（财务上的，商务上的，技术上的，法律上的），把一个好的点子落实成一个产品的。但是这些仍然不是全部。用<a href="http://pmarchive.com/guide_to_startups_part4.html">Marc Andreessen</a>的话来说：</p>
+
+<blockquote><p>Personally, I’ll take the third position – I’ll assert that market is the most impor- tant factor in a startup’s success or failure.</p><p>Why?</p><p>In a great market – a market with lots of real potential customers – the market pulls product out of the startup. The market needs to be fulfilled and the market will be fulfilled, by the first viable product that comes along. The product doesn’t need to be great; it just has to basically work. And, the market doesn’t care how good the team is, as long as the team can produce that viable product.</p></blockquote>
+
+<h5 id="section-4"><strong>那么究竟什么是最重要的：产品/点子，执行力/团队，还是市场?</strong></h5>
+
+<p>任何有一点儿<a href="http://cs229.stanford.edu/materials.html">机器学习</a>知识的人都能明白这三者是没有绝对的优先顺序的：它们都是关键因子，我们需要挨个解决。首先，我们要解决的问题是如何找到一个好点子？</p>
+
+<h5 id="section-5"><strong>点子迷宫</strong></h5>
+
+<p>一个好的创始人不应该只是有个好点子，他/她应该具备鸟瞰“点子迷宫”的能力。把解决一个需求的各种点子想象成迷宫里面的各条道路，作为消费者很可能只看到了拿出了产品的公司走的那条路。而作为好的创始人需要了解其他的公司是死在什么样的路上以及它们遇到了什么样的无法解决的问题。下图就是一个迷宫的例子：</p>
+
+<p><img src="http://lenciel.github.io/downloads/images/example_of_idea_maze.png" alt="example of idea maze" title="Don't touch me..." /></p>
+
+<p>有时候你不经过前一个迷宫有所积累，就没法到达下一个迷宫并走出去（比如Google是在search上有所收获之后，在<a href="http://googlepress.blogspot.com/2004/04/google-gets-message-launches-gmail.html">eamil</a>上也开始有了建树）。有时候迷宫自己也会随着时间变化（比如<a href="http://readwrite.com/2012/09/24/pandora-internet-radio-fairness-act#awesm=~obLCTtNRcPEnuA">Pandora的iPhone版本</a>）。有时候别的公司无法解决的问题被其他一些公司解决了（<a href="http://www.gartner.com/id%3D334368">Webvan失败了</a>，但是<a href="http://fresh.amazon.com/welcome;jsessionid=555BD9DF6EBBE824BCB76464FB768B3C">Amazon</a>、<a href="http://delivery.walmart.com/usd-estore/index.jsp?referrer=cookiesDetecting">Walmart</a>和<a href="http://shop.safeway.com/ecom/home">Safeway</a>成功的建立了送鲜货的物流）。有的时候解决前面的公司遇到的问题就形成了新公司进入迷宫时手里最有利的武器（比如Google的Pagerank灵感正是来源于Alta Vista在<a href="http://home.web.cern.ch/about/birth-web">1991年</a>还不那么明显的<a href="https://news.ycombinator.com/item?id=3925089">问题</a>）。</p>
+
+<p>就像其他迷宫一样，大多数人都能找到创业迷宫的入口，但是能看到整个局面的人就不那么多了。拿前面图里面的例子来说，一个平庸的创始人可能就看到了”电影音乐分享”或者是”照片分享”的迷宫的入口，但是却看不清这个产业的历史，竞争对手的状况，<a href="http://www.barrysookman.com/2010/05/13/blogged-what-do-limewire-napster-kazaa-and-isohunt-all-have-in-common/">失败的例子</a>和能够让自己脱颖而出的技术。</p>
+
+<p>因此，好的创始人要有能力鸟瞰整个迷宫，了解所有可能的路径和可能的问题。如果你能够使用示例中图表的形式详细的描述整个问题域，分析各种决策树上的各个分支，解释为什么你的计划能够顺利通过迷宫到达出口而不会遇到前面20个公司遇到的这样那样的问题，你可能就真的有一个不错的点子了。这就是为什么了解行业历史和做足够市场调查是那么重要。</p>
+
+<h5 id="section-6"><strong>执行力</strong></h5>
+
+<p>有了好的点子之后，如何建立执行力？其实简单来说，执行力无非是把todo list上的下一个东西做了。这是一个说起来很容易，但做起来非常有难度的事情：你要学会对其他人说不，你要学会对干扰说不，聚精会神地完成你的任务。</p>
+
+<p>在各种保持专注力的方法论中，最好的是Thiel的 <a href="http://blog.idonethis.com/post/37113345206/peter-thiels-unorthodox-management-philosophy-of">One thing</a> ：组织里面每个人在任何时间都应该不仅知道自己首要的任务是什么，同时也要明白别人手里首要任务是什么。Marc Andreessen的 <a href="http://blog.idonethis.com/post/34170232603/marc-andreessens-productivity-trick-to-feeling">anti-todo list</a> 也<a href="http://lencie.cn/blog/2013/03/15/use-done-list-rather-than-todo-list/">值得一试</a>。</p>
+
+<h4 id="section-7"><strong>你的目标市场</strong></h4>
+
+<h5 id="vs-"><strong>创业公司 vs. 小型企业</strong></h5>
+
+<p>清楚创业公司和小企业之间的<a href="http://www.kauffman.org/uploadedFiles/DownLoadableResources/a-tale-of-two-entrepreneurs.pdf">区别</a>是非常重要的。一个创业公司关注的是增长：如何引领行业，如何从小做大，如何创造丰厚的利润。Google，Facebook，Square，AirBnB等，这些公司都是标志性的创业公司。相比而言，小企业的目标可能不是那么宏伟：它们建立的基础多半是在一定地域内的某个行业有一些特别的优势，比如咖啡店，洗衣店等。</p>
+
+<p>这也是为什么创业公司常常出现在互联网领域：这个领域的很多资源是虚拟化的，而虚拟化的资源从1扩展到1亿可比实体的资源要容易多了。比较一下37Signals的扩张和麦当劳星巴克的扩张你就会发现很多不同之处。</p>
+
+<p>另一个明显的区别是小企业一般在很短的时间内就必须开始盈利。否则，会在很短时间内因为止损而关门大吉。创业公司则不同：可能会有很长一段时间是亏损的状态，直到顺利翻盘或者是倒闭。</p>
+
+<p>另外创业公司需要锻炼的就是和资本打交道的能力。VC的钱既可能造成<a href="http://mystartuphas30daystolive.tumblr.com/">严重的问题</a>，也可能让创业公司一飞冲天。做出决定的最核心的考量在于你的野心和你承受失败的能力：如果你不能承受从0开始，那就不要希望做到很大（<a href="http://diffle-history.blogspot.com/">1</a>,<a href="http://www.paulgraham.com/startupmistakes.html">2</a>,<a href="http://www.businessinsider.com/33-startups-that-died-reveal-why-they-failed-2013-6?op=1">3</a>）。</p>
+
+<h5 id="section-8"><strong>创业公司必须清楚自己的成本和利润</strong></h5>
+
+<p>如果你是有一飞冲天的雄心也准备好了迎接失败，那么投身到一个行业之前，也要先调查清楚你的产品是不是能够承载你的梦想。</p>
+
+<p>我们都知道产品的成本会随着产量的增大变低。假设产量、成本和利润的关系如下表所示：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>产品产量</th>
+      <th>单位产品成本</th>
+      <th>单位产品利润</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0&lt;=n&lt;=00</td>
+      <td>1200</td>
+      <td>1000</td>
+    </tr>
+    <tr>
+      <td>101&lt;=n&lt;=1000</td>
+      <td>975</td>
+      <td>1000</td>
+    </tr>
+    <tr>
+      <td>1001&lt;=n</td>
+      <td>700</td>
+      <td>1000</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>凭着这张表你就可以筹到大约 <code>$50000</code> 启动资金来完成最初的100个订单，然后准备 <code>$24,7500</code> 用于后续的1000个订单的完成。经过这两个阶段性胜利之后，你大概才仅仅把成本捞回来而已。</p>
+
+<p>这些简单的计算告诉我们：首先，降成本是非常关键的，比如通过使用软件把单位产品的成本变成固定的成本。其次，把整个事情做起来需要的资本是要提前计算的，这也是VC们需要的数据之一。最后，定价也是需要技巧的。由于一开始没有竞争，你可以定一个相对高的价格来赚取足够的成本。而且，<a href="http://innovatobase.wordpress.com/2013/03/04/loyal-customers-vs-groupon-csutomers/">研究证明</a>免费或者是以极低折扣拿到产品的用户是没有忠诚度的。那些给钱的用户会认为自己也参与了产品的过程（比如提出建议等）。</p>
+
+<h5 id="section-9"><strong>创业公司必须清楚经济体的规模</strong></h5>
+
+<p>当有了一个从数据上看起来不错的产品之后，你还要研究所处的市场是什么样一个规模。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line">市场规模 <span class="o">=</span> 年均消费总数 x 产品平均价格
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>很明显，你如果梦想拥有年销售额10亿的事业，这个市场要不就是产品价格很高，要不就是消费总数很大。下面的一些例子说明了10亿的事业可以如何被构建出来：</p>
+
+<ul>
+  <li>均价$1，总数超过10亿: Coca Cola</li>
+  <li>均价$10，总数超过1亿: Johnson and Johnson </li>
+  <li>均价$100，总数超过千万: Blizzard</li>
+  <li>均价$1000，总数超过百万: Lenovo</li>
+  <li>均价$10,000，总数超过十万: Toyota</li>
+  <li>均价$100,000，总数超过一万: Oracle</li>
+  <li>均价$1,000,000，总数超过1,000: Countrywide</li>
+</ul>
+
+<p>当然，现在全球化程度高，很多市场是超过了10亿的，比如汽车。每年汽车市场大概是<a href="https://en.wikipedia.org/wiki/Automotive_industry#World_motor_vehicle_production">1亿的产量</a>，均价大概是$10000。这就是为什么Google花大价钱研究<a href="http://www.forbes.com/sites/chunkamui/2013/01/22/fasten-your-seatbelts-googles-driverless-car-is-worth-trillions/">无人驾驶车</a>背后的商业考虑：这是个比搜索潜力要大很多的市场。</p>
+
+<p>另外需要注意的是均价低的产品需要自动化程度极高的生产和稳定的质量才会有利润。如果你$1的可乐经常被消费者投诉你是没有办法做下去的。相对的，低价的产品对销售的需求也降低了：你不需要售楼小姐那样巧舌如簧的队伍也能把可乐卖出去，不是吗？</p>
+
+<h4 id="section-10"><strong>市场调查</strong></h4>
+
+<p>在了解了市场调查的重要性之后，我们究竟如何能够掌握一个市场的规模以及相应的我们的产品需要多少财力人力的投入呢？</p>
+
+<h5 id="section-11"><strong>市场调查工具</strong></h5>
+
+<p>假设你现在对一个市场有了兴趣。比如，你相信新闻里面说的<a href="http://www.scmp.com/business/money/markets-investing/article/1076500/yuan-hailed-world-reserve-currency">人民币</a>最终会取代美元成为<a href="http://online.wsj.com/article/SB10001424052702303561504577496233362694486.html">世界通用币</a>。于是你想做一个服务让人们可以方便的把USD换成RMB。你如何验证你的构想是否成立？</p>
+
+<ol>
+  <li>首先，你要从媒体的报道里面抓取信息，形成一个总体框架。除开媒体，Google Books，美国的<a href="http://www.sec.gov/edgar.shtml">SEC flings</a>和维基百科都会非常有用。</li>
+  <li>然后，你要学会从Google的商业数据搜索引擎里能拿到的数据中，算出一个市场规模。</li>
+  <li>熟悉Google的<a href="https://adwords.google.com/um/Signup/Home">Keyword Planner</a>和Facebook的<a href="https://www.facebook.com/ads/create/">Advertiser Tools</a>。</li>
+  <li>如果前面的研究表明这个市场的确是可以预期的，你可以创建一个类似<a href="http://launchrock.co/">Launchrock</a>的首页，做一些基本的<a href="http://moz.com/beginners-guide-to-seo">SEO</a>。如果你真的要理清并向别人展示你的想法，你可以还需要画一些wireframe。</li>
+  <li>最后，你可以去Google的<a href="https://adwords.google.com/um/Signup/Home">Adwords</a>或者是Facebook <a href="https://www.facebook.com/advertising">Ads</a>上投放一些广告看看可能的效果。</li>
+</ol>
+
+<p>这些步骤主要的目的就是，在你开始投入时间和金钱进行所谓的MVP(<a href="http://en.wikipedia.org/wiki/Minimum_viable_product">Minimum Viable Product</a>)开发之前，需要验证市场的存在性。了解市场这件事情要从数据入手，也是一个重要原则。就像福特说的一样，如果他只是去问每个消费者他们想要什么，可能他们的回答会是：一匹更快的马。</p>
+
+<h5 id="section-12"><strong>如何确定产品层次</strong></h5>
+
+<p>在你有了点子，也调查清楚了市场，如果进行你产品的市场定位？首先可以读读Kickstarter的<a href="http://blog.boundforanything.com/2012/02/how-to-set-tiers-on-kickstarter/">product tiers</a>和<a href="http://www.kickstarter.com/blog/trends-in-pricing-and-duration">trends</a>。</p>
+
+<p>这里的思路是，假设你的市场调查面向的市场是一个70亿人的全球市场。那么你的市场调查的表格每一行代表一个人，N列代表一个个他们的属性（地域、职业等），K列代表产品的属性（产品的版本等）。通过<a href="http://www.google.com/insights/consumersurveys/home">Google Consumer Research Surveys</a>或者是<a href="http://answers.onstartups.com/questions/44163/lean-startup-landing-page-test-how-do-i-measure-success">Launchrock landing</a> pages这样的产品，你可以从受访人群中取样得到自己的产品要如何设计。</p>
+
+<p>当然，如果你是认真的要开始一个startup，付费给专业的机构进行市场调查可能比使用这些产品对你来说性价比更高。</p>
+
+<h4 id="wireframecopywritingdesign"><strong>Wireframe，Copywriting和Design</strong></h4>
+
+<p>一旦确定了要动手，你就得首先设计你的产品网站的mockup，也就是所谓的wireframe。</p>
+
+<h5 id="wireframe"><strong>Wireframe</strong></h5>
+
+<p>优秀的Wireframe工具很多，特别是下面几个：</p>
+
+<ul>
+  <li><a href="http://www.omnigroup.com/products/omnigraffle/">Omnigraffle Pro</a>特别适合专业UX</li>
+  <li><a href="https://www.lucidchart.com/google_drive/prompt">Lucidchart</a>对团队合作支持很好</li>
+  <li><a href="https://jetstrap.com/">Jetstrap</a>可以把最终的设计转成Twitter Bootstrap</li>
+  <li><a href="http://thenextweb.com/apps/2012/11/17/pop-this-iphone-app-is-every-designers-missing-puzzle-piece-for-prototyping-on-paper/">POP</a>可以方便的导入手绘的流程图</li>
+</ul>
+
+<p>熟练掌握上面的一两个就足够了，Wireframe的目的是为了得到一个全站的<a href="http://wireframes.linowski.ca/2009/12/omnigraffle-wireflows/">架构和流程示意</a>。</p>
+
+<h5 id="copywriting"><strong>Copywriting</strong></h5>
+
+<p>筑造品牌形象的一些原则：</p>
+
+<ul>
+  <li>通过主页表达：你的核心竞争力和品牌价值必须要在主页里面体现。不要指望用户会点到其他页面。</li>
+  <li>通过媒体发布：Amazon在进入产品阶段之前就<a href="http://aws.amazon.com/about-aws/whats-new/">先发媒体稿</a>。通过搜集反馈，很快就能知道究竟什么是用户期待的新功能，什么是自己制造的噪声。</li>
+  <li>研究对手扬长避短：我们在进行技术选型时常常<a href="http://en.wikipedia.org/wiki/Comparison_of_relational_database_management_systems#Fundamental_features">这么做</a>。了解你的竞争对手的缺陷和你的优势，会让你明白究竟什么是你脱颖而出的关键。</li>
+  <li>数据说话，案例说话：没有什么比市场里面的数据和成功案例更有说服力。</li>
+</ul>
+
+<h5 id="design"><strong>Design</strong></h5>
+
+<p>设计的一些原则：</p>
+
+<ul>
+  <li><strong>Vector和Raster图片</strong> ：首先你要明白<a href="http://en.wikipedia.org/wiki/Vector_graphics">vector</a>和<a href="http://en.wikipedia.org/wiki/Raster_graphics">raster</a>的区别。如果可能的话，尽量使用vector，特别是在早期MVP阶段。</li>
+  <li><strong>对齐，对比度等</strong>：Robin Williams的《<a href="http://www.amazon.com/The-Non-Designers-Design-Book-Typographic/dp/1566091594">Non-Designer’s Desgin Book</a>》值得一读。特别是其中提到的<a href="http://www.nurelm.com/themanual/2009/07/07/designing-for-the-non-designer-part-i-the-basics/">4个基本原则</a>：<a href="http://www.vanseodesign.com/web-design/design-basics-alignment/">Alignment</a>，<a href="http://www.vanseodesign.com/web-design/design-basics-repetition/">Repetition</a>，<a href="http://www.vanseodesign.com/web-design/design-basics-contrast/">Contrast</a>，<a href="http://www.vanseodesign.com/web-design/design-basics-proximity-to-know-what-belongs-with-what/">Proximity</a>。</li>
+  <li><strong>字体和图标</strong> ：尽量使用字体来表达设计。因为字体是矢量图，并且在所有的浏览器里面都可以用 <code>CSS</code>
+进行控制和调整。现在还非常集成了矢量的图标的字体库，比如<a href="http://fortawesome.github.io/Font-Awesome/">FontAwesome</a>。 </li>
+  <li><strong>视频，动画</strong>：宁缺毋滥。一定要精心制作，能给客户留下深刻印象同时又深入解析了产品的特性的。</li>
+  <li><strong>使用Bootstrap，Themeforest，99Designs，Dribble</strong>：当把wireframe变成网页时，不要重新造轮子。Bootstrap是一个免费的框架，和前面提到的Jetstrap合用很有威力。<a href="http://themeforest.net/">Themeforest</a>上的服务要贵一些，一般是$9到$12的模板。而<a href="http://99designs.com/">99Designs</a>这样的专业设计所要大概几百到几千刀。<a href="http://dribbble.com/">Dribble</a>是需找合适Designer的很好的地方。</li>
+</ul>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p>事实上Facebook的系统之大，后台涉及的技术是非常复杂的：<a href="https://www.facebook.com/notes/facebook-engineering/tao-the-power-of-the-graph/10151525983993920">1</a>，<a href="https://www.facebook.com/note.php?note_id=76191543919">2</a>，<a href="https://www.facebook.com/notes/facebook-engineering/under-the-hood-indexing-and-ranking-in-graph-search/10151361720763920">3</a>。即便是它看起来不那么复杂的前端，也不是你有一个点子就能做好的：你的用户可是几十亿形形色色的人。<a href="#fnref:1" rel="reference">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[An Accident of My Dog]]></title>
+    <link href="http://lenciel.github.io/2013/07/my-dog/"/>
+    <updated>2013-07-06T22:57:00+08:00</updated>
+    <id>http://lenciel.github.io/2013/07/my-dog</id>
+    <content type="html"><![CDATA[<p>今年2月4号，花卷被偶像派接到了我们家，处于眼睛基本刚刚能睁开的状态。</p>
+
+<p><img src="http://lenciel.github.io/downloads/images/huajuan_in_hands.jpg" alt="花卷来我家" title="Don't touch me..." /></p>
+
+<p>来家里一个月左右，花卷被养得脑满肠肥，开始四处找东西咬着玩。我们给它备了一些狗玩具，但它玩玩就腻，反而对拖鞋、鞋带这些东西非常有兴趣。</p>
+
+<p>3月16号的早晨，本座起床之后，就听到偶像派的父母在讨论狗是不是吞了给它用来咬着玩的胶管。听他们说这根胶管有食指粗，长15厘米左右，是类似抽血时捆手臂的那种胶管的材质。以花卷当时的体型，我们都觉得不太可能被它吞了。当时只有偶像派妈妈一个人比较担心，因为管子从拴在笼子上给花卷磨牙玩到发现管子消失期间，笼子是关着的：也就没有被花卷叼到其他地方的可能。</p>
+
+<p>吃过早饭，岳父去笼子旁边找那根管子。因为这根管子是他剪下来给花卷的，所以他非常内疚也就更加着急。结果把笼子和附近的地方弄了个底朝天，还是没有。这个时候大家虽然抱着拒绝相信的心情在相互安慰，但是其实都隐隐觉得可能这小伙真的蛇吞象了。</p>
+
+<p>中午偶像派和我去参加她最好的姐妹的婚礼，花卷还是留给偶像派父母照看。本来是期待很久的一场婚礼，因为这个不幸的意外，没等待开始吃饭心神不宁的我们就匆匆忙忙地撤了。还好新娘是个通情达理的好姑娘，还安慰了偶像派几句。</p>
+
+<p>从婚礼现场回来我们就开始一边找兽医的电话一边上网求助。很快微博，QQ，<a href="http://www.zhihu.com/question/20854890">知乎</a>等各路好友们的答案就回来了。基本上统计了一下，以催吐的建议居多。</p>
+
+<p>立马上网搜素那些催吐的办法，发现youtube上正经的兽医除开双氧水催吐之外，就没有传别的教程。双氧水不是家里常备的，就算买回来要把浓度调合也缺工具，所以还是决定送宠物医院催吐。</p>
+
+<p>在网上搜了一家成都比较大声誉看起来也凑合的医院，让偶像派打电话过去咨询。本座在网上继续搜一些资料，发现了关键词是 <code>Intestinal Blockage</code> ，就去Google论文库里面随便搜了点儿相关的入门文章看了看。一边看一边旁听到电话里宠物医院的医生说要先照X光片，然后最好照完确认之后就做手术。</p>
+
+<p>听到“手术”这两个字本座心里面就有些抵触情绪，觉得这医生好像一来就想求极限。但决定了要找兽医，我们也就没有再犹豫。打电话告诉了父母，他们开车把狗带上接了我们大家一起去了医院。</p>
+
+<p>到了医院照X光，解开了它为什么能吞下那么长一根胶管的谜：原来那根它“不可能咬断”的胶管被它咬成了很多截，一截截的吞了进去。从X光来看，满满当当的塞满了它的胃。</p>
+
+<p><img src="http://lenciel.github.io/downloads/images/x_ray_of_huajuan.png" alt="花卷的X光片局部" title="Don't touch me..." /></p>
+
+<p>这个时候他们的主治医师出来说，因为管子的直径超过了肠子直径不少，所以是不可能进入肠道排出去的 。这样堵在胃里，肯定会有问题，只能马上开刀。</p>
+
+<p>问他为什么不能催吐，他说这么多管子，催吐的话可能会卡在喉咙里面窒息。
+问他手术的价格和风险，他说价钱是几千，风险就是狗太小，可能挺不住这么大的手术。</p>
+
+<p>我和偶像派互相看了看，虽然不知道对方是具体是因为什么原因，但是我们都看出了对方不想动手术的意思。我们全家人一起开了个小会，决定了不做手术。医生少不了添油加醋地形容了一番不做手术狗狗有多么痛苦，虽然来之前就跟偶像派说了不能当着她爸哭，但是偶像派还是当场眼泪就下来了。</p>
+
+<p>我们抱着花卷回到了车里面，整个车里面安静得就像刚刚诞生的宇宙。最后偶像派满眼泪花的说如果是这么痛苦，干脆把花卷安乐了算了。这么一说她爸眼泪也要下来了，偶像派又开始劝她爸：“如果冒险开刀，就算能顺利下手术台，胃上那么大个口子也难受。如果不开刀，饿死或者是憋死更难受。还不如让它睡一觉就上天堂了。”她爸听她这么一说，也就忍着眼泪点了头。</p>
+
+<p>我当时有些不知道怎么劝偶像派和她爸爸。他们俩是最爱花卷的，所以想出来这么一个痛苦的决定。偶像派的妈妈一开始表示了反对，理由是当天花卷虽然吃的比较少有些没精神，但还是比较生气勃勃的样子，不如再观察一下。</p>
+
+<p>我心里也比较反对，因为隐隐记得看的论文里面还提到了一些措施，感觉这样就放弃是不是太早了。回家把那篇论文仔细看了一遍，下面是我用Evernote记的笔记：</p>
+
+<blockquote><p>根据体内异物的位置不同，狗的症状可能不同，主要涉及呕吐，失去食欲，胀痛和排便困难。</p><p>如果异物还在食道内，狗一般会舔自己的嘴唇，不断吞口水，在喂食后立刻呕吐。这种情况下狗因为进食和喝水困难，一般会很快出现生命危险。</p><p>如果异物在胃里，幽门一般会被堵死（否则异物一般会进入幽门并下到肠道），造成食物无法进入肠道。一般的症状是在进食后数小时才出现周期性的呕吐。造成胃内堵塞的异物一般是较大的并光滑的物体，比如骨头，高尔夫球等。</p><p>如果异物在小肠，说明异物通过了幽门但是小肠壁里在弯曲的地方无非继续前进。发生了这种情况，因为肠道的气体不通，会造成血压升高，死亡的可能性非常大。这样情况下，狗进食后会立刻出现呕吐症状，伴随发烧，惊慌等表现。</p><p>注：很多狗在吞了异物之后，异物在胃部时间会比较长。这段时间内，狗的表现会比较正常，直到异物通过了幽门进入了肠道，才会出现各种危险情况。</p><p>处置：</p><p>1. 2小时内就要立刻使用3%的双氧水催吐，过后不推荐催吐<br />2. 在错过时机#1之后，胃里的异物，需尽快使用粗纤维面包、红薯、南瓜、黑米糊等食物，期望在运气好的情况下对异物进行包裹并排出体外。<br />3. 如果#2不奏效，不可拖延，需立刻进行手术，以免胃里的异物进入肠道引起并发症。</p></blockquote>
+
+<p>显然花卷现在异物在肠道里面，可以采取#2描述的措施。而且当异物卡在胃里的时候无非是担心：</p>
+
+<ol>
+  <li>异物可能通不过幽门，让食物也进不了肠道，吸收不了养分</li>
+  <li>异物可能通过了幽门，但是通不过肠道，会造出更多严重后果。</li>
+</ol>
+
+<p>虽然从片子上看，管子还真是比肠道粗了不少。但是我平时给花卷收拾它的粪便，感觉也没比当天它吞进去的管子细多少，所以和偶像派商量了一下，第二天给它吃点儿红薯试试。</p>
+
+<p>第二天醒来之后，听岳父说，半夜听到花卷在呕，就帮它抠，居然从它喉头抠了一截软管出来。这一下给了我们很大的希望，白天我们一边给它喂红薯，一边观察它。</p>
+
+<p>晚上轮到偶像派和本座守着它，希望它继续争气把一截截的管子都吐出来。可是基本上整夜没合眼盯着它，也没发现它再有呕的现象。</p>
+
+<p>第三天早上，花卷例行大号的时间，见证奇迹的时刻到了：它拉了一截胶管出来。虽然加上吐出来的总共才是第二截，但是这说明花卷的消化通道是畅通的，我们悬了几天的心也算基本落地了。</p>
+
+<p>接下来的几天，花卷以每天一截的速度把胶管排出体外。为了确保它肚子里面确确实实是没有遗留，一个无比艰巨的任务分配给了本座：把每截拉出来的胶管洗干净最后拼成没咬断的样子。结果花卷天天吃红薯，本座天天洗它的红薯屎里面包着的胶管，那味道真是永生难忘。</p>
+
+<p>不久花卷就排完了所有的胶管：之所以敢说所有是因为一截截的本座都洗干净拼起来了。</p>
+
+<p><img src="http://lenciel.github.io/downloads/images/the_pipe.png" alt="花卷认罪伏法图" title="Don't touch me..." /></p>
+
+<p>事后我们制造了“死罪可免，活罪难逃”的气氛希望这位同学吸取教训。当然，虽然认罪伏法的时候花卷看起来态度尚好，但劫后余生的它最终还是在我们的纵容下过起了更加飞扬跋扈的生活。</p>
+
+<p><img src="http://lenciel.github.io/downloads/images/huanjuan_after_accident.jpg" alt="花卷认罪伏法图" title="Don't touch me..." /></p>
+]]></content>
+  </entry>
   
 </feed>

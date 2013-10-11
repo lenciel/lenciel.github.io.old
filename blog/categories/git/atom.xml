@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: git | @Lenciel]]></title>
+  <link href="http://lenciel.github.io/blog/categories/git/atom.xml" rel="self"/>
+  <link href="http://lenciel.github.io/"/>
+  <updated>2013-10-11T23:01:02+08:00</updated>
+  <id>http://lenciel.github.io/</id>
+  <author>
+    <name><![CDATA[Lenciel Li]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Better Git Log]]></title>
+    <link href="http://lenciel.github.io/2013/06/better-git-log/"/>
+    <updated>2013-06-08T23:42:00+08:00</updated>
+    <id>http://lenciel.github.io/2013/06/better-git-log</id>
+    <content type="html"><![CDATA[<p>看烦了 <code>git log</code> 的白净输出？</p>
+
+<p><img src="/downloads/images/git_raw.png" alt="Raw git log output" title="Don't touch me..." /></p>
+
+<p>这个看起来如何？</p>
+
+<p><img src="/downloads/images/git_graph.png" alt="Git graph log output" title="Don't touch me..." /></p>
+
+<p>用起来其实很简单，只需要：</p>
+
+<p><code>bash
+git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset' --abbrev-commit
+</code></p>
+
+<p>这么长当然是记不住的，可以建shell的alias，也可以添加一个git alias：</p>
+
+<p><code>bash
+git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset' --abbrev-commit
+</code></p>
+
+<p>这样每次只需要：</p>
+
+<p><code>bash
+git lg
+</code></p>
+
+<p>如果你是想知道具体发生了哪些修改可以：</p>
+
+<p><code>bash
+git lg -p
+</code></p>
+
+<p><img src="/downloads/images/git_p.png" alt="Git graph log output with p" title="Don't touch me..." /></p>
+
+<p>不过我现在更喜欢的是直接用<a href="https://github.com/jonas/tig">tig</a>：</p>
+
+<p><img src="/downloads/images/tig.png" alt="Tig output" title="Don't touch me..." /></p>
+]]></content>
+  </entry>
+  
+</feed>

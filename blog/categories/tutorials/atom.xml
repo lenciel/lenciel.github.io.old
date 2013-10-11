@@ -1,0 +1,1219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: tutorials | @Lenciel]]></title>
+  <link href="http://lenciel.github.io/blog/categories/tutorials/atom.xml" rel="self"/>
+  <link href="http://lenciel.github.io/"/>
+  <updated>2013-10-11T23:01:02+08:00</updated>
+  <id>http://lenciel.github.io/</id>
+  <author>
+    <name><![CDATA[Lenciel Li]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Cryptography and Python]]></title>
+    <link href="http://lenciel.github.io/2013/07/cryptography-and-python/"/>
+    <updated>2013-07-25T15:13:00+08:00</updated>
+    <id>http://lenciel.github.io/2013/07/cryptography-and-python</id>
+    <content type="html"><![CDATA[<p>这周我们的一个项目里面需要调用第三方接口。对方的安全机制是调用时要进行加密和校验，但它们的文档没有描述具体是怎么加密的，而是给了一段代码：</p>
+
+<p>```java
+    private static BASE64Encoder base64 = new BASE64Encoder();
+//  private static byte[] myIV = { 50, 51, 52, 53, 54, 55, 56, 57 };
+//  private static byte[] myIV = null;
+//  private static String strkey = “W9qPIzjaVGKUp7CKRk/qpCkg/SCMkQRu”; // 字节数必须是8的倍数
+    //密钥
+    private static String strkey = “NDg5MDY2NjczMxxxxXXXXXyNzUzNTg2”;
+    private static String removeBR(String str) {
+        StringBuffer sf = new StringBuffer(str);</p>
+
+<pre><code>    for (int i = 0; i &lt; sf.length(); ++i)
+    {
+      if (sf.charAt(i) == '\n')
+      {
+        sf = sf.deleteCharAt(i);
+      }
+    }
+    for (int i = 0; i &lt; sf.length(); ++i)
+    {
+      if (sf.charAt(i) == '\r')
+      {
+        sf = sf.deleteCharAt(i);
+      }
+    }
+    return sf.toString();
+}
+
+private static String desEncrypt(String input) throws Exception
+{
+
+    BASE64Decoder base64d = new BASE64Decoder();
+    DESedeKeySpec p8ksp = null;
+    p8ksp = new DESedeKeySpec(base64d.decodeBuffer(strkey));
+    Key key = null;
+    key = SecretKeyFactory.getInstance("DESede").generateSecret(p8ksp);
+
+    byte[] plainBytes = (byte[])null;
+    Cipher cipher = null;
+    byte[] cipherText = (byte[])null;
+    //“算法/模式/填充”
+    plainBytes = input.getBytes("UTF8");
+    cipher = Cipher.getInstance("DESede/ECB/PKCS5Padding");
+    SecretKeySpec myKey = new SecretKeySpec(key.getEncoded(), "DESede");  //       IvParameterSpec ivspec = new IvParameterSpec(myIV);
+    cipher.init(1, myKey);
+    cipherText = cipher.doFinal(plainBytes);
+    return removeBR(base64.encode(cipherText));
+}
+
+private static String desDecrypt(String cipherText) throws Exception
+{
+
+    BASE64Decoder base64d = new BASE64Decoder();
+    DESedeKeySpec p8ksp = null;
+    p8ksp = new DESedeKeySpec(base64d.decodeBuffer(strkey));
+    Key key = null;
+    key = SecretKeyFactory.getInstance("DESede").generateSecret(p8ksp);
+
+    Cipher cipher = null;
+    byte[] inPut = base64d.decodeBuffer(cipherText);
+    //“算法/模式/填充”
+    cipher = Cipher.getInstance("DESede/ECB/PKCS5Padding");
+    SecretKeySpec myKey = new SecretKeySpec(key.getEncoded(), "DESede");  //       IvParameterSpec ivspec = new IvParameterSpec(myIV);
+    cipher.init(2, myKey);
+    byte[] output = cipher.doFinal(inPut);
+    return new String(output, "UTF8");
+} ```
+</code></pre>
+
+<p>很明显，在提供文档的同学看来大家都是JEE程序员。仔细看了半天这两个函数<code>desEncrypt</code>和<code>desDecrypt</code>外加Google，才明白是<code>DES3</code>算法。</p>
+
+<p>接着这份文档的后面还有另一个对加密的描述也是代码，不过这次比较明显是MD5：</p>
+
+<p>```java
+public static final String MD5(String s)
+{
+  char hexDigits[] = {
+    ‘0’, ‘1’, ‘2’, ‘3’, ‘4’, ‘5’, ‘6’, ‘7’, ‘8’, ‘9’,
+    ‘a’, ‘b’, ‘c’, ‘d’, ‘e’, ‘f’
+    };
+  char str[] = null;
+  byte strTemp[] = s.getBytes();
+  MessageDigest mdTemp;
+  try {
+    mdTemp = MessageDigest.getInstance(“MD5”);
+    mdTemp.update(strTemp);
+    byte md[] = mdTemp.digest();
+    int j = md.length;
+    str = new char[j * 2];
+    int k = 0;
+    for (int i = 0; i &lt; j; i++)
+    {
+      byte b = md[i];
+      str[k++] = hexDigits[b » 4 &amp; 0xf];
+      str[k++] = hexDigits[b &amp; 0xf];
+    }
+  } catch (NoSuchAlgorithmException e) {
+    // TODO Auto-generated catch block
+    e.printStackTrace();
+  }</p>
+
+<p>return new String(str);
+}
+```</p>
+
+<p>这些算法用python来实现当然就简单多了:MD5就是一句话，看起来非常复杂的DES3也不过几句话:</p>
+
+<p>```python
+from pyDes import triple_des, ECB, PAD_PKCS5
+import base64
+import datetime</p>
+
+<p>input_str = “test string”</p>
+
+<p>key_base64_str = base64.b64decode(“NDg5MDY2NjczMxxxxXXXXXyNzUzNTg2”, “utf-8”)
+key_bytes = key_base64_str.encode(‘utf-8’)
+k = triple_des(key_bytes, ECB, pad=None, padmode=PAD_PKCS5)
+d = base64.b64encode(k.encrypt(input_str))
+print d
+```</p>
+
+<p>当然，要明白这些算法究竟怎么回事才叫认真负责的态度。</p>
+
+<h2 id="hash"><strong>Hash</strong></h2>
+
+<p>hash就是给输入的字符串生成一个固定长度的字符串（被称为hash值）。理想的hash要满足：</p>
+
+<ul>
+  <li>根据生成的字符串非常难猜到输入的字符串</li>
+  <li>任意两个不同的字符串不会生成相同的hash值</li>
+  <li>如果输入字符串没有变生成的hash值应该不会变</li>
+</ul>
+
+<p><img src="/downloads/images/hash.png" alt="hash" title="Don't touch me..." /></p>
+
+<p>hash函数可以被用来计算checksum，也可以用来进行数字签名和认证。</p>
+
+<h3 id="md5"><strong>MD5</strong></h3>
+
+<p>1991年面世的一种hash算法，生成的字符串长度为128bit。</p>
+
+<p>它的算法详情可以看<a href="http://tools.ietf.org/html/rfc1321">这里</a>，简单说如下：</p>
+
+<ul>
+  <li>首先需要对字符串进行扩展，使其位长对512求余的结果等于448。因此，位长（Bits Length）将被扩展至N*512+448，N为一个非负整数，N可以是零。填充的方法一般是在信息的后面填充一个1和无数个0，直到满足上面的条件时才停止用0对信息的填充。</li>
+  <li>然后，在这个结果后面附加一个以64位二进制表示的填充前信息长度。经过这两步的处理，现在的位长是 <code>N*512+448+64 = (N+1）*512</code>，即长度恰好是512的整数倍。</li>
+  <li>最后以512位分组来处理输入的信息，且每一分组又被划分为16个32位子分组，经过了一系列的处理后，算法的输出由四个32位分组组成，将这四个32位分组级联后将生成一个128位散列值。</li>
+</ul>
+
+<p>MD5对碰撞攻击(不同的输入生成相同的hash)等攻击的抵抗力比较差。</p>
+
+<p>在python中使用MD5:</p>
+
+<p>```python
+import os
+from Crypto.Hash import MD5</p>
+
+<p>def get_file_checksum(filename):
+    h = MD5.new()
+    chunk_size = 8192
+    with open(filename, ‘rb’) as f:
+        while True:
+            chunk = f.read(chunk_size)
+            if len(chunk) == 0:
+                break
+            h.update(chunk)
+    return h.hexdigest()
+```</p>
+
+<h2 id="section"><strong>加密算法</strong></h2>
+
+<p>加密算法使用key把输入的文本变成加密的文本。有两种加密的方式：分块和流。分块处理的单位是固定大小比如8或者16个bytes，流则是一个一个byte。只有知道了解密的<code>key</code>才能对加密的文本进行解密。</p>
+
+<h3 id="section-1"><em>分块</em></h3>
+
+<p>DES是分块加密的一种，其处理对象的大小是8个bytes。DES最简单的模式是所谓的<code>ECB( electronic code book)模式</code>，也就是每个block都是独立加密，最后组成整个加密后的文本。</p>
+
+<p><img src="/downloads/images/block_cipher_ebc.png" alt="ecb" title="Don't touch me..." /></p>
+
+<p>使用pycrpto对文本使用<code>DES/ECB</code>加密很简单。假设key是<code>10234567</code>，而我们要加密的文本是<code>abcdefgh</code>，那么：</p>
+
+<p><code>python
+&gt;&gt;&gt; from Crypto.Cipher import DES
+&gt;&gt;&gt; des = DES.new('01234567', DES.MODE_ECB)
+&gt;&gt;&gt; text = 'abcdefgh'
+&gt;&gt;&gt; cipher_text = des.encrypt(text)
+&gt;&gt;&gt; cipher_text
+'\xec\xc2\x9e\xd9] a\xd0'
+&gt;&gt;&gt; des.decrypt(cipher_text)
+'abcdefgh'
+</code></p>
+
+<p>比<code>ECB</code>更健壮的是<code>CFB (Cipher feedback)</code>模式，也就是先组合前面加密的文本和待加密的文本，然后进行加密。</p>
+
+<p><img src="/downloads/images/block_cipher_cfb.png" alt="cfb" title="Don't touch me..." /></p>
+
+<p>下面的例子说明了算法的工作流程：待加密的是<code>abcdefghijklmnop</code>，两倍8bytes。首先生成一个随机的字符串作为初始的<code>iv</code>来生成两个<code>DES</code>对象，一个用来加密一个用来解密。之所以需要这两个对象，是因为<code>feedback</code>值会随着block被加密后变化。</p>
+
+<p><code>python
+&gt;&gt;&gt; from Crypto.Cipher import DES
+&gt;&gt;&gt; from Crypto import Random
+&gt;&gt;&gt; iv = Random.get_random_bytes(8)
+&gt;&gt;&gt; des1 = DES.new('01234567', DES.MODE_CFB, iv)
+&gt;&gt;&gt; des2 = DES.new('01234567', DES.MODE_CFB, iv)
+&gt;&gt;&gt; text = 'abcdefghijklmnop'
+&gt;&gt;&gt; cipher_text = des1.encrypt(text)
+&gt;&gt;&gt; cipher_text
+"?\\\x8e\x86\xeb\xab\x8b\x97'\xa1W\xde\x89!\xc3d"
+&gt;&gt;&gt; des2.decrypt(cipher_text)
+'abcdefghijklmnop'
+</code></p>
+
+<h3 id="section-2"><em>流</em></h3>
+
+<p>这些算法基于一个个bytes，所以block的大小总是1 byte。pycrypto提供了两个这样的算法：<code>ARC4</code> 和 <code>XOR</code>。这种基于流的算法只有一种模式：<code>ECB</code>。</p>
+
+<p>下面是一个<code>ARC4</code>的算法，使用了key <code>01234567</code>:</p>
+
+<p><code>python
+&gt;&gt;&gt; from Crypto.Cipher import ARC4
+&gt;&gt;&gt; obj1 = ARC4.new('01234567')
+&gt;&gt;&gt; obj2 = ARC4.new('01234567')
+&gt;&gt;&gt; text = 'abcdefghijklmnop'
+&gt;&gt;&gt; cipher_text = obj1.encrypt(text)
+&gt;&gt;&gt; cipher_text
+'\xf0\xb7\x90{#ABXY9\xd06\x9f\xc0\x8c '
+&gt;&gt;&gt; obj2.decrypt(cipher_text)
+'abcdefghijklmnop'
+</code></p>
+
+<h3 id="section-3"><strong>应用程序</strong></h3>
+
+<p>在程序里面我们常常使用DES3对文件进行加密解密操作。一般来说操作对象是文件时，总是分成一个个chunck来处理以免占用太多内存。如果读入的chunck少于16bytes，就需要扩展它才能进行加密。</p>
+
+<p>```python
+import os
+from Crypto.Cipher import DES3</p>
+
+<p>def encrypt_file(in_filename, out_filename, chunk_size, key, iv):
+    des3 = DES3.new(key, DES3.MODE_CFB, iv)</p>
+
+<pre><code>with open(in_filename, 'r') as in_file:
+    with open(out_filename, 'w') as out_file:
+        while True:
+            chunk = in_file.read(chunk_size)
+            if len(chunk) == 0:
+                break
+            elif len(chunk) % 16 != 0:
+                chunk += ' ' * (16 - len(chunk) % 16)
+            out_file.write(des3.encrypt(chunk))
+</code></pre>
+
+<p>def decrypt_file(in_filename, out_filename, chunk_size, key, iv):
+    des3 = DES3.new(key, DES3.MODE_CFB, iv)</p>
+
+<pre><code>with open(in_filename, 'r') as in_file:
+    with open(out_filename, 'w') as out_file:
+        while True:
+            chunk = in_file.read(chunk_size)
+            if len(chunk) == 0:
+                break
+            out_file.write(des3.decrypt(chunk)) ```
+</code></pre>
+
+<p>有了上面定义的这两个函数我们可以这样使用它们：</p>
+
+<p><code>python
+from Crypto import Random
+iv = Random.get_random_bytes(8)
+with open('to_enc.txt', 'r') as f:
+    print 'to_enc.txt: %s' % f.read()
+encrypt_file('to_enc.txt', 'to_enc.enc', 8192, key, iv)
+with open('to_enc.enc', 'r') as f:
+    print 'to_enc.enc: %s' % f.read()
+decrypt_file('to_enc.enc', 'to_enc.dec', 8192, key, iv)
+with open('to_enc.dec', 'r') as f:
+    print 'to_enc.dec: %s' % f.read()
+</code></p>
+
+<p>程序的输出如下：</p>
+
+<p>```bash
+to_enc.txt: this content needs to be encrypted.</p>
+
+<p>to_enc.enc: ??~?E??.??]!=)??”t?
+                                JpDw???R?UN0?=??R?UN0?}0r?FV9
+to_enc.dec: this content needs to be encrypted.
+```</p>
+
+<h2 id="public-key-algorithms"><strong>Public-key algorithms</strong></h2>
+
+<p>上面提到的加密算法的一大问题是双方都需要知道key。而<code>public-key算法</code>提供了两个key，一个用来加密，一个用来解密。 </p>
+
+<p><img src="/downloads/images/public_private_key.png" alt="ecb" title="Don't touch me..." /></p>
+
+<h3 id="publicprivate-key"><strong>public/private key</strong></h3>
+
+<p>使用pycrpto很容易就可以生成一对<code>private/public key</code>，生成key的时候必须规定key的长度，越长越安全。除开长度，还需要设定生成key的方法。下面是一个使用RSA生成1024bit长度key的过程：</p>
+
+<p><code>python
+&gt;&gt;&gt; from Crypto.PublicKey import RSA
+&gt;&gt;&gt; from Crypto import Random
+&gt;&gt;&gt; random_generator = Random.new().read
+&gt;&gt;&gt; key = RSA.generate(1024, random_generator)
+&gt;&gt;&gt; key
+&lt;_RSAobj @0x7f60cf1b57e8 n(1024),e,d,p,q,u,private&gt;
+</code></p>
+
+<p>key对象有一系列的方法：
+- <code>can_encrypt()</code> 返回是否能用key来加密数据 
+- <code>can_sign()</code> 返回是否能用key来进行签名
+- <code>has_private()</code> 返回是否有private key</p>
+
+<p><code>python
+&gt;&gt;&gt; key.can_encrypt()
+True
+&gt;&gt;&gt; key.can_sign()
+True
+&gt;&gt;&gt; key.has_private()
+True
+</code></p>
+
+<h3 id="section-4"><strong>加密</strong></h3>
+
+<p>现在我们有了一对key，我们就可以加密一些数据了。加密的时候使用的是公钥: <code>public key</code> ：</p>
+
+<p><code>python
+&gt;&gt;&gt; public_key = key.publickey()
+&gt;&gt;&gt; enc_data = public_key.encrypt('abcdefgh', 32)
+&gt;&gt;&gt; enc_data
+('\x11\x86\x8b\xfa\x82\xdf\xe3sN ~@\xdbP\x85
+\x93\xe6\xb9\xe9\x95I\xa7\xadQ\x08\xe5\xc8$9\x81K\xa0\xb5\xee\x1e\xb5r
+\x9bH)\xd8\xeb\x03\xf3\x86\xb5\x03\xfd\x97\xe6%\x9e\xf7\x11=\xa1Y&lt;\xdc
+\x94\xf0\x7f7@\x9c\x02suc\xcc\xc2j\x0c\xce\x92\x8d\xdc\x00uL\xd6.
+\x84~/\xed\xd7\xc5\xbe\xd2\x98\xec\xe4\xda\xd1L\rM`\x88\x13V\xe1M\n X
+\xce\x13 \xaf\x10|\x80\x0e\x14\xbc\x14\x1ec\xf6Rs\xbb\x93\x06\xbe',)
+</code></p>
+
+<h3 id="section-5"><strong>解密</strong></h3>
+
+<p>只要有用于解密的私钥(private key)解密是很简单的：</p>
+
+<p><code>python
+&gt;&gt;&gt; key.decrypt(enc_data)
+'abcdefgh'
+</code></p>
+
+<h3 id="section-6"><strong>签名</strong></h3>
+
+<p>对信息进行签名，可以用来验证信息的作者，让我们相信它的来源。下面这个例子展示了如何先算出信息的hash值，然后送给RSA key的<code>sign()</code>方法。使用其他算法如<code>DSA</code>或者是<code>ElGamal</code>也类似。</p>
+
+<p><code>python
+&gt;&gt;&gt; from Crypto.Hash import MD5
+&gt;&gt;&gt; from Crypto.PublicKey import RSA
+&gt;&gt;&gt; from Crypto import Random
+&gt;&gt;&gt; key = RSA.generate(1024, random_generator)
+&gt;&gt;&gt; text = 'abcdefgh'
+&gt;&gt;&gt; hash = MD5.new(text).digest()
+&gt;&gt;&gt; hash
+'\xe8\xdc@\x81\xb144\xb4Q\x89\xa7 \xb7{h\x18'
+&gt;&gt;&gt; signature = key.sign(hash, '')
+&gt;&gt;&gt; signature
+(1549358700992033008647390368952919655009213441715588267926189797
+14352832388210003027089995136141364041133696073722879839526120115
+25996986614087200336035744524518268136542404418603981729787438986
+50177007820700181992412437228386361134849096112920177007759309019
+6400328917297225219942913552938646767912958849053L,)
+</code></p>
+
+<h3 id="section-7"><strong>验证</strong></h3>
+
+<p>只要有公钥，验证信息就很简单了。未加密的文本和签名一起被发送给接收方。接收方计算hash值然后调用公钥的<code>verify()</code>方法来进行验证：</p>
+
+<p><code>python
+&gt;&gt;&gt; text = 'abcdefgh'
+&gt;&gt;&gt; hash = MD5.new(text).digest()
+&gt;&gt;&gt; public_key.verify(hash, signature)
+True
+</code></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[tmux: Introduction and Tips]]></title>
+    <link href="http://lenciel.github.io/2013/07/tmux-introduction-and-tips/"/>
+    <updated>2013-07-21T14:02:00+08:00</updated>
+    <id>http://lenciel.github.io/2013/07/tmux-introduction-and-tips</id>
+    <content type="html"><![CDATA[<p><img src="/downloads/images/tmux_tips_1.png" alt="tmux screenshot 1" title="Don't touch me..." /></p>
+
+<h3 id="section"><strong>简介</strong></h3>
+
+<p><code>tmux</code> ,其实就是 <code>terminal multiplexer</code> 的简称。使用tmux你可以把多个任务同时运行起来，使用不同的 <code>tmux</code> 窗口来查看它们。你也可以 <code>detach</code> 一个 <code>session</code>，也就是让一个窗口的活动，比如编译这种耗时你又不希望断开的活动，放到后台去运行。如果你使用过 <code>screen</code> 对 <code>detach</code> 一个 <code>session</code> 应该非常熟悉。其实初用 <code>tmux</code> 的时候，它很大程度上就像一个 <code>GNU-Session</code> 外加很多窗口管理的功能。而且由于 <code>tmux</code> 使用了 <code>client-server</code> 架构，我们可以在一个总控的地方去操作所有的窗口和pannel，甚至可以在一个窗口里面切换不同的 <code>session</code>。</p>
+
+<h4 id="tmux"><strong>tmux的安装</strong></h4>
+
+<p>用你的Linux package manager或者如果你和我一样在OSX可以用<code>brew</code>。另外，iTerm2<a href="http://code.google.com/p/iterm2/wiki/TmuxIntegration">集成了</a>对<code>tmux</code>的支持，它也是很多Mac上的<a href="http://tangledhelix.com/blog/2012/04/28/iterm2-keymaps-for-tmux/">程序员</a>最爱的Terminal。</p>
+
+<h4 id="session"><strong>创建一个具名的Session</strong></h4>
+
+<p>由于使用 <code>tmux</code> 可以在一个电脑上创建多个 <code>session</code> ，为了更好的管理它们我们一般可以使用名字来辨识这些 <code>session</code> 。
+比如下面的命令可以创建一个叫 <code>basic</code> 的 <code>session</code>：</p>
+
+<p><code>bash
+$ tmux -new -s basic
+</code></p>
+
+<p>回车之后就会进入一个新的 <code>session</code> 里面。可以看到具名的<code>session</code>的<code>terminal</code>和正常打开<code>iTerm2</code>大致相同，没有特别之处。
+这个时候我们敲<code>exit</code>就会回到原来的<code>terminal</code>中去。</p>
+
+<h4 id="detaching--attaching"><strong>Detaching 和 Attaching</strong></h4>
+
+<p>使用<code>tmux</code>一大好处就是我们可以启动<code>terminal</code>，运行一个任务在后台，然后<code>detach</code>这个<code>session</code>。如果在一般的<code>session</code>里面工作，一旦我们关闭了窗口，跑在里面的所有程序都会被退出。
+但是如果是使用了<code>detach</code>，我们可以再<code>attach</code>回去。下面演示一个例子。</p>
+
+<p>在创建的具名<code>session</code> “basic”里面运行<code>top</code>，然后使用<code>Ctrl-b + d</code>来<code>detach</code>这个<code>session</code>。</p>
+
+<p>首先来学习一下<code>Ctrl+b</code>这样的<code>Command Prefix</code>。因为<code>tmux</code>是一个terminal管家，我们需要有一个办法告诉<code>tmux</code>我们敲击的是需要<code>tmux</code>处理的命令还是传给terminal的。如果定义了<code>Ctrl-b</code>为命令前缀，就是说我们一定要先敲这个前缀，然后执行一个命令，比如<code>d</code>，表示我们要<code>detach</code>。要记住前缀输入之后要松开手，不要在不松手的情况下发命令给<code>tmux</code>。</p>
+
+<p>由于这个前缀是可以自定义的，所以后面我们记为<code>Prefix</code>而不再用<code>Ctrl-b</code>。</p>
+
+<p>然后我们可以使用下面的命令对<code>session</code>进行<code>list</code>、<code>attach</code>和<code>delete</code>：</p>
+
+<p><code>bash
+$ tmux ls
+0: 1 windows (created Thu Sep 27 10:16:16 2012) [121x22]
+basic: 1 windows (created Thu Sep 27 14:32:50 2012) [122x22]
+</code></p>
+
+<p>可以看到目前有两个存活的<code>session</code>，一个是刚刚创建的<code>basic</code></p>
+
+<p><code>bash
+$ tmux kill-session -t 0
+</code></p>
+
+<p>杀掉我们不需要的那个</p>
+
+<p><code>bash
+$ tmux ls
+basic: 1 windows (created Thu Sep 27 14:32:50 2012) [122x22]
+</code></p>
+
+<p>再次attach的时候可以不带<code>-t</code>，因为只有<code>basic</code>这个<code>session</code>还活着。</p>
+
+<p><code>bash
+$ tmux attach
+</code></p>
+
+<p>后面我们可以看到在session之间进行切换还有更多更方便的办法。</p>
+
+<h4 id="section-1"><strong>窗口</strong></h4>
+
+<p>很多时候我们都需要打开窗口运行多个任务。这种情况比较适用于<code>tmux</code>的窗口概念：用起来和现代操作系统里面的<code>tab</code>类似。</p>
+
+<p>新建一个窗口很容易</p>
+
+<p><code>bash
+tmux new -s windows -n shell
+</code> </p>
+
+<p><code>-s</code>是对<code>session</code>进行命名的，<code>-n</code>是用来对窗口进行命名的。</p>
+
+<ul>
+  <li>在当前的<code>session</code>里面新建一个窗口: <code>Prefix+C</code></li>
+  <li>要给窗口命名：<code>Prefix+</code></li>
+  <li>在已有的窗口间跳转： <code>Prefix+n/Prefix+p</code></li>
+  <li>窗口较多的时候跳转： <code>Prefix+序列号</code></li>
+  <li>要关掉窗口： <code>exit</code>或者<code>Prefix+&amp;</code></li>
+  <li>要搜索窗口：<code>Prefix+f</code>或者 <code>Prefix+w</code></li>
+</ul>
+
+<h4 id="section-2"><strong>分栏</strong></h4>
+
+<ul>
+  <li>竖分: <code>Prefix+%</code></li>
+  <li>横分: <code>Prefix+"</code>   </li>
+  <li>在分栏中切换: <code>Prefix+o</code>   </li>
+  <li>在分栏中切换: <code>Prefix+方向键</code></li>
+  <li>在不同的布局间切换: <code>Prefix+space</code></li>
+  <li>关闭: <code>Prefix+x</code></li>
+</ul>
+
+<h4 id="section-3"><strong>命令行模式</strong></h4>
+
+<p><code>Prefix+:</code></p>
+
+<h4 id="section-4"><strong>取得所有的快捷键</strong></h4>
+
+<p><code>Prefix+?</code></p>
+
+<p>二、配置tmux</p>
+
+<p>首先在系统设置里面把<code>CapsLock</code>这枚废材按键map成<code>ctrl</code>。然后是把Prefix配置成<code>ctrl+a</code>而不是<code>ctrl+b</code>，这样主要是为了按起来方便顺手。</p>
+
+<p>另外可以让窗口的序列号从1开始分配，这样初始窗口不会是0，那个你需要手伸很远才能按到的键。</p>
+
+<p><code>bash
+set -g base-index 1
+</code> </p>
+
+<p>同理分栏的序列号也可以从1开始：</p>
+
+<p><code>bash
+setw -g pane-base-index 1
+</code> </p>
+
+<p>另外一般需要把发送命令的延迟设置为没延迟</p>
+
+<p><code>bash
+set -sg escape-time 1
+</code> </p>
+
+<p>完整的配置文件在<a href="https://github.com/lenciel/oh-my-zsh/blob/master/dot_files/tmux.conf">这里</a>：</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (tmux.conf)</span> <a href='/downloads/code/tmux.conf'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># zsh is kinda tight</span>
+</span><span class='line'><span class="nb">set</span>-option -g default-shell <span class="nv">$SHELL</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># copy and paster</span>
+</span><span class='line'><span class="nb">set</span>-option -g default-command <span class="s2">&quot;reattach-to-user-namespace -l zsh&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># look good</span>
+</span><span class='line'><span class="nb">set</span> -g default-terminal <span class="s2">&quot;screen-256color&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># act like GNU screen</span>
+</span><span class='line'><span class="nb">set</span> -g prefix C-a
+</span><span class='line'>unbind C-b
+</span><span class='line'>
+</span><span class='line'><span class="nb">set</span> -sg escape-time 1
+</span><span class='line'><span class="nb">set</span> -g base-index 1
+</span><span class='line'>setw -g pane-base-index 1
+</span><span class='line'>
+</span><span class='line'><span class="nb">bind </span>r <span class="nb">source</span>-file ~/.tmux.conf <span class="se">\;</span> display <span class="s2">&quot;Reloaded!&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">bind</span> - split-window -v
+</span><span class='line'><span class="nb">bind</span> | split-window -h
+</span><span class='line'>
+</span><span class='line'><span class="c"># act like vim</span>
+</span><span class='line'>setw -g mode-keys vi
+</span><span class='line'><span class="nb">bind </span>h <span class="k">select</span>-pane -L
+</span><span class='line'><span class="nb">bind </span>j <span class="k">select</span>-pane -D
+</span><span class='line'><span class="nb">bind </span>k <span class="k">select</span>-pane -U
+</span><span class='line'><span class="nb">bind </span>l <span class="k">select</span>-pane -R
+</span><span class='line'><span class="nb">bind</span> -r C-h <span class="k">select</span>-window -t :-
+</span><span class='line'><span class="nb">bind</span> -r C-l <span class="k">select</span>-window -t :+
+</span><span class='line'>unbind <span class="o">[</span>
+</span><span class='line'><span class="nb">bind</span> <span class="sb">`</span> copy-mode
+</span><span class='line'>unbind p
+</span><span class='line'><span class="nb">bind </span>p paste-buffer
+</span><span class='line'><span class="nb">bind</span> -t vi-copy v begin-selection
+</span><span class='line'><span class="nb">bind</span> -t vi-copy y copy-selection
+</span><span class='line'>
+</span><span class='line'><span class="c"># after copying to a tmux buffer, hit y again to copy to clipboard</span>
+</span><span class='line'><span class="nb">bind </span>y run <span class="s2">&quot;tmux save-buffer - | reattach-to-user-namespace pbcopy&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># resize pane</span>
+</span><span class='line'><span class="nb">bind</span> -r H resize-pane -L 5
+</span><span class='line'><span class="nb">bind</span> -r J resize-pane -D 5
+</span><span class='line'><span class="nb">bind</span> -r K resize-pane -U 5
+</span><span class='line'><span class="nb">bind</span> -r L resize-pane -R 5
+</span><span class='line'>
+</span><span class='line'><span class="c"># enable mouse</span>
+</span><span class='line'>setw -g mode-mouse on
+</span><span class='line'><span class="nb">set</span> -g mouse-select-pane on
+</span><span class='line'><span class="nb">set</span> -g mouse-resize-pane on
+</span><span class='line'><span class="nb">set</span> -g mouse-select-window on
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>setw -g window-status-fg cyan
+</span><span class='line'>setw -g window-status-bg default
+</span><span class='line'>setw -g window-status-attr dim
+</span><span class='line'>setw -g window-status-current-fg white
+</span><span class='line'>setw -g window-status-current-bg red
+</span><span class='line'>setw -g window-status-current-att bright
+</span><span class='line'>
+</span><span class='line'><span class="nb">set</span> -g status-interval 60
+</span><span class='line'><span class="nb">set</span> -g status-justify centre
+</span><span class='line'>setw -g monitor-activity on
+</span><span class='line'><span class="nb">set</span> -g visual-activity on
+</span><span class='line'>
+</span><span class='line'><span class="nb">set</span> -g terminal-overrides <span class="s2">&quot;xterm*:XT:smcup@:rmcup@:kUPS=\eOA:kDN5=\eOB:kLFT5=\eOD:kRIT5=\eOC&quot;</span>
+</span><span class='line'><span class="nb">set</span> -g <span class="nb">history</span>-limit 30000
+</span><span class='line'>setw -g alternate-screen on
+</span><span class='line'><span class="nb">set</span> -s escape-time 50
+</span><span class='line'>
+</span><span class='line'><span class="nb">set</span>-window-option -g window-status-current-format <span class="s2">&quot;#[fg=colour235, bg=colour27]⮀#[fg=colour255, bg=colour27] #I ⮁ #W #[fg=colour27, bg=colour235]⮀&quot;</span>
+</span><span class='line'><span class="nb">source</span> <span class="s2">&quot;/Users/lenciel/Library/Python/2.7/lib/python/site-packages/powerline/bindings/tmux/powerline.conf&quot;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Vagrant for Django I: Basic]]></title>
+    <link href="http://lenciel.github.io/2013/06/vagrant-on-mac-os-x/"/>
+    <updated>2013-06-19T15:19:00+08:00</updated>
+    <id>http://lenciel.github.io/2013/06/vagrant-on-mac-os-x</id>
+    <content type="html"><![CDATA[<p>Vagrant<a href="http://www.vagrantup.com/vmware">最近支持了VMWare</a>，但是要钱的东西我们玩不起。本系列主要分享一下Vagrant+VirtualBox搭配起来如何使用。</p>
+
+<h2 id="virtualbox">安装VirtualBox</h2>
+
+<p>VirtualBox是Oracle的动态创建、可配置、可移植的轻量虚拟机系统。在Windows、MacOSX、Linux和Solaris上都发行了相应版本。</p>
+
+<p>目前Vagrant支持的是VirtualBox4.0.x、4.1.x和4.2.x版本</p>
+
+<p><code>bash
+http://www.virtualbox.org/wiki/Downloads
+</code></p>
+
+<h2 id="vagrant">安装Vagrant</h2>
+
+<p><code>bash
+http://downloads.vagrantup.com/
+</code></p>
+
+<p>Windows和Mac OS X下面安装完毕后要把 <code>vagrant</code> 命令放到 <code>PATH</code> 下面，而其他系统下面需要把整个 <code>/opt/vagrant/bin</code> 放到PATH下面。
+完成后可以先安装一个32位的ubuntu10.04版本来测试一下：</p>
+
+<p><code>bash
+vagrant box add lucid32 http://files.vagrantup.com/lucid32.box
+vagrant init lucid32
+vagrant up
+</code></p>
+
+<h2 id="vagrant-1">Vagrant的好处</h2>
+
+<p>软件开发，特别是Web应用的开发正处于环境异常复杂的年代。为了在开发和实际部署的环境直接做到无缝切换，虚拟化技术被大规模的使用。与此同时，自动的配置管理，如 <code>Chef</code> 或者 <code>Puppet</code> 也在发挥着巨大的作用。Vagrant就是在这些技术的基础上进行了集成，从而完成（虚拟化+自动配置管理）的效果。</p>
+
+<p><em>对个人开发者</em></p>
+
+<p>对于开发者来说要想使用一个开发环境应付所有的开发任务变得非常困难了。每个项目都有自己独特的依赖，如类库，消息队列，数据库，框架等等。每个依赖也常常有版本上的差异。Vagrant提供了方便，可以为每个项目创建独立的开发环境，并且只在项目需要的时候把这些环境运行起来。</p>
+
+<p><em>对项目组</em></p>
+
+<p>同一个项目组的组员理论上都是有相同的开发环境的：同样的依赖，每个依赖都是同样的版本，采用同样的配置等等。但是现实往往不是这样。比如采用了ORM框架的Django，同一个项目组可能有人用着 <code>sqlite3</code> ，有人用 <code>mysql</code> 。而且每个人自己开发环境中服务器的配置也常常是不同的。这种异构的环境往往最终会带来大大小小的麻烦。Vagrant提供了一个方便，让大家都被强制的使用统一的开发环境。</p>
+
+<p><em>对公司</em></p>
+
+<p>如果管理过大型项目，你就知道新人和新设计的引入往往是非常大的考验。大量的环境搭建工作，都可以由Vagrant来代替。并且Vagrant的配置只需要写一次，然后分发给大家用就行了，省掉了大量的时间。</p>
+
+<h2 id="vagrant-2">Vagrant可执行文件</h2>
+
+<p>Vagrant安装好之后，主要是通过命令行使用。 <code>vagrant</code> 命令带很多子命令，如 <code>vagrant up</code> ， <code>vagrant ssh</code> ， <code>vagrant package</code> 等等。敲 <code>vagrant</code> 就可以看到有哪些可用的命令。</p>
+
+<h2 id="vagrantfile">Vagrantfile配置文件</h2>
+
+<p><code>Vagrantfile</code> 对于Vagrant就像 <code>Makefile</code> 对Make的作用一样：它被放置在每个Vagrant项目的根目录，用来配置Vagrant以及它创建的虚拟机的行为。一个最简单的配置文件如下：</p>
+
+<p><code>ruby
+Vagrant:Config.run do |config|
+     # setup the box
+     config.vim.box="my_box"
+end
+</code></p>
+
+<p>可以看到，<code>Vagrantfile</code> 是用标准的Ruby代码写成的。需要注意的是在大版本之间<code> Vagrantfile</code> 是不兼容的。</p>
+
+<h2 id="setup">基本setup</h2>
+
+<p>首选创建项目目录，然后在项目目录中初始化：</p>
+
+<p><code>bash
+mkdir vagrant_guide
+cd vagrant_guide
+vagrant init
+</code></p>
+
+<p>init命令会创建一个基本的Vagrantfile，暂时先不修改它。下一篇我们来看如何添加Django开发需要的配置以及如果build一个 <code>base box</code> 来给其他人使用。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[First steps on a new server]]></title>
+    <link href="http://lenciel.github.io/2013/04/first-steps-on-a-new-server/"/>
+    <updated>2013-04-04T08:44:00+08:00</updated>
+    <id>http://lenciel.github.io/2013/04/first-steps-on-a-new-server</id>
+    <content type="html"><![CDATA[<p>一般来说，新开张的小团队不会养专职的运维和部署团队。一般服务器开发的项目组会有人兼职做这部分的事情。刚开始的时候这部分的工作量一般也不大，但是随着租用的服务器越来越多，兼职的人就会发现自己是在打上甘岭战役————坡越来越陡。</p>
+
+<p>因此，一个简单而有效的标准流程是非常必要的。ZooM团队的服务器都会配置两个固定的帐号： <code>root</code> 和 <code>deploy</code> 。 <code>deploy</code>  这个用户具有 <code>sudo</code> 的权限。开发人员使用deploy但是不通过用户名密码登录而是用 <code>public key</code> 。这样一来，只需要保证所有机器的 <code>authorized_keys</code> 文件同步即可。后面要做的改进是：</p>
+
+<ul>
+  <li>在所有机器禁止通过 root 账号进行ssh</li>
+  <li>在所有机器上限制可以ssh的IP范围</li>
+</ul>
+
+<p>这样的实施方案对 <code>authorized_keys</code> 的保密性和正确性要求是很高的，但是在没有专门IT的时候，对我们这样的小团队基本是够用的。下面是详细的步骤：</p>
+
+<p>我们拿到的第一台机器是Ubuntu的，因为 <code>Gitlab</code> 只有Debian的版本。后面的机器大多会是CentOS，所以使用的命令可能会稍微有调整，但是意思是不变的。</p>
+
+<h2 id="root">更换root密码</h2>
+
+<p><code>bash
+passwd
+</code></p>
+
+<p>可以很长很复杂（反正也不需要记得），保存在某个地方在你忘记 <code>sudo</code> 密码或者是不能正常 <code>ssh</code> 的时候能找出来用就可以了。</p>
+
+<h2 id="section">更新系统</h2>
+
+<p><code>bash
+apt-get update
+apt-get upgrade
+</code></p>
+
+<h2 id="fail2ban">安装Fail2ban</h2>
+
+<p><code>bash
+apt-get install fail2ban
+</code></p>
+
+<p>Fail2ban是一个用来监控登录尝试的 <code>daemon</code> ，可以有效侦测和防止可疑行为的发生。这个工具文档很全，而且出厂配置就很齐全，几乎不需要定制就能投入使用了。</p>
+
+<h2 id="deploy">添加deploy用户</h2>
+
+<p><code>bash
+useradd deploy
+mkdir /home/deploy
+mkdir /home/deploy/.ssh
+chmod 700 /home/deploy/.ssh
+</code></p>
+
+<h2 id="public-key">配置 <code>public key</code></h2>
+
+<p>使用密码的日子已经慢慢过时了，这方面Github很有<a href="https://help.github.com/categories/56/articles">贡献</a>。只需要：</p>
+
+<p><code>bash
+vim /home/deploy/.ssh/authorized_keys
+</code></p>
+
+<p>把 <code>id_rsa.pub</code> 的内容拷贝进去。然后：</p>
+
+<p><code>bash
+chmod 400 /home/deploy/.ssh/authorized_keys
+chown deploy:deploy /home/deploy -R
+</code></p>
+
+<p>当然你也可以使用 <code>id_rsa.pub</code> 之外的key，然后在本地的 <code>~/.ssh/config</code> 里面对 <code>IdentityFile</code> 做指定。具体方式可以查看 <code>~/.ssh/config</code>的说明。</p>
+
+<h2 id="deploy-sudo-">测试deploy用户并赋予 <code>Sudo</code> 权限</h2>
+
+<p>先测试deploy是否能够正常登录，然后使用 <code>root</code> 账号设置密码：</p>
+
+<p><code>bash
+passwd deploy
+</code></p>
+
+<p>这是团队要用来 <code>sudo</code> 的账号，所以要弄得有意义好记一点儿。接下来：</p>
+
+<p><code>bash
+visudo
+</code></p>
+
+<p>注释掉所以已经存在的用户、用户组权限，然后加上：</p>
+
+<p><code>bash
+root    ALL=(ALL) ALL
+deploy  ALL=(ALL) ALL
+</code></p>
+
+<h2 id="ssh">锁定SSH</h2>
+
+<p>设置ssh，禁止使用密码ssh，禁止使用 <code>root</code> 账号ssh。</p>
+
+<p><code>bash
+vim /etc/ssh/sshd_config
+</code></p>
+
+<p>添加下面的设置：</p>
+
+<p><code>bash
+PermitRootLogin no
+PasswordAuthentication no
+</code></p>
+
+<p>如果有需要还可以限定可以ssh的ip地址：</p>
+
+<p><code>bash
+AllowUsers deploy@(your-ip) deploy@(another-ip-if-any)
+</code>
+重启ssh：</p>
+
+<p><code>bash
+service ssh restart
+</code></p>
+
+<h2 id="section-1">设置防火墙</h2>
+
+<p>Ubuntu提供了 <code>ufw</code>，所以只需要：</p>
+
+<p><code>bash
+ufw allow from {your-ip} to any port 22
+ufw allow 80
+ufw allow 443
+ufw enable
+</code></p>
+
+<h2 id="section-2">打开自动安全更新</h2>
+
+<p>虽然很多习惯好的服务器使用者会知道运行<code>apt-get update/upgrade</code> 但是如果服务器很多，总会有一些不那么被经常登录的机器，系统会比较陈旧。特别是做负载均衡的机器，可能很少有人登录。为了保证所有的机器都有足够的安全性需要打开自动更新（作为习惯控制一切的开发人员，自动更新总是一件让我很抗拒的事情，但是安全漏洞更让人抗拒）：</p>
+
+<p><code>bash
+apt-get install unattended-upgrades
+vim /etc/apt/apt.conf.d/10periodic
+</code></p>
+
+<p>在文件里面修改成：</p>
+
+<p><code>bash
+APT::Periodic::Update-Package-Lists "1";
+APT::Periodic::Download-Upgradeable-Packages "1";
+APT::Periodic::AutocleanInterval "7";
+APT::Periodic::Unattended-Upgrade "1";
+</code></p>
+
+<p>接着修改：</p>
+
+<p><code>bash
+vim /etc/apt/apt.conf.d/50unattended-upgrades
+</code></p>
+
+<p>修改文件成：</p>
+
+<p><code>bash
+Unattended-Upgrade::Allowed-Origins {        
+    "Ubuntu lucid-security";
+    //"Ubuntu lucid-updates"; 只更新安全更新
+};
+</code></p>
+
+<h2 id="logwatch">安装Logwatch</h2>
+
+<p>Logwatch是一个监控你的日志并发送邮件通知的daemon。</p>
+
+<p><code>bash
+apt-get install logwatch
+vim /etc/cron.daily/00logwatch
+</code></p>
+
+<p>在文件中添加：</p>
+
+<p><code>bash
+/usr/sbin/logwatch --output mail --mailto lenciel@gmail.com --detail high
+</code></p>
+
+<h2 id="whats-next">What’s Next</h2>
+
+<ul>
+  <li>使用Puppet自动化这些配置</li>
+  <li>在基础的配置上，把一个fresh的机器如果配置成各种形态的（Django/Web/Database/LoadBalance/…)</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Android开发中使用ProGuard]]></title>
+    <link href="http://lenciel.github.io/2012/02/integration-of-proguard-and-maven-in-android-projects/"/>
+    <updated>2012-02-27T22:46:00+08:00</updated>
+    <id>http://lenciel.github.io/2012/02/integration-of-proguard-and-maven-in-android-projects</id>
+    <content type="html"><![CDATA[<p>今天被同事问到怎么在release版本里面所有的日志都去掉的时候，竟然只能回忆起用<code>ProGuard</code>做过这个，完全忘记怎么做的了，特立此存照。文章里面使用的例子放在<a class="network" href="https://github.com/lenciel/AMP" rel="me"><img src="http://lenciel.github.io/downloads/images/github_button.png" alt="" width="16" height="16" /> Android-Maven-ProGuard-Sample-App</a>。</p>
+
+<h4 id="proguard">ProGuard简介</h4>
+
+<p>在移动设备上面开发应用程序，性能是一个很关键的指标。你的老板走过来要你提高性能的时候，你的第一反应有可能是抓起熟悉的工具花几个小时profile自己的应用，找出那些时间都花在哪里了。在使用这么终极的手段之前，千万不要忘记了先试试ProGuard。</p>
+
+<p>做Android之前就是Java程序员的可能早就已经对ProGuard很熟悉了。简单的来说，ProGuard就是一个Java的class文件处理器，主要的功能类似奥运会口号：</p>
+
+<ul>
+  <li>让你的程序变得更小更快 </li>
+  <li>让你的程序变得更难被反向工程 </li>
+</ul>
+
+<p>尽管ProGuard不是专用于Android开发的，但是在Android的SDK里面已经包括了这个工具，路径是<code>ANDROID_HOME/tools/proguard</code>，文档可以在<a href="http://proguard.sourceforge.net">http://proguard.sourceforge.net</a>看到。</p>
+
+<p>让程序变得更小更快的好处是不言而喻的。ProGuard通过对bytecode进行优化，优化手段包括去掉无用的代码，去掉内联方法的调用，对类的继承结构进行优化，把所有能加上的<code>final</code>和<code>static</code>加上，以及对算术运算进行<a href="http://en.wikipedia.org/wiki/Peephole_optimization" target="_blank">Peephole optimization</a>等等。</p>
+
+<p>让程序变得更难被反向工程就不一定是每个人都需要的了。一般情况下，对Android的反向工程是把Dalvik的bytecode转换成Java的bytecode，然后使用传统的Java反向工具转成成Java源代码。如果你的项目是开源的，显然也没有必要防止别人反向。但是如果是下面几种情况，你就很可能需要它了： </p>
+
+<ul>
+  <li>你在源文件里面有一些不想被别人看到的信息，如密码等 </li>
+  <li>你的代码里面有自己或者公司的赖以生存的知识产权 </li>
+  <li>你的甲方有明确的要求 </li>
+  <li>你的程序按license等方式收费，你不想被别人把licens检查的部分去掉重新编译个版本 </li>
+</ul>
+
+<p>ProGuard可以帮助通过对类，方法和成员名称进行混淆，同时通过去掉结构化的信息，如文件名或者行号表等，来使得代码从理论上变得不可被反向工程。</p>
+
+<p>如此看来，ProGuard真是美好事物一枚。但是ProGuard也不是随手一点药到病除的，也有一点学习曲线。</p>
+
+<h4 id="proguard-1">启用ProGuard</h4>
+
+<p>如果你使用Eclipse的ADT，每个新建的项目都会生成一个<code>proguard.cfg</code>文件在项目的根目录。你对ProGuard的所有设定就是在这个文件里面完成的。要想在项目里面启用Proguard，只需要把同样在项目根目录的<code>default.properties</code>里面加上：</p>
+
+<p><code>bash
+proguard.config=proguard.cfg
+</code></p>
+
+<p>当然，如果你蛋疼到要自己去移动cfg文件的位置，也要记得去改等号后面的部分。然后，在所有的release版本的build里，你的Proguard就已经生效了。对于使用Eclipse的同学来说，release的build就是指通过选择Android Tools&gt;Export Signed/Unsigned Application Package来进行。</p>
+
+<p>因为在大多数开发中我们都会使用Ant或者是Maven来对项目进行管理，所以一般不会直接用Eclipse来进行release版本的编译，所以通常我们还要掌握如何在不使用ADT的情况下使用ProGuard。对于Maven而言，可以通过使用Maven Android plugin来完成。同时，由于ProGuard已经完全集成到Android的工具链里面了，所以Android的Ant任务里面也有一个专门的private任务叫做<code>-obfuscate</code>，会把激活并使用ProGuard作为release这个target的一部分，所以使用Ant的话只要一个ant release就可以了。</p>
+
+<p>当ProGuard执行以后，会产生几个特别重要的文件：</p>
+
+<ul>
+  <li><code>mapping.txt</code>：保存了混淆后的名字和混淆前名字的对应关系。对于每次release的build，都要记得保存这个文件，要不然如果你收到release版本上报出的defect的时候，就等着哭吧。 </li>
+  <li><code>seeds.txt</code>：ProGuard找到的你的程序的entrypoint列表。 </li>
+  <li><code>usage.txt</code>：ProGuard觉得没有用所以移除了的一堆类，域和方法的list。要想学习写作“完美”的ProGuard规则的同学就要经常来这个文件看看自己定下的rule对ProGuard的行为究竟有什么样的影响。如果你有用的类出现在list里面了，说明你削得太猛了，反之亦然。</li>
+</ul>
+
+<p>需要注意的是这些文件的输出目录。在使用Ant ProGuard target的时候，输出目录是<code>bin/proguard/</code>，但是如果是通过ADT(右键project&gt;Android Tools&gt;Export）的话，输出目录会是<code>proguard/</code>。</p>
+
+<p>还有一个常见的困惑就是ProGuard是怎么找到那些需要处理的文件的。一般情况下，ProGuard希望你用<code>-injars</code>或者是<code>-libraryjars</code>来告诉它。但是对Android开发而言，Ant任务和ADT都会自动的查看你的<code>libs</code>，<code>output</code>和项目的<code>classpath</code>目录。</p>
+
+<p>从执行过程的日志来看，ProGuard对类文件的操作分为三个步骤：shrink，optimize，obfuscate。每个步骤都是可选的，可以通过使用<code>-dontshrink</code>、<code>-dontoptimize</code>和<code>-dontobfuscate</code>来分别关掉。一般来说，不用因为结果“不如人意”就随意的关掉某个步骤。完整的进行三个步骤，然后不断的改变规则，直到达到最佳效果，是使用ProGuard的最佳方式。</p>
+
+<h4 id="proguard-2">编写ProGuard规则</h4>
+
+<p>ProGuard和很多工具一样，其强大之处在于选项够多。作为Android开发者使用，首先心里要明白，没有一个唯一的最佳配置规则。在此基础上，去掌握一些对Android程序而言通常是适用的规则。然后，就像在文章里面已经反复强调过的一样，以这些规则为起点，反复的调整你的规则，找出一个对自己的程序最适用的规则。</p>
+
+<p>当然，因为选项太多，ProGuard给初学者的感觉难免是千头万绪，无从下手。因此，我们可以从一个例子程序入手来找到对ProGuard的“感觉”。</p>
+
+<p>这个例子本身没有任何特别之处，<code>MyButton</code>类继承自<code>Button</code>但是没有添加新的方法，可以通过它来观察ProGuard如何对继承结构进行压缩。Click的handler除开显示toast之外也没有特别的功能，可以通过它来观察ProGuard对方法名的混淆。<code>AMPSampleActivity</code>里面还专门有一个没有被调用的方法，可以通过它来观察ProGuard对这种情况的处理。下面是程序的入口Activity的实现：</p>
+
+<p>我们期望ProGuard做的事情包括：</p>
+
+<ul>
+  <li>保留<code>AMPSampleActivity</code>类，因为它是我们在XML里面指定的程序入口 </li>
+  <li>保留<code>StringUtils</code>类和它的<code>repeat</code>方法 </li>
+  <li>保留<code>myClickHandler</code>方法 </li>
+  <li>保留<code>MyButton</code>类 </li>
+  <li>去掉<code>unusedMethod</code> </li>
+  <li>除开XML里面引用的类（<code>AMPSampleActivity</code>和<code>MyButton</code>），其他的类名都需要被混淆 </li>
+  <li>除开XML里面引用的方法名（<code>myClickHandler</code>），其他的方法名都要被混淆 </li>
+  <li>完成一些对Android而言通常适用的优化（下面会仔细展开） </li>
+</ul>
+
+<p>ProGuard的规则是“白名单”的，也就是说ProGuard只会对你特别指定的类刀下开恩。这也就是说，对任何程序，我们都至少要写一条规则，来保留程序的入口类。因为是Android程序，我们可以这么写：</p>
+
+<p><code>java
+-keep public class * extends android.app.Activity
+</code>
+这里我们可以看到ProGuard的rule用的语法基本上遵循了Java本身的语法（<code>extends</code>等等），但是它支持使用通配符。规则中的<code>-keep</code>告诉ProGuard不要删除也不要混淆任何从<code>android.app.Activity</code>继承的类。</p>
+
+<p>很简单，不是吗？如果你这个时候运行程序，会看到： </p>
+
+<p><code>java
+org.lenciel.android/org.lenciel.android.AMPSampleActivity}: 
+    ➥ android.view.InflateException: Binary XML file line #6: Error inflating 
+    ➥ class org.lenciel.android.MyButton
+</code></p>
+
+<p>为什么在inflate我们自定义的view的时候crash了呢？这是因为自定义的view是在XML里面被用到的，而不是在Java代码里面。因此ProGuard会认为这是没有用的代码而试着删除它。要保证这些自定义的view不被误删，就需要定义如下的规则：</p>
+
+<p>```java
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context, android.util.AttributeSet); 
+} </init></p>
+
+<p>-keepclasseswithmembers class * {
+    public <init>(android.content.Context, android.util.AttributeSet, int); 
+}
+```</init></p>
+
+<p>这两条规则告诉ProGuard不要对定义了可能被<code>LayoutInflater</code>调用的构造函数的任何类进行优化。我们这里使用了<code>-keepclasseswithmembers</code>而不是<code>-keep</code>。</p>
+
+<p>再次运行，会遇到下面的错误：</p>
+
+<p><code>java
+java.lang.IllegalStateException: Could not find a method 
+   ➥ myClickHandler(View) in the activity class org.lenciel.android.AMPSampleActivity for onClick handler on 
+   ➥ view class org.lenciel.android.MyButton
+</code></p>
+
+<p>去查看<code>usage.txt</code>你会发现<code>myClickHandler</code>又被干掉了。为什么在第一条规则里面我们告诉ProGuard不要动<code>AMPSampleActivity</code>里面的任何东西，还是会有这种情况发生？这是使用<code>-keep</code>的一个常见的误会。我们用<code>-keep</code>告诉ProGuard保留一个类的时候，没有提供任何类的“body”信息的话，ProGuard仅仅会保留这个类的名字。它仍然会对这个类内部的所有东西进行优化和混淆。要保留方法，我们需要这么写：</p>
+
+<p><code>java
+-keep public class * extends android.app.Activity { 
+    methods; 
+}
+</code></p>
+
+<p>但是这样写显然又太过于慷慨了。下面这条规则会好很多：</p>
+
+<p><code>java
+-keepclassmembers class * extends android.app.Activity {
+    public void *(android.view.View); 
+}
+</code></p>
+
+<p>这条规则告诉ProGuard，如果一个<code>Activity</code>在<code>shrink</code>阶段没有被去掉，那么就保留那些<code>public</code>的，没有返回值的，传入了<code>android.view.View</code>作为参数的方法。</p>
+
+<p>可以看到，使用ProGuard存在一个不断调优的过程。他山之石，可以攻玉，已经有很多人使用ProGuard来优化Android程序了，于是也有了一些被普遍采用的规则和选项，我们下面来个简单说明。</p>
+
+<h4 id="section">常用规则和选项</h4>
+
+<p>前面看到的规则对于例子程序就足够了。但是如果我们的程序使用了<code>Service</code>怎么办？和<code>Activity</code>一样，<code>Service</code>也是在manifest xml里面定义的，因此我们需要对<code>proguard.cfg</code>做一定的扩展。</p>
+
+<p>下面的规则是针对Android程序一般来说都比较有效的。</p>
+
+<p>一般来说，下面的Android framework class都是需要保留的：</p>
+
+<p><code>java
+-keep public class * extends android.app.Activity 
+-keep public class * extends android.app.Application 
+-keep public class * extends android.app.Service 
+-keep public class * extends android.content.BroadcastReceiver 
+-keep public class * extends android.content.ContentProvider 
+-keep public class * extends android.app.backup.BackupAgentHelper 
+-keep public class * extends android.preference.Preference 
+-keep public class com.android.vending.licensing.ILicensingService
+</code></p>
+
+<p>虽然你的程序可能一开始没有使用其中的一些类，但是定义好全部这些规则也是有好处的：它可以避免你在使用ProGuard编出的版本crash之后去搞半天才发现有某个类似的规则需要更新但是你忘记了。</p>
+
+<p>第二个有用的规则是保留<code>static</code>的<code>CREATOR</code>域，这个是Android用来parcel对象的。这个域由于是在运行的时候<a href="http://www.google.com.hk/url?sa=t&amp;rct=j&amp;q=introspection&amp;source=web&amp;cd=2&amp;ved=0CDYQFjAB&amp;url=http%3A%2F%2Fen.wikipedia.org%2Fwiki%2FIntrospection&amp;ei=_JhDT-6ADIGtiQfF46TMBA&amp;usg=AFQjCNEEE1rrErPfi38AVCPjdN6ri-qROA" target="_blank">Instrospection</a>的，所以ProGuard会认为它是无用的域并把它去掉。下面这条rule可以防止这样的事情发生：</p>
+
+<p><code>java
+-keepclassmembers class * implements android.os.Parcelable {
+    static android.os.Parcelable$Creator CREATOR; 
+}
+</code></p>
+
+<p>在程序中如果你调用了native的code，比如你用JNI来调用了c的lib，由于在Java代码里面是一份方法的签名，而没有方法的实现，它必须被链接到native code上。这也就意味着这些函数名不能被ProGuard加以混淆了，不然链接的过程就会失败。下面的规则可以保证ProGuard不去动native的方法名：</p>
+
+<p><code>java
+-keepclasseswithmembernames class * { 
+     native methods; 
+}
+</code></p>
+
+<p>我们这里使用的<code>-keepclasseswithmembernames</code>是告诉ProGuard，被调用过的方法留着，没有调用过的都去掉。</p>
+
+<p>前面的规则看起来都一目了然。下面这个可能要费解一些：</p>
+
+<p><code>java
+-keepclassmembers enum * {   
+     public static **[] values(); 
+     public static ** valueOf(java.lang.String); 
+}
+</code></p>
+
+<p>这个规则是让ProGuard不要去动任何<code>Enum</code>的<code>values</code>和<code>valueOf</code>方法。这些方法之所以特殊是因为Java自己是通过发射机制来调用它们的。这可能也是Google<a href="https://developer.android.com/guide/practices/design/performance.html#avoid_enums" target="_blank">不建议使用</a>Java enum的原因吧：它们比<code>final class fields</code>的性能要低不少。如果你已经遵照Google的教诲停止使用<code>Enum</code>，那你也不需要这条规则了，恭喜。</p>
+
+<p>下面来看看常用的选项：</p>
+
+<p><code>java
+-dontusemixedcaseclassnames 
+-dontskipnonpubliclibraryclasses 
+-dontpreverify 
+-verbose
+</code></p>
+
+<p>第一个选项可以避免像Windows这样不区分大小写的操作系统不会因为类似<code>A.class</code>和<code>a.class</code>写到同一个文件里面就驾崩。</p>
+
+<p>第二个选项是因为ProGuard默认不会处理任何非public的类。但是有时候我们会遇到public的类继承自内部的非public的类。所以打开这个选项可以更好的覆盖。</p>
+
+<p>第三个选项是告诉ProGuard不要做<code>preverify</code>（预检验），因为这个只对J2ME或者是Java6的平台有用。</p>
+
+<p>最后一个选项，你们懂的。</p>
+
+<p>前面我们提到过ProGuard有一个优化代码（optimize）的过程。大多数时候ProGuard都会火力全开的对所有的代码做优化。这些优化操作有些时候是相当aggressive的，比如合并类的时候ProGuard会试着既从纵向上合并也从横向上合并，以便得到尽量少的类文件，也就可以得到尽量小的APK。同时它还会试着优化循环和代数运算。默认的ADT生成的ProGuard选项关掉了很多的优化选项：</p>
+
+<p><code>java
+-optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
+</code></p>
+
+<p>Google并没有提供他们这么配置的依据。我们可以试着先禁用这个选项，看看程序运行起来会不会有问题。如果遇到了问题再试着慢慢的减弱优化，来“探底”。</p>
+
+<p>同时ProGuard的优化是可以“递归”的，也就是优化完的结果可以作为下次优化的输入继续优化。你可以指定它反复进行多少次。但ProGuard如果发现已经没有什么可以优化，会自动停下来，不一定跑到你指定的次数。一般设置成5就够了：</p>
+
+<p><code>java
+-optimizationpasses 5
+</code></p>
+
+<h4 id="section-1">如果处理混淆后版本的错误报告</h4>
+
+<p>如果你发布了混淆的版本，有一个问题你就得面对：用户提交的问题单里面产生自这些类和方法都完全打乱过后的版本。为了展示这种问题，在Demo程序里面专门加了这么一个类：</p>
+
+<p><code>java
+public class Bomb {
+    public void explode() {
+        throw new RuntimeException("Boom!");
+    }
+}
+</code></p>
+
+<p>在onCreate方法里面它会被引爆：</p>
+
+<p><code>java
+public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.main);
+    String toast = StringUtils.repeat("Hello ProGuard! ", 3);
+    Toast.makeText(this, toast, Toast.LENGTH_SHORT).show();
+    new Bomb().explode();
+}
+</code></p>
+
+<p>如果你运行程序，就会看到下面的错误：</p>
+
+<p><code>java
+java.lang.RuntimeException: Unable to start activity ...MainActivity}: 
+java.lang.RuntimeException: Boom!
+...
+Caused by: java.lang.RuntimeException: Boom!
+   at org.lenciel.android.MainActivity.onCreate(Unknown Source)
+   at android.app.Instrumentation.callActivityOnCreate(
+   ➥ Instrumentation.java:1047)
+   at android.app.ActivityThread.performLaunchActivity(
+   ➥ ActivityThread.java:2627)
+   ... 11 more
+</code></p>
+
+<p>可以看到在错误出现位置的stack trace既没有行号也没有文件名。这是因为相关的信息都被ProGuard优化掉了。如果我们想避免这种情况，就要在<code>proguard.cfg</code>里面加上下面的选项：</p>
+
+<p><code>bash
+-keepattributes SourceFile,LineNumberTable
+</code></p>
+
+<p>显然，有了行号和文件名，还是解决不了方法被混淆的问题。我们这个例子程序里面方法很少，而<code>onCreate</code>方法因为是<code>Override</code>的，所以ProGuard不会去动它。如果是正式的工程，最好的办法还是用<code>retrace</code>工具来根据<code>mapping.txt</code>还原整个日志。</p>
+
+<p><code>bash
+$ retrace proguard/mapping.txt stacktrace.txt
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>
