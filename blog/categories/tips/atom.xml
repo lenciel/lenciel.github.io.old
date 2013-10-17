@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tips | @Lenciel]]></title>
   <link href="http://lenciel.github.io/blog/categories/tips/atom.xml" rel="self"/>
   <link href="http://lenciel.github.io/"/>
-  <updated>2013-10-13T14:13:04+08:00</updated>
+  <updated>2013-10-17T13:29:37+08:00</updated>
   <id>http://lenciel.github.io/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -12,6 +12,64 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[打开pip的download cache]]></title>
+    <link href="http://lenciel.github.io/2013/10/pip-download-cache/"/>
+    <updated>2013-10-17T13:25:00+08:00</updated>
+    <id>http://lenciel.github.io/2013/10/pip-download-cache</id>
+    <content type="html"><![CDATA[<p>Python的标准库实在是<a href="http://lenciel.cn/2013/10/recharging-the-python-library/">不够用</a>，所以一个很常见的情况是我们需要在每个项目使用的<code>virtualenv</code>里面都安装一些常用的库。</p>
+
+<p>为了加速安装的过程，有两个小窍门。</p>
+
+<p>一个是使用国内的源，比如<a href="http://www.v2ex.com/">v2ex</a>提供的。只需要新建或者编辑<code>~/.pip/pip.conf</code>，加入一行：</p>
+
+<p>```
+[global]
+index-url = http://pypi.v2ex.com/simple</p>
+
+<p>```</p>
+
+<p>另一个就是打开pip的<code>download cache</code>，这样可以避免pip每次都去下载相同的东西。只需要在<code>.bashrc</code>或者是<code>.zshrc</code>里面加入一行：</p>
+
+<p>```
+export PIP_DOWNLOAD_CACHE=$HOME/.pip-download-cache</p>
+
+<p>```</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[给Python标准库充电]]></title>
+    <link href="http://lenciel.github.io/2013/10/recharging-the-python-standard-library/"/>
+    <updated>2013-10-17T12:27:00+08:00</updated>
+    <id>http://lenciel.github.io/2013/10/recharging-the-python-standard-library</id>
+    <content type="html"><![CDATA[<p>Python的自荐页面<a href="http://www.python.org/about/">About Python</a>上号称自家的标准库是”batteries included”的，但实际情况却不是这样。对Python标准库的批评几乎从来没有中断过。著名的Python包<a href="http://docs.python-requests.org/en/latest/">Requests</a>的作者甚至决定永久把Requests保持为第三方库而拒绝加入标准库，他的理由是：<a href="http://www.leancrew.com/all-this/2012/04/where-modules-go-to-die/">加入标准库就会死翘翘</a>。</p>
+
+<p>再举个例子，我们最近的项目里面都用到了<a href="https://pypi.python.org/pypi/pytz/">pytz</a>。标准库里面的datetime是支持时区的（tzinfo类），但是并没有包含时区信息（tzinfo是抽象类需要自己实现）。遵照前人的经验使用pytz是最好的办法<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup><sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>。</p>
+
+<p>所以不奇怪的是，几乎所有的Python项目都会引用一堆优秀的第三方库。为了管理这些依赖一般都会用上pip:</p>
+
+<ul>
+  <li>在项目里面用pip freeze生成一个<code>requirement.txt</code>文件</li>
+  <li>在创建<code>virtualenv</code>的时候使用之前生成的文件安装所有的依赖</li>
+</ul>
+
+<p>为了不在每次运行<code>pip install -r requirements.txt</code>的时候都下载一堆依赖，你还可以打开pip的<a href="http://lenciel.cn/2013/10/pip-download-cache/">download cache</a>。如果整个公司在做项目的时候都需要经常使用一些包，甚至可以考虑<a href="https://github.com/wolever/pip2pi">做一个Pypi</a>的库来共享，类似于Maven的Repo。</p>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p><a href="http://stackoverflow.com/questions/2532729/daylight-saving-time-and-time-zone-best-practices/3404919#3404919">保存时间和时区的最佳实践</a>.   <a href="#fnref:1" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p><a href="http://stackoverflow.com/questions/14762518/python-datetime-strptime-and-strftime-how-to-preserve-the-timezone-informat">如何在datetime转换中保存时区信息</a>.    <a href="#fnref:2" rel="reference">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Raspberry Pi上使用HDMI转接VGA线]]></title>
@@ -707,365 +765,6 @@ var OAuth = require('mashape-oauth').OAuth,
     </li>
   </ol>
 </div>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[tmux: Introduction and Tips]]></title>
-    <link href="http://lenciel.github.io/2013/07/tmux-introduction-and-tips/"/>
-    <updated>2013-07-21T14:02:00+08:00</updated>
-    <id>http://lenciel.github.io/2013/07/tmux-introduction-and-tips</id>
-    <content type="html"><![CDATA[<p><img src="/downloads/images/tmux_tips_1.png" alt="tmux screenshot 1" title="Don't touch me..." /></p>
-
-<h3 id="section"><strong>简介</strong></h3>
-
-<p><code>tmux</code> ,其实就是 <code>terminal multiplexer</code> 的简称。使用tmux你可以把多个任务同时运行起来，使用不同的 <code>tmux</code> 窗口来查看它们。你也可以 <code>detach</code> 一个 <code>session</code>，也就是让一个窗口的活动，比如编译这种耗时你又不希望断开的活动，放到后台去运行。如果你使用过 <code>screen</code> 对 <code>detach</code> 一个 <code>session</code> 应该非常熟悉。其实初用 <code>tmux</code> 的时候，它很大程度上就像一个 <code>GNU-Session</code> 外加很多窗口管理的功能。而且由于 <code>tmux</code> 使用了 <code>client-server</code> 架构，我们可以在一个总控的地方去操作所有的窗口和pannel，甚至可以在一个窗口里面切换不同的 <code>session</code>。</p>
-
-<h4 id="tmux"><strong>tmux的安装</strong></h4>
-
-<p>用你的Linux package manager或者如果你和我一样在OSX可以用<code>brew</code>。另外，iTerm2<a href="http://code.google.com/p/iterm2/wiki/TmuxIntegration">集成了</a>对<code>tmux</code>的支持，它也是很多Mac上的<a href="http://tangledhelix.com/blog/2012/04/28/iterm2-keymaps-for-tmux/">程序员</a>最爱的Terminal。</p>
-
-<h4 id="session"><strong>创建一个具名的Session</strong></h4>
-
-<p>由于使用 <code>tmux</code> 可以在一个电脑上创建多个 <code>session</code> ，为了更好的管理它们我们一般可以使用名字来辨识这些 <code>session</code> 。
-比如下面的命令可以创建一个叫 <code>basic</code> 的 <code>session</code>：</p>
-
-<p><code>bash
-$ tmux -new -s basic
-</code></p>
-
-<p>回车之后就会进入一个新的 <code>session</code> 里面。可以看到具名的<code>session</code>的<code>terminal</code>和正常打开<code>iTerm2</code>大致相同，没有特别之处。
-这个时候我们敲<code>exit</code>就会回到原来的<code>terminal</code>中去。</p>
-
-<h4 id="detaching--attaching"><strong>Detaching 和 Attaching</strong></h4>
-
-<p>使用<code>tmux</code>一大好处就是我们可以启动<code>terminal</code>，运行一个任务在后台，然后<code>detach</code>这个<code>session</code>。如果在一般的<code>session</code>里面工作，一旦我们关闭了窗口，跑在里面的所有程序都会被退出。
-但是如果是使用了<code>detach</code>，我们可以再<code>attach</code>回去。下面演示一个例子。</p>
-
-<p>在创建的具名<code>session</code> “basic”里面运行<code>top</code>，然后使用<code>Ctrl-b + d</code>来<code>detach</code>这个<code>session</code>。</p>
-
-<p>首先来学习一下<code>Ctrl+b</code>这样的<code>Command Prefix</code>。因为<code>tmux</code>是一个terminal管家，我们需要有一个办法告诉<code>tmux</code>我们敲击的是需要<code>tmux</code>处理的命令还是传给terminal的。如果定义了<code>Ctrl-b</code>为命令前缀，就是说我们一定要先敲这个前缀，然后执行一个命令，比如<code>d</code>，表示我们要<code>detach</code>。要记住前缀输入之后要松开手，不要在不松手的情况下发命令给<code>tmux</code>。</p>
-
-<p>由于这个前缀是可以自定义的，所以后面我们记为<code>Prefix</code>而不再用<code>Ctrl-b</code>。</p>
-
-<p>然后我们可以使用下面的命令对<code>session</code>进行<code>list</code>、<code>attach</code>和<code>delete</code>：</p>
-
-<p><code>bash
-$ tmux ls
-0: 1 windows (created Thu Sep 27 10:16:16 2012) [121x22]
-basic: 1 windows (created Thu Sep 27 14:32:50 2012) [122x22]
-</code></p>
-
-<p>可以看到目前有两个存活的<code>session</code>，一个是刚刚创建的<code>basic</code></p>
-
-<p><code>bash
-$ tmux kill-session -t 0
-</code></p>
-
-<p>杀掉我们不需要的那个</p>
-
-<p><code>bash
-$ tmux ls
-basic: 1 windows (created Thu Sep 27 14:32:50 2012) [122x22]
-</code></p>
-
-<p>再次attach的时候可以不带<code>-t</code>，因为只有<code>basic</code>这个<code>session</code>还活着。</p>
-
-<p><code>bash
-$ tmux attach
-</code></p>
-
-<p>后面我们可以看到在session之间进行切换还有更多更方便的办法。</p>
-
-<h4 id="section-1"><strong>窗口</strong></h4>
-
-<p>很多时候我们都需要打开窗口运行多个任务。这种情况比较适用于<code>tmux</code>的窗口概念：用起来和现代操作系统里面的<code>tab</code>类似。</p>
-
-<p>新建一个窗口很容易</p>
-
-<p><code>bash
-tmux new -s windows -n shell
-</code> </p>
-
-<p><code>-s</code>是对<code>session</code>进行命名的，<code>-n</code>是用来对窗口进行命名的。</p>
-
-<ul>
-  <li>在当前的<code>session</code>里面新建一个窗口: <code>Prefix+C</code></li>
-  <li>要给窗口命名：<code>Prefix+</code></li>
-  <li>在已有的窗口间跳转： <code>Prefix+n/Prefix+p</code></li>
-  <li>窗口较多的时候跳转： <code>Prefix+序列号</code></li>
-  <li>要关掉窗口： <code>exit</code>或者<code>Prefix+&amp;</code></li>
-  <li>要搜索窗口：<code>Prefix+f</code>或者 <code>Prefix+w</code></li>
-</ul>
-
-<h4 id="section-2"><strong>分栏</strong></h4>
-
-<ul>
-  <li>竖分: <code>Prefix+%</code></li>
-  <li>横分: <code>Prefix+"</code>   </li>
-  <li>在分栏中切换: <code>Prefix+o</code>   </li>
-  <li>在分栏中切换: <code>Prefix+方向键</code></li>
-  <li>在不同的布局间切换: <code>Prefix+space</code></li>
-  <li>关闭: <code>Prefix+x</code></li>
-</ul>
-
-<h4 id="section-3"><strong>命令行模式</strong></h4>
-
-<p><code>Prefix+:</code></p>
-
-<h4 id="section-4"><strong>取得所有的快捷键</strong></h4>
-
-<p><code>Prefix+?</code></p>
-
-<p>二、配置tmux</p>
-
-<p>首先在系统设置里面把<code>CapsLock</code>这枚废材按键map成<code>ctrl</code>。然后是把Prefix配置成<code>ctrl+a</code>而不是<code>ctrl+b</code>，这样主要是为了按起来方便顺手。</p>
-
-<p>另外可以让窗口的序列号从1开始分配，这样初始窗口不会是0，那个你需要手伸很远才能按到的键。</p>
-
-<p><code>bash
-set -g base-index 1
-</code> </p>
-
-<p>同理分栏的序列号也可以从1开始：</p>
-
-<p><code>bash
-setw -g pane-base-index 1
-</code> </p>
-
-<p>另外一般需要把发送命令的延迟设置为没延迟</p>
-
-<p><code>bash
-set -sg escape-time 1
-</code> </p>
-
-<p>完整的配置文件在<a href="https://github.com/lenciel/oh-my-zsh/blob/master/dot_files/tmux.conf">这里</a>：</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (tmux.conf)</span> <a href='/downloads/code/tmux.conf'>download</a></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-<span class='line-number'>64</span>
-<span class='line-number'>65</span>
-<span class='line-number'>66</span>
-<span class='line-number'>67</span>
-<span class='line-number'>68</span>
-<span class='line-number'>69</span>
-<span class='line-number'>70</span>
-<span class='line-number'>71</span>
-<span class='line-number'>72</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># zsh is kinda tight</span>
-</span><span class='line'><span class="nb">set</span>-option -g default-shell <span class="nv">$SHELL</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># copy and paster</span>
-</span><span class='line'><span class="nb">set</span>-option -g default-command <span class="s2">&quot;reattach-to-user-namespace -l zsh&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># look good</span>
-</span><span class='line'><span class="nb">set</span> -g default-terminal <span class="s2">&quot;screen-256color&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># act like GNU screen</span>
-</span><span class='line'><span class="nb">set</span> -g prefix C-a
-</span><span class='line'>unbind C-b
-</span><span class='line'>
-</span><span class='line'><span class="nb">set</span> -sg escape-time 1
-</span><span class='line'><span class="nb">set</span> -g base-index 1
-</span><span class='line'>setw -g pane-base-index 1
-</span><span class='line'>
-</span><span class='line'><span class="nb">bind </span>r <span class="nb">source</span>-file ~/.tmux.conf <span class="se">\;</span> display <span class="s2">&quot;Reloaded!&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">bind</span> - split-window -v
-</span><span class='line'><span class="nb">bind</span> | split-window -h
-</span><span class='line'>
-</span><span class='line'><span class="c"># act like vim</span>
-</span><span class='line'>setw -g mode-keys vi
-</span><span class='line'><span class="nb">bind </span>h <span class="k">select</span>-pane -L
-</span><span class='line'><span class="nb">bind </span>j <span class="k">select</span>-pane -D
-</span><span class='line'><span class="nb">bind </span>k <span class="k">select</span>-pane -U
-</span><span class='line'><span class="nb">bind </span>l <span class="k">select</span>-pane -R
-</span><span class='line'><span class="nb">bind</span> -r C-h <span class="k">select</span>-window -t :-
-</span><span class='line'><span class="nb">bind</span> -r C-l <span class="k">select</span>-window -t :+
-</span><span class='line'>unbind <span class="o">[</span>
-</span><span class='line'><span class="nb">bind</span> <span class="sb">`</span> copy-mode
-</span><span class='line'>unbind p
-</span><span class='line'><span class="nb">bind </span>p paste-buffer
-</span><span class='line'><span class="nb">bind</span> -t vi-copy v begin-selection
-</span><span class='line'><span class="nb">bind</span> -t vi-copy y copy-selection
-</span><span class='line'>
-</span><span class='line'><span class="c"># after copying to a tmux buffer, hit y again to copy to clipboard</span>
-</span><span class='line'><span class="nb">bind </span>y run <span class="s2">&quot;tmux save-buffer - | reattach-to-user-namespace pbcopy&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># resize pane</span>
-</span><span class='line'><span class="nb">bind</span> -r H resize-pane -L 5
-</span><span class='line'><span class="nb">bind</span> -r J resize-pane -D 5
-</span><span class='line'><span class="nb">bind</span> -r K resize-pane -U 5
-</span><span class='line'><span class="nb">bind</span> -r L resize-pane -R 5
-</span><span class='line'>
-</span><span class='line'><span class="c"># enable mouse</span>
-</span><span class='line'>setw -g mode-mouse on
-</span><span class='line'><span class="nb">set</span> -g mouse-select-pane on
-</span><span class='line'><span class="nb">set</span> -g mouse-resize-pane on
-</span><span class='line'><span class="nb">set</span> -g mouse-select-window on
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>setw -g window-status-fg cyan
-</span><span class='line'>setw -g window-status-bg default
-</span><span class='line'>setw -g window-status-attr dim
-</span><span class='line'>setw -g window-status-current-fg white
-</span><span class='line'>setw -g window-status-current-bg red
-</span><span class='line'>setw -g window-status-current-att bright
-</span><span class='line'>
-</span><span class='line'><span class="nb">set</span> -g status-interval 60
-</span><span class='line'><span class="nb">set</span> -g status-justify centre
-</span><span class='line'>setw -g monitor-activity on
-</span><span class='line'><span class="nb">set</span> -g visual-activity on
-</span><span class='line'>
-</span><span class='line'><span class="nb">set</span> -g terminal-overrides <span class="s2">&quot;xterm*:XT:smcup@:rmcup@:kUPS=\eOA:kDN5=\eOB:kLFT5=\eOD:kRIT5=\eOC&quot;</span>
-</span><span class='line'><span class="nb">set</span> -g <span class="nb">history</span>-limit 30000
-</span><span class='line'>setw -g alternate-screen on
-</span><span class='line'><span class="nb">set</span> -s escape-time 50
-</span><span class='line'>
-</span><span class='line'><span class="nb">set</span>-window-option -g window-status-current-format <span class="s2">&quot;#[fg=colour235, bg=colour27]⮀#[fg=colour255, bg=colour27] #I ⮁ #W #[fg=colour27, bg=colour235]⮀&quot;</span>
-</span><span class='line'><span class="nb">source</span> <span class="s2">&quot;/Users/lenciel/Library/Python/2.7/lib/python/site-packages/powerline/bindings/tmux/powerline.conf&quot;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Vagrant for Django I: Basic]]></title>
-    <link href="http://lenciel.github.io/2013/06/vagrant-on-mac-os-x/"/>
-    <updated>2013-06-19T15:19:00+08:00</updated>
-    <id>http://lenciel.github.io/2013/06/vagrant-on-mac-os-x</id>
-    <content type="html"><![CDATA[<p>Vagrant<a href="http://www.vagrantup.com/vmware">最近支持了VMWare</a>，但是要钱的东西我们玩不起。本系列主要分享一下Vagrant+VirtualBox搭配起来如何使用。</p>
-
-<h2 id="virtualbox">安装VirtualBox</h2>
-
-<p>VirtualBox是Oracle的动态创建、可配置、可移植的轻量虚拟机系统。在Windows、MacOSX、Linux和Solaris上都发行了相应版本。</p>
-
-<p>目前Vagrant支持的是VirtualBox4.0.x、4.1.x和4.2.x版本</p>
-
-<p><code>bash
-http://www.virtualbox.org/wiki/Downloads
-</code></p>
-
-<h2 id="vagrant">安装Vagrant</h2>
-
-<p><code>bash
-http://downloads.vagrantup.com/
-</code></p>
-
-<p>Windows和Mac OS X下面安装完毕后要把 <code>vagrant</code> 命令放到 <code>PATH</code> 下面，而其他系统下面需要把整个 <code>/opt/vagrant/bin</code> 放到PATH下面。
-完成后可以先安装一个32位的ubuntu10.04版本来测试一下：</p>
-
-<p><code>bash
-vagrant box add lucid32 http://files.vagrantup.com/lucid32.box
-vagrant init lucid32
-vagrant up
-</code></p>
-
-<h2 id="vagrant-1">Vagrant的好处</h2>
-
-<p>软件开发，特别是Web应用的开发正处于环境异常复杂的年代。为了在开发和实际部署的环境直接做到无缝切换，虚拟化技术被大规模的使用。与此同时，自动的配置管理，如 <code>Chef</code> 或者 <code>Puppet</code> 也在发挥着巨大的作用。Vagrant就是在这些技术的基础上进行了集成，从而完成（虚拟化+自动配置管理）的效果。</p>
-
-<p><em>对个人开发者</em></p>
-
-<p>对于开发者来说要想使用一个开发环境应付所有的开发任务变得非常困难了。每个项目都有自己独特的依赖，如类库，消息队列，数据库，框架等等。每个依赖也常常有版本上的差异。Vagrant提供了方便，可以为每个项目创建独立的开发环境，并且只在项目需要的时候把这些环境运行起来。</p>
-
-<p><em>对项目组</em></p>
-
-<p>同一个项目组的组员理论上都是有相同的开发环境的：同样的依赖，每个依赖都是同样的版本，采用同样的配置等等。但是现实往往不是这样。比如采用了ORM框架的Django，同一个项目组可能有人用着 <code>sqlite3</code> ，有人用 <code>mysql</code> 。而且每个人自己开发环境中服务器的配置也常常是不同的。这种异构的环境往往最终会带来大大小小的麻烦。Vagrant提供了一个方便，让大家都被强制的使用统一的开发环境。</p>
-
-<p><em>对公司</em></p>
-
-<p>如果管理过大型项目，你就知道新人和新设计的引入往往是非常大的考验。大量的环境搭建工作，都可以由Vagrant来代替。并且Vagrant的配置只需要写一次，然后分发给大家用就行了，省掉了大量的时间。</p>
-
-<h2 id="vagrant-2">Vagrant可执行文件</h2>
-
-<p>Vagrant安装好之后，主要是通过命令行使用。 <code>vagrant</code> 命令带很多子命令，如 <code>vagrant up</code> ， <code>vagrant ssh</code> ， <code>vagrant package</code> 等等。敲 <code>vagrant</code> 就可以看到有哪些可用的命令。</p>
-
-<h2 id="vagrantfile">Vagrantfile配置文件</h2>
-
-<p><code>Vagrantfile</code> 对于Vagrant就像 <code>Makefile</code> 对Make的作用一样：它被放置在每个Vagrant项目的根目录，用来配置Vagrant以及它创建的虚拟机的行为。一个最简单的配置文件如下：</p>
-
-<p><code>ruby
-Vagrant:Config.run do |config|
-     # setup the box
-     config.vim.box="my_box"
-end
-</code></p>
-
-<p>可以看到，<code>Vagrantfile</code> 是用标准的Ruby代码写成的。需要注意的是在大版本之间<code> Vagrantfile</code> 是不兼容的。</p>
-
-<h2 id="setup">基本setup</h2>
-
-<p>首选创建项目目录，然后在项目目录中初始化：</p>
-
-<p><code>bash
-mkdir vagrant_guide
-cd vagrant_guide
-vagrant init
-</code></p>
-
-<p>init命令会创建一个基本的Vagrantfile，暂时先不修改它。下一篇我们来看如何添加Django开发需要的配置以及如果build一个 <code>base box</code> 来给其他人使用。</p>
 ]]></content>
   </entry>
   
