@@ -4,7 +4,7 @@
   <title><![CDATA[@Lenciel]]></title>
   <link href="http://lenciel.github.io/atom.xml" rel="self"/>
   <link href="http://lenciel.github.io/"/>
-  <updated>2013-11-14T16:20:33+08:00</updated>
+  <updated>2013-11-17T22:41:10+08:00</updated>
   <id>http://lenciel.github.io/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -12,6 +12,17 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[锻炼身体却伤了身体]]></title>
+    <link href="http://lenciel.github.io/2013/11/a-lot-of-healing-to-do/"/>
+    <updated>2013-11-17T22:11:00+08:00</updated>
+    <id>http://lenciel.github.io/2013/11/a-lot-of-healing-to-do</id>
+    <content type="html"><![CDATA[<p><img src="http://lenciel.github.io/downloads/images/healing_to_do.gif" alt="Should do more healing" title="Don't touch me..." /></p>
+
+<blockquote><p>&#8220;I guess I’ve still got a lot of healing to do.&#8221;</p><footer><strong>Owen Wilson</strong> <cite><a href="http://www.imdb.com/title/tt0838221/">The Darjeeling Limited(2007)</a></cite></footer></blockquote>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Mac下后台运行goagent]]></title>
@@ -1373,17 +1384,6 @@ Bob这边：(Alice的Bob私钥值次方) % 大质数</p>
 </pre></td><td class="code"><pre><code class=""><span class="line">alias curl='nocorrect curl'</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>整个世界清静了…</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[We Are Men]]></title>
-    <link href="http://lenciel.github.io/2013/07/we-are-men/"/>
-    <updated>2013-07-22T21:24:00+08:00</updated>
-    <id>http://lenciel.github.io/2013/07/we-are-men</id>
-    <content type="html"><![CDATA[<p><img src="http://lenciel.github.io/downloads/images/fight_club.gif" alt="we are men" title="Don't touch me..." /></p>
-
-<blockquote><p>Yes, we’re men. Men is what we are.</p><footer><strong>Palahniuk</strong> <cite><a href="http://en.wikipedia.org/wiki/Fight_Club">Fight Club(1999)</a></cite></footer></blockquote>
 ]]></content>
   </entry>
   

@@ -9,7 +9,8 @@
   <meta name="author" content="Lenciel Li">
 
   
-  <meta name="description" content="几年过去了，Goagent是本座翻墙唯一的选择。在Mac上使用它最开始我用了GoAgentX，但使用了一段时间之后发现几个不太满意的地方： 不是简单给GoAgent做了个界面，而是集成了多个翻墙工具，选项挺多挺乱的（可能对其他用户是一个好事） 每次GoAgent更新之后， &hellip;">
+  <meta name="description" content=" &#8220;I guess I’ve still got a lot of healing to do.&#8221;Owen Wilson The Darjeeling Limited(2007)
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -31,14 +32,16 @@
 
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://lenciel.github.io/" />
-<meta property="og:description" content="几年过去了，Goagent是本座翻墙唯一的选择。在Mac上使用它最开始我用了GoAgentX，但使用了一段时间之后发现几个不太满意的地方： 不是简单给GoAgent做了个界面，而是集成了多个翻墙工具，选项挺多挺乱的（可能对其他用户是一个好事） 每次GoAgent更新之后， &hellip;" />
+<meta property="og:description" content=" &#8220;I guess I’ve still got a lot of healing to do.&#8221;Owen Wilson The Darjeeling Limited(2007)
+" />
 
 <meta property="og:site_name" content="http://lenciel.github.io" />
 <meta property="article:author" content="https://plus.google.com/114787528537231301324">
 
 
 
-<meta itemprop="description" content="几年过去了，Goagent是本座翻墙唯一的选择。在Mac上使用它最开始我用了GoAgentX，但使用了一段时间之后发现几个不太满意的地方： 不是简单给GoAgent做了个界面，而是集成了多个翻墙工具，选项挺多挺乱的（可能对其他用户是一个好事） 每次GoAgent更新之后， &hellip;" />
+<meta itemprop="description" content=" &#8220;I guess I’ve still got a lot of healing to do.&#8221;Owen Wilson The Darjeeling Limited(2007)
+" />
 
 <!-- Combine multiple fonts into one request -->
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic|Patua+One|Yanone+Kaffeesatz" rel="stylesheet" type="text/css">
@@ -102,6 +105,46 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/11/a-lot-of-healing-to-do/">锻炼身体却伤了身体</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-17T22:11:00+08:00" pubdate data-updated="true">Nov 17<span>th</span>, 2013</time>
+        
+         | <a href="/2013/11/a-lot-of-healing-to-do/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="/downloads/images/healing_to_do.gif" alt="Should do more healing" title="Don't touch me..." /></p>
+
+<blockquote><p>&#8220;I guess I’ve still got a lot of healing to do.&#8221;</p><footer><strong>Owen Wilson</strong> <cite><a href="http://www.imdb.com/title/tt0838221/">The Darjeeling Limited(2007)</a></cite></footer></blockquote>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -353,66 +396,6 @@
 </pre></td><td class="code"><pre><code class=""><span class="line">export PIP_DOWNLOAD_CACHE=$HOME/.pip-download-cache
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/10/recharging-the-python-standard-library/">给Python标准库充电</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-10-17T12:27:00+08:00" pubdate data-updated="true">Oct 17<span>th</span>, 2013</time>
-        
-         | <a href="/2013/10/recharging-the-python-standard-library/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Python的自荐页面<a href="http://www.python.org/about/">About Python</a>上号称自家的标准库是”batteries included”的，但实际情况却不是这样。对Python标准库的批评几乎从来没有中断过。著名的Python包<a href="http://docs.python-requests.org/en/latest/">Requests</a>的作者甚至决定永久把Requests保持为第三方库而拒绝加入标准库，他的理由是：<a href="http://www.leancrew.com/all-this/2012/04/where-modules-go-to-die/">加入标准库就会死翘翘</a>。</p>
-
-<p>再举个例子，我们最近的项目里面都用到了<a href="https://pypi.python.org/pypi/pytz/">pytz</a>。标准库里面的datetime是支持时区的（tzinfo类），但是并没有包含时区信息（tzinfo是抽象类需要自己实现）。遵照前人的经验使用pytz是最好的办法<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup><sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>。</p>
-
-<p>所以不奇怪的是，几乎所有的Python项目都会引用一堆优秀的第三方库。为了管理这些依赖一般都会用上pip:</p>
-
-<ul>
-  <li>在项目里面用pip freeze生成一个<code>requirement.txt</code>文件</li>
-  <li>在创建<code>virtualenv</code>的时候使用之前生成的文件安装所有的依赖</li>
-</ul>
-
-<p>为了不在每次运行<code>pip install -r requirements.txt</code>的时候都下载一堆依赖，你还可以打开pip的<a href="http://lenciel.cn/2013/10/pip-download-cache/">download cache</a>。如果整个公司在做项目的时候都需要经常使用一些包，甚至可以考虑<a href="https://github.com/wolever/pip2pi">做一个Pypi</a>的库来共享，类似于Maven的Repo。</p>
-
-<div class="footnotes">
-  <ol>
-    <li id="fn:1">
-      <p><a href="http://stackoverflow.com/questions/2532729/daylight-saving-time-and-time-zone-best-practices/3404919#3404919">保存时间和时区的最佳实践</a>.   <a href="#fnref:1" rel="reference">&#8617;</a></p>
-    </li>
-    <li id="fn:2">
-      <p><a href="http://stackoverflow.com/questions/14762518/python-datetime-strptime-and-strftime-how-to-preserve-the-timezone-informat">如何在datetime转换中保存时区信息</a>.    <a href="#fnref:2" rel="reference">&#8617;</a></p>
-    </li>
-  </ol>
-</div>
 </div>
   
   
