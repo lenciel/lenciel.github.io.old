@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: memorize | @Lenciel]]></title>
-  <link href="http://lenciel.github.io/blog/categories/memorize/atom.xml" rel="self"/>
-  <link href="http://lenciel.github.io/"/>
-  <updated>2013-11-17T23:13:00+08:00</updated>
-  <id>http://lenciel.github.io/</id>
+  <link href="http://lenciel.cn/blog/categories/memorize/atom.xml" rel="self"/>
+  <link href="http://lenciel.cn/"/>
+  <updated>2013-11-21T17:31:50+08:00</updated>
+  <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[半年]]></title>
-    <link href="http://lenciel.github.io/2010/03/half-an-year/"/>
+    <link href="http://lenciel.cn/2010/03/half-an-year/"/>
     <updated>2010-03-09T00:12:00+08:00</updated>
-    <id>http://lenciel.github.io/2010/03/half-an-year</id>
+    <id>http://lenciel.cn/2010/03/half-an-year</id>
     <content type="html"><![CDATA[<p><img src="/downloads/images/my_idol.jpg" alt="My Idol" title="Don't touch me…" /></p>
 
 <p>偶像派，</p>

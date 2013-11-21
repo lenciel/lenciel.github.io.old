@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[@Lenciel]]></title>
-  <link href="http://lenciel.github.io/atom.xml" rel="self"/>
-  <link href="http://lenciel.github.io/"/>
-  <updated>2013-11-17T23:13:00+08:00</updated>
-  <id>http://lenciel.github.io/</id>
+  <link href="http://lenciel.cn/atom.xml" rel="self"/>
+  <link href="http://lenciel.cn/"/>
+  <updated>2013-11-21T17:31:50+08:00</updated>
+  <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
     
@@ -15,10 +15,10 @@
   
   <entry>
     <title type="html"><![CDATA[Hurt myself when shoot a goal]]></title>
-    <link href="http://lenciel.github.io/2013/11/a-lot-of-healing-to-do/"/>
+    <link href="http://lenciel.cn/2013/11/a-lot-of-healing-to-do/"/>
     <updated>2013-11-17T22:11:00+08:00</updated>
-    <id>http://lenciel.github.io/2013/11/a-lot-of-healing-to-do</id>
-    <content type="html"><![CDATA[<p><img src="http://lenciel.github.io/downloads/images/healing_to_do.gif" alt="Should do more healing" title="Don't touch me..." /></p>
+    <id>http://lenciel.cn/2013/11/a-lot-of-healing-to-do</id>
+    <content type="html"><![CDATA[<p><img src="http://lenciel.cn/downloads/images/healing_to_do.gif" alt="Should do more healing" title="Don't touch me..." /></p>
 
 <blockquote><p>&#8220;I guess I’ve still got a lot of healing to do.&#8221;</p><footer><strong>Owen Wilson</strong> <cite><a href="http://www.imdb.com/title/tt0838221/">The Darjeeling Limited(2007)</a></cite></footer></blockquote>
 ]]></content>
@@ -26,9 +26,9 @@
   
   <entry>
     <title type="html"><![CDATA[Mac下后台运行goagent]]></title>
-    <link href="http://lenciel.github.io/2013/11/replace-goagentx-with-lines-of-scripts/"/>
+    <link href="http://lenciel.cn/2013/11/replace-goagentx-with-lines-of-scripts/"/>
     <updated>2013-11-14T13:22:00+08:00</updated>
-    <id>http://lenciel.github.io/2013/11/replace-goagentx-with-lines-of-scripts</id>
+    <id>http://lenciel.cn/2013/11/replace-goagentx-with-lines-of-scripts</id>
     <content type="html"><![CDATA[<p>几年过去了，<a href="https://code.google.com/p/goagent/">Goagent</a>是本座翻墙唯一的选择。在Mac上使用它最开始我用了<a href="https://github.com/ohdarling/GoAgentX">GoAgentX</a>，但使用了一段时间之后发现几个不太满意的地方：</p>
 
 <ul>
@@ -67,9 +67,9 @@
   
   <entry>
     <title type="html"><![CDATA[Fix Python after upgrade to Maverick]]></title>
-    <link href="http://lenciel.github.io/2013/10/maverick-and-python/"/>
+    <link href="http://lenciel.cn/2013/10/maverick-and-python/"/>
     <updated>2013-10-24T22:02:00+08:00</updated>
-    <id>http://lenciel.github.io/2013/10/maverick-and-python</id>
+    <id>http://lenciel.cn/2013/10/maverick-and-python</id>
     <content type="html"><![CDATA[<p>升级到最新的osx版本Maverick之后，打开iTerm2就报错：</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
@@ -130,10 +130,10 @@
   
   <entry>
     <title type="html"><![CDATA[Sinned Too Much]]></title>
-    <link href="http://lenciel.github.io/2013/10/sinned-too-much/"/>
+    <link href="http://lenciel.cn/2013/10/sinned-too-much/"/>
     <updated>2013-10-20T16:49:00+08:00</updated>
-    <id>http://lenciel.github.io/2013/10/sinned-too-much</id>
-    <content type="html"><![CDATA[<p><img src="http://lenciel.github.io/downloads/images/live_a_simple_life.gif" alt="Sinned Too Much" title="Live a simple life..." /></p>
+    <id>http://lenciel.cn/2013/10/sinned-too-much</id>
+    <content type="html"><![CDATA[<p><img src="http://lenciel.cn/downloads/images/live_a_simple_life.gif" alt="Sinned Too Much" title="Live a simple life..." /></p>
 
 <blockquote><p>&#8220;I thought I’d lived a simple life. But I’ve sinned too much.&#8221;</p><footer><strong>Chan-wook Park</strong> <cite><a href="http://www.imdb.com/title/tt0364569/">Oldboy(2003)</a></cite></footer></blockquote>
 ]]></content>
@@ -141,9 +141,9 @@
   
   <entry>
     <title type="html"><![CDATA[打开pip的download cache]]></title>
-    <link href="http://lenciel.github.io/2013/10/pip-download-cache/"/>
+    <link href="http://lenciel.cn/2013/10/pip-download-cache/"/>
     <updated>2013-10-17T13:25:00+08:00</updated>
-    <id>http://lenciel.github.io/2013/10/pip-download-cache</id>
+    <id>http://lenciel.cn/2013/10/pip-download-cache</id>
     <content type="html"><![CDATA[<p>Python的标准库实在是<a href="http://lenciel.cn/2013/10/recharging-the-python-library/">不够用</a>，所以一个很常见的情况是我们需要在每个项目使用的<code>virtualenv</code>里面都安装一些常用的库。</p>
 
 <p>为了加速安装的过程，有两个小窍门。</p>
@@ -167,9 +167,9 @@
   
   <entry>
     <title type="html"><![CDATA[给Python标准库充电]]></title>
-    <link href="http://lenciel.github.io/2013/10/recharging-the-python-standard-library/"/>
+    <link href="http://lenciel.cn/2013/10/recharging-the-python-standard-library/"/>
     <updated>2013-10-17T12:27:00+08:00</updated>
-    <id>http://lenciel.github.io/2013/10/recharging-the-python-standard-library</id>
+    <id>http://lenciel.cn/2013/10/recharging-the-python-standard-library</id>
     <content type="html"><![CDATA[<p>Python的自荐页面<a href="http://www.python.org/about/">About Python</a>上号称自家的标准库是”batteries included”的，但实际情况却不是这样。对Python标准库的批评几乎从来没有中断过。著名的Python包<a href="http://docs.python-requests.org/en/latest/">Requests</a>的作者甚至决定永久把Requests保持为第三方库而拒绝加入标准库，他的理由是：<a href="http://www.leancrew.com/all-this/2012/04/where-modules-go-to-die/">加入标准库就会死翘翘</a>。</p>
 
 <p>再举个例子，我们最近的项目里面都用到了<a href="https://pypi.python.org/pypi/pytz/">pytz</a>。标准库里面的datetime是支持时区的（tzinfo类），但是并没有包含时区信息（tzinfo是抽象类需要自己实现）。遵照前人的经验使用pytz是最好的办法<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup><sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>。</p>
@@ -198,10 +198,10 @@
   
   <entry>
     <title type="html"><![CDATA[NASA造笔的事情也是假的]]></title>
-    <link href="http://lenciel.github.io/2013/10/the-myth-of-nasas-expensive-space-pens/"/>
+    <link href="http://lenciel.cn/2013/10/the-myth-of-nasas-expensive-space-pens/"/>
     <updated>2013-10-12T12:46:00+08:00</updated>
-    <id>http://lenciel.github.io/2013/10/the-myth-of-nasas-expensive-space-pens</id>
-    <content type="html"><![CDATA[<p><img src="http://lenciel.github.io/downloads/images/space-pen.jpg" alt="Space Pen" title="Don't touch me..." /></p>
+    <id>http://lenciel.cn/2013/10/the-myth-of-nasas-expensive-space-pens</id>
+    <content type="html"><![CDATA[<p><img src="http://lenciel.cn/downloads/images/space-pen.jpg" alt="Space Pen" title="Don't touch me..." /></p>
 
 <p>在软件开发中我们一说到避免过度设计，经常有两个例子会被抬出来，其中一个就是NASA造了昂贵的太空笔，然后俄罗斯用很简单的方案解决问题的故事（另一个大概就是传送带旁边放电风扇的故事）。<a href="http://www.snopes.com/business/genius/spacepen.asp">NASA造笔的故事</a>大概是这样的:</p>
 
@@ -218,10 +218,10 @@
   
   <entry>
     <title type="html"><![CDATA[No Clock On My Business]]></title>
-    <link href="http://lenciel.github.io/2013/10/no-clock-on-my-business/"/>
+    <link href="http://lenciel.cn/2013/10/no-clock-on-my-business/"/>
     <updated>2013-10-09T00:37:00+08:00</updated>
-    <id>http://lenciel.github.io/2013/10/no-clock-on-my-business</id>
-    <content type="html"><![CDATA[<p><img src="http://lenciel.github.io/downloads/images/no_clock_on_my_business.gif" alt="No Clock On My Business" title="Don't touch me..." /></p>
+    <id>http://lenciel.cn/2013/10/no-clock-on-my-business</id>
+    <content type="html"><![CDATA[<p><img src="http://lenciel.cn/downloads/images/no_clock_on_my_business.gif" alt="No Clock On My Business" title="Don't touch me..." /></p>
 
 <blockquote><p>&#8220;There is no clock on my business!&#8221;</p><footer><strong>Coen Brothers</strong> <cite><a href="http://www.imdb.com/title/tt1403865/">True Grit (2010)</a></cite></footer></blockquote>
 ]]></content>
@@ -229,9 +229,9 @@
   
   <entry>
     <title type="html"><![CDATA[HTTPS WHAT?]]></title>
-    <link href="http://lenciel.github.io/2013/09/https-what/"/>
+    <link href="http://lenciel.cn/2013/09/https-what/"/>
     <updated>2013-09-10T13:28:00+08:00</updated>
-    <id>http://lenciel.github.io/2013/09/https-what</id>
+    <id>http://lenciel.cn/2013/09/https-what</id>
     <content type="html"><![CDATA[<p>最近NSA相关话题很火。很多IT从业者都知道，HTTPS可以保护用户敏感的数据，但是说起HTTPS <em>到底</em> 是如何工作的，其实心里并不清楚。</p>
 
 <p>使用HTTPS之后，数据是如何被保护的？Client和Server之间如果有人在hacking，HTTPS建立的连接凭什么就是安全的？什么是安全证书？为什么有时候我们需要付钱才能买到一个？</p>
@@ -240,7 +240,7 @@
 
 <p>当你访问网页的时候，你发出的请求其实要翻越各种网关走很长的路，这一路上都可能有妖魔鬼怪在等着搞你，的数据。</p>
 
-<p><img src="http://lenciel.github.io/downloads/images/series_of_tubes.png" alt="A series of tubes" title="Don't touch me…" /></p>
+<p><img src="http://lenciel.cn/downloads/images/series_of_tubes.png" alt="A series of tubes" title="Don't touch me…" /></p>
 
 <p>一般我们访问网页的时候，请求使用的是HTTP，也就是Client和Server之间的数据是明文传送的。<a href="http://security.stackexchange.com/a/18861/4327">HTTP没有使用任何加密的原因有很多</a>:</p>
 
@@ -356,10 +356,10 @@ Bob这边：(Alice的Bob私钥值次方) % 大质数</p>
   
   <entry>
     <title type="html"><![CDATA[Secret Love]]></title>
-    <link href="http://lenciel.github.io/2013/08/secret-love/"/>
+    <link href="http://lenciel.cn/2013/08/secret-love/"/>
     <updated>2013-08-26T21:59:00+08:00</updated>
-    <id>http://lenciel.github.io/2013/08/secret-love</id>
-    <content type="html"><![CDATA[<p><img src="http://lenciel.github.io/downloads/images/secret_love.gif" alt="Secret Love" title="Don't touch me..." /></p>
+    <id>http://lenciel.cn/2013/08/secret-love</id>
+    <content type="html"><![CDATA[<p><img src="http://lenciel.cn/downloads/images/secret_love.gif" alt="Secret Love" title="Don't touch me..." /></p>
 
 <blockquote><p>&#8220;I think we’re just gonna have to be secretly in love with each other and leave it at that, Ritchie.&#8221;</p><footer><strong>Gwyneth Paltrow</strong> <cite><a href="http://www.imdb.com/title/tt0265666/">The Royal Tenenbaums(2001)</a></cite></footer></blockquote>
 ]]></content>
@@ -367,9 +367,9 @@ Bob这边：(Alice的Bob私钥值次方) % 大质数</p>
   
   <entry>
     <title type="html"><![CDATA[Butterick的实用字体设计]]></title>
-    <link href="http://lenciel.github.io/2013/08/buttericks-practical-typography/"/>
+    <link href="http://lenciel.cn/2013/08/buttericks-practical-typography/"/>
     <updated>2013-08-26T11:11:00+08:00</updated>
-    <id>http://lenciel.github.io/2013/08/buttericks-practical-typography</id>
+    <id>http://lenciel.cn/2013/08/buttericks-practical-typography</id>
     <content type="html"><![CDATA[<p>最近和一个朋友聊天，他说最近几年大概是Flat流行网页上除开字就没别的了，字体设计被各种强调。</p>
 
 <p>这位老大在上海经营自己的网页设计公司，但是大家够熟，本座就冒着班门弄斧的危险纠正了他一嘴：很多年前，<a href="http://www.theverge.com/2012/7/24/3177332/ia-oliver-reichenstein-writer-interview-good-design-is-invisible">Oliver Reichenstein</a>就说过”<a href="http://ia.net/blog/the-web-is-all-about-typography-period/">Web设计95%是字体设计</a>“了。而且这种观点还一直被<a href="http://www.smashingmagazine.com/2012/07/24/one-more-time-typography-is-the-foundation-of-web-design/">反复强调</a>。</p>
@@ -427,10 +427,10 @@ Bob这边：(Alice的Bob私钥值次方) % 大质数</p>
   
   <entry>
     <title type="html"><![CDATA[Eye In The Sky]]></title>
-    <link href="http://lenciel.github.io/2013/08/eye-in-the-sky/"/>
+    <link href="http://lenciel.cn/2013/08/eye-in-the-sky/"/>
     <updated>2013-08-25T21:50:00+08:00</updated>
-    <id>http://lenciel.github.io/2013/08/eye-in-the-sky</id>
-    <content type="html"><![CDATA[<p><img src="http://lenciel.github.io/downloads/images/eye_in_the_sky.gif" alt="Eye in the sky" title="Don't touch me..." /></p>
+    <id>http://lenciel.cn/2013/08/eye-in-the-sky</id>
+    <content type="html"><![CDATA[<p><img src="http://lenciel.cn/downloads/images/eye_in_the_sky.gif" alt="Eye in the sky" title="Don't touch me..." /></p>
 
 <blockquote><p>&#8220;And the eye-in-the-sky is watching us all.&#8221;</p><footer><strong>Martin Scorsese</strong> <cite><a href="http://www.imdb.com/title/tt0112641/">Casino(1995)</a></cite></footer></blockquote>
 ]]></content>
@@ -438,9 +438,9 @@ Bob这边：(Alice的Bob私钥值次方) % 大质数</p>
   
   <entry>
     <title type="html"><![CDATA[Boolean Objects和Boolean Primitives]]></title>
-    <link href="http://lenciel.github.io/2013/08/boolean-objects-and-boolean-primitives/"/>
+    <link href="http://lenciel.cn/2013/08/boolean-objects-and-boolean-primitives/"/>
     <updated>2013-08-21T11:31:00+08:00</updated>
-    <id>http://lenciel.github.io/2013/08/boolean-objects-and-boolean-primitives</id>
+    <id>http://lenciel.cn/2013/08/boolean-objects-and-boolean-primitives</id>
     <content type="html"><![CDATA[<p>Javascript有一个小陷阱：每个primitive都有自己的constructor，但是这些constructor构造出来的却不是primitive。</p>
 
 <p>以boolean为例，大多数的代码里面用的是primitive值，比如：</p>
@@ -553,9 +553,9 @@ Bob这边：(Alice的Bob私钥值次方) % 大质数</p>
   
   <entry>
     <title type="html"><![CDATA[Raspberry Pi上使用HDMI转接VGA线]]></title>
-    <link href="http://lenciel.github.io/2013/08/using-raspberry-pi-with-hdmi-to-vga-adapter/"/>
+    <link href="http://lenciel.cn/2013/08/using-raspberry-pi-with-hdmi-to-vga-adapter/"/>
     <updated>2013-08-20T15:19:00+08:00</updated>
-    <id>http://lenciel.github.io/2013/08/using-raspberry-pi-with-hdmi-to-vga-adapter</id>
+    <id>http://lenciel.cn/2013/08/using-raspberry-pi-with-hdmi-to-vga-adapter</id>
     <content type="html"><![CDATA[<p><a href="http://www.raspberrypi.org/‎">Raspberry Pi</a>的默认提供了HDMI接口，遇到手边显示器比较老并且电视机也比较老就不好办。</p>
 
 <p>如果直接买一根<a href="http://item.jd.com/674899.html">HDMI转VGA的线</a>，直接连上去很可能是黑屏，这是因为默认的配置文件不支持这种连接方式，需要修改配置文件。</p>
@@ -577,10 +577,10 @@ Bob这边：(Alice的Bob私钥值次方) % 大质数</p>
   
   <entry>
     <title type="html"><![CDATA[Remember Me]]></title>
-    <link href="http://lenciel.github.io/2013/08/remember-me/"/>
+    <link href="http://lenciel.cn/2013/08/remember-me/"/>
     <updated>2013-08-17T22:39:00+08:00</updated>
-    <id>http://lenciel.github.io/2013/08/remember-me</id>
-    <content type="html"><![CDATA[<p><img src="http://lenciel.github.io/downloads/images/remember_me.gif" alt="Remember Me" title="Don't touch me..." /></p>
+    <id>http://lenciel.cn/2013/08/remember-me</id>
+    <content type="html"><![CDATA[<p><img src="http://lenciel.cn/downloads/images/remember_me.gif" alt="Remember Me" title="Don't touch me..." /></p>
 
 <blockquote><p>I wonder if it remembers me.</p><footer><strong>Bill Murray</strong> <cite><a href="http://www.imdb.com/title/tt0362270/">The Life Aquatic With Steve Zissou(2004)</a></cite></footer></blockquote>
 ]]></content>
@@ -588,9 +588,9 @@ Bob这边：(Alice的Bob私钥值次方) % 大质数</p>
   
   <entry>
     <title type="html"><![CDATA[uWSGI, Gunincorn, 啥玩意儿?]]></title>
-    <link href="http://lenciel.github.io/2013/08/why-you-need-something-like-gunicorn/"/>
+    <link href="http://lenciel.cn/2013/08/why-you-need-something-like-gunicorn/"/>
     <updated>2013-08-01T14:36:00+08:00</updated>
-    <id>http://lenciel.github.io/2013/08/why-you-need-something-like-gunicorn</id>
+    <id>http://lenciel.cn/2013/08/why-you-need-something-like-gunicorn</id>
     <content type="html"><![CDATA[<p>因为nginx等优秀的开源项目，有不少本来不是做服务器的同学也可以写很多服务器端的程序了。但是在聊天中会发现，大家虽然写了不少代码，但是对wsgi是什么，gunicorn是什么，反向代理又是什么并不了解，也就是说对基本概念并没有一个全局的了解。</p>
 
 <h3 id="section">服务器</h3>
@@ -735,10 +735,10 @@ Bob这边：(Alice的Bob私钥值次方) % 大质数</p>
   
   <entry>
     <title type="html"><![CDATA[Except For Greed and Disgust]]></title>
-    <link href="http://lenciel.github.io/2013/07/except-for-greed-and-disgust/"/>
+    <link href="http://lenciel.cn/2013/07/except-for-greed-and-disgust/"/>
     <updated>2013-07-27T23:57:00+08:00</updated>
-    <id>http://lenciel.github.io/2013/07/except-for-greed-and-disgust</id>
-    <content type="html"><![CDATA[<p><img src="http://lenciel.github.io/downloads/images/american_psycho_jump.gif" alt="Except For Greed and Disgust" title="Don't touch me..." /></p>
+    <id>http://lenciel.cn/2013/07/except-for-greed-and-disgust</id>
+    <content type="html"><![CDATA[<p><img src="http://lenciel.cn/downloads/images/american_psycho_jump.gif" alt="Except For Greed and Disgust" title="Don't touch me..." /></p>
 
 <blockquote><p>I have all the characteristics of a human being: flesh, blood, skin, hair … but not a single, clear, identifiable emotion, except for greed and disgust.</p><footer><strong>Mary Harron</strong> <cite><a href="http://www.imdb.com/title/tt0144084/">American Psycho(2000)</a></cite></footer></blockquote>
 ]]></content>
@@ -746,9 +746,9 @@ Bob这边：(Alice的Bob私钥值次方) % 大质数</p>
   
   <entry>
     <title type="html"><![CDATA[Cryptography and Python]]></title>
-    <link href="http://lenciel.github.io/2013/07/cryptography-and-python/"/>
+    <link href="http://lenciel.cn/2013/07/cryptography-and-python/"/>
     <updated>2013-07-25T15:13:00+08:00</updated>
-    <id>http://lenciel.github.io/2013/07/cryptography-and-python</id>
+    <id>http://lenciel.cn/2013/07/cryptography-and-python</id>
     <content type="html"><![CDATA[<p>这周我们的一个项目里面需要调用第三方接口。对方的安全机制是调用时要进行加密和校验，但它们的文档没有描述具体是怎么加密的，而是给了一段代码：</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
@@ -989,7 +989,7 @@ Bob这边：(Alice的Bob私钥值次方) % 大质数</p>
   <li>如果输入字符串没有变生成的hash值应该不会变</li>
 </ul>
 
-<p><img src="http://lenciel.github.io/downloads/images/hash.png" alt="hash" title="Don't touch me..." /></p>
+<p><img src="http://lenciel.cn/downloads/images/hash.png" alt="hash" title="Don't touch me..." /></p>
 
 <p>hash函数可以被用来计算checksum，也可以用来进行数字签名和认证。</p>
 
@@ -1045,7 +1045,7 @@ Bob这边：(Alice的Bob私钥值次方) % 大质数</p>
 
 <p>DES是分块加密的一种，其处理对象的大小是8个bytes。DES最简单的模式是所谓的<code>ECB( electronic code book)模式</code>，也就是每个block都是独立加密，最后组成整个加密后的文本。</p>
 
-<p><img src="http://lenciel.github.io/downloads/images/block_cipher_ebc.png" alt="ecb" title="Don't touch me..." /></p>
+<p><img src="http://lenciel.cn/downloads/images/block_cipher_ebc.png" alt="ecb" title="Don't touch me..." /></p>
 
 <p>使用pycrpto对文本使用<code>DES/ECB</code>加密很简单。假设key是<code>10234567</code>，而我们要加密的文本是<code>abcdefgh</code>，那么：</p>
 
@@ -1069,7 +1069,7 @@ Bob这边：(Alice的Bob私钥值次方) % 大质数</p>
 
 <p>比<code>ECB</code>更健壮的是<code>CFB (Cipher feedback)</code>模式，也就是先组合前面加密的文本和待加密的文本，然后进行加密。</p>
 
-<p><img src="http://lenciel.github.io/downloads/images/block_cipher_cfb.png" alt="cfb" title="Don't touch me..." /></p>
+<p><img src="http://lenciel.cn/downloads/images/block_cipher_cfb.png" alt="cfb" title="Don't touch me..." /></p>
 
 <p>下面的例子说明了算法的工作流程：待加密的是<code>abcdefghijklmnop</code>，两倍8bytes。首先生成一个随机的字符串作为初始的<code>iv</code>来生成两个<code>DES</code>对象，一个用来加密一个用来解密。之所以需要这两个对象，是因为<code>feedback</code>值会随着block被加密后变化。</p>
 
@@ -1223,7 +1223,7 @@ Bob这边：(Alice的Bob私钥值次方) % 大质数</p>
 
 <p>上面提到的加密算法的一大问题是双方都需要知道key。而<code>public-key算法</code>提供了两个key，一个用来加密，一个用来解密。 </p>
 
-<p><img src="http://lenciel.github.io/downloads/images/public_private_key.png" alt="ecb" title="Don't touch me..." /></p>
+<p><img src="http://lenciel.cn/downloads/images/public_private_key.png" alt="ecb" title="Don't touch me..." /></p>
 
 <h3 id="publicprivate-key"><strong>public/private key</strong></h3>
 
@@ -1350,10 +1350,10 @@ Bob这边：(Alice的Bob私钥值次方) % 大质数</p>
   
   <entry>
     <title type="html"><![CDATA[Doomsday Machines]]></title>
-    <link href="http://lenciel.github.io/2013/07/doomsday-machines/"/>
+    <link href="http://lenciel.cn/2013/07/doomsday-machines/"/>
     <updated>2013-07-23T23:25:00+08:00</updated>
-    <id>http://lenciel.github.io/2013/07/doomsday-machines</id>
-    <content type="html"><![CDATA[<p><img src="http://lenciel.github.io/downloads/images/dr_strangelove_doomsday_machine.gif" alt="doomsday machines" title="Don't touch me..." /></p>
+    <id>http://lenciel.cn/2013/07/doomsday-machines</id>
+    <content type="html"><![CDATA[<p><img src="http://lenciel.cn/downloads/images/dr_strangelove_doomsday_machine.gif" alt="doomsday machines" title="Don't touch me..." /></p>
 
 <blockquote><p>Gee, I wish we had one of them doomsday machines.</p><footer><strong>Stanley Kubrick</strong> <cite><a href="http://www.imdb.com/title/tt0057012/">Fight Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb(1964)</a></cite></footer></blockquote>
 ]]></content>
@@ -1361,9 +1361,9 @@ Bob这边：(Alice的Bob私钥值次方) % 大质数</p>
   
   <entry>
     <title type="html"><![CDATA[关掉Zsh对指定命令的自动纠错]]></title>
-    <link href="http://lenciel.github.io/2013/07/stop-specific-zsh-shell-auto-correct/"/>
+    <link href="http://lenciel.cn/2013/07/stop-specific-zsh-shell-auto-correct/"/>
     <updated>2013-07-23T14:47:00+08:00</updated>
-    <id>http://lenciel.github.io/2013/07/stop-specific-zsh-shell-auto-correct</id>
+    <id>http://lenciel.cn/2013/07/stop-specific-zsh-shell-auto-correct</id>
     <content type="html"><![CDATA[<p>工作机器切换到Mac之后我一直在自用并在团队中推广 <a href="https://github.com/lenciel/oh-my-zsh"><code>oh-my-zsh</code></a>。99%的时间本座对它是如此满意，除开有的时候它的服务太主动了一些。</p>
 
 <p>比如今天在用<code>curl</code>试用一个接口的时候，我测试用的payload放在一个<code>payload.json</code>文件里面，所以命令是：</p>

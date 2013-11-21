@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: git | @Lenciel]]></title>
-  <link href="http://lenciel.github.io/blog/categories/git/atom.xml" rel="self"/>
-  <link href="http://lenciel.github.io/"/>
-  <updated>2013-11-17T23:13:00+08:00</updated>
-  <id>http://lenciel.github.io/</id>
+  <link href="http://lenciel.cn/blog/categories/git/atom.xml" rel="self"/>
+  <link href="http://lenciel.cn/"/>
+  <updated>2013-11-21T17:31:50+08:00</updated>
+  <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Better Git Log]]></title>
-    <link href="http://lenciel.github.io/2013/06/better-git-log/"/>
+    <link href="http://lenciel.cn/2013/06/better-git-log/"/>
     <updated>2013-06-08T23:42:00+08:00</updated>
-    <id>http://lenciel.github.io/2013/06/better-git-log</id>
+    <id>http://lenciel.cn/2013/06/better-git-log</id>
     <content type="html"><![CDATA[<p>看烦了 <code>git log</code> 的白净输出？</p>
 
 <p><img src="/downloads/images/git_raw.png" alt="Raw git log output" title="Don't touch me..." /></p>

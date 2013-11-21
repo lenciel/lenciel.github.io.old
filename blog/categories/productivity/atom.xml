@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: productivity | @Lenciel]]></title>
-  <link href="http://lenciel.github.io/blog/categories/productivity/atom.xml" rel="self"/>
-  <link href="http://lenciel.github.io/"/>
-  <updated>2013-11-17T23:13:00+08:00</updated>
-  <id>http://lenciel.github.io/</id>
+  <link href="http://lenciel.cn/blog/categories/productivity/atom.xml" rel="self"/>
+  <link href="http://lenciel.cn/"/>
+  <updated>2013-11-21T17:31:50+08:00</updated>
+  <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Use Done List Instead Of To Do List]]></title>
-    <link href="http://lenciel.github.io/2013/03/use-done-list-rather-than-todo-list/"/>
+    <link href="http://lenciel.cn/2013/03/use-done-list-rather-than-todo-list/"/>
     <updated>2013-03-15T21:25:00+08:00</updated>
-    <id>http://lenciel.github.io/2013/03/use-done-list-rather-than-todo-list</id>
+    <id>http://lenciel.cn/2013/03/use-done-list-rather-than-todo-list</id>
     <content type="html"><![CDATA[<p><img src="/downloads/images/nerd_sniping.png" alt="nerd sniping" title="Don't touch me..." /></p>
 
 <h2 id="section"><strong>起</strong></h2>

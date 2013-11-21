@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: tips | @Lenciel]]></title>
-  <link href="http://lenciel.github.io/blog/categories/tips/atom.xml" rel="self"/>
-  <link href="http://lenciel.github.io/"/>
-  <updated>2013-11-17T23:13:00+08:00</updated>
-  <id>http://lenciel.github.io/</id>
+  <link href="http://lenciel.cn/blog/categories/tips/atom.xml" rel="self"/>
+  <link href="http://lenciel.cn/"/>
+  <updated>2013-11-21T17:31:50+08:00</updated>
+  <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Mac下后台运行goagent]]></title>
-    <link href="http://lenciel.github.io/2013/11/replace-goagentx-with-lines-of-scripts/"/>
+    <link href="http://lenciel.cn/2013/11/replace-goagentx-with-lines-of-scripts/"/>
     <updated>2013-11-14T13:22:00+08:00</updated>
-    <id>http://lenciel.github.io/2013/11/replace-goagentx-with-lines-of-scripts</id>
+    <id>http://lenciel.cn/2013/11/replace-goagentx-with-lines-of-scripts</id>
     <content type="html"><![CDATA[<p>几年过去了，<a href="https://code.google.com/p/goagent/">Goagent</a>是本座翻墙唯一的选择。在Mac上使用它最开始我用了<a href="https://github.com/ohdarling/GoAgentX">GoAgentX</a>，但使用了一段时间之后发现几个不太满意的地方：</p>
 
 <ul>
@@ -50,9 +50,9 @@ root: ~/bin/goagent/local</p>
   
   <entry>
     <title type="html"><![CDATA[Fix Python after upgrade to Maverick]]></title>
-    <link href="http://lenciel.github.io/2013/10/maverick-and-python/"/>
+    <link href="http://lenciel.cn/2013/10/maverick-and-python/"/>
     <updated>2013-10-24T22:02:00+08:00</updated>
-    <id>http://lenciel.github.io/2013/10/maverick-and-python</id>
+    <id>http://lenciel.cn/2013/10/maverick-and-python</id>
     <content type="html"><![CDATA[<p>升级到最新的osx版本Maverick之后，打开iTerm2就报错：</p>
 
 <p><code>bash
@@ -95,9 +95,9 @@ sudo easy_install -U pip
   
   <entry>
     <title type="html"><![CDATA[打开pip的download cache]]></title>
-    <link href="http://lenciel.github.io/2013/10/pip-download-cache/"/>
+    <link href="http://lenciel.cn/2013/10/pip-download-cache/"/>
     <updated>2013-10-17T13:25:00+08:00</updated>
-    <id>http://lenciel.github.io/2013/10/pip-download-cache</id>
+    <id>http://lenciel.cn/2013/10/pip-download-cache</id>
     <content type="html"><![CDATA[<p>Python的标准库实在是<a href="http://lenciel.cn/2013/10/recharging-the-python-library/">不够用</a>，所以一个很常见的情况是我们需要在每个项目使用的<code>virtualenv</code>里面都安装一些常用的库。</p>
 
 <p>为了加速安装的过程，有两个小窍门。</p>
@@ -122,9 +122,9 @@ export PIP_DOWNLOAD_CACHE=$HOME/.pip-download-cache</p>
   
   <entry>
     <title type="html"><![CDATA[给Python标准库充电]]></title>
-    <link href="http://lenciel.github.io/2013/10/recharging-the-python-standard-library/"/>
+    <link href="http://lenciel.cn/2013/10/recharging-the-python-standard-library/"/>
     <updated>2013-10-17T12:27:00+08:00</updated>
-    <id>http://lenciel.github.io/2013/10/recharging-the-python-standard-library</id>
+    <id>http://lenciel.cn/2013/10/recharging-the-python-standard-library</id>
     <content type="html"><![CDATA[<p>Python的自荐页面<a href="http://www.python.org/about/">About Python</a>上号称自家的标准库是”batteries included”的，但实际情况却不是这样。对Python标准库的批评几乎从来没有中断过。著名的Python包<a href="http://docs.python-requests.org/en/latest/">Requests</a>的作者甚至决定永久把Requests保持为第三方库而拒绝加入标准库，他的理由是：<a href="http://www.leancrew.com/all-this/2012/04/where-modules-go-to-die/">加入标准库就会死翘翘</a>。</p>
 
 <p>再举个例子，我们最近的项目里面都用到了<a href="https://pypi.python.org/pypi/pytz/">pytz</a>。标准库里面的datetime是支持时区的（tzinfo类），但是并没有包含时区信息（tzinfo是抽象类需要自己实现）。遵照前人的经验使用pytz是最好的办法<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup><sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>。</p>
@@ -153,9 +153,9 @@ export PIP_DOWNLOAD_CACHE=$HOME/.pip-download-cache</p>
   
   <entry>
     <title type="html"><![CDATA[Raspberry Pi上使用HDMI转接VGA线]]></title>
-    <link href="http://lenciel.github.io/2013/08/using-raspberry-pi-with-hdmi-to-vga-adapter/"/>
+    <link href="http://lenciel.cn/2013/08/using-raspberry-pi-with-hdmi-to-vga-adapter/"/>
     <updated>2013-08-20T15:19:00+08:00</updated>
-    <id>http://lenciel.github.io/2013/08/using-raspberry-pi-with-hdmi-to-vga-adapter</id>
+    <id>http://lenciel.cn/2013/08/using-raspberry-pi-with-hdmi-to-vga-adapter</id>
     <content type="html"><![CDATA[<p><a href="http://www.raspberrypi.org/‎">Raspberry Pi</a>的默认提供了HDMI接口，遇到手边显示器比较老并且电视机也比较老就不好办。</p>
 
 <p>如果直接买一根<a href="http://item.jd.com/674899.html">HDMI转VGA的线</a>，直接连上去很可能是黑屏，这是因为默认的配置文件不支持这种连接方式，需要修改配置文件。</p>

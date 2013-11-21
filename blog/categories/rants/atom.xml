@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: rants | @Lenciel]]></title>
-  <link href="http://lenciel.github.io/blog/categories/rants/atom.xml" rel="self"/>
-  <link href="http://lenciel.github.io/"/>
-  <updated>2013-11-17T23:13:00+08:00</updated>
-  <id>http://lenciel.github.io/</id>
+  <link href="http://lenciel.cn/blog/categories/rants/atom.xml" rel="self"/>
+  <link href="http://lenciel.cn/"/>
+  <updated>2013-11-21T17:31:50+08:00</updated>
+  <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Is Wine Bullshit]]></title>
-    <link href="http://lenciel.github.io/2013/07/is-wine-bullshit/"/>
+    <link href="http://lenciel.cn/2013/07/is-wine-bullshit/"/>
     <updated>2013-07-01T15:05:00+08:00</updated>
-    <id>http://lenciel.github.io/2013/07/is-wine-bullshit</id>
+    <id>http://lenciel.cn/2013/07/is-wine-bullshit</id>
     <content type="html"><![CDATA[<p><img src="/downloads/images/wine.jpeg" alt="Raw git log output" title="Don't touch me..." /></p>
 
 <p>一瓶Lafite Rothschild Bordeaux最少要几千块，一瓶Charles Shaw或者Franzia卖十几块。我们经常可以看到那些红酒的广告宣扬着高档红酒的品质和口感是多么美妙。但其实很多人不知道，按照”酒类经济学家”的说法，葡萄酒的价格和口感之间的关系可能不是那么紧密。他们中不少人甚至声称，葡萄酒的价格根本就是乱来的，而那些号称能被品出来的万千滋味不过是付钱过后脑袋里面的自我安慰。</p>
@@ -74,9 +74,9 @@
   
   <entry>
     <title type="html"><![CDATA[The Importance of Deploy As Will]]></title>
-    <link href="http://lenciel.github.io/2013/05/the-importance-of-deploy-as-will/"/>
+    <link href="http://lenciel.cn/2013/05/the-importance-of-deploy-as-will/"/>
     <updated>2013-05-29T22:41:00+08:00</updated>
-    <id>http://lenciel.github.io/2013/05/the-importance-of-deploy-as-will</id>
+    <id>http://lenciel.cn/2013/05/the-importance-of-deploy-as-will</id>
     <content type="html"><![CDATA[<p>最近公司里面两个比较资深的开发兄弟在我座位旁边进行了一场关于“代码优化到什么程度才算好”的争论。</p>
 
 <p>他们一起工作的项目是一个比较小的python模块（几百行的规模吧），用来在嵌入式设备对接入的手机进行一些操作。其中一个人希望把这部分代码重构到“如果需求有这样那样的改变能够承受。并且即便不是我们两个来继续这个模块，任何一个人拿到都能很容易的扩展和维护”；而另一个人则认为“这个模块的规模很小不需要那么大精力做重构，并且在需求出现的时候再开始在现有代码基础上重构比先设想可能的需求来重构有意义”。</p>
@@ -113,9 +113,9 @@
   
   <entry>
     <title type="html"><![CDATA[The myth of productivity]]></title>
-    <link href="http://lenciel.github.io/2013/05/the-myth-of-productivity/"/>
+    <link href="http://lenciel.cn/2013/05/the-myth-of-productivity/"/>
     <updated>2013-05-02T01:11:00+08:00</updated>
-    <id>http://lenciel.github.io/2013/05/the-myth-of-productivity</id>
+    <id>http://lenciel.cn/2013/05/the-myth-of-productivity</id>
     <content type="html"><![CDATA[<p>在从公司辞职出来的之前，我们对创业的期望是不降低大家的生活质量。我们对自己这么说，对我们拉入伙的兄弟们也这么说。这里的生活质量当然除开收入之外，很大的一方面就是不加班。</p>
 
 <p>但是实际上的情况是：五一之前整个公司度过了一个非常特别的时期：产品团队不停地根据用户的输入，修改产品需求；服务器端和客户端两个开发组都疯狂加班，彻夜不眠；测试每天没有东西可以测试。</p>
@@ -208,9 +208,9 @@
   
   <entry>
     <title type="html"><![CDATA[The Gone of Google Reader]]></title>
-    <link href="http://lenciel.github.io/2013/03/the-gone-of-google-reader/"/>
+    <link href="http://lenciel.cn/2013/03/the-gone-of-google-reader/"/>
     <updated>2013-03-15T21:25:00+08:00</updated>
-    <id>http://lenciel.github.io/2013/03/the-gone-of-google-reader</id>
+    <id>http://lenciel.cn/2013/03/the-gone-of-google-reader</id>
     <content type="html"><![CDATA[<p><img src="/downloads/images/google_reader.png" alt="Google reader is gone" title="Don't touch me..." /></p>
 
 <p>Google Reader关掉的消息出来做之后网上的反应其实是很耐人寻味的。</p>
@@ -231,9 +231,9 @@
   
   <entry>
     <title type="html"><![CDATA[走进科学]]></title>
-    <link href="http://lenciel.github.io/2013/02/science-is-not-that-easy/"/>
+    <link href="http://lenciel.cn/2013/02/science-is-not-that-easy/"/>
     <updated>2013-02-01T23:40:00+08:00</updated>
-    <id>http://lenciel.github.io/2013/02/science-is-not-that-easy</id>
+    <id>http://lenciel.cn/2013/02/science-is-not-that-easy</id>
     <content type="html"><![CDATA[<p><img src="/downloads/images/black_and_white.jpg" alt="Black and White" title="Don't touch me…" /></p>
 
 <p>最近波音787曝出锂电池起火燃烧的<a href="http://finance.sina.com.cn/world/mzjj/20130130/140414451075.shtml">问题</a>。全世界人民，特别是中国人民纷纷摇头叹息：以精密和严谨著称的日本人，现在终归是堕落了。奇怪的是，如果你想稍微深入一点儿去搜索日本制造的锂电池究竟出了什么问题，答案就欠奉了。于是本座花了点儿时间试图去把这事情弄明白。</p>

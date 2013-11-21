@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://lenciel.github.io/sitemap.xml 
+Sitemap: http://lenciel.cn/sitemap.xml 
