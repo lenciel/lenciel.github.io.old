@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: mac | @Lenciel]]></title>
+  <link href="http://lenciel.cn/blog/categories/mac/atom.xml" rel="self"/>
+  <link href="http://lenciel.cn/"/>
+  <updated>2013-12-14T15:42:48+08:00</updated>
+  <id>http://lenciel.cn/</id>
+  <author>
+    <name><![CDATA[Lenciel Li]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Quick Look on Mac]]></title>
+    <link href="http://lenciel.cn/2013/12/quick-look-on-mac/"/>
+    <updated>2013-12-14T15:34:00+08:00</updated>
+    <id>http://lenciel.cn/2013/12/quick-look-on-mac</id>
+    <content type="html"><![CDATA[<p>Mac平台上，如果我们在Finder里面查看文件，有一个不太容易被察觉的方式是使用<a href="http://en.wikipedia.org/wiki/Quick_Look">Quick Look</a>：选中文件的情况下按<code>空格键</code>或者是<code>Cmd+Y</code>。速度快，疗效好，唯一的缺点就是有很多文件格式支持不佳，比如没有扩展名的config文件，比如各种markdown，比如图片等等。</p>
+
+<p>最近在Github上看到一个<a href="https://github.com/sindresorhus/quick-look-plugins">Quick Look插件集中营</a>，非常不错的精选集，推荐也在用Quick Look的小伙伴们试试。</p>
+
+]]></content>
+  </entry>
+  
+</feed>
