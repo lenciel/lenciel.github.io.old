@@ -4,7 +4,7 @@
   <title><![CDATA[@Lenciel]]></title>
   <link href="http://lenciel.cn/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2013-12-14T15:42:48+08:00</updated>
+  <updated>2013-12-15T14:39:45+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -12,6 +12,18 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Take it easy and avoid excitement]]></title>
+    <link href="http://lenciel.cn/2013/12/avoid-excitement/"/>
+    <updated>2013-12-15T13:17:00+08:00</updated>
+    <id>http://lenciel.cn/2013/12/avoid-excitement</id>
+    <content type="html"><![CDATA[<p><img src="http://lenciel.cn/downloads/images/modern_times_1935.gif" alt="avoid excitement" title="Don't touch me..." /></p>
+
+<blockquote><p>&#8220;Take it easy and avoid excitement.&#8221;</p><footer><strong>Charlie Chaplin</strong> <cite><a href="http://en.wikipedia.org/wiki/Modern_Times_(film)">Modern Times(1935)</a></cite></footer></blockquote>
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Quick Look on Mac]]></title>
@@ -1357,17 +1369,6 @@ Bob这边：(Alice的Bob私钥值次方) % 大质数</p>
 </span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">public_key</span><span class="o">.</span><span class="n">verify</span><span class="p">(</span><span class="nb">hash</span><span class="p">,</span> <span class="n">signature</span><span class="p">)</span>
 </span><span class="line"><span class="bp">True</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Doomsday Machines]]></title>
-    <link href="http://lenciel.cn/2013/07/doomsday-machines/"/>
-    <updated>2013-07-23T23:25:00+08:00</updated>
-    <id>http://lenciel.cn/2013/07/doomsday-machines</id>
-    <content type="html"><![CDATA[<p><img src="http://lenciel.cn/downloads/images/dr_strangelove_doomsday_machine.gif" alt="doomsday machines" title="Don't touch me..." /></p>
-
-<blockquote><p>Gee, I wish we had one of them doomsday machines.</p><footer><strong>Stanley Kubrick</strong> <cite><a href="http://www.imdb.com/title/tt0057012/">Fight Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb(1964)</a></cite></footer></blockquote>
 ]]></content>
   </entry>
   
