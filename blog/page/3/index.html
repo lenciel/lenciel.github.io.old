@@ -9,7 +9,8 @@
   <meta name="author" content="Lenciel Li">
 
   
-  <meta name="description" content="最近NSA相关话题很火。很多IT从业者都知道，HTTPS可以保护用户敏感的数据，但是说起HTTPS 到底 是如何工作的，其实心里并不清楚。 使用HTTPS之后，数据是如何被保护的？Client和Server之间如果有人在hacking，HTTPS建立的连接凭什么就是安全的？什么是安全证书？ &hellip;">
+  <meta name="description" content=" &#8220;There is no clock on my business!&#8221;Coen Brothers True Grit (2010)
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -31,14 +32,16 @@
 
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://lenciel.cn/blog/page/3/" />
-<meta property="og:description" content="最近NSA相关话题很火。很多IT从业者都知道，HTTPS可以保护用户敏感的数据，但是说起HTTPS 到底 是如何工作的，其实心里并不清楚。 使用HTTPS之后，数据是如何被保护的？Client和Server之间如果有人在hacking，HTTPS建立的连接凭什么就是安全的？什么是安全证书？ &hellip;" />
+<meta property="og:description" content=" &#8220;There is no clock on my business!&#8221;Coen Brothers True Grit (2010)
+" />
 
 <meta property="og:site_name" content="http://lenciel.cn" />
 <meta property="article:author" content="https://plus.google.com/114787528537231301324">
 
 
 
-<meta itemprop="description" content="最近NSA相关话题很火。很多IT从业者都知道，HTTPS可以保护用户敏感的数据，但是说起HTTPS 到底 是如何工作的，其实心里并不清楚。 使用HTTPS之后，数据是如何被保护的？Client和Server之间如果有人在hacking，HTTPS建立的连接凭什么就是安全的？什么是安全证书？ &hellip;" />
+<meta itemprop="description" content=" &#8220;There is no clock on my business!&#8221;Coen Brothers True Grit (2010)
+" />
 
 <!-- Combine multiple fonts into one request -->
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic|Patua+One|Yanone+Kaffeesatz" rel="stylesheet" type="text/css">
@@ -102,6 +105,46 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/10/no-clock-on-my-business/">No Clock on My Business</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-09T00:37:00+08:00" pubdate data-updated="true">Oct 9<span>th</span>, 2013</time>
+        
+         | <a href="/2013/10/no-clock-on-my-business/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="/downloads/images/no_clock_on_my_business.gif" alt="No Clock On My Business" title="Don't touch me..." /></p>
+
+<blockquote><p>&#8220;There is no clock on my business!&#8221;</p><footer><strong>Coen Brothers</strong> <cite><a href="http://www.imdb.com/title/tt1403865/">True Grit (2010)</a></cite></footer></blockquote>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -421,150 +464,6 @@ Bob这边：(Alice的Bob私钥值次方) % 大质数</p>
   <div class="entry-content"><p><img src="/downloads/images/eye_in_the_sky.gif" alt="Eye in the sky" title="Don't touch me..." /></p>
 
 <blockquote><p>&#8220;And the eye-in-the-sky is watching us all.&#8221;</p><footer><strong>Martin Scorsese</strong> <cite><a href="http://www.imdb.com/title/tt0112641/">Casino(1995)</a></cite></footer></blockquote>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/08/boolean-objects-and-boolean-primitives/">Boolean Objects和Boolean Primitives</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-21T11:31:00+08:00" pubdate data-updated="true">Aug 21<span>st</span>, 2013</time>
-        
-         | <a href="/2013/08/boolean-objects-and-boolean-primitives/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Javascript有一个小陷阱：每个primitive都有自己的constructor，但是这些constructor构造出来的却不是primitive。</p>
-
-<p>以boolean为例，大多数的代码里面用的是primitive值，比如：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="kd">var</span> <span class="nx">primitiveTrue</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-</span><span class="line"><span class="kd">var</span> <span class="nx">primitiveFalse</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>但实际上javascript里面还有Boolean函数，可以返回一个boolean的primitive：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="kd">var</span> <span class="nx">functionTrue</span> <span class="o">=</span> <span class="nb">Boolean</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
-</span><span class="line"><span class="kd">var</span> <span class="nx">functionFalse</span> <span class="o">=</span> <span class="nb">Boolean</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>不过，上面这个Boolean函数前面如果有<code>new</code>就是一个constructor了：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="kd">var</span> <span class="nx">constructorTrue</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Boolean</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
-</span><span class="line"><span class="kd">var</span> <span class="nx">constructorFalse</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Boolean</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>比较tricky的地方在于，上面这种constructor返回的不是primitive，而是对象：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="c1">// Outputs: true</span>
-</span><span class="line"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">primitiveTrue</span><span class="p">);</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">// Outputs: true</span>
-</span><span class="line"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">functionTrue</span><span class="p">);</span>
-</span><span class="line">
-</span><span class="line"><span class="c1">// Outputs: Boolean {}</span>
-</span><span class="line"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">constructorTrue</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>由于javascript的类型转换比较aggressive，比如你把一个int和string相加，这个int会自动转成string：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="c1">// Outputs: &quot;22&quot;</span>
-</span><span class="line"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;2&quot;</span> <span class="o">+</span> <span class="mi">2</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>所以使用constructor构造对象来作为条件判断的输入其实是比较危险的。因为一个对象被用来做条件判断时，它经常会被转成true：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="c1">// Outputs: &quot;Objects coerce to true.&quot;</span>
-</span><span class="line"><span class="k">if</span> <span class="p">({})</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Objects coerce to true.&quot;</span><span class="p">);</span> <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>特别的，一个Boolean对象即使内部值是false，也会被强制转换成true：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="c1">// Outputs: &quot;My false Boolean object is truthy!&quot;</span>
-</span><span class="line"><span class="k">if</span> <span class="p">(</span><span class="nx">constructorFalse</span><span class="p">)</span> <span class="p">{</span>
-</span><span class="line">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;My false Boolean object is truthy!&quot;</span><span class="p">);</span>
-</span><span class="line"><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class="line">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;My false Boolean object is falsy!&quot;</span><span class="p">);</span>
-</span><span class="line"><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>如果你实在是要取一个Boolean对象的值需要用<code>valueOf</code>方法：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="c1">// Outputs: &quot;The value of my false Boolean object is falsy!&quot;</span>
-</span><span class="line"><span class="k">if</span> <span class="p">(</span><span class="nx">constructorFalse</span><span class="p">.</span><span class="nx">valueOf</span><span class="p">())</span> <span class="p">{</span>
-</span><span class="line">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;The value of my false Boolean object is truthy!&quot;</span><span class="p">);</span>
-</span><span class="line"><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class="line">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;The value of my false Boolean object is falsy!&quot;</span><span class="p">);</span>
-</span><span class="line"><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>但是由于Boolean对象这么tricky，这种代码是非常不受欢迎的：事实上JSHint和JSLint这些工具发现你使用了Boolean的constructor就会报一个<code>potential error</code>。</p>
-
-<p>如果你要把一个其他类型的值转成boolean值，也不要用constructor，尽量直接用Boolean函数或者是用两个<code>!</code>操作符：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="c1">// Two approaches to coercing 0 into false</span>
-</span><span class="line"><span class="kd">var</span> <span class="nx">byFunction</span> <span class="o">=</span> <span class="nb">Boolean</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-</span><span class="line"><span class="kd">var</span> <span class="nx">byNotNot</span> <span class="o">=</span> <span class="o">!!</span><span class="mi">0</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>两种做法都不错，但是如果你看javascript代码比较多会发现后面这种使用更普遍：可能是因为能少打点儿字。</p>
 </div>
   
   
