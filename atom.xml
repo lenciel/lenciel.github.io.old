@@ -4,7 +4,7 @@
   <title><![CDATA[@Lenciel]]></title>
   <link href="http://lenciel.cn/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2014-01-05T02:08:00+08:00</updated>
+  <updated>2014-01-17T02:04:47+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -12,6 +12,17 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Still Long Way To Go]]></title>
+    <link href="http://lenciel.cn/2014/01/next-subject/"/>
+    <updated>2014-01-17T01:56:00+08:00</updated>
+    <id>http://lenciel.cn/2014/01/next-subject</id>
+    <content type="html"><![CDATA[<p><img src="http://lenciel.cn/downloads/images/next_subject_in_blade_runner.gif" alt="Next Subject" title="Don't touch me..." /></p>
+
+<blockquote><p>&#8220;Next subject: Kowalski, Leon.&#8221;</p><footer><strong>Ridley Scott</strong> <cite><a href="http://www.imdb.com/title/tt0083658/">Blade Runner(1982)</a></cite></footer></blockquote>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[定制机上恢复google原厂应用]]></title>
@@ -784,17 +795,6 @@ Bob这边：(Alice的Bob私钥值次方) % 大质数</p>
   <li><a href="http://en.wikipedia.org/wiki/Scalability">Wikipedia - Scalability</a></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Except For Greed and Disgust]]></title>
-    <link href="http://lenciel.cn/2013/07/except-for-greed-and-disgust/"/>
-    <updated>2013-07-27T23:57:00+08:00</updated>
-    <id>http://lenciel.cn/2013/07/except-for-greed-and-disgust</id>
-    <content type="html"><![CDATA[<p><img src="http://lenciel.cn/downloads/images/american_psycho_jump.gif" alt="Except For Greed and Disgust" title="Don't touch me..." /></p>
-
-<blockquote><p>I have all the characteristics of a human being: flesh, blood, skin, hair … but not a single, clear, identifiable emotion, except for greed and disgust.</p><footer><strong>Mary Harron</strong> <cite><a href="http://www.imdb.com/title/tt0144084/">American Psycho(2000)</a></cite></footer></blockquote>
 ]]></content>
   </entry>
   
