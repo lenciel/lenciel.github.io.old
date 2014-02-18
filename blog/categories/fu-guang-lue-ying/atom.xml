@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 浮光掠影 | @Lenciel]]></title>
   <link href="http://lenciel.cn/blog/categories/fu-guang-lue-ying/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2014-02-18T12:58:56+08:00</updated>
+  <updated>2014-02-18T13:22:07+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -22,7 +22,7 @@
 
 <p>托各种SNS的福，有趣的动态gif在网络上漫山遍野。作为电影爱好者的本座，也是<a href="http://lenciel.cn/blog/categories/fu-guang-lue-ying/">重度的gif爱好者</a>。</p>
 
-<p>如上图所示，最近动态gif玩法又有创新了：通过“打白条”的方式实现3D效果。主要的思路就是在动态物体处于背景的时候，白条遮挡动态物体。而当动态物体从背景进入前景的时候，动态物体遮挡白条，造成动态物体溢出片边界范围的错觉。</p>
+<p>如上图所示，最近动态gif玩法又有创新了：通过“打白条”的方式实现3D效果。主要的思路就是在动态物体处于背景的时候，白条遮挡动态物体。而当动态物体从背景进入前景的时候，动态物体遮挡白条，造成动态物体溢出图片边界范围的错觉。</p>
 
 <p><img src="/downloads/images/2014_02/3dgifs1.gif" alt="3d gifs" title="Don't touch me..." />
 <img src="/downloads/images/2014_02/3dgifs2.gif" alt="3d gifs" title="Don't touch me..." />
