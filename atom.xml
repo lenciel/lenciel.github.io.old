@@ -4,7 +4,7 @@
   <title><![CDATA[@Lenciel]]></title>
   <link href="http://lenciel.cn/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2014-02-18T09:00:48+08:00</updated>
+  <updated>2014-02-18T12:58:56+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -12,6 +12,34 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[3D动态Gif]]></title>
+    <link href="http://lenciel.cn/2014/02/3d-gifs/"/>
+    <updated>2014-02-18T12:40:00+08:00</updated>
+    <id>http://lenciel.cn/2014/02/3d-gifs</id>
+    <content type="html"><![CDATA[<p><img src="http://lenciel.cn/downloads/images/2014_02/3dgifs4.gif" alt="3d gifs" title="Don't touch me..." /></p>
+
+<p>托各种SNS的福，有趣的动态gif在网络上漫山遍野。作为电影爱好者的本座，也是<a href="http://lenciel.cn/blog/categories/fu-guang-lue-ying/">重度的gif爱好者</a>。</p>
+
+<p>如上图所示，最近动态gif玩法又有创新了：通过“打白条”的方式实现3D效果。主要的思路就是在动态物体处于背景的时候，白条遮挡动态物体。而当动态物体从背景进入前景的时候，动态物体遮挡白条，造成动态物体溢出片边界范围的错觉。</p>
+
+<p><img src="http://lenciel.cn/downloads/images/2014_02/3dgifs1.gif" alt="3d gifs" title="Don't touch me..." />
+<img src="http://lenciel.cn/downloads/images/2014_02/3dgifs2.gif" alt="3d gifs" title="Don't touch me..." />
+<img src="http://lenciel.cn/downloads/images/2014_02/3dgifs3.gif" alt="3d gifs" title="Don't touch me..." />
+<img src="http://lenciel.cn/downloads/images/2014_02/3dgifs5.gif" alt="3d gifs" title="Don't touch me..." />
+<img src="http://lenciel.cn/downloads/images/2014_02/3dgifs6.gif" alt="3d gifs" title="Don't touch me..." />
+<img src="http://lenciel.cn/downloads/images/2014_02/3dgifs6a.gif" alt="3d gifs" title="Don't touch me..." />
+<img src="http://lenciel.cn/downloads/images/2014_02/3dgifs8.gif" alt="3d gifs" title="Don't touch me..." />
+<img src="http://lenciel.cn/downloads/images/2014_02/3dgifs12.gif" alt="3d gifs" title="Don't touch me..." />
+<img src="http://lenciel.cn/downloads/images/2014_02/3dgifs13.gif" alt="3d gifs" title="Don't touch me..." />
+<img src="http://lenciel.cn/downloads/images/2014_02/3dgifs14.gif" alt="3d gifs" title="Don't touch me..." /></p>
+
+<p>最喜欢的一副：</p>
+
+<p><img src="http://lenciel.cn/downloads/images/2014_02/3dgifs7.gif" alt="3d gifs" title="Don't touch me..." /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[The Sochi 2014 Winter Olympics]]></title>
@@ -643,30 +671,6 @@ Bob这边：(Alice的Bob私钥值次方) % 大质数</p>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>两种做法都不错，但是如果你看javascript代码比较多会发现后面这种使用更普遍：可能是因为能少打点儿字。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Raspberry Pi上使用HDMI转接VGA线]]></title>
-    <link href="http://lenciel.cn/2013/08/using-raspberry-pi-with-hdmi-to-vga-adapter/"/>
-    <updated>2013-08-20T15:19:00+08:00</updated>
-    <id>http://lenciel.cn/2013/08/using-raspberry-pi-with-hdmi-to-vga-adapter</id>
-    <content type="html"><![CDATA[<p><a href="http://www.raspberrypi.org/‎">Raspberry Pi</a>的默认提供了HDMI接口，遇到手边显示器比较老并且电视机也比较老就不好办。</p>
-
-<p>如果直接买一根<a href="http://item.jd.com/674899.html">HDMI转VGA的线</a>，直接连上去很可能是黑屏，这是因为默认的配置文件不支持这种连接方式，需要修改配置文件。</p>
-
-<p>需要修改的是 <code>/boot/config.txt</code>里面的几个配置值，具体的讨论<a href="http://www.raspberrypi.org/phpBB3/viewtopic.php?f=76&amp;t=33477">在这里</a>：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">disable_overscan=1
-</span><span class="line">hdmi_group=2
-</span><span class="line">hdmi_mode=35
-</span><span class="line">hdmi_drive=2</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>修改完毕之后重新启动就可以看到画面了。</p>
 ]]></content>
   </entry>
   
