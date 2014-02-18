@@ -170,31 +170,31 @@
 <span class="line-number">27</span>
 </pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c"># -*- coding: utf-8 -*-</span>
 </span><span class="line">	
-</span><span class="line">    <span class="kn">import</span> <span class="nn">sys</span>
-</span><span class="line">    <span class="nb">reload</span><span class="p">(</span><span class="n">sys</span><span class="p">)</span>
-</span><span class="line">    <span class="n">sys</span><span class="o">.</span><span class="n">setdefaultencoding</span><span class="p">(</span><span class="s">&#39;utf8&#39;</span><span class="p">)</span>
-</span><span class="line">    <span class="n">ss</span> <span class="o">=</span><span class="s">&quot;全部&quot;</span>
-</span><span class="line">    <span class="n">uu</span> <span class="o">=</span> <span class="s">u&#39;全部</span>
-</span><span class="line">    <span class="n">CODEC</span> <span class="o">=</span> <span class="s">&#39;utf-8&#39;</span>
-</span><span class="line">    <span class="n">FILE</span> <span class="o">=</span> <span class="s">&#39;unicodetest.html&#39;</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">sys</span>
+</span><span class="line"><span class="nb">reload</span><span class="p">(</span><span class="n">sys</span><span class="p">)</span>
+</span><span class="line"><span class="n">sys</span><span class="o">.</span><span class="n">setdefaultencoding</span><span class="p">(</span><span class="s">&#39;utf8&#39;</span><span class="p">)</span>
+</span><span class="line"><span class="n">ss</span> <span class="o">=</span><span class="s">&quot;全部&quot;</span>
+</span><span class="line"><span class="n">uu</span> <span class="o">=</span> <span class="s">u&#39;全部&#39;</span>
+</span><span class="line"><span class="n">CODEC</span> <span class="o">=</span> <span class="s">&#39;utf-8&#39;</span>
+</span><span class="line"><span class="n">FILE</span> <span class="o">=</span> <span class="s">&#39;unicodetest.html&#39;</span>
 </span><span class="line">
-</span><span class="line">    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;archive.html&#39;</span><span class="p">,</span> <span class="s">&quot;r&quot;</span><span class="p">)</span>
-</span><span class="line">    <span class="n">bytes_out</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">CODEC</span><span class="p">)</span>
-</span><span class="line">    <span class="n">bytes_in</span> <span class="o">=</span> <span class="n">bytes_out</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">CODEC</span><span class="p">)</span>
-</span><span class="line">    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">FILE</span><span class="p">,</span> <span class="s">&quot;w&quot;</span><span class="p">)</span>
-</span><span class="line">    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">bytes_in</span><span class="p">)</span>
-</span><span class="line">    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span><span class="line"><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;archive.html&#39;</span><span class="p">,</span> <span class="s">&quot;r&quot;</span><span class="p">)</span>
+</span><span class="line"><span class="n">bytes_out</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">CODEC</span><span class="p">)</span>
+</span><span class="line"><span class="n">bytes_in</span> <span class="o">=</span> <span class="n">bytes_out</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">CODEC</span><span class="p">)</span>
+</span><span class="line"><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">FILE</span><span class="p">,</span> <span class="s">&quot;w&quot;</span><span class="p">)</span>
+</span><span class="line"><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">bytes_in</span><span class="p">)</span>
+</span><span class="line"><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </span><span class="line">
-</span><span class="line">    <span class="k">print</span> <span class="nb">repr</span><span class="p">(</span><span class="n">ss</span><span class="p">)</span>
-</span><span class="line">    <span class="k">print</span> <span class="nb">repr</span><span class="p">(</span><span class="n">uu</span><span class="p">)</span>
+</span><span class="line"><span class="k">print</span> <span class="nb">repr</span><span class="p">(</span><span class="n">ss</span><span class="p">)</span>
+</span><span class="line"><span class="k">print</span> <span class="nb">repr</span><span class="p">(</span><span class="n">uu</span><span class="p">)</span>
 </span><span class="line">
-</span><span class="line">    <span class="k">print</span><span class="p">(</span><span class="s">&quot;-------------------------------&quot;</span><span class="p">)</span>
-</span><span class="line">    <span class="k">print</span> <span class="n">ss</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">CODEC</span> <span class="p">)</span>
-</span><span class="line">    <span class="k">print</span> <span class="n">uu</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">CODEC</span> <span class="p">)</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="s">&quot;-------------------------------&quot;</span><span class="p">)</span>
+</span><span class="line"><span class="k">print</span> <span class="n">ss</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">CODEC</span> <span class="p">)</span>
+</span><span class="line"><span class="k">print</span> <span class="n">uu</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">CODEC</span> <span class="p">)</span>
 </span><span class="line">
-</span><span class="line">    <span class="k">print</span><span class="p">(</span><span class="s">&quot;-------------------------------&quot;</span><span class="p">)</span>
-</span><span class="line">	<span class="k">print</span> <span class="nb">repr</span><span class="p">(</span><span class="n">ss</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">CODEC</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&#39;gbk&#39;</span><span class="p">))</span>
-</span><span class="line">	<span class="k">print</span> <span class="n">uu</span>
+</span><span class="line"><span class="k">print</span><span class="p">(</span><span class="s">&quot;-------------------------------&quot;</span><span class="p">)</span>
+</span><span class="line"><span class="k">print</span> <span class="nb">repr</span><span class="p">(</span><span class="n">ss</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">CODEC</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&#39;gbk&#39;</span><span class="p">))</span>
+</span><span class="line"><span class="k">print</span> <span class="n">uu</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>这段程序里面，有三个地方是跟编解码有关的。 </p>
