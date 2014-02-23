@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: IWDRM | @Lenciel]]></title>
+  <link href="http://lenciel.cn/blog/categories/iwdrm/atom.xml" rel="self"/>
+  <link href="http://lenciel.cn/"/>
+  <updated>2014-02-23T22:14:44+08:00</updated>
+  <id>http://lenciel.cn/</id>
+  <author>
+    <name><![CDATA[Lenciel Li]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Not Much of A Dancer]]></title>
+    <link href="http://lenciel.cn/2014/02/not-a-dancer/"/>
+    <updated>2014-02-23T22:06:00+08:00</updated>
+    <id>http://lenciel.cn/2014/02/not-a-dancer</id>
+    <content type="html"><![CDATA[<p><img src="/downloads/images/iwdrm/not_a_dancer.gif" alt="not a dancer" title="Don't touch me..." /></p>
+
+<p><blockquote><p>“I’m not much of a dancer.”</p><footer><strong>Vincent Vega</strong> <cite><a href='http://www.imdb.com/title/tt0110912/'>Pulp Fiction(1994)</a></cite></footer></blockquote></p>
+]]></content>
+  </entry>
+  
+</feed>
