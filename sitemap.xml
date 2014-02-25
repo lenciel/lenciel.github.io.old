@@ -283,6 +283,10 @@
         <lastmod>2014-02-23T22:14:33+08:00</lastmod>
     </url>
     <url>
+        <loc>http://lenciel.cn/2014/02/hunting-the-iowait-problem-maker/</loc>
+        <lastmod>2014-02-25T22:25:50+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://lenciel.cn/404.html</loc>
         <lastmod>2013-11-17T23:43:35+08:00</lastmod>
     </url>
@@ -292,7 +296,7 @@
     </url>
     <url>
         <loc>http://lenciel.cn/blog/archives/</loc>
-        <lastmod>2014-02-25T02:56:21+08:00</lastmod>
+        <lastmod>2014-02-25T22:25:50+08:00</lastmod>
     </url>
     <url>
         <loc>http://lenciel.cn/docs/dive-into-linux-boot/</loc>
@@ -320,7 +324,7 @@
     </url>
     <url>
         <loc>http://lenciel.cn/</loc>
-        <lastmod>2014-02-25T02:56:21+08:00</lastmod>
+        <lastmod>2014-02-25T22:25:50+08:00</lastmod>
     </url>
     <url>
         <loc>http://lenciel.cn/robots.txt</loc>
