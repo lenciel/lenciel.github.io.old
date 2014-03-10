@@ -9,7 +9,9 @@
   <meta name="author" content="Lenciel Li">
 
   
-  <meta name="description" content="Python的自荐页面About Python上号称自家的标准库是”batteries included”的，但实际情况却不是这样。对Python标准库的批评几乎从来没有中断过。著名的Python包Requests的作者甚至决定永久把Requests保持为第三方库而拒绝加入标准库，他的理由是： &hellip;">
+  <meta name="description" content="Python的标准库实在是不够用，所以一个很常见的情况是我们需要在每个项目使用的virtualenv里面都安装一些常用的库。 为了加速安装的过程，有两个小窍门。 一个是使用国内的源，比如v2ex提供的。只需要新建或者编辑~/.pip/pip.conf，加入一行： 1
+2
+[global] &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -31,14 +33,18 @@
 
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://lenciel.cn/blog/page/4/" />
-<meta property="og:description" content="Python的自荐页面About Python上号称自家的标准库是”batteries included”的，但实际情况却不是这样。对Python标准库的批评几乎从来没有中断过。著名的Python包Requests的作者甚至决定永久把Requests保持为第三方库而拒绝加入标准库，他的理由是： &hellip;" />
+<meta property="og:description" content="Python的标准库实在是不够用，所以一个很常见的情况是我们需要在每个项目使用的virtualenv里面都安装一些常用的库。 为了加速安装的过程，有两个小窍门。 一个是使用国内的源，比如v2ex提供的。只需要新建或者编辑~/.pip/pip.conf，加入一行： 1
+2
+[global] &hellip;" />
 
 <meta property="og:site_name" content="http://lenciel.cn" />
 <meta property="article:author" content="https://plus.google.com/114787528537231301324">
 
 
 
-<meta itemprop="description" content="Python的自荐页面About Python上号称自家的标准库是”batteries included”的，但实际情况却不是这样。对Python标准库的批评几乎从来没有中断过。著名的Python包Requests的作者甚至决定永久把Requests保持为第三方库而拒绝加入标准库，他的理由是： &hellip;" />
+<meta itemprop="description" content="Python的标准库实在是不够用，所以一个很常见的情况是我们需要在每个项目使用的virtualenv里面都安装一些常用的库。 为了加速安装的过程，有两个小窍门。 一个是使用国内的源，比如v2ex提供的。只需要新建或者编辑~/.pip/pip.conf，加入一行： 1
+2
+[global] &hellip;" />
 
 <!-- Combine multiple fonts into one request -->
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic|Patua+One|Yanone+Kaffeesatz" rel="stylesheet" type="text/css">
@@ -102,6 +108,61 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/10/pip-download-cache/">打开pip的download Cache</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-17T13:25:00+08:00" pubdate data-updated="true">Oct 17<span>th</span>, 2013</time>
+        
+         | <a href="/2013/10/pip-download-cache/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Python的标准库实在是<a href="http://lenciel.cn/2013/10/recharging-the-python-standard-library/">不够用</a>，所以一个很常见的情况是我们需要在每个项目使用的<code>virtualenv</code>里面都安装一些常用的库。</p>
+
+<p>为了加速安装的过程，有两个小窍门。</p>
+
+<p>一个是使用国内的源，比如<a href="http://www.v2ex.com/">v2ex</a>提供的。只需要新建或者编辑<code>~/.pip/pip.conf</code>，加入一行：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">[global]
+</span><span class="line">index-url = http://pypi.v2ex.com/simple
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>另一个就是打开pip的<code>download cache</code>，这样可以避免pip每次都去下载相同的东西。只需要在<code>.bashrc</code>或者是<code>.zshrc</code>里面加入一行：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">export PIP_DOWNLOAD_CACHE=$HOME/.pip-download-cache
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -401,46 +462,6 @@ Bob这边：(Alice的Bob私钥值次方) % 大质数</p>
 
 <p>最后，Wikipedia是研究这种东西的好去处, 也可以看看 <a href="https://www.coursera.org/course/crypto">Coursera的这个课程</a> 。</p>
 
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/08/secret-love/">Secret Love</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-26T21:59:00+08:00" pubdate data-updated="true">Aug 26<span>th</span>, 2013</time>
-        
-         | <a href="/2013/08/secret-love/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="/downloads/images/secret_love.gif" alt="Secret Love" title="Don't touch me..." /></p>
-
-<blockquote><p>&#8220;I think we’re just gonna have to be secretly in love with each other and leave it at that, Ritchie.&#8221;</p><footer><strong>Gwyneth Paltrow</strong> <cite><a href="http://www.imdb.com/title/tt0265666/">The Royal Tenenbaums(2001)</a></cite></footer></blockquote>
 </div>
   
   
