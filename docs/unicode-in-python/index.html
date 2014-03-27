@@ -331,7 +331,7 @@
 
 <h2 id="section-1">总结</h2>
 
-<ol>
+<ul>
   <li>
     <p>处理任何编解码问题时我们都要牢记，unicode是为世界上所有的字符分配了一个码位（code point）的概念，而不是实现（字符在内存或者文件中的存在方式）。unicode占16位是绝对错误的（世界上语言如此多，码位早就超过百万个了）。</p>
   </li>
@@ -350,7 +350,7 @@
   <li>
     <p>python提供了codec来减少我们的代码行数，它不是你乱码的救星：</p>
   </li>
-</ol>
+</ul>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -364,9 +364,9 @@
 </span><span class="line"><span class="o">===&gt;</span><span class="n">fileObj</span> <span class="o">=</span> <span class="n">codecs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span> <span class="s">&quot;small.html&quot;</span><span class="p">,</span> <span class="s">&quot;r&quot;</span><span class="p">,</span> <span class="s">&quot;utf-8&quot;</span> <span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<ol>
+<ul>
   <li>BOM这东西对UTF-16和UTF-32（python不支持）是很关键的，但是对UTF-8而言可有可无，因为后者不需要大小端对齐（详情请看<a href="http://lenciel.cn/docs/unicode-complete/">这里</a>）。BOM在windows平台上见到得较多，长度2个bytes到4个bytes不等，codec提供了方法检验BOM：</li>
-</ol>
+</ul>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -382,14 +382,14 @@
 </pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">s</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">utf</span><span class="o">-</span><span class="mi">8</span><span class="o">-</span><span class="n">sig</span><span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<ol>
+<ul>
   <li>
     <p>文件或者网页使用的编码方式还没有很完美的方法进行检测。文件的话从BOM判断算是一个不错的选择。网页的话先查看header里面的<code>Content-Type</code>内容。</p>
   </li>
   <li>
     <p>有些第三方库如果没有支持unicode功能的话，你要自己重写一部分wrapper。自己写的代码，在ut的时候一定要用unicode进行测试。</p>
   </li>
-</ol>
+</ul>
 
 
   
