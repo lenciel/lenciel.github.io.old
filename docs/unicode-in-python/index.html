@@ -133,8 +133,8 @@
 <h2 id="encodedecode">encode/decode</h2>
 
 <ul>
-  <li>在Python2中，有两种字符对象，str和unicode(可以用type函数查看字符串对象)</li>
-  <li>str和unicode通过encode和decode方法可以互相转换(要确保encodin的正确)</li>
+  <li>在Python2中，有两种字符对象，<code>str</code>和<code>unicode</code>(可以用<code>type</code>函数查看字符串对象)</li>
+  <li><code>str</code>和<code>unicode</code>通过encode和decode方法可以互相转换(要确保encoding的正确)</li>
 </ul>
 
 <h2 id="debug-part-i-">Debug Part I 单纯字符串操作</h2>
@@ -199,9 +199,7 @@
 
 <p>这段程序里面，有三个地方是跟编解码有关的。 </p>
 
-<ol>
-  <li>声明代码用utf-8编码保存：因为我们的代码里面有中文。</li>
-</ol>
+<h3 id="utf-8">1. 声明代码用utf-8编码保存：因为我们的代码里面有中文。</h3>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 </pre></td><td class="code"><pre><code class="python"><span class="line">\<span class="c"># -\*- coding: utf-8 -\*-</span>
@@ -209,9 +207,7 @@
 
 <p>这个声明必须在最开始的两行，在后面就没有用了。</p>
 
-<ol>
-  <li>指明在console显示中sys的编码</li>
-</ol>
+<h3 id="consolesys">2. 指明在console显示中sys的编码</h3>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -227,9 +223,7 @@
 
 <p><img src="/downloads/images/python_unicode_output0.png" alt="unicode" title="Don't touch me..." /></p>
 
-<ol>
-  <li>对字符串进行的编码解码</li>
-</ol>
+<h3 id="section">3. 对字符串进行的编码解码</h3>
 
 <p>这里我们分别打印了str对象和unicode对象，并对它们进行了一些转换操作。程序的输出是这样的：</p>
 
@@ -287,7 +281,7 @@
 
 <p><img src="/downloads/images/python_unicode_output3.png" alt="unicode" title="Don't touch me..." /></p>
 
-<p>原来在序列化的时候，虽然指定了encoding是utf-8，但是两个汉字不知道为什么居然编出来了12个byte。本座也难得去下序列化的源代码看里面究竟做了什么操作。反正lxml提供了一个从字符串里面解析出html对象树的方法，叫做<code>document_fromstring</code>。所以把自己知道格式的字符串传进去让它解析就对了：</p>
+<p>原来在序列化的时候，虽然指定了encoding是utf-8，但是两个汉字不知道为什么居然编出来了12个byte。本座也懒得去下序列化的源代码看里面究竟做了什么操作。反正lxml提供了一个从字符串里面解析出html对象树的方法，叫做<code>document_fromstring</code>。所以把自己知道格式的字符串传进去让它解析就对了：</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -335,7 +329,7 @@
 </span><span class="line">
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<h2 id="section">总结</h2>
+<h2 id="section-1">总结</h2>
 
 <ol>
   <li>
