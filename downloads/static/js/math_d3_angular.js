@@ -8,14 +8,13 @@ app.controller('MainCtrl', function($scope, $window){
   angular.element($window).on('resize', function(){
     $scope.$apply(function(){ rescale_panels() })
   })
-  $scope.styles = { panel1: {}, panel2: {}, main_content: {} }
+  $scope.styles = { panel1: {}, panel2: {}, content: {} }
   var w, h
   function rescale_panels(){
     w = $scope.w = $window.innerWidth, h = $scope.h = $window.innerHeight
-    var p1 = $scope.styles.panel1, p2 = $scope.styles.panel2
-    var main_content = $scope.styles.main_content
+    var p1 = $scope.styles.panel1, p2 = $scope.styles.panel2, content = $scope.styles.content
     if(w > 650)
-      main_content.height = 600,
+      content.height = 600,
       p1.width = 40 + '%',
       p1.height = 600,
       p2.width = 60 + '%',
@@ -25,7 +24,7 @@ app.controller('MainCtrl', function($scope, $window){
       p2.right = 0,
       delete p2.bottom,
     else
-      main_content.height = 1200,
+      content.height = 1200,
       p1.width = 100 + '%',
       p1.height = 600,
       p2.width = 100 + '%',
@@ -39,7 +38,7 @@ app.controller('MainCtrl', function($scope, $window){
     }else {
       fontSize = 16
     }
-    $scope.styles.main_content.fontSize = fontSize + 'px'
+    $scope.styles.content.fontSize = fontSize + 'px'
   }
   $scope.init = function(){
     rescale_panels()

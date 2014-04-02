@@ -4,7 +4,7 @@
   <title><![CDATA[@Lenciel]]></title>
   <link href="http://lenciel.cn/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2014-04-02T17:46:38+08:00</updated>
+  <updated>2014-04-02T17:49:08+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -35,7 +35,7 @@
 
 <script src="http://lenciel.cn/downloads/static/js/math_d3_angular.js" charset="utf-8"></script>
 
-<div class="main-content" ng-app="app" ng-controller="MainCtrl" ng-style="styles.main_content" ng-class="{ sm : w &lt; 650 }" ng-init="init()">
+<div class="main-content" ng-app="app" ng-controller="MainCtrl" ng-style="styles.content" ng-class="{ sm : w &lt; 650 }" ng-init="init()">
     <div class="panel" ng-style="styles.panel1">
       <stage selected-shape="selectedShape" ng-mouseover="selectedShape = null" />
     </div>
