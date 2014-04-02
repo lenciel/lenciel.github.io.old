@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ssh | @Lenciel]]></title>
   <link href="http://lenciel.cn/blog/categories/ssh/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2014-03-27T09:29:30+08:00</updated>
+  <updated>2014-04-02T17:42:19+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -37,7 +37,7 @@ paramiko.SSHException: No suitable address
 <p>最后，虽然demo的例子也挺多，但是好像没有说清楚怎么用invoke_shell和get_pty以及照例奉上一段代码。</p>
 
 <p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (paramiko_sample.py)</span> <a href='/downloads/code/paramiko_sample.py'>download</a></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>

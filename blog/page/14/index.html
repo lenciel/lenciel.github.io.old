@@ -9,7 +9,7 @@
   <meta name="author" content="Lenciel Li">
 
   
-  <meta name="description" content="英语教员：Have you watched “Red Cliff”? 本组天才：Yes, long time ago. It’s a story in the war time. 英语教员：Yeah, tell us about the story… 本座（心里）：What the fuck…. &hellip;">
+  <meta name="description" content="最近在单位写一个自动build的小工具。因为clearcase的setview命令实际上是激活一个新的shell，所以用简单的“串通”shell的脚本很难做到。 因为在邮件组里面看到有同样问题的Matt说用paramiko解决了问题，就试了试，过程还颇有点艰辛。 首先， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -31,14 +31,14 @@
 
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://lenciel.cn/blog/page/14/" />
-<meta property="og:description" content="英语教员：Have you watched “Red Cliff”? 本组天才：Yes, long time ago. It’s a story in the war time. 英语教员：Yeah, tell us about the story… 本座（心里）：What the fuck…. &hellip;" />
+<meta property="og:description" content="最近在单位写一个自动build的小工具。因为clearcase的setview命令实际上是激活一个新的shell，所以用简单的“串通”shell的脚本很难做到。 因为在邮件组里面看到有同样问题的Matt说用paramiko解决了问题，就试了试，过程还颇有点艰辛。 首先， &hellip;" />
 
 <meta property="og:site_name" content="http://lenciel.cn" />
 <meta property="article:author" content="https://plus.google.com/114787528537231301324">
 
 
 
-<meta itemprop="description" content="英语教员：Have you watched “Red Cliff”? 本组天才：Yes, long time ago. It’s a story in the war time. 英语教员：Yeah, tell us about the story… 本座（心里）：What the fuck…. &hellip;" />
+<meta itemprop="description" content="最近在单位写一个自动build的小工具。因为clearcase的setview命令实际上是激活一个新的shell，所以用简单的“串通”shell的脚本很难做到。 因为在邮件组里面看到有同样问题的Matt说用paramiko解决了问题，就试了试，过程还颇有点艰辛。 首先， &hellip;" />
 
 <!-- Combine multiple fonts into one request -->
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic|Patua+One|Yanone+Kaffeesatz" rel="stylesheet" type="text/css">
@@ -102,6 +102,348 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/04/ssh-using-paramiko/">使用paramiko进行ssh工作</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-04-23T00:37:00+08:00" pubdate data-updated="true">Apr 23<span>rd</span>, 2009</time>
+        
+         | <a href="/2009/04/ssh-using-paramiko/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最近在单位写一个自动build的小工具。因为clearcase的<code>setview</code>命令实际上是激活一个新的<code>shell</code>，所以用简单的“串通”<code>shell</code>的脚本很难做到。</p>
+
+<p>因为在邮件组里面看到有同样问题的Matt说用<code>paramiko</code>解决了问题，就试了试，过程还颇有点艰辛。</p>
+
+<p>首先，<code>paramiko</code>没有直接的<code>msi</code>或者<code>exe</code>版本给<code>Windows</code>用户下载，而是需要在本地进行编译。而且<code>python</code>的<code>easy_install</code>工具在Vista下面会报错，所以至少花了十几分钟才算安装完毕。</p>
+
+<p>结果在用test.py验证安装的时候就报错了，说什么：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">paramiko</span><span class="o">.</span><span class="n">SSHException</span><span class="p">:</span> <span class="n">No</span> <span class="n">suitable</span> <span class="n">address</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>安装是我自己一步步弄得，难道搞错了？只好照着demo写了一个sftp的脚本，发现是可以跑的，干。</p>
+
+<p>只好丢了封信给邮件组，然后自己开始找是啥问题。丢给邮件组的信至今没有回音（人气不行啊，<code>paramiko</code>），问题还是找到了。原来是1.7.5的<code>paramiko</code>增加了对ipv6的支持，结果引入了错误。更新了<code>client.py</code>后重新编译就可以用了。</p>
+
+<p>最后，虽然demo的例子也挺多，但是好像没有说清楚怎么用invoke_shell和get_pty以及照例奉上一段代码。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span> (paramiko_sample.py)</span> <a href="/downloads/code/paramiko_sample.py">download</a></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+<span class="line-number">47</span>
+<span class="line-number">48</span>
+<span class="line-number">49</span>
+<span class="line-number">50</span>
+<span class="line-number">51</span>
+<span class="line-number">52</span>
+<span class="line-number">53</span>
+<span class="line-number">54</span>
+<span class="line-number">55</span>
+<span class="line-number">56</span>
+<span class="line-number">57</span>
+<span class="line-number">58</span>
+<span class="line-number">59</span>
+<span class="line-number">60</span>
+<span class="line-number">61</span>
+<span class="line-number">62</span>
+<span class="line-number">63</span>
+<span class="line-number">64</span>
+<span class="line-number">65</span>
+<span class="line-number">66</span>
+<span class="line-number">67</span>
+<span class="line-number">68</span>
+<span class="line-number">69</span>
+<span class="line-number">70</span>
+<span class="line-number">71</span>
+<span class="line-number">72</span>
+<span class="line-number">73</span>
+<span class="line-number">74</span>
+<span class="line-number">75</span>
+<span class="line-number">76</span>
+<span class="line-number">77</span>
+<span class="line-number">78</span>
+<span class="line-number">79</span>
+<span class="line-number">80</span>
+<span class="line-number">81</span>
+<span class="line-number">82</span>
+<span class="line-number">83</span>
+<span class="line-number">84</span>
+<span class="line-number">85</span>
+<span class="line-number">86</span>
+<span class="line-number">87</span>
+<span class="line-number">88</span>
+<span class="line-number">89</span>
+<span class="line-number">90</span>
+<span class="line-number">91</span>
+<span class="line-number">92</span>
+<span class="line-number">93</span>
+<span class="line-number">94</span>
+<span class="line-number">95</span>
+<span class="line-number">96</span>
+<span class="line-number">97</span>
+<span class="line-number">98</span>
+<span class="line-number">99</span>
+<span class="line-number">100</span>
+<span class="line-number">101</span>
+<span class="line-number">102</span>
+<span class="line-number">103</span>
+<span class="line-number">104</span>
+<span class="line-number">105</span>
+<span class="line-number">106</span>
+<span class="line-number">107</span>
+<span class="line-number">108</span>
+<span class="line-number">109</span>
+<span class="line-number">110</span>
+<span class="line-number">111</span>
+<span class="line-number">112</span>
+<span class="line-number">113</span>
+<span class="line-number">114</span>
+<span class="line-number">115</span>
+<span class="line-number">116</span>
+<span class="line-number">117</span>
+<span class="line-number">118</span>
+<span class="line-number">119</span>
+<span class="line-number">120</span>
+<span class="line-number">121</span>
+<span class="line-number">122</span>
+<span class="line-number">123</span>
+<span class="line-number">124</span>
+<span class="line-number">125</span>
+<span class="line-number">126</span>
+<span class="line-number">127</span>
+<span class="line-number">128</span>
+<span class="line-number">129</span>
+<span class="line-number">130</span>
+<span class="line-number">131</span>
+<span class="line-number">132</span>
+<span class="line-number">133</span>
+<span class="line-number">134</span>
+<span class="line-number">135</span>
+<span class="line-number">136</span>
+<span class="line-number">137</span>
+<span class="line-number">138</span>
+<span class="line-number">139</span>
+<span class="line-number">140</span>
+<span class="line-number">141</span>
+<span class="line-number">142</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="sd">&quot;&quot;&quot;</span>
+</span><span class="line"><span class="sd">This script is using for build the software package</span>
+</span><span class="line"><span class="sd">&quot;&quot;&quot;</span>
+</span><span class="line">
+</span><span class="line"><span class="kn">import</span> <span class="nn">sys</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">time</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">paramiko</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">traceback</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">ConfigParser</span>
+</span><span class="line">
+</span><span class="line"><span class="sd">&quot;&quot;&quot;</span>
+</span><span class="line"><span class="sd">The main class of the builder.</span>
+</span><span class="line"><span class="sd">&quot;&quot;&quot;</span>
+</span><span class="line"><span class="k">class</span> <span class="nc">Builder</span><span class="p">:</span>
+</span><span class="line">
+</span><span class="line">    <span class="sd">&quot;&quot;&quot;Parses options from the ini file to create connection.&quot;&quot;&quot;</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">inifile</span><span class="p">):</span>
+</span><span class="line">        <span class="k">try</span><span class="p">:</span>
+</span><span class="line">            <span class="n">config</span> <span class="o">=</span> <span class="n">ConfigParser</span><span class="o">.</span><span class="n">ConfigParser</span><span class="p">()</span>
+</span><span class="line">            <span class="n">config</span><span class="o">.</span><span class="n">readfp</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">inifile</span><span class="p">))</span>
+</span><span class="line">
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">_ssh</span> <span class="o">=</span> <span class="n">paramiko</span><span class="o">.</span><span class="n">SSHClient</span><span class="p">()</span>
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">_ssh</span><span class="o">.</span><span class="n">set_missing_host_key_policy</span><span class="p">(</span><span class="n">paramiko</span><span class="o">.</span><span class="n">AutoAddPolicy</span><span class="p">())</span>
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">_ssh</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;host&#39;</span><span class="p">,</span><span class="s">&#39;server&#39;</span><span class="p">),</span>
+</span><span class="line">                              <span class="n">port</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">getint</span><span class="p">(</span><span class="s">&#39;host&#39;</span><span class="p">,</span> <span class="s">&#39;port&#39;</span><span class="p">),</span>
+</span><span class="line">                              <span class="n">username</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;host&#39;</span><span class="p">,</span><span class="s">&#39;user&#39;</span><span class="p">),</span>
+</span><span class="line">                              <span class="n">password</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;host&#39;</span><span class="p">,</span><span class="s">&#39;password&#39;</span><span class="p">))</span>
+</span><span class="line">
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">_t</span> <span class="o">=</span> <span class="n">paramiko</span><span class="o">.</span><span class="n">Transport</span><span class="p">((</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;host&#39;</span><span class="p">,</span><span class="s">&#39;server&#39;</span><span class="p">),</span> <span class="n">config</span><span class="o">.</span><span class="n">getint</span><span class="p">(</span><span class="s">&#39;host&#39;</span><span class="p">,</span> <span class="s">&#39;port&#39;</span><span class="p">)))</span>
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">_t</span><span class="o">.</span><span class="n">start_client</span><span class="p">()</span>
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">_t</span><span class="o">.</span><span class="n">auth_password</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;host&#39;</span><span class="p">,</span><span class="s">&#39;user&#39;</span><span class="p">),</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;host&#39;</span><span class="p">,</span><span class="s">&#39;password&#39;</span><span class="p">))</span>
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">_sftp</span> <span class="o">=</span> <span class="n">paramiko</span><span class="o">.</span><span class="n">SFTPClient</span><span class="o">.</span><span class="n">from_transport</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_t</span><span class="p">)</span>
+</span><span class="line">        <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+</span><span class="line">            <span class="k">print</span> <span class="s">&#39;*** Caught exception: </span><span class="si">%s</span><span class="s">: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">__class__</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</span><span class="line">            <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">()</span>
+</span><span class="line">            <span class="k">try</span><span class="p">:</span>
+</span><span class="line">                <span class="bp">self</span><span class="o">.</span><span class="n">closeConn</span><span class="p">()</span>
+</span><span class="line">            <span class="k">except</span><span class="p">:</span>
+</span><span class="line">                <span class="k">pass</span>
+</span><span class="line">            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">_fpga</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;fpga compress&#39;</span><span class="p">,</span><span class="s">&#39;fpga&#39;</span><span class="p">)</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">_lpath</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;fpga compress&#39;</span><span class="p">,</span><span class="s">&#39;local_fpga_path&#39;</span><span class="p">)</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">_rpath</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;fpga compress&#39;</span><span class="p">,</span><span class="s">&#39;remote_fpga_path&#39;</span><span class="p">)</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">_oab</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;fpga compress&#39;</span><span class="p">,</span><span class="s">&#39;oab&#39;</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">_xlf</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;xlf build&#39;</span><span class="p">,</span><span class="s">&#39;xlf&#39;</span><span class="p">)</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">_lmid</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;xlf build&#39;</span><span class="p">,</span><span class="s">&#39;lmid&#39;</span><span class="p">)</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">_xpp</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;xlf build&#39;</span><span class="p">,</span><span class="s">&#39;xpp&#39;</span><span class="p">)</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">_xdp</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;xlf build&#39;</span><span class="p">,</span><span class="s">&#39;xdp&#39;</span><span class="p">)</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">_rru</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;xlf build&#39;</span><span class="p">,</span><span class="s">&#39;rru&#39;</span><span class="p">)</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">_rruswdb</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;xlf build&#39;</span><span class="p">,</span><span class="s">&#39;rru_sw_db&#39;</span><span class="p">)</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">_xpl</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;xlf build&#39;</span><span class="p">,</span><span class="s">&#39;xpl&#39;</span><span class="p">)</span>
+</span><span class="line">        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Your input fpga file is:&quot;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">_lpath</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">_fpga</span><span class="o">+</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+</span><span class="line">        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Your ouput xlf file will be:&quot;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">_xlf</span><span class="o">+</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">    <span class="sd">&quot;&quot;&quot;Run command on the server&quot;&quot;&quot;</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">runCmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">):</span>
+</span><span class="line">        <span class="sd">&quot;&quot;&quot;run &lt;command&gt;</span>
+</span><span class="line"><span class="sd">        Execute this command on all hosts in the list&quot;&quot;&quot;</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">command</span><span class="p">:</span>
+</span><span class="line">            <span class="n">stdin</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ssh</span><span class="o">.</span><span class="n">exec_command</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+</span><span class="line">            <span class="n">stdin</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span><span class="line">            <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">stdout</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">():</span>
+</span><span class="line">                <span class="k">print</span> <span class="n">line</span>
+</span><span class="line">        <span class="k">else</span><span class="p">:</span>
+</span><span class="line">            <span class="k">print</span> <span class="s">&quot;usage: run &lt;command&gt;&quot;</span>
+</span><span class="line">
+</span><span class="line">    <span class="sd">&quot;&quot;&quot;Upload the fpga and compress it to oab.bin&quot;&quot;&quot;</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">createOab</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">_sftp</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_lpath</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">_fpga</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">_rpath</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">_fpga</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">runCmd</span><span class="p">(</span><span class="s">&quot;hou_create_fpga -bf </span><span class="se">\&quot;</span><span class="s">/home/ehholli/fpgainput/fpga.med</span><span class="se">\&quot;</span><span class="s"> -dn </span><span class="se">\&quot;</span><span class="s">CXC 172 8213/1</span><span class="se">\&quot;</span><span class="s"> -of oab -dev </span><span class="se">\&quot;</span><span class="s">XC2V6000,-4</span><span class="se">\&quot;</span><span class="s"> -dir /home/ehholli/fpgaoutput/&quot;</span><span class="p">)</span>
+</span><span class="line">        <span class="k">try</span><span class="p">:</span>
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">_sftp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_oab</span><span class="p">,</span><span class="s">&#39;oab.bin&#39;</span><span class="p">)</span>
+</span><span class="line">            <span class="k">print</span><span class="p">(</span><span class="s">&quot;Fpga file compress successfully!&quot;</span><span class="p">)</span>
+</span><span class="line">        <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+</span><span class="line">            <span class="k">print</span> <span class="s">&#39;*** Caught exception: </span><span class="si">%s</span><span class="s">: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">__class__</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</span><span class="line">            <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">()</span>
+</span><span class="line">            <span class="k">try</span><span class="p">:</span>
+</span><span class="line">                <span class="bp">self</span><span class="o">.</span><span class="n">closeConn</span><span class="p">()</span>
+</span><span class="line">            <span class="k">except</span><span class="p">:</span>
+</span><span class="line">                <span class="k">pass</span>
+</span><span class="line">            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">    <span class="sd">&quot;&quot;&quot;Make the tlf&quot;&quot;&quot;</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">genXlf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="line">        <span class="c">#open a interactive shell</span>
+</span><span class="line">        <span class="n">ct_chan</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t</span><span class="o">.</span><span class="n">open_session</span><span class="p">()</span>
+</span><span class="line">        <span class="n">ct_chan</span><span class="o">.</span><span class="n">setblocking</span><span class="p">()</span>
+</span><span class="line">        <span class="n">ct_chan</span><span class="o">.</span><span class="n">get_pty</span><span class="p">()</span>
+</span><span class="line">        <span class="n">ct_chan</span><span class="o">.</span><span class="n">invoke_shell</span><span class="p">()</span>
+</span><span class="line">        <span class="c">#ct setview ehholli</span>
+</span><span class="line">        <span class="k">if</span><span class="p">(</span><span class="n">ct_chan</span><span class="o">.</span><span class="n">send_ready</span><span class="p">()):</span>
+</span><span class="line">            <span class="n">ct_chan</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s">&quot;ct setview ehholli</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">)</span>
+</span><span class="line">        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">        <span class="c">#compile</span>
+</span><span class="line">        <span class="n">build_cmd</span><span class="o">=</span><span class="s">&quot;/vobs/rbs/hw/bcp/xp/deliv/solaris2/bin/xlf_gen -r &quot;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">_xpp</span><span class="o">+</span><span class="s">&quot; &quot;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">_xdp</span><span class="o">+</span><span class="s">&quot; &quot;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">_rru</span> \
+</span><span class="line">                     <span class="o">+</span><span class="s">&quot; -i &quot;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">_oab</span><span class="o">+</span><span class="s">&quot; &quot;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">_rruswdb</span> \
+</span><span class="line">                     <span class="o">+</span><span class="s">&quot; -o /home/ehholli/tmp/&quot;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">_xlf</span> \
+</span><span class="line">                     <span class="o">+</span><span class="s">&quot; -x &quot;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">_xpl</span> \
+</span><span class="line">                     <span class="o">+</span><span class="s">&quot; -lmid </span><span class="se">\&quot;</span><span class="s">&quot;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">_lmid</span><span class="o">+</span><span class="s">&quot;</span><span class="se">\&quot;</span><span class="s">&quot;</span> \
+</span><span class="line">                     <span class="o">+</span><span class="s">&quot; -t </span><span class="se">\&quot;</span><span class="s">au_applic</span><span class="se">\&quot;</span><span class="s"> -v </span><span class="se">\r\n</span><span class="s">&quot;</span>
+</span><span class="line">        <span class="k">print</span><span class="p">(</span><span class="n">build_cmd</span><span class="p">)</span>
+</span><span class="line">        <span class="k">if</span><span class="p">(</span><span class="n">ct_chan</span><span class="o">.</span><span class="n">send_ready</span><span class="p">()):</span>
+</span><span class="line">            <span class="n">ct_chan</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">build_cmd</span><span class="p">)</span>
+</span><span class="line">        <span class="n">tCheck2</span> <span class="o">=</span>
+</span><span class="line">        <span class="k">while</span> <span class="ow">not</span> <span class="n">ct_chan</span><span class="o">.</span><span class="n">recv_ready</span><span class="p">():</span>
+</span><span class="line">            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</span><span class="line">            <span class="n">tCheck2</span><span class="o">+=</span><span class="mi">1</span>
+</span><span class="line">            <span class="k">if</span> <span class="n">tCheck2</span> <span class="o">&gt;=</span> <span class="mi">6</span><span class="p">:</span>
+</span><span class="line">                <span class="k">print</span> <span class="s">&#39;time out&#39;</span><span class="c">#TODO: add exeption here</span>
+</span><span class="line">        <span class="k">print</span><span class="p">(</span><span class="n">ct_chan</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">65536</span><span class="p">))</span>
+</span><span class="line">        <span class="n">ct_chan</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span><span class="line">        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span><span class="line">        <span class="c">#download the xlf file</span>
+</span><span class="line">        <span class="k">try</span><span class="p">:</span>
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">_sftp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;/home/ehholli/tmp/&quot;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">_xlf</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">_xlf</span><span class="p">)</span>
+</span><span class="line">            <span class="k">print</span><span class="p">(</span><span class="s">&quot;xlf file downloaded successfully!&quot;</span><span class="p">)</span>
+</span><span class="line">        <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+</span><span class="line">            <span class="k">print</span> <span class="s">&#39;*** Caught exception: </span><span class="si">%s</span><span class="s">: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">__class__</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</span><span class="line">            <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">()</span>
+</span><span class="line">            <span class="k">try</span><span class="p">:</span>
+</span><span class="line">                <span class="bp">self</span><span class="o">.</span><span class="n">closeConn</span><span class="p">()</span>
+</span><span class="line">            <span class="k">except</span><span class="p">:</span>
+</span><span class="line">                <span class="k">pass</span>
+</span><span class="line">            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">    <span class="sd">&quot;&quot;&quot;Close everything we opened&quot;&quot;&quot;</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">closeConn</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">_ssh</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">_sftp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">_t</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span><span class="line"><span class="k">if</span> <span class="n">__name__</span><span class="o">==</span><span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+</span><span class="line">    <span class="c"># setup logging</span>
+</span><span class="line">    <span class="n">paramiko</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">log_to_file</span><span class="p">(</span><span class="s">&#39;demo_builder.log&#39;</span><span class="p">)</span>
+</span><span class="line">    <span class="n">b</span><span class="o">=</span><span class="n">Builder</span><span class="p">(</span><span class="s">&#39;cfg.ini&#39;</span><span class="p">)</span>
+</span><span class="line">    <span class="n">b</span><span class="o">.</span><span class="n">createOab</span><span class="p">()</span>
+</span><span class="line">    <span class="n">b</span><span class="o">.</span><span class="n">genXlf</span><span class="p">()</span>
+</span><span class="line">    <span class="c">#b.runCmd(&#39;ls&#39;)</span>
+</span><span class="line">    <span class="n">b</span><span class="o">.</span><span class="n">closeConn</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -397,71 +739,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/06/weng-an/">禽兽不如</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-06-30T23:10:00+08:00" pubdate data-updated="true">Jun 30<span>th</span>, 2008</time>
-        
-         | <a href="/2008/06/weng-an/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://lenciel.cn/wp-content/uploads/img/831f886cf347_1296B/b61d7422694158cb81ed814b9e3408c907ee2369_m.jpg"><img style="margin:5px" height="248" alt="wengan" src="/downloads/images/2008_06/wengan.jpg" width="178" align="left" border="0" /></a>公车到站，扰了售票员吃烤饼的节奏。他便有些暴躁：</p>
-
-<p>“易初莲花到了，要下的快点下去。”</p>
-
-<p>对面的那个睡着的女人被这么一叫，赶紧从梦里醒来，带着些讨好的笑容问道：</p>
-
-<p>“师傅，这站是易初莲花伐？”</p>
-
-<p>“不是易初莲花我会叫易初莲花到了？”</p>
-
-<p>售票员回答得还是很凶，但是他没有注意到，自己的眼神炯炯的嵌在女人的乳沟里面，一起溜下车了。</p>
-
-<p>就像他没有注意到，我发现了他那烤饼一样廉价的情欲。</p>
-
-<p>全球化、国际化、现代化，路边的标语上不断出现空洞无物的政治口号。它们伴随着车载电视里面的股价阵阵袭来，让人回想起《政治经济学》的课名，有恍然大悟的感觉。</p>
-
-<p>一切向钱看的如今，经济学成为显学。而我们所谓的经济学家为利益所趋，依附着强势集团，用共同富裕之类的口号掩护着显而易见的阶级分化。新兴集团的崛起，反抗力量的死亡，无声无息。</p>
-
-<p>昨天踢球回家，出租车师傅说，现在油价涨了，每天加油要多付60多块钱。但是，补贴讨论了这么多天，都没有落实。</p>
-
-<p>“我50几了，只比这个国家小一点。我最怀念的还是毛主席那个时候，那个时候的人，真的是讲人情的。兄弟之间，朋友之间，单位里面，都是讲人情的。”</p>
-
-<p>很想纠正他，人情不是毛主席带来的。中国人自古就是最讲人情的啊。愚笨、昏庸、暴戾，都还是缺点，不讲人情，就“禽兽不如”了。自私不再是受人唾弃的品质，形式主义的德育，形式主义的新闻宣传，形式主义的社会活动，仿佛是最近的事情而已。</p>
-
-<p>不过也没有真去反驳他。虽然对毛主席，作为我们这代人甚少好感。但出租车司机的话，突然让我想到，我们现在这个社会，真的比那个理想主义的时代好么？狂热和偏执之后，我们从拥有一个“共产主义”的长远目标，变得整个社会都漫无目标的时候，是不是才是最坏的开始？当我们投身眼花缭乱的物质生活，彻底抛弃孔武有力的精神生活，浑浑噩噩的我们快乐吗？</p>
-
-<p>欧洲杯决赛的幸福被一些贵州的<a href="http://www.google.cn/search?aq=f&#038;complete=1&#038;hl=zh-CN&#038;newwindow=1&#038;rlz=1B3GGGL_zh-CN___CN231&#038;q=%E7%93%AE%E5%AE%89%E4%BA%8B%E4%BB%B6&#038;btnG=Google+%E6%90%9C%E7%B4%A2&#038;meta=" target="_blank">新闻</a>冲淡，让本已模糊的这些怨念又变得清晰。窗外的这个向现代化迈进的城市，到处是还未熄灭的灯光。它如此需要五光十色的夜晚，就像我们如此需要在这个禽兽不如的世界中变得更加禽兽不如，才能奔跑在那真正禽兽不如的未来。</p>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/15/">&larr; Older</a>
@@ -508,16 +785,6 @@
 
 
 
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
 
 
 
