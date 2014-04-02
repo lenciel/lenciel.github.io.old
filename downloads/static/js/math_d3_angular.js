@@ -26,7 +26,7 @@ app.controller('MainCtrl', function($scope, $window){
     else
       content.height = 1200,
       p1.width = 100 + '%',
-      p1.height = 600,
+      p1.height = 800,
       p2.width = 100 + '%',
       p2.height = 1200,
       p1.top = 350,
