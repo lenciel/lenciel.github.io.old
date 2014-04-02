@@ -20,7 +20,7 @@ app.controller('MainCtrl', function($scope, $window){
       p2.width = 60 + '%',
       p2.height = 600,
       p1.left = 0,
-      p1.top= 0,
+      p1.top= 300,
       p2.right = 0,
       delete p2.bottom
     else
