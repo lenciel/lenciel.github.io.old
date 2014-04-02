@@ -29,7 +29,7 @@ app.controller('MainCtrl', function($scope, $window){
       p1.height = 600,
       p2.width = 100 + '%',
       p2.height = 1200,
-      p1.top = 300,
+      p1.top = 350,
       p2.top = 800
 
     var fontSize
