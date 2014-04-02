@@ -30,7 +30,7 @@ app.controller('MainCtrl', function($scope, $window){
       p2.width = 100 + '%',
       p2.height = 1200,
       p1.top = 400,
-      p2.top = 850
+      p2.top = 900
 
     var fontSize
     if(w < 300){
