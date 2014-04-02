@@ -24,12 +24,12 @@ app.controller('MainCtrl', function($scope, $window){
       p2.right = 0,
       delete p2.bottom
     else
-      content.height = 1200,
+      content.height = 1250,
       p1.width = 100 + '%',
-      p1.height = 600,
+      p1.height = 350,
       p2.width = 100 + '%',
       p2.height = 1200,
-      p1.top = 400,
+      p1.top = 500,
       p2.top = 900
 
     var fontSize
