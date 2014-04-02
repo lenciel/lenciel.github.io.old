@@ -4,7 +4,7 @@
   <title><![CDATA[Category: d3 | @Lenciel]]></title>
   <link href="http://lenciel.cn/blog/categories/d3/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2014-04-02T18:35:06+08:00</updated>
+  <updated>2014-04-02T18:38:48+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -18,14 +18,14 @@
     <link href="http://lenciel.cn/2014/04/time-to-talk-about-math/"/>
     <updated>2014-04-02T14:30:00+08:00</updated>
     <id>http://lenciel.cn/2014/04/time-to-talk-about-math</id>
-    <content type="html"><![CDATA[<p>嗯，这篇日志主要是想试试:</p>
+    <content type="html"><![CDATA[<p>这篇日志主要是想试试:</p>
 
 <ul>
-  <li>能不能把<code>d3.js</code>和<code>AngularJS</code>集成到<a href="http://lenciel.cn/2013/03/blog-with-octopress-and-github-pages/">octopress</a>，因为<a href="http://vudlab.com/bart/">setosa</a>很酷</li>
-  <li>能不能在某篇日志里面支持specific的js和css</li>
+  <li>怎么把<code>d3.js</code>和<code>AngularJS</code>集成到<a href="http://lenciel.cn/2013/03/blog-with-octopress-and-github-pages/">octopress</a>，因为<a href="http://vudlab.com/bart/">setosa</a>很酷</li>
+  <li>怎么在某篇日志里面支持specific的js和css</li>
 </ul>
 
-<p>所以课本里面的<a href="http://aleph0.clarku.edu/~djoyce/java/elements/bookI/propI47.html">勾股定理</a>怎么呈现才好懂？</p>
+<p>玩了一下并不是很麻烦，于是这个<a href="(http://lenciel.cn/2013/03/blog-with-octopress-and-github-pages/)">静态站点</a>可以干的事情就多了。比如把课本里面的<a href="http://aleph0.clarku.edu/~djoyce/java/elements/bookI/propI47.html">勾股定理</a>这么证明一下：</p>
 
 <link rel="stylesheet" type="text/css" href="http://lenciel.cn/downloads/static/css/math_d3_angular.css" />
 
@@ -103,8 +103,6 @@
       </div> <!-- end details -->
     </div> <!-- end panel -->
 </div>
-
-<p>嗯，看起来，今后可以写很多花里胡哨的东西了。</p>
 ]]></content>
   </entry>
   
