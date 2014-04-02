@@ -24,7 +24,7 @@ app.controller('MainCtrl', function($scope, $window){
       p2.right = 0,
       delete p2.bottom
     else
-      content.height = 1250,
+      content.height = 1300,
       p1.width = 100 + '%',
       p1.height = 350,
       p2.width = 100 + '%',
