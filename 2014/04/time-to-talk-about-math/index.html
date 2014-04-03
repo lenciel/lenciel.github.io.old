@@ -148,10 +148,10 @@
 <script src="/downloads/static/js/math_d3_angular.js" charset="utf-8"></script>
 
 <div class="main-content" ng-app="app" ng-controller="MainCtrl" ng-style="styles.content" ng-class="{ sm : w &lt; 650 }" ng-init="init()">
-    <div class="panel" ng-style="styles.panel1">
+    <div id="panel1" class="panel" ng-style="styles.panel1">
       <stage selected-shape="selectedShape" ng-mouseover="selectedShape = null" />
     </div>
-    <div class="panel" ng-style="styles.panel2">
+    <div id="panel2" class="panel" ng-style="styles.panel2">
       <div class="details">
         <p>
           如图所示的三角形<co points="abc" shape="triangle">ABC</co>角<co points="bac" shape="angle">BAC</co>为直角。
@@ -274,6 +274,8 @@
       
         <a class="basic-alignment left" href="/2014/03/good-night-1/" title="Previous Post: 晚安(二)">&laquo; 晚安(二)</a>
       
+      
+        <a class="basic-alignment right" href="/2014/04/pomodoroda-tech/" title="Next Post: Pomodoro Technique">Pomodoro Technique &raquo;</a>
       
     </p>
   </footer>

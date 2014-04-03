@@ -9,7 +9,8 @@
   <meta name="author" content="Lenciel Li">
 
   
-  <meta name="description" content="最近因为移动的手机丢了，正好宽带升级到100M送了两个电信的卡没地方用，入了一个Rick推荐的电信移动双卡双待的机器：中兴N986。 机器用来当小三机已经是非常不错了，唯一让本座纠结的就是电信的合约机老是喜欢把google账号干掉，而小弟的所有联系人又都在google（ &hellip;">
+  <meta name="description" content=" &#8220;Next subject: Kowalski, Leon.&#8221;Ridley Scott Blade Runner(1982)
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -31,14 +32,16 @@
 
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://lenciel.cn/blog/page/3/" />
-<meta property="og:description" content="最近因为移动的手机丢了，正好宽带升级到100M送了两个电信的卡没地方用，入了一个Rick推荐的电信移动双卡双待的机器：中兴N986。 机器用来当小三机已经是非常不错了，唯一让本座纠结的就是电信的合约机老是喜欢把google账号干掉，而小弟的所有联系人又都在google（ &hellip;" />
+<meta property="og:description" content=" &#8220;Next subject: Kowalski, Leon.&#8221;Ridley Scott Blade Runner(1982)
+" />
 
 <meta property="og:site_name" content="http://lenciel.cn" />
 <meta property="article:author" content="https://plus.google.com/114787528537231301324">
 
 
 
-<meta itemprop="description" content="最近因为移动的手机丢了，正好宽带升级到100M送了两个电信的卡没地方用，入了一个Rick推荐的电信移动双卡双待的机器：中兴N986。 机器用来当小三机已经是非常不错了，唯一让本座纠结的就是电信的合约机老是喜欢把google账号干掉，而小弟的所有联系人又都在google（ &hellip;" />
+<meta itemprop="description" content=" &#8220;Next subject: Kowalski, Leon.&#8221;Ridley Scott Blade Runner(1982)
+" />
 
 <!-- Combine multiple fonts into one request -->
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic|Patua+One|Yanone+Kaffeesatz" rel="stylesheet" type="text/css">
@@ -102,6 +105,46 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/01/next-subject/">Still Long Way to Go</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-17T01:56:00+08:00" pubdate data-updated="true">Jan 17<span>th</span>, 2014</time>
+        
+         | <a href="/2014/01/next-subject/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="/downloads/images/next_subject_in_blade_runner.gif" alt="Next Subject" title="Don't touch me..." /></p>
+
+<blockquote><p>&#8220;Next subject: Kowalski, Leon.&#8221;</p><footer><strong>Ridley Scott</strong> <cite><a href="http://www.imdb.com/title/tt0083658/">Blade Runner(1982)</a></cite></footer></blockquote>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -277,76 +320,6 @@
   <div class="entry-content"><p><img src="/downloads/images/healing_to_do.gif" alt="Should do more healing" title="Don't touch me..." /></p>
 
 <blockquote><p>&#8220;I guess I’ve still got a lot of healing to do.&#8221;</p><footer><strong>Owen Wilson</strong> <cite><a href="http://www.imdb.com/title/tt0838221/">The Darjeeling Limited(2007)</a></cite></footer></blockquote>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/11/replace-goagentx-with-lines-of-scripts/">Mac下后台运行goagent</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-11-14T13:22:00+08:00" pubdate data-updated="true">Nov 14<span>th</span>, 2013</time>
-        
-         | <a href="/2013/11/replace-goagentx-with-lines-of-scripts/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>几年过去了，<a href="https://code.google.com/p/goagent/">Goagent</a>是本座翻墙唯一的选择。在Mac上使用它最开始我用了<a href="https://github.com/ohdarling/GoAgentX">GoAgentX</a>，但使用了一段时间之后发现几个不太满意的地方：</p>
-
-<ul>
-  <li>不是简单给GoAgent做了个界面，而是集成了多个翻墙工具，选项挺多挺乱的（可能对其他用户是一个好事）</li>
-  <li>每次GoAgent更新之后，GoAgentX更新的时间都比较滞后</li>
-  <li>GoAgentX更新之后，经常无法工作，需要做这样那样的调整</li>
-</ul>
-
-<p>但其实用GoAgent我们需要的无非是<code>python proxy.py</code>，有很多办法让它运行起来。本座比较喜欢的是用tmux把这个任务跑在一个detach了的session，如果连接有问题再attach上去看看是什么问题。具体流程如下：</p>
-
-<p>先装<a href="https://github.com/aziz/tmuxinator">tmuxinator</a>，看名字不知道是不是受了ubuntu下面terminator的启发。然后新建一个项目用来跑goagent:</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>mux new goagent
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>项目配置文件（假设你的goagent放在<code>~/bin/goagent/local</code>）：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-</pre></td><td class="code"><pre><code class="ruby"><span class="line"><span class="nb">name</span><span class="p">:</span> <span class="n">goagent</span>
-</span><span class="line"><span class="ss">root</span><span class="p">:</span> <span class="o">~</span><span class="sr">/bin/</span><span class="n">goagent</span><span class="o">/</span><span class="n">local</span>
-</span><span class="line">
-</span><span class="line">
-</span><span class="line"><span class="ss">windows</span><span class="p">:</span>
-</span><span class="line">  <span class="o">-</span> <span class="ss">shell</span><span class="p">:</span> <span class="n">python</span> <span class="n">proxy</span><span class="o">.</span><span class="n">py</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>这样就只需要你在需要翻墙的时候<code>mux goagent</code>一下即可，detach或者attach到这个session也非常方便。当然不使用tmuxinator而是直接用shell脚本写一堆tmux命令也可以达到一样的效果，用tmuxinator是因为本座自己还有一堆别的Django项目的tmuxinator项目。</p>
 </div>
   
   

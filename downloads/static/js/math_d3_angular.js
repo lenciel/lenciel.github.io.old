@@ -20,7 +20,6 @@ app.controller('MainCtrl', function($scope, $window){
       p2.width = 60 + '%',
       p2.height = 800,
       p1.left = 0,
-      p1.top= 350,
       p2.right = 0,
       delete p2.bottom
     else
@@ -28,9 +27,7 @@ app.controller('MainCtrl', function($scope, $window){
       p1.width = 100 + '%',
       p1.height = 350,
       p2.width = 100 + '%',
-      p2.height = 1200,
-      p1.top = 500,
-      p2.top = 900
+      p2.height = 1200
 
     var fontSize
     if(w < 300){

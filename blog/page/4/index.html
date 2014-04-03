@@ -9,15 +9,7 @@
   <meta name="author" content="Lenciel Li">
 
   
-  <meta name="description" content="升级到最新的osx版本Maverick之后，打开iTerm2就报错： 1
-2
-3
-4
-5
-6
-7
-8
-Traceback (most recent call last): File &quot;&lt;string&gt;&quot;, line 1, in &lt;module&gt; &hellip;">
+  <meta name="description" content="几年过去了，Goagent是本座翻墙唯一的选择。在Mac上使用它最开始我用了GoAgentX，但使用了一段时间之后发现几个不太满意的地方： 不是简单给GoAgent做了个界面，而是集成了多个翻墙工具，选项挺多挺乱的（可能对其他用户是一个好事） 每次GoAgent更新之后， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -39,30 +31,14 @@ Traceback (most recent call last): File &quot;&lt;string&gt;&quot;, line 1, in &
 
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://lenciel.cn/blog/page/4/" />
-<meta property="og:description" content="升级到最新的osx版本Maverick之后，打开iTerm2就报错： 1
-2
-3
-4
-5
-6
-7
-8
-Traceback (most recent call last): File &quot;&lt;string&gt;&quot;, line 1, in &lt;module&gt; &hellip;" />
+<meta property="og:description" content="几年过去了，Goagent是本座翻墙唯一的选择。在Mac上使用它最开始我用了GoAgentX，但使用了一段时间之后发现几个不太满意的地方： 不是简单给GoAgent做了个界面，而是集成了多个翻墙工具，选项挺多挺乱的（可能对其他用户是一个好事） 每次GoAgent更新之后， &hellip;" />
 
 <meta property="og:site_name" content="http://lenciel.cn" />
 <meta property="article:author" content="https://plus.google.com/114787528537231301324">
 
 
 
-<meta itemprop="description" content="升级到最新的osx版本Maverick之后，打开iTerm2就报错： 1
-2
-3
-4
-5
-6
-7
-8
-Traceback (most recent call last): File &quot;&lt;string&gt;&quot;, line 1, in &lt;module&gt; &hellip;" />
+<meta itemprop="description" content="几年过去了，Goagent是本座翻墙唯一的选择。在Mac上使用它最开始我用了GoAgentX，但使用了一段时间之后发现几个不太满意的地方： 不是简单给GoAgent做了个界面，而是集成了多个翻墙工具，选项挺多挺乱的（可能对其他用户是一个好事） 每次GoAgent更新之后， &hellip;" />
 
 <!-- Combine multiple fonts into one request -->
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic|Patua+One|Yanone+Kaffeesatz" rel="stylesheet" type="text/css">
@@ -126,6 +102,76 @@ Traceback (most recent call last): File &quot;&lt;string&gt;&quot;, line 1, in &
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/11/replace-goagentx-with-lines-of-scripts/">Mac下后台运行goagent</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-14T13:22:00+08:00" pubdate data-updated="true">Nov 14<span>th</span>, 2013</time>
+        
+         | <a href="/2013/11/replace-goagentx-with-lines-of-scripts/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>几年过去了，<a href="https://code.google.com/p/goagent/">Goagent</a>是本座翻墙唯一的选择。在Mac上使用它最开始我用了<a href="https://github.com/ohdarling/GoAgentX">GoAgentX</a>，但使用了一段时间之后发现几个不太满意的地方：</p>
+
+<ul>
+  <li>不是简单给GoAgent做了个界面，而是集成了多个翻墙工具，选项挺多挺乱的（可能对其他用户是一个好事）</li>
+  <li>每次GoAgent更新之后，GoAgentX更新的时间都比较滞后</li>
+  <li>GoAgentX更新之后，经常无法工作，需要做这样那样的调整</li>
+</ul>
+
+<p>但其实用GoAgent我们需要的无非是<code>python proxy.py</code>，有很多办法让它运行起来。本座比较喜欢的是用tmux把这个任务跑在一个detach了的session，如果连接有问题再attach上去看看是什么问题。具体流程如下：</p>
+
+<p>先装<a href="https://github.com/aziz/tmuxinator">tmuxinator</a>，看名字不知道是不是受了ubuntu下面terminator的启发。然后新建一个项目用来跑goagent:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>mux new goagent
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>项目配置文件（假设你的goagent放在<code>~/bin/goagent/local</code>）：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class="ruby"><span class="line"><span class="nb">name</span><span class="p">:</span> <span class="n">goagent</span>
+</span><span class="line"><span class="ss">root</span><span class="p">:</span> <span class="o">~</span><span class="sr">/bin/</span><span class="n">goagent</span><span class="o">/</span><span class="n">local</span>
+</span><span class="line">
+</span><span class="line">
+</span><span class="line"><span class="ss">windows</span><span class="p">:</span>
+</span><span class="line">  <span class="o">-</span> <span class="ss">shell</span><span class="p">:</span> <span class="n">python</span> <span class="n">proxy</span><span class="o">.</span><span class="n">py</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>这样就只需要你在需要翻墙的时候<code>mux goagent</code>一下即可，detach或者attach到这个session也非常方便。当然不使用tmuxinator而是直接用shell脚本写一堆tmux命令也可以达到一样的效果，用tmuxinator是因为本座自己还有一堆别的Django项目的tmuxinator项目。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -367,55 +413,6 @@ Traceback (most recent call last): File &quot;&lt;string&gt;&quot;, line 1, in &
     </li>
   </ol>
 </div>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/10/the-myth-of-nasas-expensive-space-pens/">NASA造笔的事情也是假的</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-10-12T12:46:00+08:00" pubdate data-updated="true">Oct 12<span>th</span>, 2013</time>
-        
-         | <a href="/2013/10/the-myth-of-nasas-expensive-space-pens/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="/downloads/images/space-pen.jpg" alt="Space Pen" title="Don't touch me..." /></p>
-
-<p>在软件开发中我们一说到避免过度设计，经常有两个例子会被抬出来，其中一个就是NASA造了昂贵的太空笔，然后俄罗斯用很简单的方案解决问题的故事（另一个大概就是传送带旁边放电风扇的故事）。<a href="http://www.snopes.com/business/genius/spacepen.asp">NASA造笔的故事</a>大概是这样的:</p>
-
-<blockquote><p>太空竞赛开始的1960年代，NASA面临一大难题，宇航员需要用笔在真空环境下写字。NASA于是展开了研究，花了150万美元开发出了“宇航员笔”，并在商业市场上取得了小小的成功。</p><p>俄罗斯人遇到了同样的问题。</p><p>他们用铅笔搞定。</p></blockquote>
-
-<p>非常有启发意义的故事，不是吗？只不过这不是真相。其实NASA一开始就在太空中使用铅笔，但是铅笔在零重力下会造成粉尘特别是石墨这类导电的粉尘飘散，所以被替代了。替代品是<a href="http://www.scientificamerican.com/article.cfm?id=fact-or-fiction-nasa-spen">Fisher公司开发的一款可以在极端条件下使用的笔</a>:</p>
-
-<blockquote><p>Paul C. Fisher and his company, the Fisher Pen Company, reportedly invested $1 million to create what is now commonly known as the space pen. None of this investment money came from NASA&#8217;s coffers &#8211; the agency only became involved after the pen was dreamed into existence. In 1965 Fisher patented a pen that could write upside-down, in frigid or roasting conditions (down to minus 50 degrees Fahrenheit or up to 400 degrees F), and even underwater or in other liquids. If too hot, though, the ink turned green instead of its normal blue.</p></blockquote>
-
-<p>在测试之后，NASA订购了400支Fisher笔，总共花费在一千美元以下。俄罗斯在一年之后也开始订这种笔了。Fisher公司目前仍然在<a href="http://www.spacepen.com/originalastronautspacepen.aspx">销售这种太空笔</a>，并且你可以很方便的买到：<a href="http://www.amazon.com/exec/obidos/ASIN/B0015ZP2AC/ref=nosim/0sil8">Amazon上</a>30来刀，甚至还有一个一看就不是官方网站的<a href="http://www.spacepen.cn/index.php">中文官方网站</a>。</p>
-
 </div>
   
   

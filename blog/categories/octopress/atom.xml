@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | @Lenciel]]></title>
   <link href="http://lenciel.cn/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2014-04-02T20:27:07+08:00</updated>
+  <updated>2014-04-03T17:00:58+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -36,10 +36,10 @@
 <script src="http://lenciel.cn/downloads/static/js/math_d3_angular.js" charset="utf-8"></script>
 
 <div class="main-content" ng-app="app" ng-controller="MainCtrl" ng-style="styles.content" ng-class="{ sm : w &lt; 650 }" ng-init="init()">
-    <div class="panel" ng-style="styles.panel1">
+    <div id="panel1" class="panel" ng-style="styles.panel1">
       <stage selected-shape="selectedShape" ng-mouseover="selectedShape = null" />
     </div>
-    <div class="panel" ng-style="styles.panel2">
+    <div id="panel2" class="panel" ng-style="styles.panel2">
       <div class="details">
         <p>
           如图所示的三角形<co points="abc" shape="triangle">ABC</co>角<co points="bac" shape="angle">BAC</co>为直角。
