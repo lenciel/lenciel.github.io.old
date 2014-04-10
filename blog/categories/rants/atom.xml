@@ -4,7 +4,7 @@
   <title><![CDATA[Category: rants | @Lenciel]]></title>
   <link href="http://lenciel.cn/blog/categories/rants/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2014-04-10T14:24:11+08:00</updated>
+  <updated>2014-04-10T14:25:17+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -12,6 +12,129 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Openssl Heartbleed Bug]]></title>
+    <link href="http://lenciel.cn/2014/04/openssl-heartbleed-bug/"/>
+    <updated>2014-04-10T11:29:15+08:00</updated>
+    <id>http://lenciel.cn/2014/04/openssl-heartbleed-bug</id>
+    <content type="html"><![CDATA[<p>连某宝都中招的<a href="http://heartbleed.com/">Heartbleed bug</a>究竟是个什么东西？简单地说就是攻击者可以读最多64KB内存的内容。</p>
+
+<p>读了这64KB能干嘛？用报这个bug的人的话来说：</p>
+
+<p><blockquote><p>Without using any privileged information or credentials we were able steal from ourselves the secret keys used for our X.509 certificates, user names and passwords, instant messages, emails and business critical documents and communication.</p></blockquote></p>
+
+<p>那么读取64KB内存和获取这么多关键信息究竟有什么关系呢？</p>
+
+<h2 id="the-bug">The bug</h2>
+<p>先来看看<a href="http://git.openssl.org/gitweb/?p=openssl.git;a=commitdiff;h=96db9023b881d7cd9f379b0c154650d6c108e9a3">patch</a>里面的<code>ssl/d1_both.c</code>:</p>
+
+<p><code>c
+int            
+dtls1_process_heartbeat(SSL *s)
+    {          
+    unsigned char *p = &amp;s-&gt;s3-&gt;rrec.data[0], *pl;
+    unsigned short hbtype;
+    unsigned int payload;
+    unsigned int padding = 16; /* Use minimum padding */
+</code></p>
+
+<p>可以看到，heartbeat里有一个 <a href="http://en.wikipedia.org/wiki/Transport_Layer_Security">SSLv3</a>  record的指针，这个<code>record</code>的代码如下:</p>
+
+<p><code>c
+typedef struct ssl3_record_st
+    {
+        int type;               /* type of record */
+        unsigned int length;    /* How many bytes available */
+        unsigned int off;       /* read/write offset into 'buf' */
+        unsigned char *data;    /* pointer to the record data */
+        unsigned char *input;   /* where the decode bytes are */
+        unsigned char *comp;    /* only used with decompression - malloc()ed */
+        unsigned long epoch;    /* epoch number, needed by DTLS1 */
+        unsigned char seq_num[8]; /* sequence number, needed by DTLS1 */
+    } SSL3_RECORD;
+</code>
+可以看到，每个<code>record</code>有它的<code>type</code>、<code>length</code>和<code>data</code>，规规矩矩。</p>
+
+<p>回到<code>dtls1_process_heartbeat</code>：</p>
+
+<p><code>c
+/* Read type and payload length first */
+hbtype = *p++;
+n2s(p, payload);
+pl = p;
+</code></p>
+
+<p>可以看到<code>SSLv3 record</code>的第一个byte就是放这个<code>heartbeat</code>的<code>type</code>。 宏<code>n2s</code> 则是从<code>p</code>里面取两个byte放到payload里面，被用来作为payload的长度。 <strong>注意这里并没有检查<code>SSLv3 record</code> 实际的长度。</strong> </p>
+
+<p>接下来在这个函数里面干了下面这些事情：</p>
+
+<p>``` c
+unsigned char *buffer, *bp;
+int r;</p>
+
+<p>/* Allocate memory for the response, size is 1 byte
+ * message type, plus 2 bytes payload length, plus
+ * payload, plus padding
+ */
+buffer = OPENSSL_malloc(1 + 2 + payload + padding);
+bp = buffer;
+```</p>
+
+<p>可以看到，用户要多少程序就分配多少，最多可以分配到<code>65535+1+2+16</code>，指针bp被用来操作这块内存。然后：</p>
+
+<p><code>c
+/* Enter response type, length and copy payload */
+*bp++ = TLS1_HB_RESPONSE;
+s2n(payload, bp);
+memcpy(bp, pl, payload);
+</code></p>
+
+<p>宏<code> s2n</code>把<code>n2s</code>做的操作恢复出来：先拿16个bit的值放到2个byte里面，也就是原来请求的payload的长度。然后把<code>pl</code>里面放的payload(请求者提交的data)拷贝到新分配的<code>bp</code>里面。</p>
+
+<p>看起来是很平常的操作，只不过没有认真的检查用户输入而已，但问题也就在这里了。</p>
+
+<h2 id="where-is-the-bug">Where is the bug</h2>
+
+<p>如果用户并没有正在提交声称的那么多个bytes的payload，那么memcpy就会读到同一个process里面SSLv3 record附近的内存内容。</p>
+
+<p>这附近有哪些内容呢？</p>
+
+<p>首先要明白在linux上，内存的动态分配主要是通过<a href="http://linux.die.net/man/2/sbrk">sbrk</a> 或者是 <a href="http://man7.org/linux/man-pages/man2/mmap.2.html">mmap</a>。如果内存是通过sbrk分配的，它会使用<code>heap-grows-up</code>规则，泄露出来的东西不会那么多（但是如果是同时并发请求<a href="http://blog.existentialize.com/diagnosis-of-the-openssl-heartbleed-bug.html#fn:update">还是有东西会漏</a>）。</p>
+
+<p>在这里，<code>pl</code>因为malloc里面的mmap_threshhold多半是sbrk分配的，但是，那些关键的用户数据，则多半是通过mmap分配内存。于是这些数据就会被攻击者用<code>pl</code>拿到。如果再考虑并发请求，就…</p>
+
+<h2 id="the-fix">The fix</h2>
+
+<p>所以，整个patch里面最主要的fix就是：
+* 检查是否有长度为0的虚假heartbeat
+* 检查record的真实长度</p>
+
+<p>代码如下：</p>
+
+<p><code>c    
+    /* Read type and payload length first */
+    if (1 + 2 + 16 &gt; s-&gt;s3-&gt;rrec.length)
+        return 0; /* silently discard */
+    hbtype = *p++;
+    n2s(p, payload);
+    if (1 + 2 + payload + 16 &gt; s-&gt;s3-&gt;rrec.length)
+        return 0; /* silently discard per RFC 6520 sec. 4 */
+    pl = p;
+</code>    </p>
+
+<h2 id="so">So?</h2>
+
+<p>这个bug大概算是影响这么剧烈的bug里面最好明白的一个，所以居然我也看明白了。感受：</p>
+
+<ul>
+  <li>为了可扩展性引入了复杂度，经常都会带来恶梦</li>
+  <li>用户的输入，无论如何都不能相信，一定要check</li>
+  <li>C语言的确是大牛小牛都会踩到坑啊</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Is Wine Bullshit]]></title>
@@ -226,34 +349,6 @@
 <p>所以说Google Reader这种服务的倒掉，在短期内当然是巨大的损失。不过这样一来，似乎又唤醒了一个行业沉睡多年的创造力。看看<a href="http://inside.flipboard.com/2013/03/14/weve-got-your-rss-covered-save-your-google-reader-feeds-now/">Flipboard</a>、<a href="http://feedly.com/">Feedly</a>、<a href="http://feedafever.com/">Fever</a>、<a href="http://www.newsblur.com/">Newsblur</a>的反应你就会觉得，说不定会有比Google Reader更好的服务被孵化出来。</p>
 
 <p>因为，我实在是不觉得那些乱七八糟的SNS能代替一个干干净净的阅读器。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[走进科学]]></title>
-    <link href="http://lenciel.cn/2013/02/science-is-not-that-easy/"/>
-    <updated>2013-02-01T23:40:00+08:00</updated>
-    <id>http://lenciel.cn/2013/02/science-is-not-that-easy</id>
-    <content type="html"><![CDATA[<p><img src="/downloads/images/black_and_white.jpg" alt="Black and White" title="Don't touch me…" /></p>
-
-<p>最近波音787曝出锂电池起火燃烧的<a href="http://finance.sina.com.cn/world/mzjj/20130130/140414451075.shtml">问题</a>。全世界人民，特别是中国人民纷纷摇头叹息：以精密和严谨著称的日本人，现在终归是堕落了。奇怪的是，如果你想稍微深入一点儿去搜索日本制造的锂电池究竟出了什么问题，答案就欠奉了。于是本座花了点儿时间试图去把这事情弄明白。</p>
-
-<p>人类对锂电池最初的开发是在上世纪六十年代。由于在金属中，锂元素有着最小的密度和最大的电负性，故而具有最高的比能量。但由于锂的活性非常强，所以一直都有严重的安全问题没法投产。</p>
-
-<p>80年代开始出现了所谓的“摇椅式锂电池”。其正极为不同类型的含锂化合物，负极则由石墨一类的物质形成层状结构，Li+可填充于其中。在充电时，阴极部分的锂离子离开含锂化合物，透过电解液中的隔膜向阳极移动，并嵌入到阳极的层状结构中；反之在放电时，锂离子在负极脱离，移向正极并结合于正极的化合物之中。与传统锂电池不同的是，被氧化还原的物质不再是Li和Li+，锂离子只是伴随着两极材料本身发生放电而产生的氧化态的变化而反复脱嵌与嵌入，往返于两极之间，故称为“摇椅式”。</p>
-
-<p>这种锂电池要求选用的电解液必须不和锂盐发生反应，并且在相当宽的温度范围内保持液态，所以合适的选择非常少。一开始，普遍使用的是碳酸丙烯酯。不过这种溶剂有很大的缺陷：它会渗透石墨烯，使得电池效率低下，安全性也随之降低。</p>
-
-<p>到了90年代初，Sony的研究人员发现使用碳酸乙烯酯，问题解决了：反应中生成的粘稠的物质正好可以阻碍溶剂本身的分子渗透到石墨烯，同时又不会阻碍锂电子穿透进入石墨烯。于是锂电池正式投入大规模商用。</p>
-
-<p>不过，虽然好死不死的商用了20来年，至今都没人搞明白那粘稠的物质究竟是啥，而从碳酸丙烯酯到碳酸乙烯酯这微小的结构变化为何带来这么巨大的差异。很多论文发表了，很多理论被提出了，有志于此的公司投入了大量人力财力，但似乎，用句四川话来说，“还没有摸到火门”。</p>
-
-<p>本座常常听人说我们处在一个知识大爆炸的年代。但实际上，我们仅仅是处在一个获取知识很容易的时代而已（感谢Google和其他开放的Web service）。在书店里面就可以买到华丽的《时间简史》，打开电脑可以看BBT这种动不动就要来段术语或者方程式的剧，让我们感觉好像过得很”科学“，有时候就会有一种自己很聪明的幻觉。</p>
-
-<p>于是可能我们看到787的新闻时也就会觉得，这帮日本人啊，电池都造不好。写下这篇blog，希望自己记住今天的这份感觉：全世界用来发这条新闻，看这条新闻，尽情评论的人，其实也不知道自己用的笔记本里面锂电池是怎么工作的。这不是什么弦理论，不是地球形成之初的疑问，不需要什么超强的抽象思维能力和高智商。每个人都可以打开电池开始研究，但就是没人知道。</p>
-
-<p>因为科学其实是很枯燥又很寂寞的事情啊。</p>
-
 ]]></content>
   </entry>
   
