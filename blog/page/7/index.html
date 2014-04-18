@@ -9,8 +9,7 @@
   <meta name="author" content="Lenciel Li">
 
   
-  <meta name="description" content=" I wonder if it remembers me.Bill Murray The Life Aquatic With Steve Zissou(2004)
-">
+  <meta name="description" content="Raspberry Pi的默认提供了HDMI接口，遇到手边显示器比较老并且电视机也比较老就不好办。 如果直接买一根HDMI转VGA的线，直接连上去很可能是黑屏，这是因为默认的配置文件不支持这种连接方式，需要修改配置文件。 需要修改的是 /boot/config.txt里面的几个配置值， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -32,16 +31,14 @@
 
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://lenciel.cn/blog/page/7/" />
-<meta property="og:description" content=" I wonder if it remembers me.Bill Murray The Life Aquatic With Steve Zissou(2004)
-" />
+<meta property="og:description" content="Raspberry Pi的默认提供了HDMI接口，遇到手边显示器比较老并且电视机也比较老就不好办。 如果直接买一根HDMI转VGA的线，直接连上去很可能是黑屏，这是因为默认的配置文件不支持这种连接方式，需要修改配置文件。 需要修改的是 /boot/config.txt里面的几个配置值， &hellip;" />
 
 <meta property="og:site_name" content="http://lenciel.cn" />
 <meta property="article:author" content="https://plus.google.com/114787528537231301324">
 
 
 
-<meta itemprop="description" content=" I wonder if it remembers me.Bill Murray The Life Aquatic With Steve Zissou(2004)
-" />
+<meta itemprop="description" content="Raspberry Pi的默认提供了HDMI接口，遇到手边显示器比较老并且电视机也比较老就不好办。 如果直接买一根HDMI转VGA的线，直接连上去很可能是黑屏，这是因为默认的配置文件不支持这种连接方式，需要修改配置文件。 需要修改的是 /boot/config.txt里面的几个配置值， &hellip;" />
 
 <!-- Combine multiple fonts into one request -->
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic|Patua+One|Yanone+Kaffeesatz" rel="stylesheet" type="text/css">
@@ -105,6 +102,59 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/08/using-raspberry-pi-with-hdmi-to-vga-adapter/">Raspberry Pi上使用HDMI转接VGA线</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-20T15:19:00+08:00" pubdate data-updated="true">Aug 20<span>th</span>, 2013</time>
+        
+         | <a href="/2013/08/using-raspberry-pi-with-hdmi-to-vga-adapter/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://www.raspberrypi.org/‎">Raspberry Pi</a>的默认提供了HDMI接口，遇到手边显示器比较老并且电视机也比较老就不好办。</p>
+
+<p>如果直接买一根<a href="http://item.jd.com/674899.html">HDMI转VGA的线</a>，直接连上去很可能是黑屏，这是因为默认的配置文件不支持这种连接方式，需要修改配置文件。</p>
+
+<p>需要修改的是 <code>/boot/config.txt</code>里面的几个配置值，具体的讨论<a href="http://www.raspberrypi.org/phpBB3/viewtopic.php?f=76&amp;t=33477">在这里</a>：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">disable_overscan=1
+</span><span class="line">hdmi_group=2
+</span><span class="line">hdmi_mode=35
+</span><span class="line">hdmi_drive=2</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>修改完毕之后重新启动就可以看到画面了。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -988,46 +1038,6 @@
 </span><span class="line"><span class="o">&gt;&gt;&gt;</span> <span class="n">public_key</span><span class="o">.</span><span class="n">verify</span><span class="p">(</span><span class="nb">hash</span><span class="p">,</span> <span class="n">signature</span><span class="p">)</span>
 </span><span class="line"><span class="bp">True</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/07/doomsday-machines/">Doomsday Machines</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-23T23:25:00+08:00" pubdate data-updated="true">Jul 23<span>rd</span>, 2013</time>
-        
-         | <a href="/2013/07/doomsday-machines/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="/downloads/images/dr_strangelove_doomsday_machine.gif" alt="doomsday machines" title="Don't touch me..." /></p>
-
-<blockquote><p>Gee, I wish we had one of them doomsday machines.</p><footer><strong>Stanley Kubrick</strong> <cite><a href="http://www.imdb.com/title/tt0057012/">Fight Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb(1964)</a></cite></footer></blockquote>
 </div>
   
   
