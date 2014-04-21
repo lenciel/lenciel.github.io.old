@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tutorials | @Lenciel]]></title>
   <link href="http://lenciel.cn/blog/categories/tutorials/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2014-04-22T04:28:50+08:00</updated>
+  <updated>2014-04-22T04:32:01+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Pipeline For Deployment]]></title>
+    <title type="html"><![CDATA[构建Deployment系统 (1)]]></title>
     <link href="http://lenciel.cn/2014/04/pipeline-for-deployment/"/>
     <updated>2014-04-22T02:49:38+08:00</updated>
     <id>http://lenciel.cn/2014/04/pipeline-for-deployment</id>
@@ -31,7 +31,7 @@
   <li>整个deployment流程是可预测的，也是可追溯的</li>
 </ol>
 
-<p>那么，如果你到了一个新公司，推开门发现那是一个蛮荒之地，应该怎么办呢？</p>
+<p>那么，如果你到了一个新公司，推开门发现那是一个蛮荒之地，应该怎么办呢？这篇先理一下基本的概念，然后后面分节描述一下讲到的这些工具具体要怎么配置怎么用。</p>
 
 <h1 id="section">善其器</h1>
 
