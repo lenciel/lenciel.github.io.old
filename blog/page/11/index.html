@@ -9,7 +9,7 @@
   <meta name="author" content="Lenciel Li">
 
   
-  <meta name="description" content="在从公司辞职出来的之前，我们对创业的期望是不降低大家的生活质量。我们对自己这么说，对我们拉入伙的兄弟们也这么说。这里的生活质量当然除开收入之外，很大的一方面就是不加班。 但是实际上的情况是：五一之前整个公司度过了一个非常特别的时期：产品团队不停地根据用户的输入，修改产品需求； &hellip;">
+  <meta name="description" content="最近公司里面两个比较资深的开发兄弟在我座位旁边进行了一场关于“代码优化到什么程度才算好”的争论。 他们一起工作的项目是一个比较小的python模块（几百行的规模吧），用来在嵌入式设备对接入的手机进行一些操作。其中一个人希望把这部分代码重构到“如果需求有这样那样的改变能够承受。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -31,14 +31,14 @@
 
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://lenciel.cn/blog/page/11/" />
-<meta property="og:description" content="在从公司辞职出来的之前，我们对创业的期望是不降低大家的生活质量。我们对自己这么说，对我们拉入伙的兄弟们也这么说。这里的生活质量当然除开收入之外，很大的一方面就是不加班。 但是实际上的情况是：五一之前整个公司度过了一个非常特别的时期：产品团队不停地根据用户的输入，修改产品需求； &hellip;" />
+<meta property="og:description" content="最近公司里面两个比较资深的开发兄弟在我座位旁边进行了一场关于“代码优化到什么程度才算好”的争论。 他们一起工作的项目是一个比较小的python模块（几百行的规模吧），用来在嵌入式设备对接入的手机进行一些操作。其中一个人希望把这部分代码重构到“如果需求有这样那样的改变能够承受。 &hellip;" />
 
 <meta property="og:site_name" content="http://lenciel.cn" />
 <meta property="article:author" content="https://plus.google.com/114787528537231301324">
 
 
 
-<meta itemprop="description" content="在从公司辞职出来的之前，我们对创业的期望是不降低大家的生活质量。我们对自己这么说，对我们拉入伙的兄弟们也这么说。这里的生活质量当然除开收入之外，很大的一方面就是不加班。 但是实际上的情况是：五一之前整个公司度过了一个非常特别的时期：产品团队不停地根据用户的输入，修改产品需求； &hellip;" />
+<meta itemprop="description" content="最近公司里面两个比较资深的开发兄弟在我座位旁边进行了一场关于“代码优化到什么程度才算好”的争论。 他们一起工作的项目是一个比较小的python模块（几百行的规模吧），用来在嵌入式设备对接入的手机进行一些操作。其中一个人希望把这部分代码重构到“如果需求有这样那样的改变能够承受。 &hellip;" />
 
 <!-- Combine multiple fonts into one request -->
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic|Patua+One|Yanone+Kaffeesatz" rel="stylesheet" type="text/css">
@@ -102,6 +102,74 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/05/the-importance-of-deploy-as-will/">The Importance of Deploy as Will</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-29T22:41:00+08:00" pubdate data-updated="true">May 29<span>th</span>, 2013</time>
+        
+         | <a href="/2013/05/the-importance-of-deploy-as-will/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最近公司里面两个比较资深的开发兄弟在我座位旁边进行了一场关于“代码优化到什么程度才算好”的争论。</p>
+
+<p>他们一起工作的项目是一个比较小的python模块（几百行的规模吧），用来在嵌入式设备对接入的手机进行一些操作。其中一个人希望把这部分代码重构到“如果需求有这样那样的改变能够承受。并且即便不是我们两个来继续这个模块，任何一个人拿到都能很容易的扩展和维护”；而另一个人则认为“这个模块的规模很小不需要那么大精力做重构，并且在需求出现的时候再开始在现有代码基础上重构比先设想可能的需求来重构有意义”。</p>
+
+<p>他们争的时候都有眼神投射到小弟这边，但是我没有加入：因为其实两个人的说法都还挺有道理的，他们的分歧我感觉是因为背景不同：一个是在我大M出道的（慢工出细活的平台中间件公司），一个是在互联网公司出道的。</p>
+
+<h2 id="dev">追求品质是成为优秀dev的不二法门</h2>
+
+<p>首先，作为一个dev，最优秀的品质大概就是一直想要优化自己的产出(扎克伯格的致员工信里面特别强调了这个很多次）。程序员的产出可以优化的东西是很多的：大到设计、算法、接口、自动化测试和部署，小到变量名、函数名、注释等等。自觉地重构和优化可以给你在技能和思考方式上带来很大的提升。而在自己入行的早期有幸遇到一个严格要求品质的mentor逼着被动的追求重构和优化，并且挺过来（挺过来很重要，要有学习能力并且有胸怀），更是能在工作方式和思考方式上得到很多非常正面的影响。我大M在我呆过的公司里面，这方面绝对是做得最好的。</p>
+
+<h2 id="deploy">什么时候够好要看你的deploy成本</h2>
+
+<p>但是，就这个项目而言，我个人是比较同意后面这位弟兄的看法的。软件项目可以做的重构和优化几乎是没有止境的，如何来衡量什么时候就“够好了”，业界其实有很多标准。但是我自己最喜欢的是Martin Fowler在一个演讲的时候提到的例子。他说：</p>
+
+<blockquote>
+  <p>假设你被要求设计一个电脑控制的手枪，要求在50米内自动瞄准并击中目标。需求只有这么一个。一种做法是设计一个复杂的系统，采集并计算各种可能的变量(风速、海拔、温度等等)，以这些变量为基础瞄准并最后击发。还有一种是设计一个简单的系统，可以快速的击发，并且能够统计每一击距离目标多远。然后它根据收集回来的距离数据校正并迅速击中目标。</p>
+</blockquote>
+
+<p>你可能会因为上下文觉得第二种方式当然是最好的，但其实上面两种方式是没有绝对的最优的：决定性的因素在于子弹的价钱。如果一个测量风速的模块都贵得可以买一车的子弹了，那么谁更好是显而易见的。</p>
+
+<p>对于软件项目而言，Martin Fowler的例子中的目标就是你的用户，子弹的价钱就是你软件的deploy成本(当然，不要忘记了健全的用户反馈机制也很重要)。如果我们在造一个高可靠性的系统，比如发射火箭，显然是没法承受射出去一颗不行再来一颗的；如果我们在做一个小模块或者是小项目，那么一开始就很完美地设计并不断重构它，可能性价比确实不高。</p>
+
+<p>对于Web开发者，理解Martin Fowler的例子显得特别重要。一般来说网站上线的初期(一年左右)，是属于deploy成本比较低的时候。这时候在线的用户一般是抱着试玩的心态，对新功能的渴望远远超过对稳定性的要求，并且能够给出很多反馈意见。这个阶段迅速的deploy新功能，迅速的处理反馈并设计下一个新功能非常重要，而有一定时间的宕机或者回退用户并不那么在乎。所以那位互联网公司出道的兄弟有他那样的想法，也就不足为奇了。</p>
+
+<p>到了用户量上去，或者重要的用户进场之后，deploy的成本就变得很高了。这个时候如果没有一整套严格的测试和运维流程，可能系统就玩不转。</p>
+
+<h2 id="section">结论</h2>
+
+<p>对于我司而言，目前和很长一段时间内的大多数产品都处于子弹不那么贵的阶段。个人感觉目前我们的CI和收集处理反馈这两方面是需要加强的，只有做到了”deploy as will”，我们才有底气来以做互联网的方式来开发我们自己的产品。</p>
+
+<p>而从长期来看，全面的提高项目品质，不仅需要dev自己有重构的自觉性，还需要我们有健全的融入到CI的测试以及成熟的运维团队。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -749,109 +817,6 @@
 
 <p>接下来的计划就是建立项目组自己的repo，把诸如输入法、dotfiles、Java开发环境和Django开发环境这些东西的安装和配置都自动化了。</p>
 
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/03/use-done-list-rather-than-todo-list/">Use Done List Instead of to Do List</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-15T21:25:00+08:00" pubdate data-updated="true">Mar 15<span>th</span>, 2013</time>
-        
-         | <a href="/2013/03/use-done-list-rather-than-todo-list/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="/downloads/images/nerd_sniping.png" alt="nerd sniping" title="Don't touch me..." /></p>
-
-<h2 id="section"><strong>起</strong></h2>
-
-<p><a href="http://xkcd.com/730/" target="_blank">xkcd</a>一直是本座最喜欢的网站（嗯哼）。上面这幅图说了一个很有趣的现象，正好最近深有体会，就来这边吐槽一下。整个经过是：</p>
-
-<p>大前天回到家感觉不算太忙，本座就开始家姐布置的家庭作业：做一个用于心理学测试的游戏。需求简单来说就是：</p>
-
-<ul>
-  <li>游戏开始后轮转播放图片、视频或者音频 （媒体库要容易换，播放的切换间隙也要能配置）</li>
-  <li>被试通过操控手中的手柄表达心理的反应，由程序转成可统计的数据（比如看到美女图按同时按下AB）   </li>
-  <li>程序得到的数据能够很容易的被统计，统计结果能够很优雅的呈现出来</li>
-</ul>
-
-<p>为了让这个事情变得更有趣，本座在需求确定之后决定：</p>
-
-<ol>
-  <li>用帅气的<a href="http://www.nintendo.co.uk/NOE/en_GB/systems/accessories_1243.html" target="_blank" class="broken_link">Wii Remote</a>来让被试表达自己（想想美女图片一出就甩或者是撸一下WiiRemote有多实在）   </li>
-  <li>用<a href="http://www.pygame.org/news.html" target="_blank">pyGame</a>来写这个游戏（早就想学习pyGame了）   </li>
-  <li>把统计数据的输出作为一个用<a href="http://www.r-project.org/" target="_blank">R语言</a>实现的统计绘图的界面的输入</li>
-</ol>
-
-<p>接着就开始第一项。当程序把 <code>Wii Remote</code> 的蓝牙信号正确的转换成标准的手柄信号的时候，一看已经挺晚了，本座就只好把后面两个放在了 <code>todo list</code> 上。接着这两天都很忙这些东西就继续的呆在 <code>todo list</code> 。</p>
-
-<p>然后今天又找到时间，本座就开始用 <code>pyGame</code> 写游戏本身部分，但突然觉得vim下面自动补全很烂，就开始google合适的插件。花了10分钟左右发觉不少人说 <code>pydict</code> 好，本座就又花了15分钟左右去配置。然后看着chrome里面为了搜索插件弹出的一堆tab突然本座发现：</p>
-
-<p>经过了4天，本座把Wii Remote用蓝牙连到PC输出手柄信号，本座有了一个不错的vim下开发python的环境，本座还学习了一点儿R。唯一没有开始的就是，嗯，还没有开始写那个游戏。</p>
-
-<h2 id="section-1"><strong>承</strong></h2>
-
-<p>你的情况可能具体细节和我不一样，但是结果估计都是南辕北辙：你是网页设计师，在需要画 <code>wireframe</code> 的时候花了一大把时间去看搜索出来的新鲜的、华丽的 <code>CSS3</code> 效果；你上淘宝买手机结果研究移动电源用了4个小时；你想学怎么养花结果因为选盆子下面水漏的形状耽误了。</p>
-
-<p>这种情况之所以对你的效率有很大的伤害是因为：</p>
-
-<ol>
-  <li>你认为你是在完成自己 <code>todo list</code> 上的东西，所以你觉得自己是在“进展中”而不是“瞎逛”。   </li>
-  <li>你认为的进展给你带来了更多 <code>todo list</code> 上的东西，而且有些确实对原来的目标是无益的。</li>
-</ol>
-
-<p>人的精力是有限的，如果你长期处于这种状况（太正常了，如果你是玩电脑的话），可就要小心了。</p>
-
-<h2 id="section-2"><strong>转</strong></h2>
-
-<p>其实这种发散的工作方式并不是完全错误的。其实在我们这个行业，这种“总想追求更好”的想法，是整个Agile的基础。Facebook在自己的员工的邮件<a href="http://blogs.wsj.com/deals/2012/02/01/mark-zuckerbergs-letter-from-the-facebook-filing/" target="_blank">里面</a>写到：</p>
-
-<blockquote>
-  <p>The Hacker Way is an approach to building that involves continuous improvement and iteration. Hackers believe that something can always be better, and that nothing is ever complete. They just have to go fix it — often in the face of people who say it’s impossible or are content with the status quo.</p>
-</blockquote>
-
-<p>从本座自己的感觉而言，做事循规蹈矩的同事，完成一般难度的任务时，效率确实很高。但是那种真正非常困难的问题，常常是被喜欢“瞎逛”的人解决的。这当然也没什么奇怪的，所谓闭门造的车，出门就只能合辙。Richard Hamming也<a href="http://www.cs.virginia.edu/~robins/YouAndYourResearch.html" target="_blank">说</a>：</p>
-
-<blockquote>
-  <p>I notice that if you have the door to your office closed, you get more work done today and tomorrow, and you are more productive than most. But 10 years later somehow you don’t know quite about what problems are worth working on … He who works with the door open gets all kinds of interruptions, but he also occasionally gets clues as to what the world is and what might be important. ….</p>
-</blockquote>
-
-<h2 id="section-3"><strong>合</strong></h2>
-
-<p>不能闭门造车，又需要有固定的输出值，怎么办？今天本座是这么办的：</p>
-
-<ol>
-  <li>早上起来把今天最重要的事情从<a href="https://astrid.com/home" target="_blank">todo list</a>里面选出来。</li>
-  <li>完成这些事情的过程中遇到任何有趣的东西或者想法，存到<a href="http://delicious.com/" target="_blank">delicious</a>或者<a href="http://www.evernote.com/" target="_blank">evernote</a>里面。</li>
-  <li>使用<a href="https://idonethis.com" target="_blank">Done list</a>而不是todo list来标记自己今天的活动。</li>
-</ol>
-
-<p>结果是今天3点钟就完成了所有重要的事情，能够来安心的写一篇blog，看起来是个不错的办法。</p>
 </div>
   
   

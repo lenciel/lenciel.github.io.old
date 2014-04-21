@@ -148,7 +148,7 @@
     </url>
     <url>
         <loc>http://lenciel.cn/2013/05/the-importance-of-deploy-as-will/</loc>
-        <lastmod>2014-04-13T14:47:00+08:00</lastmod>
+        <lastmod>2014-04-22T02:57:08+08:00</lastmod>
     </url>
     <url>
         <loc>http://lenciel.cn/2013/06/better-git-log/</loc>
@@ -347,6 +347,10 @@
         <lastmod>2014-04-19T22:02:02+08:00</lastmod>
     </url>
     <url>
+        <loc>http://lenciel.cn/2014/04/pipeline-for-deployment/</loc>
+        <lastmod>2014-04-22T04:28:41+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://lenciel.cn/404.html</loc>
         <lastmod>2014-04-13T14:47:00+08:00</lastmod>
     </url>
@@ -356,7 +360,7 @@
     </url>
     <url>
         <loc>http://lenciel.cn/blog/archives/</loc>
-        <lastmod>2014-04-19T22:02:02+08:00</lastmod>
+        <lastmod>2014-04-22T04:28:41+08:00</lastmod>
     </url>
     <url>
         <loc>http://lenciel.cn/docs/dive-into-linux-boot/</loc>
@@ -384,7 +388,7 @@
     </url>
     <url>
         <loc>http://lenciel.cn/</loc>
-        <lastmod>2014-04-19T22:02:02+08:00</lastmod>
+        <lastmod>2014-04-22T04:28:41+08:00</lastmod>
     </url>
     <url>
         <loc>http://lenciel.cn/robots.txt</loc>

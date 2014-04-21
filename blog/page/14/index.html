@@ -9,7 +9,7 @@
   <meta name="author" content="Lenciel Li">
 
   
-  <meta name="description" content="03年的时候，看《迷失东京》，比尔·默里的这幅样子存在了本座硬盘里。有人说这是颇有喜感的画面，却带给本座前所未有的悲催感：那就是有朝一日，我们也会一如Bob Harris这个角色，莫名其妙的活在某个看似五光十色灯红酒绿的城市里面，内心却沉寂而冰冷，不管是手中丰满的鹌鹑，还是床上丰满的妹子， &hellip;">
+  <meta name="description" content="这似乎是CSS里面最简单的一个概念：如果你希望一个block-level的元素填满整个父容器的所有空白，只需要为这个元素声明width:100%这个属性就可以了。 但从个人经验和搜索结果看，大概很多CSS使用者都有过加上这个属性后挠头不已的惨痛回忆。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -31,14 +31,14 @@
 
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://lenciel.cn/blog/page/14/" />
-<meta property="og:description" content="03年的时候，看《迷失东京》，比尔·默里的这幅样子存在了本座硬盘里。有人说这是颇有喜感的画面，却带给本座前所未有的悲催感：那就是有朝一日，我们也会一如Bob Harris这个角色，莫名其妙的活在某个看似五光十色灯红酒绿的城市里面，内心却沉寂而冰冷，不管是手中丰满的鹌鹑，还是床上丰满的妹子， &hellip;" />
+<meta property="og:description" content="这似乎是CSS里面最简单的一个概念：如果你希望一个block-level的元素填满整个父容器的所有空白，只需要为这个元素声明width:100%这个属性就可以了。 但从个人经验和搜索结果看，大概很多CSS使用者都有过加上这个属性后挠头不已的惨痛回忆。 &hellip;" />
 
 <meta property="og:site_name" content="http://lenciel.cn" />
 <meta property="article:author" content="https://plus.google.com/114787528537231301324">
 
 
 
-<meta itemprop="description" content="03年的时候，看《迷失东京》，比尔·默里的这幅样子存在了本座硬盘里。有人说这是颇有喜感的画面，却带给本座前所未有的悲催感：那就是有朝一日，我们也会一如Bob Harris这个角色，莫名其妙的活在某个看似五光十色灯红酒绿的城市里面，内心却沉寂而冰冷，不管是手中丰满的鹌鹑，还是床上丰满的妹子， &hellip;" />
+<meta itemprop="description" content="这似乎是CSS里面最简单的一个概念：如果你希望一个block-level的元素填满整个父容器的所有空白，只需要为这个元素声明width:100%这个属性就可以了。 但从个人经验和搜索结果看，大概很多CSS使用者都有过加上这个属性后挠头不已的惨痛回忆。 &hellip;" />
 
 <!-- Combine multiple fonts into one request -->
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic|Patua+One|Yanone+Kaffeesatz" rel="stylesheet" type="text/css">
@@ -102,6 +102,68 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/09/width_with_percentage_in_css/">CSS里的width:100%和width:auto</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-09-22T09:53:00+08:00" pubdate data-updated="true">Sep 22<span>nd</span>, 2011</time>
+        
+         | <a href="/2011/09/width_with_percentage_in_css/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img height="200" alt="block" src="/downloads/images/2011_09/width100css.jpg" width="178" align="left" style="margin:5px" /> 这似乎是CSS里面最简单的一个概念：如果你希望一个block-level的元素填满整个父容器的所有空白，只需要为这个元素声明<font color="#0080ff">width:100%</font>这个属性就可以了。</p>
+
+<p>但从个人经验和搜索结果看，大概很多CSS使用者都有过加上这个属性后挠头不已的惨痛回忆。最后很多人不得不经过反复试验后重新转回使用绝对值的长和宽。</p>
+
+<p>的确，百分比在CSS里的真实作用，就像偶像派的苦瓜炒蛋，是属于“看起来简单，弄起来挺难”的东西。</p>
+
+<h2 id="blocks100">其实Blocks不需要指定100%</h2>
+
+<p>大多数专业的Web开发者都清楚，block-level的元素(如div, p, ul等)和inline的元素两者的区别就在于默认情况下，block元素的宽度就会取填满父容器的宽度(减去自己的margin或者父容器的padding)。</p>
+
+<p><img src="/downloads/images/2011_09/blockelementnoneed.jpg" alt="block element is not needed" title="Don't touch me..." /></p>
+
+<p>这知识虽然初级，理解这点对我们明白百分比的实际作用很有帮助。</p>
+
+<h2 id="section">真实的含义</h2>
+
+<p>如果你在CSS中给一个元素x%的宽度，其实就是定义：“把这个元素所占的区域扩成它父容器的绝对宽度的x%，当然，必须它父容器有一个绝对宽度啊，亲。”比如你的元素放在一个400px宽度的容器里面，然后它的宽度定成了100%，那么它在保证自己被渲染成400px宽度之后，还是会遵守自己被定义margin/padding/border的设置，所以最好出来的效果很可能就是下图那悲催样：</p>
+
+<p><img src="/downloads/images/2011_09/childequal.jpg" alt="just pull" title="Don't touch me..." /></p>
+
+<h2 id="height">Height(在所有的浏览器)也一样</h2>
+
+<p>是的，这是CSS比较坑人的地方：如果你的父容器没有一个显示声明的绝对值高度，那么你用百分比来定义它的高度希望它充满父容器是不行的。Height和Width的唯一区别是对于block-level的element而言，不会自动去填满父容器，也就是说height:100%是不能省略的。</p>
+
+<p>当然，百分号的行为也是CSS里面难得不坑人的地方：所有的浏览器对百分比的渲染都是一致的。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -381,69 +443,6 @@
 <p>        也许，这些愿望有一部分能够实现。也许，一件也做不完。我还是能做梦，干活，悠然的过日子。因为你是我的偶像，而我们在一起。</p>
 
 <p>        天冷手冻，辞不达意。十分钟之后你就下班，我们见面聊。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/08/the-rain-stopped/">没完没了</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-08-13T03:13:00+08:00" pubdate data-updated="true">Aug 13<span>th</span>, 2009</time>
-        
-         | <a href="/2009/08/the-rain-stopped/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="/downloads/images/almost_again.jpg" alt="Almost" title="Don't touch me..." /></p>
-
-<p>雨是从正中午的时候开始下的。我朝外面看了看，好像也不大，就决定坐地铁去府河边走走。从很小的时候，我就想弄明白，下雨是让天空更亮了，还是让天空更暗了。所以，每次下雨我都跑去河边看。</p>
-
-<p>当然，我从来没有得到结论。有的时候，天分明是因为下雨而明亮起来，可是当我想要再确切的看一眼的时候，又总觉得它好像是变暗了。这当然浪费了我很多的时间，于是我想起两个星期之前看到的那封信。</p>
-
-<p>“你是一个好人，李重。我们有过很多美好的回忆。但是你三十二岁了，没房，没车，和你在一起有什么希望？你不是活在当下的，你不能停止去想那些没有任何意义的事情，我只能离开。”</p>
-
-<p>这是我最近一个女朋友走的时候留下的。就像你们猜到的那样，我的恋情仿佛是被定时器控制着一样。当我从不知道哪一个梦中醒来的时候，就会看到收拾得整整齐齐的房间和那个黄澄澄的信封。</p>
-
-<p>她们离开时使用的黄信封，由我在跟她们确定关系的夜晚交到她们手里。其实我并不是真正需要一个分手的原因，只不过每封信都会让我忍俊不禁。比如这次，她要求有回忆和希望，这两件事情都得和当下保持时间上的距离。可是她又如此的看重当下，这听起来多么贪心而滑稽啊。</p>
-
-<p>后来，我在“一瓢油”肥肠粉店遇到过她一次。我试图向她说明，她离开我是因为她向往更富足的物质生活，这跟活不活在当下没有任何关系。</p>
-
-<p>“也许，跟你活在谁的档下倒是有点关系。”我告别她之前用手捏了一把她富有弹性的屁股，然后像一个真正的流氓一样吹着口哨离开了。</p>
-
-<p>想到这里，我右手的那两个手指忍不住揉搓起来。在我座位前面站着的女孩一定看到了我脸上挂着幸福的笑容，于是她也微笑起来。其实在她上车的时候我就注意到她了，我本来希望她坐在我身边，可是一个小孩子一下子蹲在了那里。我只好尽量和那个小孩保持距离，以免她误认为我是一个带着孩子去补课的无可救药的父亲。</p>
-
-<p>为了看清楚她，我认真的扶了扶自己的眼镜。她鼻尖闪闪的汗珠让我想起来，别人都老老实实呆在教室里的时候，我和一个女孩来到河边，躺在露水打湿的草坪上。河上和身上都有慢慢升起的薄雾掩护起来，我假装不经意的碰到了她的腿。她害羞的转过脸去，我只能看到她鼻尖闪闪的汗珠。</p>
-
-<p>就在这个时候，车不可救药的到站了。大概是正好这一站从地下开到了地上，车门开启的时候，有人欢呼起来。她走在出站人群的最后一个，我猜，她应该是不太确定应不应该在这一站下车。我看到她有些期待的看着我，似乎是希望我起身告诉她现在该怎么办。于是我望着门外，大声的说了一句：</p>
-
-<blockquote>
-  <p>咦，雨已经停了吗？</p>
-</blockquote>
-
 </div>
   
   
