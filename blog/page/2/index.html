@@ -9,7 +9,7 @@
   <meta name="author" content="Lenciel Li">
 
   
-  <meta name="description" content="不管是从日常生活里面的观察和感受，还是查看统计数据，都很容易发现人们在移动设备上停留的时间已经逐渐超过了在PC上停留的时间。当然拐点是不是如下图所示就在今年业界有些争议，但是拐点已经要来了是没有人再怀疑了。 而移动设备取代PC机成为最主要的入口之后，就意味着谁占领了移动设备，谁就拥有未来。 &hellip;">
+  <meta name="description" content="连某宝都中招的Heartbleed bug究竟是个什么东西？简单地说就是攻击者可以读最多64KB内存的内容。 读了这64KB能干嘛？用报这个bug的人的话来说： Without using any privileged information or credentials we were able &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -31,14 +31,14 @@
 
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://lenciel.cn/blog/page/2/" />
-<meta property="og:description" content="不管是从日常生活里面的观察和感受，还是查看统计数据，都很容易发现人们在移动设备上停留的时间已经逐渐超过了在PC上停留的时间。当然拐点是不是如下图所示就在今年业界有些争议，但是拐点已经要来了是没有人再怀疑了。 而移动设备取代PC机成为最主要的入口之后，就意味着谁占领了移动设备，谁就拥有未来。 &hellip;" />
+<meta property="og:description" content="连某宝都中招的Heartbleed bug究竟是个什么东西？简单地说就是攻击者可以读最多64KB内存的内容。 读了这64KB能干嘛？用报这个bug的人的话来说： Without using any privileged information or credentials we were able &hellip;" />
 
 <meta property="og:site_name" content="http://lenciel.cn" />
 <meta property="article:author" content="https://plus.google.com/114787528537231301324">
 
 
 
-<meta itemprop="description" content="不管是从日常生活里面的观察和感受，还是查看统计数据，都很容易发现人们在移动设备上停留的时间已经逐渐超过了在PC上停留的时间。当然拐点是不是如下图所示就在今年业界有些争议，但是拐点已经要来了是没有人再怀疑了。 而移动设备取代PC机成为最主要的入口之后，就意味着谁占领了移动设备，谁就拥有未来。 &hellip;" />
+<meta itemprop="description" content="连某宝都中招的Heartbleed bug究竟是个什么东西？简单地说就是攻击者可以读最多64KB内存的内容。 读了这64KB能干嘛？用报这个bug的人的话来说： Without using any privileged information or credentials we were able &hellip;" />
 
 <!-- Combine multiple fonts into one request -->
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic|Patua+One|Yanone+Kaffeesatz" rel="stylesheet" type="text/css">
@@ -102,6 +102,195 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/04/openssl-heartbleed-bug/">Openssl Heartbleed Bug</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-10T11:29:15+08:00" pubdate data-updated="true">Apr 10<span>th</span>, 2014</time>
+        
+         | <a href="/2014/04/openssl-heartbleed-bug/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>连某宝都中招的<a href="http://heartbleed.com/">Heartbleed bug</a>究竟是个什么东西？简单地说就是攻击者可以读最多64KB内存的内容。</p>
+
+<p>读了这64KB能干嘛？用报这个bug的人的话来说：</p>
+
+<blockquote><p>Without using any privileged information or credentials we were able steal from ourselves the secret keys used for our X.509 certificates, user names and passwords, instant messages, emails and business critical documents and communication.</p></blockquote>
+
+<p>那么读取64KB内存和获取这么多关键信息究竟有什么关系呢？</p>
+
+<h2 id="the-bug">The bug</h2>
+<p>先来看看<a href="http://git.openssl.org/gitweb/?p=openssl.git;a=commitdiff;h=96db9023b881d7cd9f379b0c154650d6c108e9a3">patch</a>里面的<code>ssl/d1_both.c</code>:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class="c"><span class="line"><span class="kt">int</span>
+</span><span class="line"><span class="nf">dtls1_process_heartbeat</span><span class="p">(</span><span class="n">SSL</span> <span class="o">*</span><span class="n">s</span><span class="p">)</span>
+</span><span class="line">    <span class="p">{</span>
+</span><span class="line">    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">s3</span><span class="o">-&gt;</span><span class="n">rrec</span><span class="p">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">*</span><span class="n">pl</span><span class="p">;</span>
+</span><span class="line">    <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">hbtype</span><span class="p">;</span>
+</span><span class="line">    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">payload</span><span class="p">;</span>
+</span><span class="line">    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">padding</span> <span class="o">=</span> <span class="mi">16</span><span class="p">;</span> <span class="cm">/* Use minimum padding */</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>可以看到，heartbeat里有一个 <a href="http://en.wikipedia.org/wiki/Transport_Layer_Security">SSLv3</a>  record的指针，这个<code>record</code>的代码如下:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+</pre></td><td class="code"><pre><code class="c"><span class="line"><span class="k">typedef</span> <span class="k">struct</span> <span class="n">ssl3_record_st</span>
+</span><span class="line">    <span class="p">{</span>
+</span><span class="line">        <span class="kt">int</span> <span class="n">type</span><span class="p">;</span>               <span class="cm">/* type of record */</span>
+</span><span class="line">        <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">length</span><span class="p">;</span>    <span class="cm">/* How many bytes available */</span>
+</span><span class="line">        <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">off</span><span class="p">;</span>       <span class="cm">/* read/write offset into &#39;buf&#39; */</span>
+</span><span class="line">        <span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="n">data</span><span class="p">;</span>    <span class="cm">/* pointer to the record data */</span>
+</span><span class="line">        <span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="n">input</span><span class="p">;</span>   <span class="cm">/* where the decode bytes are */</span>
+</span><span class="line">        <span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="n">comp</span><span class="p">;</span>    <span class="cm">/* only used with decompression - malloc()ed */</span>
+</span><span class="line">        <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">epoch</span><span class="p">;</span>    <span class="cm">/* epoch number, needed by DTLS1 */</span>
+</span><span class="line">        <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">seq_num</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span> <span class="cm">/* sequence number, needed by DTLS1 */</span>
+</span><span class="line">    <span class="p">}</span> <span class="n">SSL3_RECORD</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p>可以看到，每个<code>record</code>有它的<code>type</code>、<code>length</code>和<code>data</code>，规规矩矩。</p>
+
+<p>回到<code>dtls1_process_heartbeat</code>：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class="c"><span class="line"><span class="cm">/* Read type and payload length first */</span>
+</span><span class="line"><span class="n">hbtype</span> <span class="o">=</span> <span class="o">*</span><span class="n">p</span><span class="o">++</span><span class="p">;</span>
+</span><span class="line"><span class="n">n2s</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">payload</span><span class="p">);</span>
+</span><span class="line"><span class="n">pl</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>可以看到<code>SSLv3 record</code>的第一个byte就是放这个<code>heartbeat</code>的<code>type</code>。 宏<code>n2s</code> 则是从<code>p</code>里面取两个byte放到payload里面，被用来作为payload的长度。 <strong>注意这里并没有检查<code>SSLv3 record</code> 实际的长度。</strong> </p>
+
+<p>接下来在这个函数里面干了下面这些事情：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+</pre></td><td class="code"><pre><code class="c"><span class="line"><span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="n">buffer</span><span class="p">,</span> <span class="o">*</span><span class="n">bp</span><span class="p">;</span>
+</span><span class="line"><span class="kt">int</span> <span class="n">r</span><span class="p">;</span>
+</span><span class="line">
+</span><span class="line"><span class="cm">/* Allocate memory for the response, size is 1 byte</span>
+</span><span class="line"><span class="cm"> * message type, plus 2 bytes payload length, plus</span>
+</span><span class="line"><span class="cm"> * payload, plus padding</span>
+</span><span class="line"><span class="cm"> */</span>
+</span><span class="line"><span class="n">buffer</span> <span class="o">=</span> <span class="n">OPENSSL_malloc</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">payload</span> <span class="o">+</span> <span class="n">padding</span><span class="p">);</span>
+</span><span class="line"><span class="n">bp</span> <span class="o">=</span> <span class="n">buffer</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>可以看到，用户要多少程序就分配多少，最多可以分配到<code>65535+1+2+16</code>，指针bp被用来操作这块内存。然后：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class="c"><span class="line"><span class="cm">/* Enter response type, length and copy payload */</span>
+</span><span class="line"><span class="o">*</span><span class="n">bp</span><span class="o">++</span> <span class="o">=</span> <span class="n">TLS1_HB_RESPONSE</span><span class="p">;</span>
+</span><span class="line"><span class="n">s2n</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">bp</span><span class="p">);</span>
+</span><span class="line"><span class="n">memcpy</span><span class="p">(</span><span class="n">bp</span><span class="p">,</span> <span class="n">pl</span><span class="p">,</span> <span class="n">payload</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>宏<code> s2n</code>把<code>n2s</code>做的操作恢复出来：先拿16个bit的值放到2个byte里面，也就是原来请求的payload的长度。然后把<code>pl</code>里面放的payload(请求者提交的data)拷贝到新分配的<code>bp</code>里面。</p>
+
+<p>看起来是很平常的操作，只不过没有认真的检查用户输入而已，但问题也就在这里了。</p>
+
+<h2 id="where-is-the-bug">Where is the bug</h2>
+
+<p>如果用户并没有正在提交声称的那么多个bytes的payload，那么memcpy就会读到同一个process里面SSLv3 record附近的内存内容。</p>
+
+<p>这附近有哪些内容呢？</p>
+
+<p>首先要明白在linux上，内存的动态分配主要是通过<a href="http://linux.die.net/man/2/sbrk">sbrk</a> 或者是 <a href="http://man7.org/linux/man-pages/man2/mmap.2.html">mmap</a>。如果内存是通过sbrk分配的，它会使用<code>heap-grows-up</code>规则，泄露出来的东西不会那么多（但是如果是同时并发请求<a href="http://blog.existentialize.com/diagnosis-of-the-openssl-heartbleed-bug.html#fn:update">还是有东西会漏</a>）。</p>
+
+<p>在这里，<code>pl</code>因为malloc里面的mmap_threshhold多半是sbrk分配的，但是，那些关键的用户数据，则多半是通过mmap分配内存。于是这些数据就会被攻击者用<code>pl</code>拿到。如果再考虑并发请求，就…</p>
+
+<h2 id="the-fix">The fix</h2>
+
+<p>所以，整个patch里面最主要的fix就是：
+* 检查是否有长度为0的虚假heartbeat
+* 检查record的真实长度</p>
+
+<p>代码如下：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td><td class="code"><pre><code class="c"><span class="line"><span class="cm">/* Read type and payload length first */</span>
+</span><span class="line"><span class="k">if</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">16</span> <span class="o">&gt;</span> <span class="n">s</span><span class="o">-&gt;</span><span class="n">s3</span><span class="o">-&gt;</span><span class="n">rrec</span><span class="p">.</span><span class="n">length</span><span class="p">)</span>
+</span><span class="line">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> <span class="cm">/* silently discard */</span>
+</span><span class="line"><span class="n">hbtype</span> <span class="o">=</span> <span class="o">*</span><span class="n">p</span><span class="o">++</span><span class="p">;</span>
+</span><span class="line"><span class="n">n2s</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">payload</span><span class="p">);</span>
+</span><span class="line"><span class="k">if</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">payload</span> <span class="o">+</span> <span class="mi">16</span> <span class="o">&gt;</span> <span class="n">s</span><span class="o">-&gt;</span><span class="n">s3</span><span class="o">-&gt;</span><span class="n">rrec</span><span class="p">.</span><span class="n">length</span><span class="p">)</span>
+</span><span class="line">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> <span class="cm">/* silently discard per RFC 6520 sec. 4 */</span>
+</span><span class="line"><span class="n">pl</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="so">So?</h2>
+
+<p>这个bug大概算是影响这么剧烈的bug里面最好明白的一个，所以居然我也看明白了。感受：</p>
+
+<ul>
+  <li>为了可扩展性引入了复杂度，经常都会带来恶梦</li>
+  <li>用户的输入，无论如何都不能相信，一定要check</li>
+  <li>C语言的确是大牛小牛都会踩到坑啊</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -540,73 +729,6 @@
 <p>外公答了我一句就认真地睡起觉来。我确认了一下他被子是盖好的，就也躺下来，怔怔地继续看着窗外。</p>
 
 <p>晚安，这大概是我说过次数最多的谎话。</p>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2014/03/good-night-0/">晚安(一)</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-03-10T04:18:00+08:00" pubdate data-updated="true">Mar 10<span>th</span>, 2014</time>
-        
-         | <a href="/2014/03/good-night-0/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img alt="block" src="/downloads/images/2014_03/good_night.jpg" align="left" style="margin:0px 5px;width:23%" />  在去兰州之前，我其实有点儿犹豫。</p>
-
-<p>我的意思当然不是说外公下葬这件事情不值得专程跑一趟。实际上，从他确诊后提出要回兰州去看看，我就一直在帮他说服家里的人，帮他买机票，最后还请假把他和母亲一起送到了兰州。一方面，我在公司算是可有可无的人，有没有出现对大家都不会有影响，走起来非常方便。另一方面，以前每次外公去兰州都是我陪他去的，母亲从来没有去过。毕竟外公是重病之中，有我这样一个轻车熟路的人，好有个照应。</p>
-
-<p>真正成行距离他年底例行体检时查出那片不祥的阴影已经又过去了小半年：也许是正常人生命中不值一提的短暂时光，但已经长到让他形销骨立，不成人形。</p>
-
-<p>当然，那时候我也完全没有想到他再也不会回来。如果知道，不管家里人多么反对，我可能也会按他说的陪他慢慢坐到兰州吧。</p>
-
-<p>但没有那么多如果。我们一左一右把他推出中川机场的时候，初春的阳光打在我们背上，彷佛之前飞机上空姐职业化的笑容，饱满充盈，却让人感觉不到太多温暖。</p>
-
-<p>“飞机果然快啊。像我这种情况，还化疗什么？不该折腾那么久，应该我还能自己走路的时候就过来了。”</p>
-
-<p>“化疗怎么了？人这一辈子不就是一次漫长的化疗，到最后统统死路一条。” 母亲头也没抬。</p>
-
-<p>外公没有理会自己的女儿，却也不再说话，只是默默地凝视着地上我们三个人的影子。他已经骨瘦如柴，又是坐在轮椅上，所以影子难免缩成一团，终究显得矮小起来。而我和母亲的影子，则好像站在家门口送孩子远行的心碎家长，漫长地铺满了整条过道，延绵不绝，不可救药。</p>
-
-<p>后来上了兰州石化派来的接我们的车，外公便也又有了些兴致，就开始不依不饶地说起旧事。他的那些回忆我已经是再熟悉不过了，而母亲仍然保持着对这趟出行的深恶痛绝，所以认真听着并且不时回应着的只有司机师傅。很快他们两个人就用兰州话聊了起来，我知道外公这一方面是方便普通话不怎么熟练的司机师傅，更是给我和母亲不用再假惺惺地装作要参与进去一个正当的理由。</p>
-
-<p>外公这一生都是这么体贴的一个人，大概也正是因为这样，别人很难知道他究竟过得是否快乐。</p>
-
-<p>他六十年代从清华毕业之后，作为国内最出色的自动化专家，在兰州石化支援建设一干就是二十几年，到八十年代调回家乡四川的川大时，已经是总工。凭着深厚的学术知识和丰富的实战经验，外公在川大的自动化系建成了国家重点实验室，如果不是看不惯学术圈的习气，估计早就应该当上院士了。</p>
-
-<p>回四川之后的二十来年他再也没有回过兰州，但外婆去世之后他就常常都吵着要去。</p>
-
-<p>我从母亲第一次要我送外公去兰州时那紧皱的眉头就猜到，外公的兰州之行有其微妙之处。我的意思是，这肯定不是什么单纯的”我这辈子最好的时候都是在兰州过的我要回去看看”的那种归乡之旅。</p>
-
-<p>“其实是因为年轻的时候爱过的人”，虽然我猜到了七八分，但确切的消息是父亲先来告诉我的。我不知道他是因为终于离婚了不需要再保守什么秘密，还是想证明自己出轨的合理性。我这么想的时候，难免对自己有些失望：即便是真心祝福父亲开始新的生活，好像还是没法压抑面对这种谈话时心里的不快。</p>
-
-<p>总之母亲就是因为这个所以没办法说服自己陪外公去兰州：外公不仅仅是这辈子最疼爱她的人，更是她一生的偶像。人们总是可以接受世间一切的不幸与不公，却没法接受内心世界里偶像的坍塌，因为那毕竟是自己竖起来供着的东西。</p>
 
 </div>
   
