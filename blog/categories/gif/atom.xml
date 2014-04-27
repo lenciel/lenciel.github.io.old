@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: gif | @Lenciel]]></title>
+  <link href="http://lenciel.cn/blog/categories/gif/atom.xml" rel="self"/>
+  <link href="http://lenciel.cn/"/>
+  <updated>2014-04-27T18:36:38+08:00</updated>
+  <id>http://lenciel.cn/</id>
+  <author>
+    <name><![CDATA[Lenciel Li]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Change The Light]]></title>
+    <link href="http://lenciel.cn/2014/04/change-the-light/"/>
+    <updated>2014-04-27T18:31:55+08:00</updated>
+    <id>http://lenciel.cn/2014/04/change-the-light</id>
+    <content type="html"><![CDATA[<p><img src="/downloads/images/iwdrm/change_the_light.gif" alt="Change the light" title="Don't touch me..." /></p>
+
+<p><blockquote><p>“It’s just that it may change the light.”</p><footer><strong>Tracy Chevalier</strong> <cite><a href='http://www.imdb.com/title/tt0335119/'>Girl With a Pearl Earring(2003)</a></cite></footer></blockquote>
+—</p>
+]]></content>
+  </entry>
+  
+</feed>
