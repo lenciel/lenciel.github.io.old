@@ -11,7 +11,7 @@
 	margin: 40px auto;
 	margin-bottom: 100px;
 	padding: 0;
-	width: 340px;
+	width: 300px;
 	height: 540px;
 	list-style: none;
 	-webkit-perspective: 1000px;
@@ -30,9 +30,9 @@
 .elasticstack li {
 	position: absolute;
 	z-index: 1;
-	width: 340px;
-	height: 580px;
-	border-width: 20px 20px 60px 20px;
+	width: 300px;
+	height: 540px;
+	border-width: 20px 20px 120px 20px;
 	border-style: solid;
 	border-color: #fff;
 	box-shadow: 0 10px 7px -7px rgba(0,0,0,0.12), 0 0 4px rgba(0,0,0,0.1);
