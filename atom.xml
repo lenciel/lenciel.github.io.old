@@ -4,7 +4,7 @@
   <title><![CDATA[@Lenciel]]></title>
   <link href="http://lenciel.cn/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2014-04-27T18:36:38+08:00</updated>
+  <updated>2014-04-29T16:16:29+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -12,6 +12,46 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Edward Gorey]]></title>
+    <link href="http://lenciel.cn/2014/04/edward-gorey/"/>
+    <updated>2014-04-29T13:48:21+08:00</updated>
+    <id>http://lenciel.cn/2014/04/edward-gorey</id>
+    <content type="html"><![CDATA[<p>最近偶像派在说要买一些给蒙爷看的绘本。</p>
+
+<p>这让我想起来《读库》有几期专门在梳理国内外那些有名的插画家。的确，纸质书最让人怀念的就是里面那些精致的插画。</p>
+
+<p>我最喜欢的插画家是号称“黑旋风”的<a href="http://en.wikipedia.org/wiki/Edward_Gorey">Edward Gorey</a>。他本身是作家，但是最主要的成就却不是文字而是一系列绘本作品，比如代表作《<a href="http://www.douban.com/photos/album/34618766/?start=0">死小孩</a>》。他的画风非常特别，层层叠叠的钢笔在大片的留白中把细节逐一勾勒，塑造出神秘又阴森的质感。题材虽然常常黑暗甚至颓废，作品却总有意味深长的轻松诙谐流露出来，让你翻开的时候彷佛能看到一个倔强男人在对生活尽情调侃。</p>
+
+<p>当然，这些要拿来做蒙爷的启蒙教育绘本当然是过分“黑暗”了一些。不过从技术上来说，试试怎么把图片叠得好看总是一样的。</p>
+
+<p>所以，让我们看看Edward Gorey画的一些知名小说的封面吧（他能一直在作家圈子有帮朋友似乎也是因为画了不少封面）：
+<link rel="stylesheet" type="text/css" href="http://lenciel.cn/downloads/static/css/elasticstack_slider.css" /></p>
+
+<div class="slider-container">
+    <ul id="elasticstack" class="elasticstack">
+        <li><img src="http://lenciel.cn/downloads/images/2014_04/edward_gorey/gorey_kafka.jpg" alt="01" /><h5>Amerika</h5></li>
+        <li><img src="http://lenciel.cn/downloads/images/2014_04/edward_gorey/gorey_james2.jpg" alt="02" /><h5>The Ambassadors</h5></li>
+        <li><img src="http://lenciel.cn/downloads/images/2014_04/edward_gorey/gorey_james3.jpg" alt="03" /><h5>The Awkward Age</h5></li>
+        <li><img src="http://lenciel.cn/downloads/images/2014_04/edward_gorey/gorey_james4.jpg" alt="04" /><h5>What Maisie Knows</h5></li>
+        <li><img src="http://lenciel.cn/downloads/images/2014_04/edward_gorey/gorey_conrad1.jpg" alt="05" /><h5>Victory</h5></li>
+        <li><img src="http://lenciel.cn/downloads/images/2014_04/edward_gorey/gorey_conrad2.jpg" alt="06" /><h5>Chance</h5></li>
+        <li><img src="http://lenciel.cn/downloads/images/2014_04/edward_gorey/gorey_gogol1.jpg" alt="07" /><h5>Tales of Good and Evil</h5></li>
+    </ul>
+</div>
+<!-- /container -->
+
+<script src="http://lenciel.cn/downloads/static/js/draggabilly.pkgd.min.js"></script>
+
+<script src="http://lenciel.cn/downloads/static/js/elastiStack.js"></script>
+
+<script>
+    new ElastiStack( document.getElementById( 'elasticstack' ) );
+</script>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Change The Light]]></title>
@@ -1152,36 +1192,6 @@
     <content type="html"><![CDATA[<p><img src="http://lenciel.cn/downloads/images/next_subject_in_blade_runner.gif" alt="Next Subject" title="Don't touch me..." /></p>
 
 <blockquote><p>&#8220;Next subject: Kowalski, Leon.&#8221;</p><footer><strong>Ridley Scott</strong> <cite><a href="http://www.imdb.com/title/tt0083658/">Blade Runner(1982)</a></cite></footer></blockquote>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[定制机上恢复google原厂应用]]></title>
-    <link href="http://lenciel.cn/2013/12/restore-google-apps/"/>
-    <updated>2013-12-18T22:33:00+08:00</updated>
-    <id>http://lenciel.cn/2013/12/restore-google-apps</id>
-    <content type="html"><![CDATA[<p>最近因为移动的手机丢了，正好宽带升级到100M送了两个电信的卡没地方用，入了一个Rick推荐的电信移动双卡双待的机器：<a href="http://item.jd.com/824702.html">中兴N986</a>。</p>
-
-<p>机器用来当小三机已经是非常不错了，唯一让本座纠结的就是电信的合约机老是喜欢把google账号干掉，而小弟的所有联系人又都在google（虽然现在看起来这么做可能也未必妥当）。</p>
-
-<p>据Rick大大说，之前是可以用小米的<a href="http://app.xiaomi.com/detail/36925">谷歌应用下载器</a>来直接把Google的一干应用装回来。但是好像因为<a href="http://www.zhihu.com/question/21103129">Google不太愿意</a>自己的应用被未授权的雷总装来装去，这个应用已经没有更新了：青漾系统是4.2.1，下载回来的apk直接<code>adb install</code>会因为android版本不match报错。</p>
-
-<p>于是只好去搜了<a href="http://www.teamandroid.com/gapps/">4.2.1的stock gapps包</a>回来自己撸 - <a href="http://pan.baidu.com/s/1iPXn">百度盘分享了一份</a>。</p>
-
-<p>首先要root机器，然后把<code>/system/app</code>路径mount成rw的。</p>
-
-<p>root就是刷recovery然后替换一些文件，当然大天朝有不少神器做得非常不错，比如<a href="http://www.mgyun.com/">刷机大师</a>这种软件，感觉会摧毁电脑城刷机青年的就业机会。而修改目录权限这种事情，如果你对命令行不熟，好像有很多流行的文件夹管理应用可以用来更改目录的权限。</p>
-
-<p>然后，直接把下载回来的gapps.zip解压，进入<code>system/app</code>路径，将自己需要的apk往<code>/system/app</code>路径push就行了。</p>
-
-<p>以Google联系人同步为例，就是：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">adb push GoogleContactsSyncAdapter.apk /system/app/.
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>这里要注意的就是所有Google的应用有些基础的依赖，要记得check一下/system/app下面是不是都有，比如<code>GoogleServicesFramework.apk</code>等等。</p>
-
 ]]></content>
   </entry>
   
