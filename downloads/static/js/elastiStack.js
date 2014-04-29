@@ -4,16 +4,16 @@
  *
  * Licensed under the MIT license.
  * http://www.opensource.org/licenses/mit-license.php
- * 
+ *
  * Copyright 2013, Codrops
  * http://www.codrops.com
  */
 ;( function( window ) {
-	
+
 	'use strict';
 
 	function extend( a, b ) {
-		for( var key in b ) { 
+		for( var key in b ) {
 			if( b.hasOwnProperty( key ) ) {
 				a[key] = b[key];
 			}
@@ -48,10 +48,10 @@
 	}
 
 	ElastiStack.prototype.options = {
-		// distDragBack: if the user stops dragging the image in a area that does not exceed [distDragBack]px for either x or y then the image goes back to the stack 
+		// distDragBack: if the user stops dragging the image in a area that does not exceed [distDragBack]px for either x or y then the image goes back to the stack
 		distDragBack : 200,
-		// distDragMax: if the user drags the image in a area that exceeds [distDragMax]px for either x or y then the image moves away from the stack 
-		distDragMax : 450,
+		// distDragMax: if the user drags the image in a area that exceeds [distDragMax]px for either x or y then the image moves away from the stack
+		distDragMax : 100,
 		// callback
 		onUpdateStack : function( current ) { return false; }
 	};
@@ -105,16 +105,16 @@
 	ElastiStack.prototype._moveAway = function( instance ) {
 		// disable drag
 		this._disableDragg();
-		
+
 		// add class "animate"
 		classie.add( instance.element, 'animate' );
-		
+
 		// calculate how much to translate in the x and y axis
 		var tVal = this._getTranslateVal( instance );
-		
-		// apply it	
+
+		// apply it
 		setTransformStyle( instance.element, is3d ? 'translate3d(' + tVal.x + 'px,' + tVal.y + 'px, 0px)' : 'translate(' + tVal.x + 'px,' + tVal.y + 'px)' );
-		
+
 		// item also fades out
 		instance.element.style.opacity = 0;
 
@@ -136,7 +136,7 @@
 		var self = this,
 			onEndTransFn = function() {
 				instance.element.removeEventListener( transEndEventName, onEndTransFn );
-				
+
 				// reset first item
 				setTransformStyle( instance.element, is3d ? 'translate3d(0,0,-180px)' : 'translate(0,0,0)' );
 				instance.element.style.left = instance.element.style.top = '0px';
@@ -270,9 +270,9 @@
 			dy = Math.sin( a * ( Math.PI / 180 ) ) * hL,
 			tx = dx - Math.abs( el.position.x ),
 			ty = dy - Math.abs( el.position.y );
-		
+
 		return {
-			x : el.position.x > 0 ? tx : tx * -1, 
+			x : el.position.x > 0 ? tx : tx * -1,
 			y : el.position.y > 0 ? ty : ty * -1
 		}
 	};
@@ -281,23 +281,23 @@
 	ElastiStack.prototype._firstItem = function() {
 		return this.items[ this.current ];
 	};
-	
+
 	// returns the second item in the stack
 	ElastiStack.prototype._secondItem = function() {
 		if( this.itemsCount >= 2 ) {
 			return this.current + 1 < this.itemsCount ? this.items[ this.current + 1 ] : this.items[ Math.abs( this.itemsCount - ( this.current + 1 ) ) ];
 		}
 	};
-	
+
 	// returns the third item in the stack
-	ElastiStack.prototype._thirdItem = function() { 
+	ElastiStack.prototype._thirdItem = function() {
 		if( this.itemsCount >= 3 ) {
 			return this.current + 2 < this.itemsCount ? this.items[ this.current + 2 ] : this.items[ Math.abs( this.itemsCount - ( this.current + 2 ) ) ];
 		}
 	};
 
 	// returns the last item (of the first three) in the stack
-	ElastiStack.prototype._lastItem = function() { 
+	ElastiStack.prototype._lastItem = function() {
 		if( this.itemsCount >= 3 ) {
 			return this._thirdItem();
 		}
