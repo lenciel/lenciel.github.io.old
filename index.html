@@ -9,7 +9,7 @@
   <meta name="author" content="Lenciel Li">
 
   
-  <meta name="description" content="最近偶像派在说要买一些给蒙爷看的绘本。 这让我想起来《读库》有几期专门在梳理国内外那些有名的插画家。的确，纸质书最让人怀念的就是里面那些精致的插画。 我最喜欢的插画家是号称“黑旋风”的Edward Gorey。他本身是作家，但是最主要的成就却不是文字而是一系列绘本作品，比如代表作《死小孩》。 &hellip;">
+  <meta name="description" content="午饭之前的这点儿垃圾时间闲着也是闲着，大多数网站让用户输入密码都做得不够温柔。什么样是温柔呢？不打扰就是温柔… 谢谢 请再次输入你的密码 输入正确 返回 请输入密码 最少8位 必须包含大写字母 必须包含小写字母 必须包含数字 必须包含符号 ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -31,14 +31,14 @@
 
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://lenciel.cn/" />
-<meta property="og:description" content="最近偶像派在说要买一些给蒙爷看的绘本。 这让我想起来《读库》有几期专门在梳理国内外那些有名的插画家。的确，纸质书最让人怀念的就是里面那些精致的插画。 我最喜欢的插画家是号称“黑旋风”的Edward Gorey。他本身是作家，但是最主要的成就却不是文字而是一系列绘本作品，比如代表作《死小孩》。 &hellip;" />
+<meta property="og:description" content="午饭之前的这点儿垃圾时间闲着也是闲着，大多数网站让用户输入密码都做得不够温柔。什么样是温柔呢？不打扰就是温柔… 谢谢 请再次输入你的密码 输入正确 返回 请输入密码 最少8位 必须包含大写字母 必须包含小写字母 必须包含数字 必须包含符号 " />
 
 <meta property="og:site_name" content="http://lenciel.cn" />
 <meta property="article:author" content="https://plus.google.com/114787528537231301324">
 
 
 
-<meta itemprop="description" content="最近偶像派在说要买一些给蒙爷看的绘本。 这让我想起来《读库》有几期专门在梳理国内外那些有名的插画家。的确，纸质书最让人怀念的就是里面那些精致的插画。 我最喜欢的插画家是号称“黑旋风”的Edward Gorey。他本身是作家，但是最主要的成就却不是文字而是一系列绘本作品，比如代表作《死小孩》。 &hellip;" />
+<meta itemprop="description" content="午饭之前的这点儿垃圾时间闲着也是闲着，大多数网站让用户输入密码都做得不够温柔。什么样是温柔呢？不打扰就是温柔… 谢谢 请再次输入你的密码 输入正确 返回 请输入密码 最少8位 必须包含大写字母 必须包含小写字母 必须包含数字 必须包含符号 " />
 
 <!-- Combine multiple fonts into one request -->
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic|Patua+One|Yanone+Kaffeesatz" rel="stylesheet" type="text/css">
@@ -102,6 +102,92 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/05/better-password-form-field/">请输入密码</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-04T09:33:43+08:00" pubdate data-updated="true">May 4<span>th</span>, 2014</time>
+        
+         | <a href="/2014/05/better-password-form-field/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>午饭之前的这点儿垃圾时间闲着也是闲着，大多数网站让用户输入密码都做得不够温柔。什么样是温柔呢？不打扰就是温柔…</p>
+
+<link rel="stylesheet" href="/downloads/static/css/flip_animations.css" />
+
+<link rel="stylesheet" href="/downloads/static/css/better_password_form_field.css" />
+
+<div id="better-password-container">
+    <div class="top"></div>
+    <div class="middle">
+      <div class="left"></div>
+      <div class="middle">
+        <div id="form-container">
+
+          <div id="all-done">谢谢</div>
+
+          <form id="verify-new-password">
+            <label for="verify-password">请再次输入你的密码</label>
+            <input placeholder="请再次输入你的密码" type="password" id="verify-password" name="password-to-verify" />
+            <ul>
+              <li id="matches-password">输入正确</li>
+            </ul>
+
+            <input type="submit" id="verify-password-submit" value="确认" disabled="disabled" />
+            <button id="go-back">返回</button>
+          </form>
+
+          <form id="new-password">
+            <label for="password">请输入密码</label>
+            <input placeholder="请输入密码" type="password" id="password" name="password" />
+            <ul>
+              <li id="eight-plus">最少8位</li>
+              <li id="uppercase">必须包含大写字母</li>
+              <li id="lowercase">必须包含小写字母</li>
+              <li id="numbers">必须包含数字</li>
+              <li id="punctuation">必须包含符号</li>
+            </ul>
+
+            <input type="submit" id="password-submit" value="下一步" disabled="disabled" />
+          </form>
+
+        </div>
+      </div>
+      <div class="right"></div>
+    </div>
+    <div class="bottom"></div>
+  </div>
+
+<script src="/downloads/static/js/better_password_form_field.js"></script>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -493,46 +579,6 @@
 
 <p>Hope you have fun when setting up the pipeline for your company.</p>
 
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2014/04/why-look-so-sad/">Why Look So Sad</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-04-19T21:54:53+08:00" pubdate data-updated="true">Apr 19<span>th</span>, 2014</time>
-        
-         | <a href="/2014/04/why-look-so-sad/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="/downloads/images/iwdrm/we_are_different.gif" alt="We are different" title="Don't touch me..." /></p>
-
-<blockquote><p>&#8220;Why do you look so sad?&#8221;<br />&#8220;Because you speak to me in words and I look at you with feelings.&#8221;</p><footer><strong>Jean-Paul Belmondo</strong> <cite><a href="http://www.imdb.com/title/tt0059592/">Pierrot Le Fou (1965)</a></cite></footer></blockquote>
 </div>
   
   
