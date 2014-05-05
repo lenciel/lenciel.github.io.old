@@ -9,8 +9,8 @@
   <meta name="author" content="Lenciel Li">
 
   
-  <meta name="description" content=" Yes, we’re men. Men is what we are.Palahniuk Fight Club(1999)
-">
+  <meta name="description" content="工作机器切换到Mac之后我一直在自用并在团队中推广 oh-my-zsh。99%的时间本座对它是如此满意，除开有的时候它的服务太主动了一些。 比如今天在用curl试用一个接口的时候，我测试用的payload放在一个payload.json文件里面，所以命令是： 1
+curl -H "Content- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -32,16 +32,16 @@
 
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://lenciel.cn/blog/page/10/" />
-<meta property="og:description" content=" Yes, we’re men. Men is what we are.Palahniuk Fight Club(1999)
-" />
+<meta property="og:description" content="工作机器切换到Mac之后我一直在自用并在团队中推广 oh-my-zsh。99%的时间本座对它是如此满意，除开有的时候它的服务太主动了一些。 比如今天在用curl试用一个接口的时候，我测试用的payload放在一个payload.json文件里面，所以命令是： 1
+curl -H "Content- &hellip;" />
 
 <meta property="og:site_name" content="http://lenciel.cn" />
 <meta property="article:author" content="https://plus.google.com/114787528537231301324">
 
 
 
-<meta itemprop="description" content=" Yes, we’re men. Men is what we are.Palahniuk Fight Club(1999)
-" />
+<meta itemprop="description" content="工作机器切换到Mac之后我一直在自用并在团队中推广 oh-my-zsh。99%的时间本座对它是如此满意，除开有的时候它的服务太主动了一些。 比如今天在用curl试用一个接口的时候，我测试用的payload放在一个payload.json文件里面，所以命令是： 1
+curl -H "Content- &hellip;" />
 
 <!-- Combine multiple fonts into one request -->
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic|Patua+One|Yanone+Kaffeesatz" rel="stylesheet" type="text/css">
@@ -105,6 +105,63 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/07/stop-specific-zsh-shell-auto-correct/">关掉Zsh对指定命令的自动纠错</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-23T14:47:00+08:00" pubdate data-updated="true">Jul 23<span>rd</span>, 2013</time>
+        
+         | <a href="/2013/07/stop-specific-zsh-shell-auto-correct/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>工作机器切换到Mac之后我一直在自用并在团队中推广 <a href="https://github.com/lenciel/oh-my-zsh"><code>oh-my-zsh</code></a>。99%的时间本座对它是如此满意，除开有的时候它的服务太主动了一些。</p>
+
+<p>比如今天在用<code>curl</code>试用一个接口的时候，我测试用的payload放在一个<code>payload.json</code>文件里面，所以命令是：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">curl -H "Content-Type: application/json" -X POST -d @payload.json  http://xxx.xxx.xxx/xxx/StartServiceServlet</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>然后它就一直提示：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">zsh: correct '@payload.json' to 'payload.json' [nyae]?</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>一，直，提，示。</p>
+
+<p>跑到代码里面去看了一下，要关掉这种自动纠错的提示可以配置 <code>~/.oh-my-zsh/lib/correction.zsh</code>：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">alias curl='nocorrect curl'</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>整个世界清静了…</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1186,46 +1243,6 @@ https://oauth_service/login/oauth/authorize?client_id=3MVG9lKcPoNINVB&amp;redire
   <div class="entry-content"><p><img src="/downloads/images/1984.gif" alt="1984" title="Don't touch me..." /></p>
 
 <blockquote><p>&#8220;From the age of Big Brother, from the age of the Thought Police, from a dead man … greetings.&#8221;</p><footer><strong>George Orwell</strong> <cite>Nineteen Eighty-Four (1984)</cite></footer></blockquote>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/07/go-and-love-more/">Go and Love More</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-18T21:14:00+08:00" pubdate data-updated="true">Jul 18<span>th</span>, 2013</time>
-        
-         | <a href="/2013/07/go-and-love-more/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="/downloads/images/go_and_love_more.gif" alt="Go and love more" title="Don't touch me..." /></p>
-
-<blockquote><p>&#8220;Go and love some more.&#8221;</p><footer><strong>Hal Ashby</strong> <cite><a href="http://en.wikipedia.org/wiki/Harold_and_Maude">Harold and Maude(1971)</a></cite></footer></blockquote>
 </div>
   
   

@@ -9,7 +9,8 @@
   <meta name="author" content="Lenciel Li">
 
   
-  <meta name="description" content="因为nginx等优秀的开源项目，有不少本来不是做服务器的同学也可以写很多服务器端的程序了。但是在聊天中会发现，大家虽然写了不少代码，但是对wsgi是什么，gunicorn是什么，反向代理又是什么并不了解，也就是说对基本概念并没有一个全局的了解。 服务器 到了服务器组你会发现原来有各种各样的服务器， &hellip;">
+  <meta name="description" content=" I wonder if it remembers me.Bill Murray The Life Aquatic With Steve Zissou(2004)
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -31,14 +32,16 @@
 
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://lenciel.cn/blog/page/9/" />
-<meta property="og:description" content="因为nginx等优秀的开源项目，有不少本来不是做服务器的同学也可以写很多服务器端的程序了。但是在聊天中会发现，大家虽然写了不少代码，但是对wsgi是什么，gunicorn是什么，反向代理又是什么并不了解，也就是说对基本概念并没有一个全局的了解。 服务器 到了服务器组你会发现原来有各种各样的服务器， &hellip;" />
+<meta property="og:description" content=" I wonder if it remembers me.Bill Murray The Life Aquatic With Steve Zissou(2004)
+" />
 
 <meta property="og:site_name" content="http://lenciel.cn" />
 <meta property="article:author" content="https://plus.google.com/114787528537231301324">
 
 
 
-<meta itemprop="description" content="因为nginx等优秀的开源项目，有不少本来不是做服务器的同学也可以写很多服务器端的程序了。但是在聊天中会发现，大家虽然写了不少代码，但是对wsgi是什么，gunicorn是什么，反向代理又是什么并不了解，也就是说对基本概念并没有一个全局的了解。 服务器 到了服务器组你会发现原来有各种各样的服务器， &hellip;" />
+<meta itemprop="description" content=" I wonder if it remembers me.Bill Murray The Life Aquatic With Steve Zissou(2004)
+" />
 
 <!-- Combine multiple fonts into one request -->
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic|Patua+One|Yanone+Kaffeesatz" rel="stylesheet" type="text/css">
@@ -102,6 +105,46 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/08/remember-me/">Remember Me</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-17T22:39:00+08:00" pubdate data-updated="true">Aug 17<span>th</span>, 2013</time>
+        
+         | <a href="/2013/08/remember-me/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="/downloads/images/remember_me.gif" alt="Remember Me" title="Don't touch me..." /></p>
+
+<blockquote><p>I wonder if it remembers me.</p><footer><strong>Bill Murray</strong> <cite><a href="http://www.imdb.com/title/tt0362270/">The Life Aquatic With Steve Zissou(2004)</a></cite></footer></blockquote>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -985,63 +1028,6 @@
   <div class="entry-content"><p><img src="/downloads/images/dr_strangelove_doomsday_machine.gif" alt="doomsday machines" title="Don't touch me..." /></p>
 
 <blockquote><p>Gee, I wish we had one of them doomsday machines.</p><footer><strong>Stanley Kubrick</strong> <cite><a href="http://www.imdb.com/title/tt0057012/">Fight Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb(1964)</a></cite></footer></blockquote>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/07/stop-specific-zsh-shell-auto-correct/">关掉Zsh对指定命令的自动纠错</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-23T14:47:00+08:00" pubdate data-updated="true">Jul 23<span>rd</span>, 2013</time>
-        
-         | <a href="/2013/07/stop-specific-zsh-shell-auto-correct/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>工作机器切换到Mac之后我一直在自用并在团队中推广 <a href="https://github.com/lenciel/oh-my-zsh"><code>oh-my-zsh</code></a>。99%的时间本座对它是如此满意，除开有的时候它的服务太主动了一些。</p>
-
-<p>比如今天在用<code>curl</code>试用一个接口的时候，我测试用的payload放在一个<code>payload.json</code>文件里面，所以命令是：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">curl -H "Content-Type: application/json" -X POST -d @payload.json  http://xxx.xxx.xxx/xxx/StartServiceServlet</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>然后它就一直提示：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">zsh: correct '@payload.json' to 'payload.json' [nyae]?</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>一，直，提，示。</p>
-
-<p>跑到代码里面去看了一下，要关掉这种自动纠错的提示可以配置 <code>~/.oh-my-zsh/lib/correction.zsh</code>：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">alias curl='nocorrect curl'</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>整个世界清静了…</p>
 </div>
   
   

@@ -9,8 +9,7 @@
   <meta name="author" content="Lenciel Li">
 
   
-  <meta name="description" content="对软件公司，特别是互联网软件公司来说，发布流程是企业的核心竞争力。 那么什么是一个好的发布流程呢？Github（别忘了它本身也是一家软件公司）的CTO在介绍Boxen
-的时候说过，他们公司新员工从拿电脑到可以开始编码只要30分钟，这给混过几家10w+员工公司的我带来的震撼特别强烈。 所以我觉得， &hellip;">
+  <meta name="description" content="做Web开发的时候经常需要修改/etc/hosts文件把dev.cool.project或者cool.project.dev这样的域名指向127.0.0.1(如果你从来没有这么做过那你可以跳过后面的内容了但, seriously? you are a web dev and never did &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -32,16 +31,14 @@
 
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://lenciel.cn/blog/page/2/" />
-<meta property="og:description" content="对软件公司，特别是互联网软件公司来说，发布流程是企业的核心竞争力。 那么什么是一个好的发布流程呢？Github（别忘了它本身也是一家软件公司）的CTO在介绍Boxen
-的时候说过，他们公司新员工从拿电脑到可以开始编码只要30分钟，这给混过几家10w+员工公司的我带来的震撼特别强烈。 所以我觉得， &hellip;" />
+<meta property="og:description" content="做Web开发的时候经常需要修改/etc/hosts文件把dev.cool.project或者cool.project.dev这样的域名指向127.0.0.1(如果你从来没有这么做过那你可以跳过后面的内容了但, seriously? you are a web dev and never did &hellip;" />
 
 <meta property="og:site_name" content="http://lenciel.cn" />
 <meta property="article:author" content="https://plus.google.com/114787528537231301324">
 
 
 
-<meta itemprop="description" content="对软件公司，特别是互联网软件公司来说，发布流程是企业的核心竞争力。 那么什么是一个好的发布流程呢？Github（别忘了它本身也是一家软件公司）的CTO在介绍Boxen
-的时候说过，他们公司新员工从拿电脑到可以开始编码只要30分钟，这给混过几家10w+员工公司的我带来的震撼特别强烈。 所以我觉得， &hellip;" />
+<meta itemprop="description" content="做Web开发的时候经常需要修改/etc/hosts文件把dev.cool.project或者cool.project.dev这样的域名指向127.0.0.1(如果你从来没有这么做过那你可以跳过后面的内容了但, seriously? you are a web dev and never did &hellip;" />
 
 <!-- Combine multiple fonts into one request -->
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic|Patua+One|Yanone+Kaffeesatz" rel="stylesheet" type="text/css">
@@ -105,6 +102,148 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/04/dnsmasq-on-mac/">使用dnsmasq配置本地开发环境</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-25T14:53:37+08:00" pubdate data-updated="true">Apr 25<span>th</span>, 2014</time>
+        
+         | <a href="/2014/04/dnsmasq-on-mac/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>做Web开发的时候经常需要修改<code>/etc/hosts</code>文件把<code>dev.cool.project</code>或者<code>cool.project.dev</code>这样的域名指向127.0.0.1(如果你从来没有这么做过那你可以跳过后面的内容了但, seriously? you are a web dev and never did this before?）。这样做有些麻烦：</p>
+
+<ul>
+  <li>每个项目需要修改hosts文件</li>
+  <li>需要root权限才能修改这个文件</li>
+</ul>
+
+<p>这里记一下如何用<a href="http://www.thekelleys.org.uk/dnsmasq/doc.html">dnsmasq</a>把所有<code>dev</code>结尾的域名都指向<code>127.0.0.1</code>。</p>
+
+<h4 id="dnsmasq">安装dnsmasq</h4>
+
+<p>在Mac下安装什么东西本座都用<a href="http://brew.sh/">homebrew</a>，先更新brew:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>brew up
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>然后安装dnsmasq。注意安装命令的输出，结尾是有配置的简单说明的。因为我用了<a href="http://lenciel.cn/2013/03/boxen-introduction/">boxen</a>所以路径不一定对每个人都适用，以你自己的输出为准：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>brew install <span class="nv">dnsmasq</span>
+</span><span class="line"><span class="o">==</span>&gt; make install <span class="nv">PREFIX</span><span class="o">=</span>/opt/boxen/homebrew/Cellar/dnsmasq/2.69
+</span><span class="line"><span class="o">==</span>&gt; Caveats
+</span><span class="line">To configure dnsmasq, copy the example configuration to /opt/boxen/homebrew/etc/dnsmasq.conf
+</span><span class="line">and edit to taste.
+</span><span class="line">  cp /opt/boxen/homebrew/opt/dnsmasq/dnsmasq.conf.example /opt/boxen/homebrew/etc/dnsmasq.conf
+</span><span class="line">To have launchd start dnsmasq at startup:
+</span><span class="line">sudo cp -fv /opt/boxen/homebrew/opt/dnsmasq/*.plist /Library/LaunchDaemons
+</span><span class="line">Then to load dnsmasq now:
+</span><span class="line">sudo launchctl load /Library/LaunchDaemons/homebrew.mxcl.dnsmasq.plist
+</span><span class="line"><span class="o">==</span>&gt; Summary
+</span><span class="line">/opt/boxen/homebrew/Cellar/dnsmasq/2.69: 7 files, 488K, built in 22 seconds
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="dnsmasq-1">配置dnsmasq</h4>
+
+<p>在<code>dnsmasq.conf</code>里面添加一个配置<code>dev</code>的配置：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">address</span><span class="o">=</span>/dev/127.0.0.1
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>重启dnsmasq服务:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>sudo launchctl stop homebrew.mxcl.dnsmasq
+</span><span class="line"><span class="nv">$ </span>sudo launchctl start homebrew.mxcl.dnsmasq
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="osx">配置OSX</h4>
+
+<p>安装了dnsmasq之后你有两个选择：</p>
+
+<ol>
+  <li>把操作系统所有的DNS查询都由dnsmasq处理</li>
+  <li>把<code>.dev</code>的DNS查询交给dnsmasq处理</li>
+</ol>
+
+<p>第一个比较简单，在<code>System Preferences</code>里面配置一下就可以了。
+第二个需要用/etc/reslov.conf文件来更精细的控制DNS查询:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>sudo mkdir -p /etc/resolver
+</span><span class="line"><span class="nv">$ </span>sudo touch /etc/resolver/dev
+</span><span class="line"><span class="nv">$ </span>sudo vi /etc/resolver/dev
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>在<code>/etc/resolver/dev</code>里面添加一行<code>nameserver 127.0.0.1</code>就可以了。</p>
+
+<h3 id="section">测试效果</h3>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line">    <span class="nv">$ </span>ping -c 1 www.sina.com.cn
+</span><span class="line">    PING newscd.sina.com.cn <span class="o">(</span>221.236.31.145<span class="o">)</span>: 56 data bytes
+</span><span class="line">
+</span><span class="line">    <span class="nv">$ </span>ping -c 1 this.is.a.test.dev
+</span><span class="line">    PING this.is.a.test.dev <span class="o">(</span>127.0.0.1<span class="o">)</span>: 56 data bytes
+</span><span class="line">
+</span><span class="line">    <span class="nv">$ </span>ping -c 1 this.is.cool.dev
+</span><span class="line">    PING this.is.cool.dev <span class="o">(</span>127.0.0.1<span class="o">)</span>: 56 data bytes
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>嗯哼~</p>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -399,195 +538,6 @@
 <p>于是马尔克斯更进一步，他告诉你那份孤独恰恰是爱的最意味深长的赠品。你接受了这份赠品，就能学会理解别的孤独的灵魂和深藏于它们之中的深邃的爱。读懂他你会明白，是否一起生活一起死去并不重要，能够在他/她到来的时候好好去爱，其充实感是任何体验都无法比拟的。从某种意义上说，那么强烈的感情正是人的一生中最美好的东西。</p>
 
 <p>所以，并没有像电池一样的东西在持续供给着让你对抗孤独。那些某个瞬间点燃的火花，就足够照亮我们漫长的日常生活。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2014/04/openssl-heartbleed-bug/">Openssl Heartbleed Bug</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-04-10T11:29:15+08:00" pubdate data-updated="true">Apr 10<span>th</span>, 2014</time>
-        
-         | <a href="/2014/04/openssl-heartbleed-bug/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>连某宝都中招的<a href="http://heartbleed.com/">Heartbleed bug</a>究竟是个什么东西？简单地说就是攻击者可以读最多64KB内存的内容。</p>
-
-<p>读了这64KB能干嘛？用报这个bug的人的话来说：</p>
-
-<blockquote><p>Without using any privileged information or credentials we were able steal from ourselves the secret keys used for our X.509 certificates, user names and passwords, instant messages, emails and business critical documents and communication.</p></blockquote>
-
-<p>那么读取64KB内存和获取这么多关键信息究竟有什么关系呢？</p>
-
-<h2 id="the-bug">The bug</h2>
-<p>先来看看<a href="http://git.openssl.org/gitweb/?p=openssl.git;a=commitdiff;h=96db9023b881d7cd9f379b0c154650d6c108e9a3">patch</a>里面的<code>ssl/d1_both.c</code>:</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-</pre></td><td class="code"><pre><code class="c"><span class="line"><span class="kt">int</span>
-</span><span class="line"><span class="nf">dtls1_process_heartbeat</span><span class="p">(</span><span class="n">SSL</span> <span class="o">*</span><span class="n">s</span><span class="p">)</span>
-</span><span class="line">    <span class="p">{</span>
-</span><span class="line">    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">s3</span><span class="o">-&gt;</span><span class="n">rrec</span><span class="p">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">*</span><span class="n">pl</span><span class="p">;</span>
-</span><span class="line">    <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">hbtype</span><span class="p">;</span>
-</span><span class="line">    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">payload</span><span class="p">;</span>
-</span><span class="line">    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">padding</span> <span class="o">=</span> <span class="mi">16</span><span class="p">;</span> <span class="cm">/* Use minimum padding */</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>可以看到，heartbeat里有一个 <a href="http://en.wikipedia.org/wiki/Transport_Layer_Security">SSLv3</a>  record的指针，这个<code>record</code>的代码如下:</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-</pre></td><td class="code"><pre><code class="c"><span class="line"><span class="k">typedef</span> <span class="k">struct</span> <span class="n">ssl3_record_st</span>
-</span><span class="line">    <span class="p">{</span>
-</span><span class="line">        <span class="kt">int</span> <span class="n">type</span><span class="p">;</span>               <span class="cm">/* type of record */</span>
-</span><span class="line">        <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">length</span><span class="p">;</span>    <span class="cm">/* How many bytes available */</span>
-</span><span class="line">        <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">off</span><span class="p">;</span>       <span class="cm">/* read/write offset into &#39;buf&#39; */</span>
-</span><span class="line">        <span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="n">data</span><span class="p">;</span>    <span class="cm">/* pointer to the record data */</span>
-</span><span class="line">        <span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="n">input</span><span class="p">;</span>   <span class="cm">/* where the decode bytes are */</span>
-</span><span class="line">        <span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="n">comp</span><span class="p">;</span>    <span class="cm">/* only used with decompression - malloc()ed */</span>
-</span><span class="line">        <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">epoch</span><span class="p">;</span>    <span class="cm">/* epoch number, needed by DTLS1 */</span>
-</span><span class="line">        <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">seq_num</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span> <span class="cm">/* sequence number, needed by DTLS1 */</span>
-</span><span class="line">    <span class="p">}</span> <span class="n">SSL3_RECORD</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-<p>可以看到，每个<code>record</code>有它的<code>type</code>、<code>length</code>和<code>data</code>，规规矩矩。</p>
-
-<p>回到<code>dtls1_process_heartbeat</code>：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class="c"><span class="line"><span class="cm">/* Read type and payload length first */</span>
-</span><span class="line"><span class="n">hbtype</span> <span class="o">=</span> <span class="o">*</span><span class="n">p</span><span class="o">++</span><span class="p">;</span>
-</span><span class="line"><span class="n">n2s</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">payload</span><span class="p">);</span>
-</span><span class="line"><span class="n">pl</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>可以看到<code>SSLv3 record</code>的第一个byte就是放这个<code>heartbeat</code>的<code>type</code>。 宏<code>n2s</code> 则是从<code>p</code>里面取两个byte放到payload里面，被用来作为payload的长度。 <strong>注意这里并没有检查<code>SSLv3 record</code> 实际的长度。</strong> </p>
-
-<p>接下来在这个函数里面干了下面这些事情：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-</pre></td><td class="code"><pre><code class="c"><span class="line"><span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="n">buffer</span><span class="p">,</span> <span class="o">*</span><span class="n">bp</span><span class="p">;</span>
-</span><span class="line"><span class="kt">int</span> <span class="n">r</span><span class="p">;</span>
-</span><span class="line">
-</span><span class="line"><span class="cm">/* Allocate memory for the response, size is 1 byte</span>
-</span><span class="line"><span class="cm"> * message type, plus 2 bytes payload length, plus</span>
-</span><span class="line"><span class="cm"> * payload, plus padding</span>
-</span><span class="line"><span class="cm"> */</span>
-</span><span class="line"><span class="n">buffer</span> <span class="o">=</span> <span class="n">OPENSSL_malloc</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">payload</span> <span class="o">+</span> <span class="n">padding</span><span class="p">);</span>
-</span><span class="line"><span class="n">bp</span> <span class="o">=</span> <span class="n">buffer</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>可以看到，用户要多少程序就分配多少，最多可以分配到<code>65535+1+2+16</code>，指针bp被用来操作这块内存。然后：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class="c"><span class="line"><span class="cm">/* Enter response type, length and copy payload */</span>
-</span><span class="line"><span class="o">*</span><span class="n">bp</span><span class="o">++</span> <span class="o">=</span> <span class="n">TLS1_HB_RESPONSE</span><span class="p">;</span>
-</span><span class="line"><span class="n">s2n</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">bp</span><span class="p">);</span>
-</span><span class="line"><span class="n">memcpy</span><span class="p">(</span><span class="n">bp</span><span class="p">,</span> <span class="n">pl</span><span class="p">,</span> <span class="n">payload</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>宏<code> s2n</code>把<code>n2s</code>做的操作恢复出来：先拿16个bit的值放到2个byte里面，也就是原来请求的payload的长度。然后把<code>pl</code>里面放的payload(请求者提交的data)拷贝到新分配的<code>bp</code>里面。</p>
-
-<p>看起来是很平常的操作，只不过没有认真的检查用户输入而已，但问题也就在这里了。</p>
-
-<h2 id="where-is-the-bug">Where is the bug</h2>
-
-<p>如果用户并没有正在提交声称的那么多个bytes的payload，那么memcpy就会读到同一个process里面SSLv3 record附近的内存内容。</p>
-
-<p>这附近有哪些内容呢？</p>
-
-<p>首先要明白在linux上，内存的动态分配主要是通过<a href="http://linux.die.net/man/2/sbrk">sbrk</a> 或者是 <a href="http://man7.org/linux/man-pages/man2/mmap.2.html">mmap</a>。如果内存是通过sbrk分配的，它会使用<code>heap-grows-up</code>规则，泄露出来的东西不会那么多（但是如果是同时并发请求<a href="http://blog.existentialize.com/diagnosis-of-the-openssl-heartbleed-bug.html#fn:update">还是有东西会漏</a>）。</p>
-
-<p>在这里，<code>pl</code>因为malloc里面的mmap_threshhold多半是sbrk分配的，但是，那些关键的用户数据，则多半是通过mmap分配内存。于是这些数据就会被攻击者用<code>pl</code>拿到。如果再考虑并发请求，就…</p>
-
-<h2 id="the-fix">The fix</h2>
-
-<p>所以，整个patch里面最主要的fix就是：
-* 检查是否有长度为0的虚假heartbeat
-* 检查record的真实长度</p>
-
-<p>代码如下：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-</pre></td><td class="code"><pre><code class="c"><span class="line"><span class="cm">/* Read type and payload length first */</span>
-</span><span class="line"><span class="k">if</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">16</span> <span class="o">&gt;</span> <span class="n">s</span><span class="o">-&gt;</span><span class="n">s3</span><span class="o">-&gt;</span><span class="n">rrec</span><span class="p">.</span><span class="n">length</span><span class="p">)</span>
-</span><span class="line">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> <span class="cm">/* silently discard */</span>
-</span><span class="line"><span class="n">hbtype</span> <span class="o">=</span> <span class="o">*</span><span class="n">p</span><span class="o">++</span><span class="p">;</span>
-</span><span class="line"><span class="n">n2s</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">payload</span><span class="p">);</span>
-</span><span class="line"><span class="k">if</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">payload</span> <span class="o">+</span> <span class="mi">16</span> <span class="o">&gt;</span> <span class="n">s</span><span class="o">-&gt;</span><span class="n">s3</span><span class="o">-&gt;</span><span class="n">rrec</span><span class="p">.</span><span class="n">length</span><span class="p">)</span>
-</span><span class="line">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> <span class="cm">/* silently discard per RFC 6520 sec. 4 */</span>
-</span><span class="line"><span class="n">pl</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="so">So?</h2>
-
-<p>这个bug大概算是影响这么剧烈的bug里面最好明白的一个，所以居然我也看明白了。感受：</p>
-
-<ul>
-  <li>为了可扩展性引入了复杂度，经常都会带来恶梦</li>
-  <li>用户的输入，无论如何都不能相信，一定要check</li>
-  <li>C语言的确是大牛小牛都会踩到坑啊</li>
-</ul>
-
 </div>
   
   
