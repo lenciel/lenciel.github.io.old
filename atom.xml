@@ -4,7 +4,7 @@
   <title><![CDATA[@Lenciel]]></title>
   <link href="http://lenciel.cn/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2014-05-06T03:00:04+08:00</updated>
+  <updated>2014-05-06T03:01:52+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -14,9 +14,20 @@
 
   
   <entry>
+    <title type="html"><![CDATA[You mean more to me]]></title>
+    <link href="http://lenciel.cn/2014/05/you-mean-more-to-me/"/>
+    <updated>2014-05-05T23:38:20+08:00</updated>
+    <id>http://lenciel.cn/2014/05/you-mean-more-to-me</id>
+    <content type="html"><![CDATA[<p><img src="http://lenciel.cn/downloads/images/iwdrm/you_mean_more_to_me.gif" alt="You Mean More To Me" title="Don't touch me..." /></p>
+
+<blockquote><p>&#8220;You mean more to me than any scientific truth.&#8221;</p><footer><strong>Donatas Banionis</strong> <cite><a href="http://www.imdb.com/title/tt0069293/">Солярис(1972)</a></cite></footer></blockquote>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[晚安(三)]]></title>
     <link href="http://lenciel.cn/2014/05/good-night-3/"/>
-    <updated>2014-05-06T03:38:34+08:00</updated>
+    <updated>2014-05-05T03:38:34+08:00</updated>
     <id>http://lenciel.cn/2014/05/good-night-3</id>
     <content type="html"><![CDATA[<p><img alt="block" src="http://lenciel.cn/downloads/images/2014_03/good_night.jpg" align="left" style="margin:0px 5px;width:23%" />  </p>
 
@@ -49,17 +60,6 @@
 <p>照片上的她衣着并不见得昂贵却十分得体，轻轻松松地就和背景里的山水融在了一起。留着齐脖子的短发，有着形状娇美的薄薄嘴唇，纤细而秀美的鼻翼，眼睛黑漆漆的但并不给人深不可测的感觉。当然，最让我难以忘怀的是她的笑容：那么放松而自然的笑容，是城市生活中绝少见到的清澈爽朗的人才能有的笑容。大概是因为常常在笑，下眼睑有了一条细细的纹路，彷佛可以看到太阳升起的海岸上一直延绵到远方的地平线，令人心醉。</p>
 
 <p>那张照片从公司的公告板上拿下不久，我就在公司里面遇到了她。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[You mean more to me]]></title>
-    <link href="http://lenciel.cn/2014/05/you-mean-more-to-me/"/>
-    <updated>2014-05-05T23:38:20+08:00</updated>
-    <id>http://lenciel.cn/2014/05/you-mean-more-to-me</id>
-    <content type="html"><![CDATA[<p><img src="http://lenciel.cn/downloads/images/iwdrm/you_mean_more_to_me.gif" alt="You Mean More To Me" title="Don't touch me..." /></p>
-
-<blockquote><p>&#8220;You mean more to me than any scientific truth.&#8221;</p><footer><strong>Donatas Banionis</strong> <cite><a href="http://www.imdb.com/title/tt0069293/">Солярис(1972)</a></cite></footer></blockquote>
 ]]></content>
   </entry>
   
