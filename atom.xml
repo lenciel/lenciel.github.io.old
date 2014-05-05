@@ -4,7 +4,7 @@
   <title><![CDATA[@Lenciel]]></title>
   <link href="http://lenciel.cn/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2014-05-04T12:12:06+08:00</updated>
+  <updated>2014-05-05T23:45:19+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -12,6 +12,17 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[You mean more to me]]></title>
+    <link href="http://lenciel.cn/2014/05/you-mean-more-to-me/"/>
+    <updated>2014-05-05T23:38:20+08:00</updated>
+    <id>http://lenciel.cn/2014/05/you-mean-more-to-me</id>
+    <content type="html"><![CDATA[<p><img src="http://lenciel.cn/downloads/images/iwdrm/you_mean_more_to_me.gif" alt="You Mean More To Me" title="Don't touch me..." /></p>
+
+<blockquote><p>&#8220;You mean more to me than any scientific truth.&#8221;</p><footer><strong>Donatas Banionis</strong> <cite><a href="http://www.imdb.com/title/tt0069293/">Солярис(1972)</a></cite></footer></blockquote>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[请输入密码]]></title>
@@ -1219,25 +1230,6 @@
     <content type="html"><![CDATA[<p><img src="http://lenciel.cn/downloads/images/sochi_winter_olympics.gif" alt="Turn the worst" title="Don't touch me..." /></p>
 
 <blockquote><p>&#8220;Let&#8217;s meet in Sochi, they said&#8230;Like brothers and sisters, they said&#8230;&#8221;</p><footer><strong>Lenciel (2014)</strong></footer></blockquote>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[听起来很假]]></title>
-    <link href="http://lenciel.cn/2014/02/true-facts-that-sound-false/"/>
-    <updated>2014-02-12T10:46:00+08:00</updated>
-    <id>http://lenciel.cn/2014/02/true-facts-that-sound-false</id>
-    <content type="html"><![CDATA[<p>Reddit上有一篇关于 <a href="http://www.reddit.com/r/AskReddit/comments/1sdw81/what_is_a_true_fact_that_sound_completely/">听起来很假的事实</a> 的讨论贴<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>，不知道是不是真的:</p>
-
-<blockquote><p>* 做肾脏移植的时候，一般原来的肾都会留着不动，这第三个新来的肾会被放在骨盆里面</p><p>* IPv6可以给地球表面的所有原子分配一个ip（其实比地球面积大100倍的也能搞定）</p><p>* 俄罗斯比冥王星还大 (冥王星表面积: 16.7x10^6 km^2; 俄罗斯表面积: 17.1x10^6 km^2)</p><p>* 如果你把埃菲尔铁塔熔了，铁水放到和铁塔基座面积相同的坑里面，厚度不会超过8厘米</p><p>* 1790年出生并且在1841年成为美国的第10任总统的John Tyler，他有两个孙子还活着</p><p>* 如果原子有银河系那么大，那么中微子就是高尔夫球那么大</p><p>* 人类和香蕉有50%的DNA是相同的</p></blockquote>
-
-<div class="footnotes">
-  <ol>
-    <li id="fn:1">
-      <p>还有一个<a href="http://www.reddit.com/r/AskReddit/comments/1x34t4/whats_the_most_bullshitsoundingbuttrue_fact_you/?limit=500">更老的帖子</a>。 <a href="#fnref:1" rel="reference">&#8617;</a></p>
-    </li>
-  </ol>
-</div>
 ]]></content>
   </entry>
   
