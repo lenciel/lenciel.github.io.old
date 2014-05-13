@@ -4,7 +4,7 @@
   <title><![CDATA[@Lenciel]]></title>
   <link href="http://lenciel.cn/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2014-05-07T11:05:56+08:00</updated>
+  <updated>2014-05-14T00:21:15+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -12,6 +12,45 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Joy myself]]></title>
+    <link href="http://lenciel.cn/2014/05/joy-myself/"/>
+    <updated>2014-05-13T22:38:07+08:00</updated>
+    <id>http://lenciel.cn/2014/05/joy-myself</id>
+    <content type="html"><![CDATA[<p><img src="http://lenciel.cn/downloads/images/iwdrm/tumblr_n5hh9kJw1i1shrw6zo1_400.gif" alt="Go and love more" title="Don't touch me..." />
+<img src="http://lenciel.cn/downloads/images/iwdrm/tumblr_n5hh9kJw1i1shrw6zo2_400.gif" alt="Go and love more" title="Don't touch me..." />
+<img src="http://lenciel.cn/downloads/images/iwdrm/tumblr_n5hh9kJw1i1shrw6zo3_400.gif" alt="Go and love more" title="Don't touch me..." />
+<img src="http://lenciel.cn/downloads/images/iwdrm/tumblr_n5hh9kJw1i1shrw6zo4_400.gif" alt="Go and love more" title="Don't touch me..." />
+<img src="http://lenciel.cn/downloads/images/iwdrm/tumblr_n5hh9kJw1i1shrw6zo5_400.gif" alt="Go and love more" title="Don't touch me..." />
+<img src="http://lenciel.cn/downloads/images/iwdrm/tumblr_n5hh9kJw1i1shrw6zo6_400.gif" alt="Go and love more" title="Don't touch me..." />
+<img src="http://lenciel.cn/downloads/images/iwdrm/tumblr_n5hh9kJw1i1shrw6zo7_400.gif" alt="Go and love more" title="Don't touch me..." />
+<img src="http://lenciel.cn/downloads/images/iwdrm/tumblr_n5hh9kJw1i1shrw6zo8_400.gif" alt="Go and love more" title="Don't touch me..." /></p>
+
+<blockquote><p>&#8220;We are only here briefly, and in this moment I want to allow myself joy.&#8221;</p><footer><strong>Pat Solitano</strong> <cite><a href="http://www.imdb.com/title/tt1798709/">Her(2013)</a></cite></footer></blockquote>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[如何review产品的UX设计]]></title>
+    <link href="http://lenciel.cn/2014/05/what-to-ask-about-design/"/>
+    <updated>2014-05-12T22:45:33+08:00</updated>
+    <id>http://lenciel.cn/2014/05/what-to-ask-about-design</id>
+    <content type="html"><![CDATA[<p>产品设计中UX设计是很重要的一方面，毕竟是拿来见人的嘛。像我这样的工程师怎么去构思自己产品的UX设计或者是review别人的设计呢？当然还是工程师的思维方式了：</p>
+
+<ul>
+  <li>它外在的形式是什么？</li>
+  <li>它内在的表达是什么？</li>
+  <li>它的外在形式和内在表达一致吗？</li>
+  <li>作为观者，我自己感觉如何？我能接收到它传达的东西吗？我能够被它激发起使用的兴趣吗？</li>
+  <li>有了兴趣，接下来该怎么点击，怎么拖动，怎么操作是明显的吗？</li>
+  <li>有没有过度的设计？有没有可以砍掉的地方？有没有做太多假设？有没有缺失的地方？</li>
+  <li>今后如果功能上有这样那样的扩展，是很容易加上去的吗？</li>
+</ul>
+
+<p>我知道做设计的都很讨厌问题太多的人，没关系我会开始公示一下<a href="http://nmd.lenciel.cn/">我心中的好设计</a>。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[You mean more to me]]></title>
@@ -1219,45 +1258,6 @@
     </li>
   </ol>
 </div>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Not Much of A Dancer]]></title>
-    <link href="http://lenciel.cn/2014/02/not-a-dancer/"/>
-    <updated>2014-02-23T22:06:00+08:00</updated>
-    <id>http://lenciel.cn/2014/02/not-a-dancer</id>
-    <content type="html"><![CDATA[<p><img src="http://lenciel.cn/downloads/images/iwdrm/not_a_dancer.gif" alt="not a dancer" title="Don't touch me..." /></p>
-
-<blockquote><p>&#8220;I’m not much of a dancer.&#8221;</p><footer><strong>Vincent Vega</strong> <cite><a href="http://www.imdb.com/title/tt0110912/">Pulp Fiction(1994)</a></cite></footer></blockquote>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[3D动态Gif]]></title>
-    <link href="http://lenciel.cn/2014/02/3d-gifs/"/>
-    <updated>2014-02-18T12:40:00+08:00</updated>
-    <id>http://lenciel.cn/2014/02/3d-gifs</id>
-    <content type="html"><![CDATA[<p><img src="http://lenciel.cn/downloads/images/2014_02/3dgifs4.gif" alt="3d gifs" title="Don't touch me..." /></p>
-
-<p>托各种SNS的福，有趣的动态gif在网络上漫山遍野。作为电影爱好者的本座，也是<a href="http://lenciel.cn/blog/categories/fu-guang-lue-ying/">重度的gif爱好者</a>。</p>
-
-<p>如上图所示，最近动态gif玩法又有创新了：通过“打白条”的方式实现3D效果。主要的思路就是在动态物体处于背景的时候，白条遮挡动态物体。而当动态物体从背景进入前景的时候，动态物体遮挡白条，造成动态物体溢出图片边界范围的错觉。</p>
-
-<p><img src="http://lenciel.cn/downloads/images/2014_02/3dgifs1.gif" alt="3d gifs" title="Don't touch me..." />
-<img src="http://lenciel.cn/downloads/images/2014_02/3dgifs2.gif" alt="3d gifs" title="Don't touch me..." />
-<img src="http://lenciel.cn/downloads/images/2014_02/3dgifs3.gif" alt="3d gifs" title="Don't touch me..." />
-<img src="http://lenciel.cn/downloads/images/2014_02/3dgifs5.gif" alt="3d gifs" title="Don't touch me..." />
-<img src="http://lenciel.cn/downloads/images/2014_02/3dgifs6.gif" alt="3d gifs" title="Don't touch me..." />
-<img src="http://lenciel.cn/downloads/images/2014_02/3dgifs6a.gif" alt="3d gifs" title="Don't touch me..." />
-<img src="http://lenciel.cn/downloads/images/2014_02/3dgifs8.gif" alt="3d gifs" title="Don't touch me..." />
-<img src="http://lenciel.cn/downloads/images/2014_02/3dgifs12.gif" alt="3d gifs" title="Don't touch me..." />
-<img src="http://lenciel.cn/downloads/images/2014_02/3dgifs13.gif" alt="3d gifs" title="Don't touch me..." />
-<img src="http://lenciel.cn/downloads/images/2014_02/3dgifs14.gif" alt="3d gifs" title="Don't touch me..." /></p>
-
-<p>最喜欢的一副：</p>
-
-<p><img src="http://lenciel.cn/downloads/images/2014_02/3dgifs7.gif" alt="3d gifs" title="Don't touch me..." /></p>
 ]]></content>
   </entry>
   
