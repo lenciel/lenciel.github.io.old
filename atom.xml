@@ -4,7 +4,7 @@
   <title><![CDATA[@Lenciel]]></title>
   <link href="http://lenciel.cn/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2014-05-14T12:59:10+08:00</updated>
+  <updated>2014-05-14T17:38:30+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -12,6 +12,121 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How Does iBeacons Work]]></title>
+    <link href="http://lenciel.cn/2014/05/how-does-ibeacons-work/"/>
+    <updated>2014-05-14T15:19:59+08:00</updated>
+    <id>http://lenciel.cn/2014/05/how-does-ibeacons-work</id>
+    <content type="html"><![CDATA[<p>iBeacons这个怪怪的单词<a href="https://www.google.com/search?q=%E6%9C%80%E8%BF%91%E5%87%BA%E9%95%9C%E7%8E%87%E5%BE%88%E9%AB%98+site%3A36kr.com&amp;oq=%E6%9C%80%E8%BF%91%E5%87%BA%E9%95%9C%E7%8E%87%E5%BE%88%E9%AB%98+site%3A36kr.com&amp;aqs=chrome..69i57.5408j0j7&amp;sourceid=chrome&amp;es_sm=91&amp;ie=UTF-8#newwindow=1&amp;q=ibeacons+site:36kr.com&amp;safe=off">最近出镜率很高</a>。它可以用的场景很多，考勤打卡，室内导航，各种关联位置的推送以及我们现在还想不到诡异的应用。但虽然满坑满谷的文章介绍如何应用iBeacons，但它工作的原理究竟是什么样的呢？</p>
+
+<h1 id="bluetooth-le">Bluetooth LE</h1>
+
+<p><a href="http://www.bluetooth.com/Pages/Low-Energy.aspx">Bluetooth Low Energy</a>，也就是低功耗蓝牙，经常被缩写成BLE。它其实是2010年颁布的Bluetooth 4.0标准的一部分：说准确点儿就是由Nokia提出的本来叫<code>Wibree</code>的那部分。</p>
+
+<p>话说11年本座给一个银行做押运的系统，需要在Android手机上加外设，让押运员持卡验明正身。当时考察了好些技术，蓝牙，NFC，IC卡…蓝牙被放弃的原因就是供电太麻烦而4.0低功耗的设备市面上根本就找不到。因为虽然标准是2010年就颁布了，但是4.0的协议向下不兼容，设备更新没有那么快。一晃几年过去了，你还是能看到市面上有三种主要的蓝牙设备型号：</p>
+
+<ul>
+  <li>Bluetooth: 仅支持<code>传统</code>蓝牙</li>
+  <li>Bluetooth Smart Ready: <code>传统</code>和<code>低功耗</code>通吃的蓝牙</li>
+  <li>Bluetooth Smart: 仅支持<code>低功耗</code>蓝牙</li>
+</ul>
+
+<p><img src="http://lenciel.cn/downloads/images/2014_05/bluetooth_smart_ready_logo.jpg" alt="bluetooth smart ready logo" title="Don't touch me..." /></p>
+
+<p>比较老的设备，以及大部分的汽车，家电等等，是仅支持传统意义上的Bluetooth的。</p>
+
+<p>比较新的手机（iPhone 4S+，Samsung G3+），平板，笔记本等等都已经支持了完整的Bluetooth 4.0，所以都可以算是”Smart Ready”的。</p>
+
+<p>Beacons，如前面所述，是仅支持低功耗这部分的标准，所以就是”Smart”的。这些设备一般一颗纽扣电池就可以保证它运行2年左右，发射频率和传统蓝牙一样都是2.4GHz-2.4835GHz，在无遮挡的情况下100米内都有信号，但传输速率比传统蓝牙慢：当然，低功耗蓝牙设计的目的也不是用来输送大量的数据。</p>
+
+<h1 id="ble">BLE通信</h1>
+
+<p>BLE通信主要是两种模式：<code>Advertising</code>和<code>Connecting</code>。</p>
+
+<p><code>Advertising</code>是单向的。希望被发现的设备自主发射间隔从20ms到10s不等的数据包出来。发射间隔越短，电池寿命就会越短，但同时也会更快的被找到。数据包的组成为：</p>
+
+<ul>
+  <li>1 byte</li>
+  <li>4 bytes access adress</li>
+  <li>2-39 bytes advertising channel PDU</li>
+  <li>3 bytes CRC</li>
+</ul>
+
+<p><img src="http://lenciel.cn/downloads/images/2014_05/bluetooth_le_packet.png" alt="bluetooth le packet" title="Don't touch me..." /></p>
+
+<p>其中<code>access address</code>在这种模式下是固定的<code>0x8E89BED6</code>。换句话说，<code>Advertising</code>模式就是对外以一个固定的读取地址和固定的时间间隔不断的发送数据。</p>
+
+<p>PDU的2个bytes的头包含了<code>size/type</code>等payload的信息，接着是device的MAC地址，最后是最多31个bytes的实际payload数据。</p>
+
+<p>当一个设备被找到之后，连接可以切换到<code>Connecting</code>模式。这种情况下，设备可以对外提供可读写的服务（被称为GATT profile）。比如一个智能热水器，可以提供一个服务让你读取以及设置出水的温度。</p>
+
+<p>关于<code>Connecting</code>到BLE设备，苹果的教程或者更专业的EE times的介绍都可以看看。但其实beacons没有使用<code>Connecting</code>模式，它只工作在<code>Advertising</code>模式下。</p>
+
+<h1 id="beaconsble">beacons如何使用BLE</h1>
+
+<p>beacons仅仅工作在<code>Advertising</code>模式下。因此，可以说所谓的<code>iBeacons</code>就是iOS下对BLE的<code>Advertising</code>工作模式里数据的定义和封装。</p>
+
+<p>以Estimote的beacon为例，下面是它的PDU数据（使用XCode的<a href="http://stackoverflow.com/questions/5863088/bluetooth-sniffer-preferably-mac-osx">插件</a>可以对蓝牙设备抓包）：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">02 01 06 1A FF 4C 00 02 15 B9 40 7F 30 F5 F8 46 6E AF F9 25 55 6B 57 FE 6D 00 49 00 0A C5</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>可以看到整个payload数据是30bytes，非常符合协议最多31bytes的要求。实际上，这份数据的格式的确是苹果<a href="http://stackoverflow.com/questions/18906988/what-is-the-ibeacon-bluetooth-profile">精心设计</a>了的：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">02 01 06 1A FF 4C 00 02 15: iBeacon prefix (fixed)
+</span><span class="line">B9 40 7F 30 F5 F8 46 6E AF F9 25 55 6B 57 FE 6D: proximity UUID (here: Estimote’s fixed UUID)
+</span><span class="line">00 49: major
+</span><span class="line">00 0A: minor
+</span><span class="line">C5: 2’s complement of measured TX power</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><img src="http://lenciel.cn/downloads/images/2014_05/bluetooth_le_ibeacon_packet.png" alt="bluetooth le ibeacon packet" title="Don't touch me..." /></p>
+
+<p>换句哈说，如果你想试玩一下iBeacons技术，在买到beacon之前，其实你手边的任何新一点儿的iPhone或者<a href="http://developer.radiusnetworks.com/2013/10/09/how-to-make-an-ibeacon-out-of-a-raspberry-pi.html">Mac设备都可以拿来作为iBeacon</a>的发射端或者接收端。当然，<a href="http://developer.radiusnetworks.com/2013/10/09/how-to-make-an-ibeacon-out-of-a-raspberry-pi.html">万能的树莓</a>也可以改造成beacon。</p>
+
+<h1 id="ibeacon">iBeacon数据格式</h1>
+<p><code>02 01 06 1A FF 4C 00 02 15</code>是固定不变的prefix。</p>
+
+<p><code>Proximity UUID</code>用来标识beacon。比如商店里面一批beacon都是用来提供打折活动的推送给顾客，那么这批beacon的Proximity UUID就应该是一样的。</p>
+
+<p><code>Major Number</code> (2 bytes，例子里面是<code>0×0049</code>，也就是73) 是用来对一批beacon进行分组的。比如商店里面的所有的beacon可以配置成相同的<code>Major Number</code>。</p>
+
+<p><code>Minor Number</code> (2 bytes，例子里面是<code>0x000A</code>，也就是10)用来标识单个的beacon。因为商店里面每个beacon都有不同的<code>Minor Number</code>，才能知道顾客是处在什么位置。</p>
+
+<h1 id="section">测距</h1>
+
+<p>数据里面的最后一位，<code>TX Power</code>，就是用来表征你离某个beacon的距离的。它测距离主要就是用所谓的RSSI(Received Signal Strength Indication)去算，这个算法在iOS里面是已经集成了的，即便是需要在Android平台上面实现一遍<a href="http://stackoverflow.com/questions/20416218/understanding-ibeacon-distancing">也不是那么的复杂</a>。</p>
+
+<p>另外需要注意的就是，无线信号总会因为障碍物以及其他的信号源更快的衰减。所以测算出来的距离只是一个有大概。</p>
+
+<h1 id="ios">iOS集成</h1>
+
+<p>苹果既然敢在beacon前面加个i当然是做了很多增强的。对应用开发者来说，最主要的就是当用户靠近iBeacons设备的时候，App即使不在前台也可以被唤醒，并发送notification给用户。</p>
+
+<p>需要注意的是，因为beacon是周期性的发送，而手机在进入省电模式的时候探测蓝牙型号也是周期性的。这两个周期很可能会踩到边界，造成在实际应用中，有的手机<a href="http://developer.radiusnetworks.com/2013/11/13/ibeacon-monitoring-in-the-background-and-foreground.html">甚至会需要15分钟</a>左右的时间才能找到beacon。</p>
+
+<p>iOS下详细的应用开发教程可以见<a href="http://www.cocoanetics.com/2013/11/can-you-smell-the-ibeacon/">这里</a>。更多的例子可以参考设备商Estimote的iOS SDK和Android。</p>
+
+<h1 id="section-1">如何购买设备</h1>
+
+<p>现在整个供货情况还是接不上趟的。我的<a href="http://estimote.com/">Estimote</a>已经订了4个多礼拜了还杳无音讯。因此最快的上手方案仍然是改造你的手机或者用Raspberry Pi自己搭个玩。但是如果你不满足（一般是满足不了的）这种玩法可以试试：</p>
+
+<ul>
+  <li>预订<a href="http://estimote.com/">Estimote</a>的beacon: 99刀3个</li>
+  <li><a href="http://kontakt.io/">Kontakt</a>的beacon: 99刀4个，279刀10个</li>
+  <li><a href="http://www.radiusnetworks.com/">RadiusNetworks</a>的树莓套件: 99刀1个</li>
+  <li><a href="http://redbearlab.com/ibeacon/">RedBearLab</a>的Arduino套件： 30刀1个</li>
+  <li><a href="http://bleu.io/">Bleu</a>的USB转iBeacon转接头：40刀1个，150刀5个</li>
+</ul>
+
+<p>另外，高通也有做自己的解决方案叫<a href="https://www.gimbal.com/">Gimbal</a>，不但提供了Android和iOS两套SDK，价格也很平易近人：5刀一个，值得拥有，:)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Please Allow Me]]></title>
@@ -48,7 +163,7 @@
   <li>今后如果功能上有这样那样的扩展，是很容易加上去的吗？</li>
 </ul>
 
-<p>我知道做设计的都很讨厌问题太多的人，没关系我会开始公示一下<a href="http://nmd.lenciel.cn/">我心中的好设计</a>。</p>
+<p>我知道做设计的都很讨厌问题太多的人，没关系我会开始公示一下<a href="http://nd.lenciel.cn/">我心中的好设计</a>。</p>
 ]]></content>
   </entry>
   
@@ -1043,221 +1158,6 @@
     <content type="html"><![CDATA[<p><img src="http://lenciel.cn/downloads/images/iwdrm/understanding.gif" alt="Understanding" title="Don't touch me..." /></p>
 
 <blockquote><p>&#8220;As long as we were in love, we understood each other. There was nothing more to understand.&#8221;</p><footer><strong>Alain Delon</strong> <cite><a href="http://www.imdb.com/title/tt0056736/">L&#8217;Eclisse (1962)</a></cite></footer></blockquote>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[解决iowait过高的告警]]></title>
-    <link href="http://lenciel.cn/2014/02/hunting-the-iowait-problem-maker/"/>
-    <updated>2014-02-24T09:22:00+08:00</updated>
-    <id>http://lenciel.cn/2014/02/hunting-the-iowait-problem-maker</id>
-    <content type="html"><![CDATA[<p><img src="http://lenciel.cn/downloads/images/2014_02/warning_letter.png" alt="warning letter" title="Don't touch me..." /></p>
-
-<p>从Nagios切到<a href="https://www.zabbix.com">Zabbix</a>之后，经常大清早被iowait过高的告警邮件叫醒。因为这套Zabbix监控是本座搭的，所以解决这个问题就只有本座来了…..哎，不知道是不是把首席运营官给宠坏了。</p>
-
-<h2 id="iowait">iowait的定义和计算方式</h2>
-
-<p>iowait的定义为：</p>
-
-<blockquote><p>iowait is time that the processor/processors are waiting (i.e. is in an idle state and does nothing), during which there in fact was outstanding disk I/O requests.</p></blockquote>
-
-<p>也就是至少有一个I/O在进行时CPU处于<code>idle</code>状态的比例。</p>
-
-<p>我们都知道用<code>vmstat</code>, <code>iostat</code>, <code>sar</code>等命令查看系统状况的时候，CPU有四种比较主要的状态：user, sys, idle和iowait。它们都是表示CPU处于此状态的一个平均比例（其中sar命令是可以用<code>-P</code>具体指定哪个CPU的，其他的命令一般是所有CPU的平均），通常相加应该就是1.</p>
-
-<p>这个比例的统计其实是通过kernel不断的更新计数器然后计算出来的。当时钟中断发生的时候，kernel检查当前CPU是不是idle的。如果不是，就检查正在执行的指令是user space还是kernel space的。如果是user space就给<code>user</code>的计数器加1，kernel space就给<code>sys</code>计数器加1.</p>
-
-<p>类似的，如果CPU是处于idle状态，kernel就检查是不是有I/O操作正在发生（可以是local disk也可以是<code>mount</code>的NFS），如果有就给<code>iowait</code>计数器加1，没有就给<code>idle</code>计数器加1.</p>
-
-<p>当我们运行<code>vmstat</code>或者<code>sar</code>等命令查看时，它们会先读取当前这几个计数器的计数，然后在用户指定的时间里面等待，然后再次读取。因为用户指定的时间里面过去了多少个<code>tick</code>是可以计算的，然后前后计数器的增值也可以计算，就可以算出一个比值。比如如果用户运行的命令是<code>vmstat 2</code>，表示每两秒取样一次，那么：</p>
-
-<ol>
-  <li>tick是10ms一个，所以总共是200个ticks</li>
-  <li>计数器的增量/200*100就是每个状态的百分比</li>
-</ol>
-
-<h2 id="iowait-1">iowait的意义</h2>
-
-<p>这其实比它怎么计算要难理解一些。比如本座之前心里就有一个疑问：既然只是某个process在block，那么系统会schedule其他的事情，这对性能有什么大不了的影响呢？</p>
-
-<p>来看几个例子。</p>
-
-<h3 id="section">例子一</h3>
-
-<p>假设一个程序进行批量的事务，每个事务都有一个10ms的计算任务，计算出的结果通过同步的方式写到磁盘。由于它写结果的文件是阻塞方式打开的，所以I/O完成之前写操作是不会<code>return</code>的。如果我们假设磁盘系统没有cache，每个物理的I/O需要20ms，那么一个事务需要30ms。也就是每秒33个事务（33 tps）。如果把系统算成只有一个CPU的话，很显然<code>iowait</code>就是66%。</p>
-
-<p>这种情况下，如果我们能改进I/O子系统，比如启用磁盘的缓存，让每次物理的I/O只需要1ms的话，那么<code>iowait</code>就会迅速下降到8%左右。可见这种情况下，<code>iowait</code>直接影响着程序的performance。</p>
-
-<h3 id="section-1">例子二</h3>
-
-<p>假设一个磁盘检查的程序运行在系统上，每秒钟读4k的数据。我们假设这个程序的入口是main()，然后读磁盘的函数是read()，main()和read()都是用户态的。read()属于libc.a，会调用kread()这个系统调用来进行物理的I/O，这个时候就进入了kernel态。整个main(),read()和kread执行的时间加起来不长，我们假设是50微秒。而物理的I/O需要多久要看seek的数据有多远，假设需要2-20ms。这样就完全有可能当时钟中断的时候，cpu是idle的，而且I/O正在发生，于是<code>iowait</code>值就达到97-98% (如果每个I/O需要20ms就是99-100%)。</p>
-
-<p>这种情况下，虽然<code>iowait</code>数值非常高，其实这个系统的性能是正常的。</p>
-
-<h3 id="section-2">例子三</h3>
-
-<p>假设有两个程序跑在同一个CPU上。一个程序写得有点儿问题，I/O会阻塞10秒左右。另一个则100%的时间都在做计算。由于当前一个程序阻塞起来的时候，后面这个程序被运行了，因此无论什么时候都没有CPU处于idle的状态等I/O，于是<code>iowait</code>一直是0，这时候其实系统的performance是有很大的问题的。</p>
-
-<h3 id="section-3">例子四</h3>
-
-<p>假设系统是4核的CPU，运行了6个程序。其中4个程序有70%时间在进行物理的I/O，30%的时间在进行计算任务（假设其中25%在用户态，5%在kernel态）。另外2个程序假设100%时间都在用户态进行计算任务，没有任何I/O操作。</p>
-
-<p>如果我们查看系统的CPU状态，大概可能看到下面的状况:</p>
-
-<pre><code>     cpu    %usr    %sys    %iowait   %idle
-      0       50      10      40       0
-      1       50      10      40       0
-      2      100       0       0       0
-      3      100       0       0       0
-      -       75       5      20       0
-</code></pre>
-
-<p>如果我们把相同的6个程序跑到一个6核的机器（相同的CPU和磁盘配置），那么可以简单的认为会有下面的结果：</p>
-
-<pre><code>     cpu    %usr    %sys    %iowait   %idle
-      0       25       5      70       0
-      1       25       5      70       0
-      2       25       5      70       0
-      3       25       5      70       0
-      4      100       0       0       0
-      5      100       0       0       0
-      -       50       3      47       0
-</code></pre>
-
-<p>也就是说，同样的程序跑在不同的系统上，iowait增加了一倍多，而这个时候其实没有什么performance问题，只不过是系统还能做更多的计算工作。</p>
-
-<h3 id="section-4">结论</h3>
-
-<ul>
-  <li>CPU处于<code>iowait</code>状态，并不说明CPU不能运行其他的程序</li>
-  <li><code>iowait</code>偏高只能说明系统这个时刻还能进行更多的计算任务，至于是不是出现了performance问题，需要进一步分析才知道</li>
-</ul>
-
-<h2 id="section-5">找出造成问题的进程</h2>
-
-<p>虽然每次都是6点半多少说明应该是某个cron任务（因为机器上没有其他自定义的定时任务）但没法具体知道究竟是哪个。</p>
-
-<p>最简单的办法当然是出问题的时候用<code>iotop</code>命令来看了 。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class=""><span class="line"> # iotop
-</span><span class="line"> Total DISK READ: 8.00 M/s | Total DISK WRITE: 20.36 M/s
-</span><span class="line">  TID PRIO USER DISK READ DISK WRITE SWAPIN IO&gt; COMMAND
-</span><span class="line"> 15758 be/4 root 7.99 M/s 8.01 M/s 0.00 % 61.97 % bonnie++ -n 0 -u 0 -r 239 -s 478 -f -b -d /tmp</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>但是谁又会在6点多起来干这种事情。除开修改系统时间重现问题，还可以通过ps命令查看记录处于<code>D</code>状态的进程来找到。</p>
-
-<p><code>ps</code>命令输出里面对<code>PROCESS STATE CODES</code>的定义是：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-</pre></td><td class="code"><pre><code class=""><span class="line"> D uninterruptible sleep (usually IO)
-</span><span class="line"> R running or runnable (on run queue)
-</span><span class="line"> S interruptible sleep (waiting for an event to complete)
-</span><span class="line"> T stopped, either by a job control signal or because it is being traced.
-</span><span class="line"> W paging (not valid since the 2.6.xx kernel)
-</span><span class="line"> X dead (should never be seen)
-</span><span class="line"> Z defunct ("zombie") process, terminated but not reaped by its parent.</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>处于等待I/O完成状态的进程一般就是<code>D</code>，所以可以通过tmux起一个sessio来跑下面的命令：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">while true; do date; ps auxf | awk '{if($8=="D") print $0;}'; sleep 1; done &gt; /var/log/ps.log</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>然后在又一个这样的6点半：</p>
-
-<p><img src="http://lenciel.cn/downloads/images/2014_02/zabbix_cpu_util.png" alt="warning letter" title="Don't touch me..." /></p>
-
-<p>去日志里面查看：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span>
-<span class="line-number">30</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">$ cat /var/log/ps.log | grep D
-</span><span class="line">
-</span><span class="line">root      7585  7.9  0.0   5904   812 ?        D    06:34   0:02                  \_ /usr/bin/updatedb.mlocate
-</span><span class="line">root      7585  7.8  0.0   5904   812 ?        D    06:34   0:02                  \_ /usr/bin/updatedb.mlocate
-</span><span class="line">root      7585  7.8  0.0   5904   812 ?        D    06:34   0:02                  \_ /usr/bin/updatedb.mlocate
-</span><span class="line">root      7585  7.8  0.0   5944   944 ?        D    06:34   0:02                  \_ /usr/bin/updatedb.mlocate
-</span><span class="line">root      7585  7.7  0.0   5944   944 ?        D    06:34   0:02                  \_ /usr/bin/updatedb.mlocate
-</span><span class="line">root      7585  7.5  0.0   5944   944 ?        D    06:34   0:02                  \_ /usr/bin/updatedb.mlocate
-</span><span class="line">root      7585  7.5  0.0   5944   944 ?        D    06:34   0:02                  \_ /usr/bin/updatedb.mlocate
-</span><span class="line">root      7585  7.6  0.0   5944   944 ?        D    06:34   0:03                  \_ /usr/bin/updatedb.mlocate
-</span><span class="line">root      7585  7.7  0.0   5944   944 ?        D    06:34   0:03                  \_ /usr/bin/updatedb.mlocate
-</span><span class="line">root      7585  7.7  0.0   5944   944 ?        D    06:34   0:03                  \_ /usr/bin/updatedb.mlocate
-</span><span class="line">root      7585  7.8  0.0   5944   944 ?        D    06:34   0:03                  \_ /usr/bin/updatedb.mlocate
-</span><span class="line">root      7585  7.7  0.0   5944   944 ?        D    06:34   0:03                  \_ /usr/bin/updatedb.mlocate
-</span><span class="line">root      7585  7.8  0.0   5944   944 ?        D    06:34   0:03                  \_ /usr/bin/updatedb.mlocate
-</span><span class="line">root      7585  7.7  0.0   5944   944 ?        D    06:34   0:03                  \_ /usr/bin/updatedb.mlocate
-</span><span class="line">root      7585  7.7  0.0   5944   944 ?        D    06:34   0:03                  \_ /usr/bin/updatedb.mlocate
-</span><span class="line">root      7585  7.7  0.0   5944   944 ?        D    06:34   0:03                  \_ /usr/bin/updatedb.mlocate
-</span><span class="line">root      7585  7.7  0.0   5944   944 ?        D    06:34   0:03                  \_ /usr/bin/updatedb.mlocate
-</span><span class="line">root      7585  7.8  0.0   5944   944 ?        D    06:34   0:03                  \_ /usr/bin/updatedb.mlocate
-</span><span class="line">root      7585  7.8  0.0   5944   944 ?        D    06:34   0:03                  \_ /usr/bin/updatedb.mlocate
-</span><span class="line">root      7585  7.8  0.0   5944   944 ?        D    06:34   0:04                  \_ /usr/bin/updatedb.mlocate
-</span><span class="line">root      7585  7.6  0.0   5944   944 ?        D    06:34   0:04                  \_ /usr/bin/updatedb.mlocate
-</span><span class="line">root      7585  7.6  0.0   5944   944 ?        D    06:34   0:04                  \_ /usr/bin/updatedb.mlocate
-</span><span class="line">root      7585  7.6  0.0   5944   944 ?        D    06:34   0:04                  \_ /usr/bin/updatedb.mlocate
-</span><span class="line">root      7585  7.6  0.0   5944   944 ?        D    06:34   0:04                  \_ /usr/bin/updatedb.mlocate
-</span><span class="line">root      7585  7.7  0.0   5944   944 ?        D    06:34   0:04                  \_ /usr/bin/updatedb.mlocate
-</span><span class="line">root      7585  7.6  0.0   5944   944 ?        D    06:34   0:04                  \_ /usr/bin/updatedb.mlocate
-</span><span class="line">root      7585  7.6  0.0   6000   968 ?        D    06:34   0:04                  \_ /usr/bin/updatedb.mlocate
-</span><span class="line">root      7585  7.6  0.0   6000   968 ?        D    06:34   0:04                  \_ /usr/bin/updatedb.mlocate</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>嗯，原来是<code>/usr/bin/updatedb.mlocate</code>。Google了一下<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup><sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>发现其实关掉也没什么：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">sudo killall updatedb.mlocate
-</span><span class="line">sudo chmod -x /etc/cron.daily/mlocate</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>整个世界清静了。</p>
-
-<div class="footnotes">
-  <ol>
-    <li id="fn:1">
-      <p>http://www.iasptk.com/ubuntuwp/can-i-disable-updatedb-mlocate/<a href="#fnref:1" rel="reference">&#8617;</a></p>
-    </li>
-    <li id="fn:2">
-      <p>http://ubuntuforums.org/showthread.php?t=1243951&amp;page=2&amp;p=7844783#post7844783<a href="#fnref:2" rel="reference">&#8617;</a></p>
-    </li>
-  </ol>
-</div>
 ]]></content>
   </entry>
   
