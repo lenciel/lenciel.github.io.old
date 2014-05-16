@@ -4,7 +4,7 @@
   <title><![CDATA[Category: knowledge | @Lenciel]]></title>
   <link href="http://lenciel.cn/blog/categories/knowledge/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2014-05-16T15:32:29+08:00</updated>
+  <updated>2014-05-16T15:42:59+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -18,7 +18,9 @@
     <link href="http://lenciel.cn/2014/05/web-development-skill-set-and-reading-list/"/>
     <updated>2014-05-16T14:28:04+08:00</updated>
     <id>http://lenciel.cn/2014/05/web-development-skill-set-and-reading-list</id>
-    <content type="html"><![CDATA[<h2 id="section">基础知识</h2>
+    <content type="html"><![CDATA[<p>这个list保存在了一个专门的<a href="https://gist.github.com/lenciel/637812a7dcbe8341b07b">Gist里面</a>，方便更新。</p>
+
+<h2 id="section">基础知识</h2>
 <ul>
   <li>计算机软硬件基础</li>
   <li>计算机网络</li>
@@ -266,6 +268,7 @@
 </ul>
 
 <h2 id="tba-2">书籍推荐(TBA)</h2>
+
 ]]></content>
   </entry>
   
