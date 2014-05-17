@@ -9,7 +9,8 @@
   <meta name="author" content="Lenciel Li">
 
   
-  <meta name="description" content="Table Of Contents 点子，执行力和市场 点子 执行力 市场 那么究竟什么是最重要的：产品/点子，执行力/团队，还是市场? 点子迷宫 执行力 你的目标市场 创业公司 vs. 小型企业 创业公司必须清楚自己的成本和利润 创业公司必须清楚经济体的规模 市场调查 市场调查工具 &hellip;">
+  <meta name="description" content=" &#8220;Go and love some more.&#8221;Hal Ashby Harold and Maude(1971)
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -31,14 +32,16 @@
 
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://lenciel.cn/blog/page/12/" />
-<meta property="og:description" content="Table Of Contents 点子，执行力和市场 点子 执行力 市场 那么究竟什么是最重要的：产品/点子，执行力/团队，还是市场? 点子迷宫 执行力 你的目标市场 创业公司 vs. 小型企业 创业公司必须清楚自己的成本和利润 创业公司必须清楚经济体的规模 市场调查 市场调查工具 &hellip;" />
+<meta property="og:description" content=" &#8220;Go and love some more.&#8221;Hal Ashby Harold and Maude(1971)
+" />
 
 <meta property="og:site_name" content="http://lenciel.cn" />
 <meta property="article:author" content="https://plus.google.com/114787528537231301324">
 
 
 
-<meta itemprop="description" content="Table Of Contents 点子，执行力和市场 点子 执行力 市场 那么究竟什么是最重要的：产品/点子，执行力/团队，还是市场? 点子迷宫 执行力 你的目标市场 创业公司 vs. 小型企业 创业公司必须清楚自己的成本和利润 创业公司必须清楚经济体的规模 市场调查 市场调查工具 &hellip;" />
+<meta itemprop="description" content=" &#8220;Go and love some more.&#8221;Hal Ashby Harold and Maude(1971)
+" />
 
 <!-- Combine multiple fonts into one request -->
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic|Patua+One|Yanone+Kaffeesatz" rel="stylesheet" type="text/css">
@@ -98,6 +101,46 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/07/go-and-love-more/">Go and Love More</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-18T21:14:00+08:00" pubdate data-updated="true">Jul 18<span>th</span>, 2013</time>
+        
+         | <a href="/2013/07/go-and-love-more/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="/downloads/images/go_and_love_more.gif" alt="Go and love more" title="Don't touch me..." /></p>
+
+<blockquote><p>&#8220;Go and love some more.&#8221;</p><footer><strong>Hal Ashby</strong> <cite><a href="http://en.wikipedia.org/wiki/Harold_and_Maude">Harold and Maude(1971)</a></cite></footer></blockquote>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -716,80 +759,6 @@
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>init命令会创建一个基本的Vagrantfile，暂时先不修改它。下一篇我们来看如何添加Django开发需要的配置以及如果build一个 <code>base box</code> 来给其他人使用。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/06/better-git-log/">Better Git Log</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-08T23:42:00+08:00" pubdate data-updated="true">Jun 8<span>th</span>, 2013</time>
-        
-         | <a href="/2013/06/better-git-log/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>看烦了 <code>git log</code> 的白净输出？</p>
-
-<p><img src="/downloads/images/git_raw.png" alt="Raw git log output" title="Don't touch me..." /></p>
-
-<p>这个看起来如何？</p>
-
-<p><img src="/downloads/images/git_graph.png" alt="Git graph log output" title="Don't touch me..." /></p>
-
-<p>用起来其实很简单，只需要：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">git log --graph --pretty<span class="o">=</span>format:<span class="s1">&#39;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#39;</span> --abbrev-commit
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>这么长当然是记不住的，可以建shell的alias，也可以添加一个git alias：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">git config --global alias.lg <span class="err">&quot;</span>log --color --graph --pretty<span class="o">=</span>format:<span class="s1">&#39;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#39;</span> --abbrev-commit
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>这样每次只需要：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">git lg
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>如果你是想知道具体发生了哪些修改可以：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">git lg -p
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p><img src="/downloads/images/git_p.png" alt="Git graph log output with p" title="Don't touch me..." /></p>
-
-<p>不过我现在更喜欢的是直接用<a href="https://github.com/jonas/tig">tig</a>：</p>
-
-<p><img src="/downloads/images/tig.png" alt="Tig output" title="Don't touch me..." /></p>
 </div>
   
   

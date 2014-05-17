@@ -9,7 +9,8 @@
   <meta name="author" content="Lenciel Li">
 
   
-  <meta name="description" content="“喂，又在发什么呆啊，李重。” 项目经理张烈路过我座位的时候在我的显示器上狠狠地敲了一下，我好像睡梦中突然被惊醒的人一样猛地打了个寒颤，整个人立刻从延绵不绝的回忆中清醒过来。 大概是看到了我狼狈的模样，张烈也没用多说什么。他人其实不坏，但因为是名校毕业又年轻有为，所以有的时候难免会显得盛气凌人， &hellip;">
+  <meta name="description" content=" &#8220;You mean more to me than any scientific truth.&#8221;Donatas Banionis Солярис(1972)
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -31,14 +32,16 @@
 
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://lenciel.cn/blog/page/2/" />
-<meta property="og:description" content="“喂，又在发什么呆啊，李重。” 项目经理张烈路过我座位的时候在我的显示器上狠狠地敲了一下，我好像睡梦中突然被惊醒的人一样猛地打了个寒颤，整个人立刻从延绵不绝的回忆中清醒过来。 大概是看到了我狼狈的模样，张烈也没用多说什么。他人其实不坏，但因为是名校毕业又年轻有为，所以有的时候难免会显得盛气凌人， &hellip;" />
+<meta property="og:description" content=" &#8220;You mean more to me than any scientific truth.&#8221;Donatas Banionis Солярис(1972)
+" />
 
 <meta property="og:site_name" content="http://lenciel.cn" />
 <meta property="article:author" content="https://plus.google.com/114787528537231301324">
 
 
 
-<meta itemprop="description" content="“喂，又在发什么呆啊，李重。” 项目经理张烈路过我座位的时候在我的显示器上狠狠地敲了一下，我好像睡梦中突然被惊醒的人一样猛地打了个寒颤，整个人立刻从延绵不绝的回忆中清醒过来。 大概是看到了我狼狈的模样，张烈也没用多说什么。他人其实不坏，但因为是名校毕业又年轻有为，所以有的时候难免会显得盛气凌人， &hellip;" />
+<meta itemprop="description" content=" &#8220;You mean more to me than any scientific truth.&#8221;Donatas Banionis Солярис(1972)
+" />
 
 <!-- Combine multiple fonts into one request -->
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic|Patua+One|Yanone+Kaffeesatz" rel="stylesheet" type="text/css">
@@ -98,6 +101,46 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/05/you-mean-more-to-me/">You Mean More to Me</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-05T23:38:20+08:00" pubdate data-updated="true">May 5<span>th</span>, 2014</time>
+        
+         | <a href="/2014/05/you-mean-more-to-me/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="/downloads/images/iwdrm/you_mean_more_to_me.gif" alt="You Mean More To Me" title="Don't touch me..." /></p>
+
+<blockquote><p>&#8220;You mean more to me than any scientific truth.&#8221;</p><footer><strong>Donatas Banionis</strong> <cite><a href="http://www.imdb.com/title/tt0069293/">Солярис(1972)</a></cite></footer></blockquote>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -356,148 +399,6 @@
 
 <blockquote><p>&#8220;It’s just that it may change the light.&#8221;</p><footer><strong>Tracy Chevalier</strong> <cite><a href="http://www.imdb.com/title/tt0335119/">Girl With a Pearl Earring(2003)</a></cite></footer></blockquote>
 <hr />
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2014/04/dnsmasq-on-mac/">使用dnsmasq配置本地开发环境</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-04-25T14:53:37+08:00" pubdate data-updated="true">Apr 25<span>th</span>, 2014</time>
-        
-         | <a href="/2014/04/dnsmasq-on-mac/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>做Web开发的时候经常需要修改<code>/etc/hosts</code>文件把<code>dev.cool.project</code>或者<code>cool.project.dev</code>这样的域名指向127.0.0.1(如果你从来没有这么做过那你可以跳过后面的内容了但, seriously? you are a web dev and never did this before?）。这样做有些麻烦：</p>
-
-<ul>
-  <li>每个项目需要修改hosts文件</li>
-  <li>需要root权限才能修改这个文件</li>
-</ul>
-
-<p>这里记一下如何用<a href="http://www.thekelleys.org.uk/dnsmasq/doc.html">dnsmasq</a>把所有<code>dev</code>结尾的域名都指向<code>127.0.0.1</code>。</p>
-
-<h4 id="dnsmasq">安装dnsmasq</h4>
-
-<p>在Mac下安装什么东西本座都用<a href="http://brew.sh/">homebrew</a>，先更新brew:</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>brew up
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>然后安装dnsmasq。注意安装命令的输出，结尾是有配置的简单说明的。因为我用了<a href="http://lenciel.cn/2013/03/boxen-introduction/">boxen</a>所以路径不一定对每个人都适用，以你自己的输出为准：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>brew install <span class="nv">dnsmasq</span>
-</span><span class="line"><span class="o">==</span>&gt; make install <span class="nv">PREFIX</span><span class="o">=</span>/opt/boxen/homebrew/Cellar/dnsmasq/2.69
-</span><span class="line"><span class="o">==</span>&gt; Caveats
-</span><span class="line">To configure dnsmasq, copy the example configuration to /opt/boxen/homebrew/etc/dnsmasq.conf
-</span><span class="line">and edit to taste.
-</span><span class="line">  cp /opt/boxen/homebrew/opt/dnsmasq/dnsmasq.conf.example /opt/boxen/homebrew/etc/dnsmasq.conf
-</span><span class="line">To have launchd start dnsmasq at startup:
-</span><span class="line">sudo cp -fv /opt/boxen/homebrew/opt/dnsmasq/*.plist /Library/LaunchDaemons
-</span><span class="line">Then to load dnsmasq now:
-</span><span class="line">sudo launchctl load /Library/LaunchDaemons/homebrew.mxcl.dnsmasq.plist
-</span><span class="line"><span class="o">==</span>&gt; Summary
-</span><span class="line">/opt/boxen/homebrew/Cellar/dnsmasq/2.69: 7 files, 488K, built in 22 seconds
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h4 id="dnsmasq-1">配置dnsmasq</h4>
-
-<p>在<code>dnsmasq.conf</code>里面添加一个配置<code>dev</code>的配置：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">address</span><span class="o">=</span>/dev/127.0.0.1
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>重启dnsmasq服务:</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>sudo launchctl stop homebrew.mxcl.dnsmasq
-</span><span class="line"><span class="nv">$ </span>sudo launchctl start homebrew.mxcl.dnsmasq
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h4 id="osx">配置OSX</h4>
-
-<p>安装了dnsmasq之后你有两个选择：</p>
-
-<ol>
-  <li>把操作系统所有的DNS查询都由dnsmasq处理</li>
-  <li>把<code>.dev</code>的DNS查询交给dnsmasq处理</li>
-</ol>
-
-<p>第一个比较简单，在<code>System Preferences</code>里面配置一下就可以了。
-第二个需要用/etc/reslov.conf文件来更精细的控制DNS查询:</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>sudo mkdir -p /etc/resolver
-</span><span class="line"><span class="nv">$ </span>sudo touch /etc/resolver/dev
-</span><span class="line"><span class="nv">$ </span>sudo vi /etc/resolver/dev
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>在<code>/etc/resolver/dev</code>里面添加一行<code>nameserver 127.0.0.1</code>就可以了。</p>
-
-<h3 id="section">测试效果</h3>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">    <span class="nv">$ </span>ping -c 1 www.sina.com.cn
-</span><span class="line">    PING newscd.sina.com.cn <span class="o">(</span>221.236.31.145<span class="o">)</span>: 56 data bytes
-</span><span class="line">
-</span><span class="line">    <span class="nv">$ </span>ping -c 1 this.is.a.test.dev
-</span><span class="line">    PING this.is.a.test.dev <span class="o">(</span>127.0.0.1<span class="o">)</span>: 56 data bytes
-</span><span class="line">
-</span><span class="line">    <span class="nv">$ </span>ping -c 1 this.is.cool.dev
-</span><span class="line">    PING this.is.cool.dev <span class="o">(</span>127.0.0.1<span class="o">)</span>: 56 data bytes
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>嗯哼~</p>
-
 </div>
   
   
