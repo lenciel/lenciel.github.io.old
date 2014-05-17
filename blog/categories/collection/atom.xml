@@ -4,7 +4,7 @@
   <title><![CDATA[Category: collection | @Lenciel]]></title>
   <link href="http://lenciel.cn/blog/categories/collection/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2014-05-16T15:42:59+08:00</updated>
+  <updated>2014-05-17T12:19:36+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -20,254 +20,161 @@
     <id>http://lenciel.cn/2014/05/web-development-skill-set-and-reading-list</id>
     <content type="html"><![CDATA[<p>这个list保存在了一个专门的<a href="https://gist.github.com/lenciel/637812a7dcbe8341b07b">Gist里面</a>，方便更新。</p>
 
-<h2 id="section">基础知识</h2>
-<ul>
-  <li>计算机软硬件基础</li>
-  <li>计算机网络</li>
-  <li>操作系统</li>
-  <li>数据结构和算法</li>
-  <li>设计模式</li>
-  <li>以及其他各种你应该懂的东西</li>
-</ul>
+<p><div><script src='https://gist.github.com/637812a7dcbe8341b07b.js?file=web_skill_list.md'></script>
+<noscript><pre><code>## 基础知识
+- 计算机软硬件基础
+- 计算机网络
+- 操作系统
+- 数据结构和算法
+- 设计模式
+- 以及其他各种你应该懂的东西
 
-<h2 id="section-1">前端开发</h2>
-<ul>
-  <li>前端标准/规范
-    <ul>
-      <li><a href="http://www.w3.org/Protocols/rfc2616/rfc2616.html">HTTP1.1</a></li>
-      <li><a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm">ECMAScript3/5</a></li>
-      <li><a href="http://www.w3.org/TR/">W3C/DOM/BOM/XHTML/XML/JSON/JSONP</a></li>
-      <li><a href="http://wiki.commonjs.org/wiki/Modules/1.0">CommonJS Modules</a>/<a href="https://github.com/amdjs/amdjs-api/wiki/AMD">AMD</a></li>
-      <li><a href="http://www.w3.org/html/wg/drafts/html/master/">HTML5</a>/<a href="http://www.w3.org/Style/CSS/specs.en.html">CSS3</a></li>
-    </ul>
-  </li>
-  <li>前端库/框架
-    <ul>
-      <li><a href="http://jquery.com/">jQuery</a>/<a href="http://underscorejs.org/">Underscore</a>/<a href="http://mootools.net/">Mootools</a>/<a href="http://www.prototypejs.org/">Prototype.js</a></li>
-      <li><a href="http://yuilibrary.com/projects/yui3/">YUI3</a>/<a href="http://dojotoolkit.org/">Dojo</a>/<a href="http://www.sencha.com/products/extjs">ExtJS</a>/<a href="http://docs.kissyui.com/">KISSY</a></li>
-      <li><a href="http://backbonejs.org/">Backbone</a>/<a href="http://knockoutjs.com/">KnockoutJS</a>/<a href="http://emberjs.com/">Emberjs</a></li>
-      <li><a href="http://angularjs.org/">AngularJS</a>
-        <ul>
-          <li><a href="https://chrome.google.com/webstore/detail/angularjs-batarang/ighdmehidhipcmcojjgiloacoafjmpfk">Batarang</a></li>
-        </ul>
-      </li>
-      <li><a href="http://getbootstrap.com/">Bootstrap</a></li>
-      <li><a href="http://www.semantic-ui.com/">Semantic UI</a></li>
-      <li><a href="http://juiceui.com/">Juice UI</a></li>
-      <li><a href="http://webatomsjs.neurospeech.com/">Web Atoms</a></li>
-    </ul>
-  </li>
-  <li>模板引擎(TBA)</li>
-  <li>静态站点生成器(TBA)</li>
-  <li>编程语言
-    <ul>
-      <li><a href="https://developer.mozilla.org/en-US/docs/JavaScript">JavaScript</a>/<a href="http://nodejs.org/">Node.js</a></li>
-      <li><a href="http://coffeescript.org/">CoffeeScript</a></li>
-      <li><a href="http://www.typescriptlang.org/">TypeScript</a>        </li>
-      <li><a href="http://www.w3.org/html/">HTML</a>/<a href="http://www.w3.org/TR/html5/">HTML5</a></li>
-      <li><a href="http://www.w3.org/Style/CSS/">CSS/CSS3</a></li>
-    </ul>
-  </li>
-  <li>做图切图
-    <ul>
-      <li><a href="http://www.photoshop.com/products/photoshop">PhotoShop</a>/<a href="http://www.getpaint.net/">Paint.net</a>/<a href="http://www.adobe.com/cn/products/fireworks.html">Fireworks</a>/<a href="http://www.gimp.org/">GIMP</a></li>
-    </ul>
-  </li>
-  <li>代码质量
-    <ul>
-      <li>Coding style
-        <ul>
-          <li><a href="http://www.jslint.com/">JSLint</a>/<a href="http://www.jshint.com/">JSHint</a>/<a href="https://github.com/mdevils/node-jscs">jscs</a></li>
-          <li><a href="http://csslint.net/">CSSLint</a></li>
-          <li><a href="http://validator.w3.org/">Markup Validation Service</a></li>
-        </ul>
-      </li>
-      <li>单元测试
-        <ul>
-          <li><a href="http://qunitjs.com/">QUnit</a>/<a href="http://pivotal.github.com/jasmine/">Jasmine</a>/<a href="http://facebook.github.io/jest/index.html">Jest</a></li>
-          <li><a href="http://visionmedia.github.com/mocha/">Mocha</a>/<a href="https://github.com/visionmedia/should.js/">Should</a>/<a href="http://chaijs.com/">Chai</a>/<a href="https://github.com/LearnBoost/expect.js/">Expect</a></li>
-          <li><a href="http://unitjs.com/">Unit JS</a></li>
-        </ul>
-      </li>
-      <li>自动化测试
-        <ul>
-          <li><a href="http://docs.seleniumhq.org/docs/03_webdriver.jsp">Selenium WebDriver</a>/<a href="https://github.com/karma-runner/karma">Karma Runner</a>/<a href="http://sahi.co.in/">Sahi</a></li>
-          <li><a href="http://phantomjs.org/">phantomjs</a></li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li>性能
-    <ul>
-      <li><a href="http://jsperf.com/">JSPerf</a></li>
-      <li><a href="http://developer.yahoo.com/performance/rules.html">YSlow 35 rules</a></li>
-      <li><a href="https://developers.google.com/speed/pagespeed/">PageSpeed</a></li>
-      <li><a href="http://www.httpwatch.com/">HTTPWatch</a></li>
-      <li><a href="http://www.compuware.com/application-performance-management/dynatrace-ajax-download.html">DynaTrace’s Ajax</a></li>
-      <li><a href="http://book.douban.com/subject/5362856/">高性能JavaScript</a></li>
-    </ul>
-  </li>
-  <li>部署流程
-    <ul>
-      <li>压缩合并
-        <ul>
-          <li><a href="http://developer.yahoo.com/yui/compressor/">YUI Compressor</a></li>
-          <li><a href="https://developers.google.com/closure/compiler/">Google Clousure Complier</a></li>
-          <li><a href="https://github.com/mishoo/UglifyJS">UglifyJS</a></li>
-          <li><a href="https://github.com/GoalSmashers/clean-css">CleanCSS</a></li>
-        </ul>
-      </li>
-      <li>文档输出
-        <ul>
-          <li><a href="http://code.google.com/p/jsdoc-toolkit/">JSDoc</a></li>
-          <li><a href="https://github.com/visionmedia/dox">Dox</a>/<a href="https://github.com/JacksonTian/doxmate">Doxmate</a>/<a href="https://github.com/luozhihua/grunt-doxmate">Grunt-Doxmate</a></li>
-        </ul>
-      </li>
-      <li>项目构建工具
-        <ul>
-          <li><a href="http://www.gnu.org/software/make/">make</a>/<a href="http://ant.apache.org/">Ant</a></li>
-          <li><a href="http://code.google.com/p/gyp/">GYP</a></li>
-          <li><a href="http://gulpjs.com">Gulp</a></li>
-          <li><a href="http://gruntjs.com/">Grunt</a></li>
-          <li><a href="http://yeoman.io/">Yeoman</a></li>
-          <li><a href="http://fis.baidu.com/">FIS</a></li>
-          <li><a href="https://github.com/modulejs/modjs">Mod</a></li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li>代码组织
-    <ul>
-      <li>类库模块化
-        <ul>
-          <li><a href="http://www.commonjs.org/">CommonJS</a>/AMD</li>
-          <li><a href="http://yuilibrary.com/projects/yui3/">YUI3模块</a></li>
-        </ul>
-      </li>
-      <li>业务逻辑模块化
-        <ul>
-          <li><a href="https://github.com/twitter/bower">bower</a>/<a href="https://github.com/component/component">component</a></li>
-        </ul>
-      </li>
-      <li>文件加载
-        <ul>
-          <li><a href="http://labjs.com/">LABjs</a></li>
-          <li><a href="http://seajs.org/">SeaJS</a>/<a href="http://requirejs.org/">Require.js</a></li>
-        </ul>
-      </li>
-      <li>模块化预处理器
-        <ul>
-          <li><a href="https://github.com/substack/node-browserify">Browserify</a></li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li>安全
-    <ul>
-      <li><a href="http://en.wikipedia.org/wiki/Cross-site_request_forgery">CSRF</a>/<a href="http://en.wikipedia.org/wiki/Cross-site_scripting">XSS</a></li>
-      <li>ADsafe/Caja/Sandbox</li>
-    </ul>
-  </li>
-  <li>移动Web
-    <ul>
-      <li>HTML5/CSS3</li>
-      <li><a href="http://zh.wikipedia.org/wiki/%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BD%91%E9%A1%B5%E8%AE%BE%E8%AE%A1">响应式网页设计</a></li>
-      <li><a href="http://zeptojs.com/">Zeptojs</a>/<a href="http://cubiq.org/iscroll">iScroll</a></li>
-      <li>V5/<a href="http://www.sencha.com/products/touch">Sencha Touch</a></li>
-      <li><a href="http://phonegap.com/">PhoneGap</a></li>
-      <li><a href="http://jquerymobile.com/">jQuery Mobile</a></li>
-    </ul>
-  </li>
-  <li>可视化
-    <ul>
-      <li>SVG/Canvas/VML</li>
-      <li>SVG: <a href="http://d3js.org/">D3</a>/<a href="http://raphaeljs.com/">Raphaël</a>/<a href="http://snapsvg.io/">Snap.svg</a>/<a href="http://datavlab.org/datavjs/">DataV</a></li>
-      <li>Canvas: <a href="http://www.createjs.com/">CreateJS</a>/<a href="http://kineticjs.com/">KineticJS</a></li>
-    </ul>
-  </li>
-</ul>
+## 前端开发
+- 前端标准/规范
+    - [HTTP1.1](http://www.w3.org/Protocols/rfc2616/rfc2616.html)
+    - [ECMAScript3/5](http://www.ecma-international.org/publications/standards/Ecma-262.htm)
+    - [W3C/DOM/BOM/XHTML/XML/JSON/JSONP](http://www.w3.org/TR/)
+    - [CommonJS Modules](http://wiki.commonjs.org/wiki/Modules/1.0)/[AMD](https://github.com/amdjs/amdjs-api/wiki/AMD)
+    - [HTML5](http://www.w3.org/html/wg/drafts/html/master/)/[CSS3](http://www.w3.org/Style/CSS/specs.en.html)
+- 前端库/框架
+    - [jQuery](http://jquery.com/)/[Underscore](http://underscorejs.org/)/[Mootools](http://mootools.net/)/[Prototype.js](http://www.prototypejs.org/)
+    - [YUI3](http://yuilibrary.com/projects/yui3/)/[Dojo](http://dojotoolkit.org/)/[ExtJS](http://www.sencha.com/products/extjs)/[KISSY](http://docs.kissyui.com/)
+    - [Backbone](http://backbonejs.org/)/[KnockoutJS](http://knockoutjs.com/)/[Emberjs](http://emberjs.com/)
+    - [AngularJS](http://angularjs.org/)
+        - [Batarang](https://chrome.google.com/webstore/detail/angularjs-batarang/ighdmehidhipcmcojjgiloacoafjmpfk)
+    - [Bootstrap](http://getbootstrap.com/)
+    - [Semantic UI](http://www.semantic-ui.com/)
+    - [Juice UI](http://juiceui.com/)
+    - [Web Atoms](http://webatomsjs.neurospeech.com/)
+- 模板引擎(TBA)
+- 静态站点生成器(TBA)
+- 编程语言
+    - [JavaScript](https://developer.mozilla.org/en-US/docs/JavaScript)/[Node.js](http://nodejs.org/)
+    - [CoffeeScript](http://coffeescript.org/)
+    - [TypeScript](http://www.typescriptlang.org/)        
+    - [HTML](http://www.w3.org/html/)/[HTML5](http://www.w3.org/TR/html5/)
+    - [CSS/CSS3](http://www.w3.org/Style/CSS/)
+- 做图切图
+    - [PhotoShop](http://www.photoshop.com/products/photoshop)/[Paint.net](http://www.getpaint.net/)/[Fireworks](http://www.adobe.com/cn/products/fireworks.html)/[GIMP](http://www.gimp.org/)
+- 代码质量
+    - Coding style
+        - [JSLint](http://www.jslint.com/)/[JSHint](http://www.jshint.com/)/[jscs](https://github.com/mdevils/node-jscs)
+        - [CSSLint](http://csslint.net/)
+        - [Markup Validation Service](http://validator.w3.org/)
+    - 单元测试
+        - [QUnit](http://qunitjs.com/)/[Jasmine](http://pivotal.github.com/jasmine/)/[Jest](http://facebook.github.io/jest/index.html)
+        - [Mocha](http://visionmedia.github.com/mocha/)/[Should](https://github.com/visionmedia/should.js/)/[Chai](http://chaijs.com/)/[Expect](https://github.com/LearnBoost/expect.js/)
+        - [Unit JS](http://unitjs.com/)
+    - 自动化测试
+        - [Selenium WebDriver](http://docs.seleniumhq.org/docs/03_webdriver.jsp)/[Karma Runner](https://github.com/karma-runner/karma)/[Sahi](http://sahi.co.in/)
+        - [phantomjs](http://phantomjs.org/)
+- 性能
+    - [JSPerf](http://jsperf.com/)
+    - [YSlow 35 rules](http://developer.yahoo.com/performance/rules.html)
+    - [PageSpeed](https://developers.google.com/speed/pagespeed/)
+    - [HTTPWatch](http://www.httpwatch.com/)
+    - [DynaTrace's Ajax](http://www.compuware.com/application-performance-management/dynatrace-ajax-download.html)
+    - [高性能JavaScript](http://book.douban.com/subject/5362856/)
+- 部署流程
+    - 压缩合并
+        - [YUI Compressor](http://developer.yahoo.com/yui/compressor/)
+        - [Google Clousure Complier](https://developers.google.com/closure/compiler/)
+        - [UglifyJS](https://github.com/mishoo/UglifyJS)
+        - [CleanCSS](https://github.com/GoalSmashers/clean-css)
+    - 文档输出
+        - [JSDoc](http://code.google.com/p/jsdoc-toolkit/)
+        - [Dox](https://github.com/visionmedia/dox)/[Doxmate](https://github.com/JacksonTian/doxmate)/[Grunt-Doxmate](https://github.com/luozhihua/grunt-doxmate)
+    - 项目构建工具
+        - [make](http://www.gnu.org/software/make/)/[Ant](http://ant.apache.org/)
+        - [GYP](http://code.google.com/p/gyp/)
+        - [Gulp](http://gulpjs.com)
+        - [Grunt](http://gruntjs.com/)
+        - [Yeoman](http://yeoman.io/)
+        - [FIS](http://fis.baidu.com/)
+        - [Mod](https://github.com/modulejs/modjs)
+- 代码组织
+    - 类库模块化
+        - [CommonJS](http://www.commonjs.org/)/AMD
+        - [YUI3模块](http://yuilibrary.com/projects/yui3/)
+    - 业务逻辑模块化
+        - [bower](https://github.com/twitter/bower)/[component](https://github.com/component/component)
+    - 文件加载
+        - [LABjs](http://labjs.com/)
+        - [SeaJS](http://seajs.org/)/[Require.js](http://requirejs.org/)
+    - 模块化预处理器
+        - [Browserify](https://github.com/substack/node-browserify)
+- 安全
+    - [CSRF](http://en.wikipedia.org/wiki/Cross-site_request_forgery)/[XSS](http://en.wikipedia.org/wiki/Cross-site_scripting)
+    - ADsafe/Caja/Sandbox
+- 移动Web
+    - HTML5/CSS3
+    - [响应式网页设计](http://zh.wikipedia.org/wiki/%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BD%91%E9%A1%B5%E8%AE%BE%E8%AE%A1)
+    - [Zeptojs](http://zeptojs.com/)/[iScroll](http://cubiq.org/iscroll)
+    - V5/[Sencha Touch](http://www.sencha.com/products/touch)
+    - [PhoneGap](http://phonegap.com/)
+    - [jQuery Mobile](http://jquerymobile.com/)
+- 可视化
+    - SVG/Canvas/VML
+    - SVG: [D3](http://d3js.org/)/[Raphaël](http://raphaeljs.com/)/[Snap.svg](http://snapsvg.io/)/[DataV](http://datavlab.org/datavjs/)
+    - Canvas: [CreateJS](http://www.createjs.com/)/[KineticJS](http://kineticjs.com/)
 
-<h2 id="tba">后端开发(TBA)</h2>
-<ul>
-  <li>编程语言</li>
-  <li>网页服务器
-    <ul>
-      <li><a href="http://nginx.org/en/">Nginx</a></li>
-      <li><a href="http://httpd.apache.org/">Apache</a></li>
-      <li><a href="http://www.lighttpd.net/">Lighttpd</a></li>
-    </ul>
-  </li>
-  <li>数据库
-    <ul>
-      <li>SQL</li>
-      <li><a href="http://www.mysql.com/">MySQL</a>/<a href="http://www.postgresql.org/">PostgreSQL</a>/<a href="http://www.oracle.com/us/products/database/overview/index.html">Oracle</a></li>
-      <li><a href="http://www.mongodb.org/">MongoDB</a>/<a href="http://couchdb.apache.org/">CouchDB</a></li>
-    </ul>
-  </li>
-</ul>
+## 后端开发(TBA)
+- 编程语言
+- 网页服务器
+    - [Nginx](http://nginx.org/en/)
+    - [Apache](http://httpd.apache.org/)
+    - [Lighttpd](http://www.lighttpd.net/)
+- 数据库
+    - SQL
+    - [MySQL](http://www.mysql.com/)/[PostgreSQL](http://www.postgresql.org/)/[Oracle](http://www.oracle.com/us/products/database/overview/index.html)
+    - [MongoDB](http://www.mongodb.org/)/[CouchDB](http://couchdb.apache.org/)
 
-<h2 id="section-2">开发工具</h2>
-<ul>
-  <li>浏览器
-    <ul>
-      <li>IE6/<a href="http://www.microsoft.com/en-US/download/details.aspx?id=2">7</a>/<a href="http://windows.microsoft.com/en-US/internet-explorer/downloads/ie-8">8</a>/<a href="http://windows.microsoft.com/en-US/internet-explorer/downloads/ie-9/worldwide-languages">9</a>/<a href="http://windows.microsoft.com/en-US/internet-explorer/ie-10-worldwide-languages">10</a>/<a href="http://windows.microsoft.com/en-US/internet-explorer/ie-11-worldwide-languages">11</a> (Trident)</li>
-      <li><a href="http://www.mozilla.org/en-US/">Firefox</a> (Gecko)</li>
-      <li><a href="http://www.google.com/chrome">Chrome</a>/<a href="http://www.chromium.org/">Chromium</a> (Blink)</li>
-      <li><a href="http://www.apple.com/safari/">Safari</a> (WebKit)</li>
-      <li><a href="http://www.opera.com/">Opera</a> (Blink)</li>
-    </ul>
-  </li>
-  <li>编辑器和IDE
-    <ul>
-      <li><a href="http://www.vim.org/">VIM</a>/<a href="http://www.sublimetext.com/">Sublime Text2</a></li>
-      <li><a href="http://notepad-plus-plus.org/">Notepad++</a>/<a href="http://www.editplus.com/">EditPlus</a></li>
-      <li><a href="http://www.jetbrains.com/webstorm/">WebStorm</a></li>
-      <li><a href="http://www.gnu.org/software/emacs/">Emacs</a>  <a href="http://emacswiki.org">EmacsWiki</a></li>
-      <li><a href="http://brackets.io">Brackets</a></li>
-      <li><a href="http://www.activestate.com/komodo-edit">Komodo IDE / Edit</a></li>
-      <li><a href="http://www.eclipse.org/">Eclipse</a></li>
-      <li><a href="http://www.visualstudio.com/">Visual Studio</a></li>
-      <li><a href="https://netbeans.org/">NetBeans</a></li>
-      <li><a href="http://c9.io/">Cloud9 IDE</a></li>
-    </ul>
-  </li>
-  <li>调试工具
-    <ul>
-      <li><a href="http://getfirebug.com/">Firebug</a>/<a href="https://addons.mozilla.org/en-US/firefox/addon/firecookie/">Firecookie</a></li>
-      <li><a href="http://developer.yahoo.com/yslow/">YSlow</a></li>
-      <li><a href="http://www.microsoft.com/en-us/download/details.aspx?id=18359">IEDeveloperToolbar</a>/<a href="http://www.my-debugbar.com/wiki/IETester/HomePage">IETester</a></li>
-      <li><a href="http://www.fiddler2.com/fiddler2/">Fiddler</a></li>
-      <li><a href="https://developers.google.com/chrome-developer-tools/">Chrome Dev Tools</a></li>
-      <li><a href="http://www.opera.com/dragonfly/">Dragonfly</a></li>
-      <li><a href="http://www.debugbar.com/">DebugBar</a></li>
-      <li><a href="https://developer.mozilla.org/en-US/docs/Venkman">Venkman</a></li>
-    </ul>
-  </li>
-  <li>版本管理
-    <ul>
-      <li><a href="git-scm.com/">Git</a>/<a href="http://subversion.apache.org/">SVN</a>/<a href="http://mercurial.selenic.com/">Mercurial</a></li>
-      <li><a href="https://github.com/">Github</a>/<a href="https://bitbucket.org/">Bitbucket</a>/<a href="http://code.google.com/hosting/">Google Code</a>/<a href="https://gitorious.org/">Gitorious</a>/<a href="http://savannah.gnu.org/">GNU Savannah</a>/<a href="https://launchpad.net/">Launchpad</a>/<a href="http://sourceforge.net/">SourceForge</a>/<a href="http://gitlab.org/">Gitlab</a></li>
-    </ul>
-  </li>
-</ul>
+## 开发工具
+- 浏览器
+    - IE6/[7](http://www.microsoft.com/en-US/download/details.aspx?id=2)/[8](http://windows.microsoft.com/en-US/internet-explorer/downloads/ie-8)/[9](http://windows.microsoft.com/en-US/internet-explorer/downloads/ie-9/worldwide-languages)/[10](http://windows.microsoft.com/en-US/internet-explorer/ie-10-worldwide-languages)/[11](http://windows.microsoft.com/en-US/internet-explorer/ie-11-worldwide-languages) (Trident)
+    - [Firefox](http://www.mozilla.org/en-US/) (Gecko)
+    - [Chrome](http://www.google.com/chrome)/[Chromium](http://www.chromium.org/) (Blink)
+    - [Safari](http://www.apple.com/safari/) (WebKit)
+    - [Opera](http://www.opera.com/) (Blink)
+- 编辑器和IDE
+    - [VIM](http://www.vim.org/)/[Sublime Text2](http://www.sublimetext.com/)
+    - [Notepad++](http://notepad-plus-plus.org/)/[EditPlus](http://www.editplus.com/)
+    - [WebStorm](http://www.jetbrains.com/webstorm/)
+    - [Emacs](http://www.gnu.org/software/emacs/)  [EmacsWiki](http://emacswiki.org)
+    - [Brackets](http://brackets.io)
+    - [Komodo IDE / Edit](http://www.activestate.com/komodo-edit)
+    - [Eclipse](http://www.eclipse.org/)
+    - [Visual Studio](http://www.visualstudio.com/)
+    - [NetBeans](https://netbeans.org/)
+    - [Cloud9 IDE](http://c9.io/)
+- 调试工具
+    - [Firebug](http://getfirebug.com/)/[Firecookie](https://addons.mozilla.org/en-US/firefox/addon/firecookie/)
+    - [YSlow](http://developer.yahoo.com/yslow/)
+    - [IEDeveloperToolbar](http://www.microsoft.com/en-us/download/details.aspx?id=18359)/[IETester](http://www.my-debugbar.com/wiki/IETester/HomePage)
+    - [Fiddler](http://www.fiddler2.com/fiddler2/)
+    - [Chrome Dev Tools](https://developers.google.com/chrome-developer-tools/)
+    - [Dragonfly](http://www.opera.com/dragonfly/)
+    - [DebugBar](http://www.debugbar.com/)
+    - [Venkman](https://developer.mozilla.org/en-US/docs/Venkman)
+- 版本管理
+    - [Git](git-scm.com/)/[SVN](http://subversion.apache.org/)/[Mercurial](http://mercurial.selenic.com/)
+    - [Github](https://github.com/)/[Bitbucket](https://bitbucket.org/)/[Google Code](http://code.google.com/hosting/)/[Gitorious](https://gitorious.org/)/[GNU Savannah](http://savannah.gnu.org/)/[Launchpad](https://launchpad.net/)/[SourceForge](http://sourceforge.net/)/[Gitlab](http://gitlab.org/)
+    
+## 部署运维(TBA)
+- 代码编译与发布
+- 服务器部署
+- 服务器监控
+- 服务器日志分析
 
-<h2 id="tba-1">部署运维(TBA)</h2>
-<ul>
-  <li>代码编译与发布</li>
-  <li>服务器部署</li>
-  <li>服务器监控</li>
-  <li>服务器日志分析</li>
-</ul>
+## Softskill(TBA)
+- 知识管理/总结分享
+- 沟通技巧/团队协作
+- 需求管理/PM
+- 交互设计/可用性/可访问性知识
 
-<h2 id="softskilltba">Softskill(TBA)</h2>
-<ul>
-  <li>知识管理/总结分享</li>
-  <li>沟通技巧/团队协作</li>
-  <li>需求管理/PM</li>
-  <li>交互设计/可用性/可访问性知识</li>
-</ul>
-
-<h2 id="tba-2">书籍推荐(TBA)</h2>
+## 书籍推荐(TBA)
+</code></pre></noscript></div>
+</p>
 
 ]]></content>
   </entry>
