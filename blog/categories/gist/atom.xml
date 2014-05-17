@@ -4,7 +4,7 @@
   <title><![CDATA[Category: gist | @Lenciel]]></title>
   <link href="http://lenciel.cn/blog/categories/gist/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2014-05-17T14:14:45+08:00</updated>
+  <updated>2014-05-17T14:19:08+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -42,7 +42,7 @@ Liquid Exception: incompatible character encodings: UTF-8 and ASCII-8BIT in 2014
 
 <p>解决起来也很简单，只需要在<code>lib/jekyll/converters/markdown.rb</code>里面强制设定encoding就可以了：</p>
 
-<p><code>ruby lib/jekyll/converters/markdown.rb
+<p><code>diff lib/jekyll/converters/markdown.rb
 @@ -120,7 +120,7 @@ def convert(content)
            rd = RDiscount.new(content, *@rdiscount_extensions)
            html = rd.to_html
@@ -52,7 +52,7 @@ Liquid Exception: incompatible character encodings: UTF-8 and ASCII-8BIT in 2014
            end
 </code></p>
 
-<p>接下来就是render出来的效果，大概是因为gist的输出格式有过一次变化，样子很丑：</p>
+<p>接下来就是render出来的效果，样子丑到让人无法直视：</p>
 
 <p><img src="/downloads/images/2014_05/gist_render_output_orig.jpg" alt="original gist render output" title="Don't touch me..." /></p>
 
@@ -64,7 +64,7 @@ Liquid Exception: incompatible character encodings: UTF-8 and ASCII-8BIT in 2014
 
 <p>调整的地方见<a href="https://gist.github.com/lenciel/ecc8b3805ed346727abe">这里</a>:</p>
 
-<p>```diff
+<p>```diff _sass/partials/_syntax.scss
 diff –git a/46501e4:sass/partials/_syntax.scss b/02b0441:sass/partials/_syntax.scss
 index 137d475..5465286 100644
 — a/46501e4:sass/partials/_syntax.scss
