@@ -9,7 +9,7 @@
   <meta name="author" content="Lenciel Li">
 
   
-  <meta name="description" content="个人觉得Mac上最好用的文件/文件夹比较工具应该就是Kaleidoscope了。在它的新版本中新增了 KSReview 功能，比较有用。 举个常见的场景：如果 master 分支下有两个人lenciel和ming在做事。如果ming的事情先做完，代码上了master分支。 &hellip;">
+  <meta name="description" content="最近在单位写一个自动build的小工具。因为clearcase的setview命令实际上是激活一个新的shell，所以用简单的“串通”shell的脚本很难做到。 因为在邮件组里面看到有同样问题的Matt说用paramiko解决了问题，就试了试，过程还颇有点艰辛。 首先， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -31,14 +31,14 @@
 
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://lenciel.cn/blog/page/22/" />
-<meta property="og:description" content="个人觉得Mac上最好用的文件/文件夹比较工具应该就是Kaleidoscope了。在它的新版本中新增了 KSReview 功能，比较有用。 举个常见的场景：如果 master 分支下有两个人lenciel和ming在做事。如果ming的事情先做完，代码上了master分支。 &hellip;" />
+<meta property="og:description" content="最近在单位写一个自动build的小工具。因为clearcase的setview命令实际上是激活一个新的shell，所以用简单的“串通”shell的脚本很难做到。 因为在邮件组里面看到有同样问题的Matt说用paramiko解决了问题，就试了试，过程还颇有点艰辛。 首先， &hellip;" />
 
 <meta property="og:site_name" content="http://lenciel.cn" />
 <meta property="article:author" content="https://plus.google.com/114787528537231301324">
 
 
 
-<meta itemprop="description" content="个人觉得Mac上最好用的文件/文件夹比较工具应该就是Kaleidoscope了。在它的新版本中新增了 KSReview 功能，比较有用。 举个常见的场景：如果 master 分支下有两个人lenciel和ming在做事。如果ming的事情先做完，代码上了master分支。 &hellip;" />
+<meta itemprop="description" content="最近在单位写一个自动build的小工具。因为clearcase的setview命令实际上是激活一个新的shell，所以用简单的“串通”shell的脚本很难做到。 因为在邮件组里面看到有同样问题的Matt说用paramiko解决了问题，就试了试，过程还颇有点艰辛。 首先， &hellip;" />
 
 <!-- Combine multiple fonts into one request -->
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic|Patua+One|Yanone+Kaffeesatz" rel="stylesheet" type="text/css">
@@ -104,7 +104,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2013/04/use-kaleidoscope-as-code-review-tool/">Use Kaleidoscope as Code Review Tool</a></h1>
+      <h1 class="entry-title"><a href="/2009/04/ssh-using-paramiko/">使用paramiko进行ssh工作</a></h1>
     
     
       <p class="meta">
@@ -120,372 +120,35 @@
   
 
 
-<time datetime="2013-04-14T20:57:00+08:00" pubdate data-updated="true">Apr 14<span>th</span>, 2013</time>
+<time datetime="2009-04-23T00:37:00+08:00" pubdate data-updated="true">Apr 23<span>rd</span>, 2009</time>
         
-         | <a href="/2013/04/use-kaleidoscope-as-code-review-tool/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>个人觉得Mac上最好用的文件/文件夹比较工具应该就是Kaleidoscope了。在它的<a href="http://kaleidoscopeapp.com/beta">新版本</a>中新增了 <code>KSReview</code> 功能，比较有用。</p>
-
-<p>举个常见的场景：如果 <code>master</code> 分支下有两个人lenciel和ming在做事。如果ming的事情先做完，代码上了master分支。这个时候lenciel做diff的时候，因为主分支的文件已经发生过变化，那么我们diff的结果哪些是自己的开发分支与主分支的差异哪些是ming引入的，就要靠“人工智能”来肉身体察了。</p>
-
-<p>而 <code>KSReview</code> 会只收集开发者自己的开发分支和主分支之间的差异，过滤掉无关的信息，这样改动就非常清晰了。它的安装方便，只需要在命令行里面敲入：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">git config --global alias.ksreview <span class="s1">&#39;!f() { local SHA=${1:-HEAD}; local BRANCH=${2:-master}; if [ $SHA == $BRANCH ]; then SHA=HEAD; fi; git difftool -y -t Kaleidoscope $BRANCH...$SHA; }; f&#39;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>安装完毕之后就可以用下面的命令来做diff了：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">git ksreview feature-branch-name-or-sha mainline-branch-name
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/04/first-steps-on-a-new-server/">First Steps on a New Server</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-04T08:44:00+08:00" pubdate data-updated="true">Apr 4<span>th</span>, 2013</time>
-        
-         | <a href="/2013/04/first-steps-on-a-new-server/#disqus_thread">Comments</a>
+         | <a href="/2009/04/ssh-using-paramiko/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>一般来说，新开张的小团队不会养专职的运维和部署团队。一般服务器开发的项目组会有人兼职做这部分的事情。刚开始的时候这部分的工作量一般也不大，但是随着租用的服务器越来越多，兼职的人就会发现自己是在打上甘岭战役————坡越来越陡。</p>
+  <div class="entry-content"><p>最近在单位写一个自动build的小工具。因为clearcase的<code>setview</code>命令实际上是激活一个新的<code>shell</code>，所以用简单的“串通”<code>shell</code>的脚本很难做到。</p>
 
-<p>因此，一个简单而有效的标准流程是非常必要的。ZooM团队的服务器都会配置两个固定的帐号： <code>root</code> 和 <code>deploy</code> 。 <code>deploy</code>  这个用户具有 <code>sudo</code> 的权限。开发人员使用deploy但是不通过用户名密码登录而是用 <code>public key</code> 。这样一来，只需要保证所有机器的 <code>authorized_keys</code> 文件同步即可。后面要做的改进是：</p>
+<p>因为在邮件组里面看到有同样问题的Matt说用<code>paramiko</code>解决了问题，就试了试，过程还颇有点艰辛。</p>
 
-<ul>
-  <li>在所有机器禁止通过 root 账号进行ssh</li>
-  <li>在所有机器上限制可以ssh的IP范围</li>
-</ul>
+<p>首先，<code>paramiko</code>没有直接的<code>msi</code>或者<code>exe</code>版本给<code>Windows</code>用户下载，而是需要在本地进行编译。而且<code>python</code>的<code>easy_install</code>工具在Vista下面会报错，所以至少花了十几分钟才算安装完毕。</p>
 
-<p>这样的实施方案对 <code>authorized_keys</code> 的保密性和正确性要求是很高的，但是在没有专门IT的时候，对我们这样的小团队基本是够用的。下面是详细的步骤：</p>
-
-<p>我们拿到的第一台机器是Ubuntu的，因为 <code>Gitlab</code> 只有Debian的版本。后面的机器大多会是CentOS，所以使用的命令可能会稍微有调整，但是意思是不变的。</p>
-
-<h2 id="root">更换root密码</h2>
+<p>结果在用test.py验证安装的时候就报错了，说什么：</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">passwd
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">paramiko</span><span class="o">.</span><span class="n">SSHException</span><span class="p">:</span> <span class="n">No</span> <span class="n">suitable</span> <span class="n">address</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>可以很长很复杂（反正也不需要记得），保存在某个地方在你忘记 <code>sudo</code> 密码或者是不能正常 <code>ssh</code> 的时候能找出来用就可以了。</p>
+<p>安装是我自己一步步弄得，难道搞错了？只好照着demo写了一个sftp的脚本，发现是可以跑的，干。</p>
 
-<h2 id="section">更新系统</h2>
+<p>只好丢了封信给邮件组，然后自己开始找是啥问题。丢给邮件组的信至今没有回音（人气不行啊，<code>paramiko</code>），问题还是找到了。原来是1.7.5的<code>paramiko</code>增加了对ipv6的支持，结果引入了错误。更新了<code>client.py</code>后重新编译就可以用了。</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">apt-get update
-</span><span class="line">apt-get upgrade
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p>最后，虽然demo的例子也挺多，但是好像没有说清楚怎么用invoke_shell和get_pty以及照例奉上一段代码。</p>
 
-<h2 id="fail2ban">安装Fail2ban</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">apt-get install fail2ban
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>Fail2ban是一个用来监控登录尝试的 <code>daemon</code> ，可以有效侦测和防止可疑行为的发生。这个工具文档很全，而且出厂配置就很齐全，几乎不需要定制就能投入使用了。</p>
-
-<h2 id="deploy">添加deploy用户</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">useradd deploy
-</span><span class="line">mkdir /home/deploy
-</span><span class="line">mkdir /home/deploy/.ssh
-</span><span class="line">chmod 700 /home/deploy/.ssh
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="public-key">配置 <code>public key</code></h2>
-
-<p>使用密码的日子已经慢慢过时了，这方面Github很有<a href="https://help.github.com/categories/56/articles">贡献</a>。只需要：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">vim /home/deploy/.ssh/authorized_keys
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>把 <code>id_rsa.pub</code> 的内容拷贝进去。然后：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">chmod 400 /home/deploy/.ssh/authorized_keys
-</span><span class="line">chown deploy:deploy /home/deploy -R
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>当然你也可以使用 <code>id_rsa.pub</code> 之外的key，然后在本地的 <code>~/.ssh/config</code> 里面对 <code>IdentityFile</code> 做指定。具体方式可以查看 <code>~/.ssh/config</code>的说明。</p>
-
-<h2 id="deploy-sudo-">测试deploy用户并赋予 <code>Sudo</code> 权限</h2>
-
-<p>先测试deploy是否能够正常登录，然后使用 <code>root</code> 账号设置密码：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">passwd deploy
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>这是团队要用来 <code>sudo</code> 的账号，所以要弄得有意义好记一点儿。接下来：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">visudo
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>注释掉所以已经存在的用户、用户组权限，然后加上：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">root    <span class="nv">ALL</span><span class="o">=(</span>ALL<span class="o">)</span> ALL
-</span><span class="line">deploy  <span class="nv">ALL</span><span class="o">=(</span>ALL<span class="o">)</span> ALL
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="ssh">锁定SSH</h2>
-
-<p>设置ssh，禁止使用密码ssh，禁止使用 <code>root</code> 账号ssh。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">vim /etc/ssh/sshd_config
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>添加下面的设置：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">PermitRootLogin no
-</span><span class="line">PasswordAuthentication no
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>如果有需要还可以限定可以ssh的ip地址：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">AllowUsers deploy@<span class="o">(</span>your-ip<span class="o">)</span> deploy@<span class="o">(</span>another-ip-if-any<span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-<p>重启ssh：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">service ssh restart
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="section-1">设置防火墙</h2>
-
-<p>Ubuntu提供了 <code>ufw</code>，所以只需要：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">ufw allow from <span class="o">{</span>your-ip<span class="o">}</span> to any port 22
-</span><span class="line">ufw allow 80
-</span><span class="line">ufw allow 443
-</span><span class="line">ufw <span class="nb">enable</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="section-2">打开自动安全更新</h2>
-
-<p>虽然很多习惯好的服务器使用者会知道运行<code>apt-get update/upgrade</code> 但是如果服务器很多，总会有一些不那么被经常登录的机器，系统会比较陈旧。特别是做负载均衡的机器，可能很少有人登录。为了保证所有的机器都有足够的安全性需要打开自动更新（作为习惯控制一切的开发人员，自动更新总是一件让我很抗拒的事情，但是安全漏洞更让人抗拒）：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">apt-get install unattended-upgrades
-</span><span class="line">vim /etc/apt/apt.conf.d/10periodic
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>在文件里面修改成：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">APT::Periodic::Update-Package-Lists <span class="s2">&quot;1&quot;</span>;
-</span><span class="line">APT::Periodic::Download-Upgradeable-Packages <span class="s2">&quot;1&quot;</span>;
-</span><span class="line">APT::Periodic::AutocleanInterval <span class="s2">&quot;7&quot;</span>;
-</span><span class="line">APT::Periodic::Unattended-Upgrade <span class="s2">&quot;1&quot;</span>;
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>接着修改：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">vim /etc/apt/apt.conf.d/50unattended-upgrades
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>修改文件成：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">Unattended-Upgrade::Allowed-Origins <span class="o">{</span>
-</span><span class="line">    <span class="s2">&quot;Ubuntu lucid-security&quot;</span>;
-</span><span class="line">    //<span class="s2">&quot;Ubuntu lucid-updates&quot;</span>; 只更新安全更新
-</span><span class="line"><span class="o">}</span>;
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="logwatch">安装Logwatch</h2>
-
-<p>Logwatch是一个监控你的日志并发送邮件通知的daemon。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">apt-get install logwatch
-</span><span class="line">vim /etc/cron.daily/00logwatch
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>在文件中添加：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">/usr/sbin/logwatch --output mail --mailto lenciel@gmail.com --detail high
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="whats-next">What’s Next</h2>
-
-<ul>
-  <li>使用Puppet自动化这些配置</li>
-  <li>在基础的配置上，把一个fresh的机器如果配置成各种形态的（Django/Web/Database/LoadBalance/…)</li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/03/boxen-introduction/">Boxen Introduction</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-31T08:28:00+08:00" pubdate data-updated="true">Mar 31<span>st</span>, 2013</time>
-        
-         | <a href="/2013/03/boxen-introduction/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>如果列举开发人员在工作中最讨厌的部分，估计搭建开发环境得票率肯定可以排进前三。年初Github开源了自己内部的Privision框架<a href="http://boxen.github.com/">Boxen</a>，趁着新笔记本需要起轿，尝试了一把。</p>
-
-<h2 id="boxen">Boxen框架简介</h2>
-
-<p>Boxen基于大红大紫的<a href="https://puppetlabs.com/">Puppet</a>，但和后者目前主要侧重于服务器的Privision不同，Boxen更主要是用于组织内工作人员使用的机器的配置和管理流程标准化。</p>
-
-<p>配置流程标准化比较好理解：拿到一台机器，敲一个命令就把所有需要的软件装上并且把环境配置好。按Boxen主页上的说法，Github新员工入职后领到电脑后，用Boxen配置环境到开始写代码只需要30分钟。</p>
-
-<p>管理流程标准化听起来比较抽象，你可以想象这么一个场景：如果公司里面所有的机器都是是用Boxen来配置的。当发现Chrome浏览器的Java插件会导致安全问题的时候，IT部门可以push一个禁用Chrome里Java插件的change到boxen repo。所有的员工只需要和repo做一次sync，自己的Chrome里的Java插件就被禁用了。这显然比传统的发邮件要求大家去禁用Chrome浏览器Java插件简单有效。</p>
-
-<p>简单地概括Boxen的思路，就是像对待产品一样对待开发环境。使用包括版本控制，持续集成这些手段，在团队中维护一个开发环境的仓库。如果你想更深入地了解Boxen的设计哲学，可以看看这个slide：<a href="https://speakerdeck.com/wfarr/boxen">BOXEN by Will Farrington</a>。</p>
-
-<h2 id="boxen-1">使用Boxen</h2>
-
-<p>首先确保你的初始环境是干净的：</p>
-
-<ul>
-  <li>如果你手上是台新机器，它是干净的</li>
-  <li>
-    <p>如果不是一台新机器，请先备份，然后：</p>
-
-    <ul>
-      <li>卸载Homebrew</li>
-      <li>删除所有的 <code>dotfiles</code> 和 <code>vimfiles</code> ，比如<a href="https://github.com/robbyrussell/oh-my-zsh">Oh my zsh</a>或者<a href="https://github.com/spf13/spf13-vim">spf13 vim</a>等</li>
-      <li>删除 <code>.rbenv</code> 或者 <code>.rvm</code> 文件夹</li>
-      <li><code>chsh -s /bin/bash</code> 把SHELL改回 <code>bash</code></li>
-    </ul>
-  </li>
-</ul>
-
-<p>接下来就是安装一些必须的软件，比如Git和Xcode的 <code>Command Line Tools</code>。</p>
-
-<h3 id="xcode-clt">Xcode CLT</h3>
-
-<ul>
-  <li>升级Xcode</li>
-  <li>启动Xcode，在Preferences里面选择下载</li>
-  <li>安装”Command Line Tools”</li>
-</ul>
-
-<p><img src="/downloads/images/xcode_clt.png" alt="Xcode Command Line Tools" title="Don't touch me..." /></p>
-
-<h3 id="firevault2">打开FireVault2</h3>
-
-<p>Boxen默认会希望硬盘信息是被加密的：</p>
-
-<p><img src="/downloads/images/turn_on_fire_vault.png" alt="Turn on FireVault2" title="Don't touch me..." /></p>
-
-<h3 id="fork-our-boxen">Fork our-boxen</h3>
-
-<p><a href="https://github.com/boxen/our-boxen">our-boxen</a>是Boxen提供的基线repo，也是整个Boxen框架里面文档最全的一个repo。</p>
-
-<p>首先按照repo说明中的方式来clone和配置本地repo：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">sudo mkdir -p /opt/boxen
-</span><span class="line">sudo chown <span class="k">${</span><span class="nv">USER</span><span class="k">}</span>:admin /opt/boxen
-</span><span class="line">git clone https://github.com/boxen/our-boxen /opt/boxen/repo
-</span><span class="line"><span class="nb">cd</span> /opt/boxen/repo
-</span><span class="line">git remote rm origin
-</span><span class="line">git remote add origin
-</span><span class="line">git push -u origin master
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>这种clone下来再配置origin的方式类似于fork，区别是fork下来的repo一定是public的，而这样得到的repo可以是private的。可以想象如果你使用boxen来完成对公司电脑的配置，多少都会有一些敏感信息在repo里面，所以private的repo是非常必要的。</p>
-
-<p>接下来在 <code>/opt/boxen/repo</code> 路径下运行 <code>script/boxen</code> 即可完成boxen默认的模块的安装。默认的模块定义在 <code>/opt/boxen/repo/Puppetfile</code> 中：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span> (paramiko_sample.py)</span> <a href="/downloads/code/paramiko_sample.py">download</a></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
@@ -497,130 +160,504 @@
 <span class="line-number">10</span>
 <span class="line-number">11</span>
 <span class="line-number">12</span>
-</pre></td><td class="code"><pre><code class="ruby"><span class="line"><span class="n">github</span> <span class="s2">&quot;dnsmasq&quot;</span><span class="p">,</span>  <span class="s2">&quot;1.0.0&quot;</span>
-</span><span class="line"><span class="n">github</span> <span class="s2">&quot;gcc&quot;</span><span class="p">,</span>      <span class="s2">&quot;1.0.0&quot;</span>
-</span><span class="line"><span class="n">github</span> <span class="s2">&quot;git&quot;</span><span class="p">,</span>      <span class="s2">&quot;1.0.0&quot;</span>
-</span><span class="line"><span class="n">github</span> <span class="s2">&quot;homebrew&quot;</span><span class="p">,</span> <span class="s2">&quot;1.0.0&quot;</span>
-</span><span class="line"><span class="n">github</span> <span class="s2">&quot;hub&quot;</span><span class="p">,</span>      <span class="s2">&quot;1.0.0&quot;</span>
-</span><span class="line"><span class="n">github</span> <span class="s2">&quot;inifile&quot;</span><span class="p">,</span>  <span class="s2">&quot;0.9.0&quot;</span><span class="p">,</span> <span class="ss">:repo</span> <span class="o">=&gt;</span> <span class="s2">&quot;cprice-puppet/puppetlabs-inifile&quot;</span>
-</span><span class="line"><span class="n">github</span> <span class="s2">&quot;nginx&quot;</span><span class="p">,</span>    <span class="s2">&quot;1.0.0&quot;</span>
-</span><span class="line"><span class="n">github</span> <span class="s2">&quot;nodejs&quot;</span><span class="p">,</span>   <span class="s2">&quot;1.0.0&quot;</span>
-</span><span class="line"><span class="n">github</span> <span class="s2">&quot;nvm&quot;</span><span class="p">,</span>      <span class="s2">&quot;1.0.0&quot;</span>
-</span><span class="line"><span class="n">github</span> <span class="s2">&quot;ruby&quot;</span><span class="p">,</span>     <span class="s2">&quot;1.0.0&quot;</span>
-</span><span class="line"><span class="n">github</span> <span class="s2">&quot;stdlib&quot;</span><span class="p">,</span>   <span class="s2">&quot;3.0.0&quot;</span><span class="p">,</span> <span class="ss">:repo</span> <span class="o">=&gt;</span> <span class="s2">&quot;puppetlabs/puppetlabs-stdlib&quot;</span>
-</span><span class="line"><span class="n">github</span> <span class="s2">&quot;sudo&quot;</span><span class="p">,</span>     <span class="s2">&quot;1.0.0&quot;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>可以看到Github大量用到 <code>ruby</code> 和 <code>nodejs</code> 。在运行boxen的时候，可能会看到大量的警告信息：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="ruby"><span class="line"><span class="ss">Warning</span><span class="p">:</span> <span class="no">Could</span> <span class="ow">not</span> <span class="n">retrieve</span> <span class="n">fact</span> <span class="n">fqdn</span>
-</span><span class="line"><span class="ss">Warning</span><span class="p">:</span> <span class="no">Host</span> <span class="n">is</span> <span class="n">missing</span> <span class="n">hostname</span> <span class="ow">and</span><span class="o">/</span><span class="ow">or</span> <span class="ss">domain</span><span class="p">:</span> <span class="n">suttlemac</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>然后伴随着 <code>https://rubygems.org</code> 失败。这些主要是因为GFW，你可以使用镜像，比如淘宝的。具体方式可以<a href="http://ruby.taobao.org/">查看这里</a>。</p>
-
-<p>注意你还应该把下面的脚本加到 <code>~/.bashrc</code> 或者 <code>~/.zshrc</code> :</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="o">[</span> -f /opt/boxen/env.sh <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">source</span> /opt/boxen/env.sh
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>然后新开一个shell运行 <code>boxen --env</code>，结果一切正常你的box就配置完毕了。</p>
-
-<h2 id="box">自定义你的box</h2>
-
-<p>默认安装的内容当然不一定对你的口味，如果你用过Puppet那么自定义Boxen的box是非常简单的。不过埋头开干之前还是可以check一下是不是已经<a href="https://github.com/boxen">有人做好了</a>。这些做好的repo可以直接通过修改配置文件是用，因为Boxen对librarian-puppet做了wrapper，对fetch各种module也做了wrapper。</p>
-
-<p>比如我们要安装Chrome和Skype，打开 <code>/opt/boxen/repo/Puppetfile</code> 并添加两行：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-</pre></td><td class="code"><pre><code class="ruby"><span class="line"><span class="o">.</span><span class="n">.</span><span class="o">.</span>
-</span><span class="line"><span class="n">github</span> <span class="s2">&quot;sudo&quot;</span><span class="p">,</span>     <span class="s2">&quot;1.0.0&quot;</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+<span class="line-number">47</span>
+<span class="line-number">48</span>
+<span class="line-number">49</span>
+<span class="line-number">50</span>
+<span class="line-number">51</span>
+<span class="line-number">52</span>
+<span class="line-number">53</span>
+<span class="line-number">54</span>
+<span class="line-number">55</span>
+<span class="line-number">56</span>
+<span class="line-number">57</span>
+<span class="line-number">58</span>
+<span class="line-number">59</span>
+<span class="line-number">60</span>
+<span class="line-number">61</span>
+<span class="line-number">62</span>
+<span class="line-number">63</span>
+<span class="line-number">64</span>
+<span class="line-number">65</span>
+<span class="line-number">66</span>
+<span class="line-number">67</span>
+<span class="line-number">68</span>
+<span class="line-number">69</span>
+<span class="line-number">70</span>
+<span class="line-number">71</span>
+<span class="line-number">72</span>
+<span class="line-number">73</span>
+<span class="line-number">74</span>
+<span class="line-number">75</span>
+<span class="line-number">76</span>
+<span class="line-number">77</span>
+<span class="line-number">78</span>
+<span class="line-number">79</span>
+<span class="line-number">80</span>
+<span class="line-number">81</span>
+<span class="line-number">82</span>
+<span class="line-number">83</span>
+<span class="line-number">84</span>
+<span class="line-number">85</span>
+<span class="line-number">86</span>
+<span class="line-number">87</span>
+<span class="line-number">88</span>
+<span class="line-number">89</span>
+<span class="line-number">90</span>
+<span class="line-number">91</span>
+<span class="line-number">92</span>
+<span class="line-number">93</span>
+<span class="line-number">94</span>
+<span class="line-number">95</span>
+<span class="line-number">96</span>
+<span class="line-number">97</span>
+<span class="line-number">98</span>
+<span class="line-number">99</span>
+<span class="line-number">100</span>
+<span class="line-number">101</span>
+<span class="line-number">102</span>
+<span class="line-number">103</span>
+<span class="line-number">104</span>
+<span class="line-number">105</span>
+<span class="line-number">106</span>
+<span class="line-number">107</span>
+<span class="line-number">108</span>
+<span class="line-number">109</span>
+<span class="line-number">110</span>
+<span class="line-number">111</span>
+<span class="line-number">112</span>
+<span class="line-number">113</span>
+<span class="line-number">114</span>
+<span class="line-number">115</span>
+<span class="line-number">116</span>
+<span class="line-number">117</span>
+<span class="line-number">118</span>
+<span class="line-number">119</span>
+<span class="line-number">120</span>
+<span class="line-number">121</span>
+<span class="line-number">122</span>
+<span class="line-number">123</span>
+<span class="line-number">124</span>
+<span class="line-number">125</span>
+<span class="line-number">126</span>
+<span class="line-number">127</span>
+<span class="line-number">128</span>
+<span class="line-number">129</span>
+<span class="line-number">130</span>
+<span class="line-number">131</span>
+<span class="line-number">132</span>
+<span class="line-number">133</span>
+<span class="line-number">134</span>
+<span class="line-number">135</span>
+<span class="line-number">136</span>
+<span class="line-number">137</span>
+<span class="line-number">138</span>
+<span class="line-number">139</span>
+<span class="line-number">140</span>
+<span class="line-number">141</span>
+<span class="line-number">142</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="sd">&quot;&quot;&quot;</span>
+</span><span class="line"><span class="sd">This script is using for build the software package</span>
+</span><span class="line"><span class="sd">&quot;&quot;&quot;</span>
 </span><span class="line">
-</span><span class="line"><span class="c1"># Add new modules</span>
-</span><span class="line"><span class="n">github</span> <span class="s2">&quot;skype&quot;</span><span class="p">,</span>    <span class="s2">&quot;1.0.2&quot;</span>
-</span><span class="line"><span class="n">github</span> <span class="s2">&quot;chrome&quot;</span><span class="p">,</span>   <span class="s2">&quot;1.1.0&quot;</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">sys</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">time</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">paramiko</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">traceback</span>
+</span><span class="line"><span class="kn">import</span> <span class="nn">ConfigParser</span>
+</span><span class="line">
+</span><span class="line"><span class="sd">&quot;&quot;&quot;</span>
+</span><span class="line"><span class="sd">The main class of the builder.</span>
+</span><span class="line"><span class="sd">&quot;&quot;&quot;</span>
+</span><span class="line"><span class="k">class</span> <span class="nc">Builder</span><span class="p">:</span>
+</span><span class="line">
+</span><span class="line">    <span class="sd">&quot;&quot;&quot;Parses options from the ini file to create connection.&quot;&quot;&quot;</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">inifile</span><span class="p">):</span>
+</span><span class="line">        <span class="k">try</span><span class="p">:</span>
+</span><span class="line">            <span class="n">config</span> <span class="o">=</span> <span class="n">ConfigParser</span><span class="o">.</span><span class="n">ConfigParser</span><span class="p">()</span>
+</span><span class="line">            <span class="n">config</span><span class="o">.</span><span class="n">readfp</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">inifile</span><span class="p">))</span>
+</span><span class="line">
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">_ssh</span> <span class="o">=</span> <span class="n">paramiko</span><span class="o">.</span><span class="n">SSHClient</span><span class="p">()</span>
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">_ssh</span><span class="o">.</span><span class="n">set_missing_host_key_policy</span><span class="p">(</span><span class="n">paramiko</span><span class="o">.</span><span class="n">AutoAddPolicy</span><span class="p">())</span>
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">_ssh</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;host&#39;</span><span class="p">,</span><span class="s">&#39;server&#39;</span><span class="p">),</span>
+</span><span class="line">                              <span class="n">port</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">getint</span><span class="p">(</span><span class="s">&#39;host&#39;</span><span class="p">,</span> <span class="s">&#39;port&#39;</span><span class="p">),</span>
+</span><span class="line">                              <span class="n">username</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;host&#39;</span><span class="p">,</span><span class="s">&#39;user&#39;</span><span class="p">),</span>
+</span><span class="line">                              <span class="n">password</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;host&#39;</span><span class="p">,</span><span class="s">&#39;password&#39;</span><span class="p">))</span>
+</span><span class="line">
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">_t</span> <span class="o">=</span> <span class="n">paramiko</span><span class="o">.</span><span class="n">Transport</span><span class="p">((</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;host&#39;</span><span class="p">,</span><span class="s">&#39;server&#39;</span><span class="p">),</span> <span class="n">config</span><span class="o">.</span><span class="n">getint</span><span class="p">(</span><span class="s">&#39;host&#39;</span><span class="p">,</span> <span class="s">&#39;port&#39;</span><span class="p">)))</span>
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">_t</span><span class="o">.</span><span class="n">start_client</span><span class="p">()</span>
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">_t</span><span class="o">.</span><span class="n">auth_password</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;host&#39;</span><span class="p">,</span><span class="s">&#39;user&#39;</span><span class="p">),</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;host&#39;</span><span class="p">,</span><span class="s">&#39;password&#39;</span><span class="p">))</span>
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">_sftp</span> <span class="o">=</span> <span class="n">paramiko</span><span class="o">.</span><span class="n">SFTPClient</span><span class="o">.</span><span class="n">from_transport</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_t</span><span class="p">)</span>
+</span><span class="line">        <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+</span><span class="line">            <span class="k">print</span> <span class="s">&#39;*** Caught exception: </span><span class="si">%s</span><span class="s">: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">__class__</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</span><span class="line">            <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">()</span>
+</span><span class="line">            <span class="k">try</span><span class="p">:</span>
+</span><span class="line">                <span class="bp">self</span><span class="o">.</span><span class="n">closeConn</span><span class="p">()</span>
+</span><span class="line">            <span class="k">except</span><span class="p">:</span>
+</span><span class="line">                <span class="k">pass</span>
+</span><span class="line">            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">_fpga</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;fpga compress&#39;</span><span class="p">,</span><span class="s">&#39;fpga&#39;</span><span class="p">)</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">_lpath</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;fpga compress&#39;</span><span class="p">,</span><span class="s">&#39;local_fpga_path&#39;</span><span class="p">)</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">_rpath</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;fpga compress&#39;</span><span class="p">,</span><span class="s">&#39;remote_fpga_path&#39;</span><span class="p">)</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">_oab</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;fpga compress&#39;</span><span class="p">,</span><span class="s">&#39;oab&#39;</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">_xlf</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;xlf build&#39;</span><span class="p">,</span><span class="s">&#39;xlf&#39;</span><span class="p">)</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">_lmid</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;xlf build&#39;</span><span class="p">,</span><span class="s">&#39;lmid&#39;</span><span class="p">)</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">_xpp</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;xlf build&#39;</span><span class="p">,</span><span class="s">&#39;xpp&#39;</span><span class="p">)</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">_xdp</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;xlf build&#39;</span><span class="p">,</span><span class="s">&#39;xdp&#39;</span><span class="p">)</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">_rru</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;xlf build&#39;</span><span class="p">,</span><span class="s">&#39;rru&#39;</span><span class="p">)</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">_rruswdb</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;xlf build&#39;</span><span class="p">,</span><span class="s">&#39;rru_sw_db&#39;</span><span class="p">)</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">_xpl</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;xlf build&#39;</span><span class="p">,</span><span class="s">&#39;xpl&#39;</span><span class="p">)</span>
+</span><span class="line">        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Your input fpga file is:&quot;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">_lpath</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">_fpga</span><span class="o">+</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+</span><span class="line">        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Your ouput xlf file will be:&quot;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">_xlf</span><span class="o">+</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">    <span class="sd">&quot;&quot;&quot;Run command on the server&quot;&quot;&quot;</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">runCmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">):</span>
+</span><span class="line">        <span class="sd">&quot;&quot;&quot;run &lt;command&gt;</span>
+</span><span class="line"><span class="sd">        Execute this command on all hosts in the list&quot;&quot;&quot;</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">command</span><span class="p">:</span>
+</span><span class="line">            <span class="n">stdin</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ssh</span><span class="o">.</span><span class="n">exec_command</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+</span><span class="line">            <span class="n">stdin</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span><span class="line">            <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">stdout</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">():</span>
+</span><span class="line">                <span class="k">print</span> <span class="n">line</span>
+</span><span class="line">        <span class="k">else</span><span class="p">:</span>
+</span><span class="line">            <span class="k">print</span> <span class="s">&quot;usage: run &lt;command&gt;&quot;</span>
+</span><span class="line">
+</span><span class="line">    <span class="sd">&quot;&quot;&quot;Upload the fpga and compress it to oab.bin&quot;&quot;&quot;</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">createOab</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">_sftp</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_lpath</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">_fpga</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">_rpath</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">_fpga</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">runCmd</span><span class="p">(</span><span class="s">&quot;hou_create_fpga -bf </span><span class="se">\&quot;</span><span class="s">/home/ehholli/fpgainput/fpga.med</span><span class="se">\&quot;</span><span class="s"> -dn </span><span class="se">\&quot;</span><span class="s">CXC 172 8213/1</span><span class="se">\&quot;</span><span class="s"> -of oab -dev </span><span class="se">\&quot;</span><span class="s">XC2V6000,-4</span><span class="se">\&quot;</span><span class="s"> -dir /home/ehholli/fpgaoutput/&quot;</span><span class="p">)</span>
+</span><span class="line">        <span class="k">try</span><span class="p">:</span>
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">_sftp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_oab</span><span class="p">,</span><span class="s">&#39;oab.bin&#39;</span><span class="p">)</span>
+</span><span class="line">            <span class="k">print</span><span class="p">(</span><span class="s">&quot;Fpga file compress successfully!&quot;</span><span class="p">)</span>
+</span><span class="line">        <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+</span><span class="line">            <span class="k">print</span> <span class="s">&#39;*** Caught exception: </span><span class="si">%s</span><span class="s">: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">__class__</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</span><span class="line">            <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">()</span>
+</span><span class="line">            <span class="k">try</span><span class="p">:</span>
+</span><span class="line">                <span class="bp">self</span><span class="o">.</span><span class="n">closeConn</span><span class="p">()</span>
+</span><span class="line">            <span class="k">except</span><span class="p">:</span>
+</span><span class="line">                <span class="k">pass</span>
+</span><span class="line">            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">    <span class="sd">&quot;&quot;&quot;Make the tlf&quot;&quot;&quot;</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">genXlf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="line">        <span class="c">#open a interactive shell</span>
+</span><span class="line">        <span class="n">ct_chan</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t</span><span class="o">.</span><span class="n">open_session</span><span class="p">()</span>
+</span><span class="line">        <span class="n">ct_chan</span><span class="o">.</span><span class="n">setblocking</span><span class="p">()</span>
+</span><span class="line">        <span class="n">ct_chan</span><span class="o">.</span><span class="n">get_pty</span><span class="p">()</span>
+</span><span class="line">        <span class="n">ct_chan</span><span class="o">.</span><span class="n">invoke_shell</span><span class="p">()</span>
+</span><span class="line">        <span class="c">#ct setview ehholli</span>
+</span><span class="line">        <span class="k">if</span><span class="p">(</span><span class="n">ct_chan</span><span class="o">.</span><span class="n">send_ready</span><span class="p">()):</span>
+</span><span class="line">            <span class="n">ct_chan</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s">&quot;ct setview ehholli</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">)</span>
+</span><span class="line">        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">        <span class="c">#compile</span>
+</span><span class="line">        <span class="n">build_cmd</span><span class="o">=</span><span class="s">&quot;/vobs/rbs/hw/bcp/xp/deliv/solaris2/bin/xlf_gen -r &quot;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">_xpp</span><span class="o">+</span><span class="s">&quot; &quot;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">_xdp</span><span class="o">+</span><span class="s">&quot; &quot;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">_rru</span> \
+</span><span class="line">                     <span class="o">+</span><span class="s">&quot; -i &quot;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">_oab</span><span class="o">+</span><span class="s">&quot; &quot;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">_rruswdb</span> \
+</span><span class="line">                     <span class="o">+</span><span class="s">&quot; -o /home/ehholli/tmp/&quot;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">_xlf</span> \
+</span><span class="line">                     <span class="o">+</span><span class="s">&quot; -x &quot;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">_xpl</span> \
+</span><span class="line">                     <span class="o">+</span><span class="s">&quot; -lmid </span><span class="se">\&quot;</span><span class="s">&quot;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">_lmid</span><span class="o">+</span><span class="s">&quot;</span><span class="se">\&quot;</span><span class="s">&quot;</span> \
+</span><span class="line">                     <span class="o">+</span><span class="s">&quot; -t </span><span class="se">\&quot;</span><span class="s">au_applic</span><span class="se">\&quot;</span><span class="s"> -v </span><span class="se">\r\n</span><span class="s">&quot;</span>
+</span><span class="line">        <span class="k">print</span><span class="p">(</span><span class="n">build_cmd</span><span class="p">)</span>
+</span><span class="line">        <span class="k">if</span><span class="p">(</span><span class="n">ct_chan</span><span class="o">.</span><span class="n">send_ready</span><span class="p">()):</span>
+</span><span class="line">            <span class="n">ct_chan</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">build_cmd</span><span class="p">)</span>
+</span><span class="line">        <span class="n">tCheck2</span> <span class="o">=</span>
+</span><span class="line">        <span class="k">while</span> <span class="ow">not</span> <span class="n">ct_chan</span><span class="o">.</span><span class="n">recv_ready</span><span class="p">():</span>
+</span><span class="line">            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</span><span class="line">            <span class="n">tCheck2</span><span class="o">+=</span><span class="mi">1</span>
+</span><span class="line">            <span class="k">if</span> <span class="n">tCheck2</span> <span class="o">&gt;=</span> <span class="mi">6</span><span class="p">:</span>
+</span><span class="line">                <span class="k">print</span> <span class="s">&#39;time out&#39;</span><span class="c">#TODO: add exeption here</span>
+</span><span class="line">        <span class="k">print</span><span class="p">(</span><span class="n">ct_chan</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">65536</span><span class="p">))</span>
+</span><span class="line">        <span class="n">ct_chan</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span><span class="line">        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span><span class="line">        <span class="c">#download the xlf file</span>
+</span><span class="line">        <span class="k">try</span><span class="p">:</span>
+</span><span class="line">            <span class="bp">self</span><span class="o">.</span><span class="n">_sftp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;/home/ehholli/tmp/&quot;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">_xlf</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">_xlf</span><span class="p">)</span>
+</span><span class="line">            <span class="k">print</span><span class="p">(</span><span class="s">&quot;xlf file downloaded successfully!&quot;</span><span class="p">)</span>
+</span><span class="line">        <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+</span><span class="line">            <span class="k">print</span> <span class="s">&#39;*** Caught exception: </span><span class="si">%s</span><span class="s">: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">__class__</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</span><span class="line">            <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">()</span>
+</span><span class="line">            <span class="k">try</span><span class="p">:</span>
+</span><span class="line">                <span class="bp">self</span><span class="o">.</span><span class="n">closeConn</span><span class="p">()</span>
+</span><span class="line">            <span class="k">except</span><span class="p">:</span>
+</span><span class="line">                <span class="k">pass</span>
+</span><span class="line">            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">    <span class="sd">&quot;&quot;&quot;Close everything we opened&quot;&quot;&quot;</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">closeConn</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">_ssh</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">_sftp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span><span class="line">        <span class="bp">self</span><span class="o">.</span><span class="n">_t</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span><span class="line"><span class="k">if</span> <span class="n">__name__</span><span class="o">==</span><span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+</span><span class="line">    <span class="c"># setup logging</span>
+</span><span class="line">    <span class="n">paramiko</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">log_to_file</span><span class="p">(</span><span class="s">&#39;demo_builder.log&#39;</span><span class="p">)</span>
+</span><span class="line">    <span class="n">b</span><span class="o">=</span><span class="n">Builder</span><span class="p">(</span><span class="s">&#39;cfg.ini&#39;</span><span class="p">)</span>
+</span><span class="line">    <span class="n">b</span><span class="o">.</span><span class="n">createOab</span><span class="p">()</span>
+</span><span class="line">    <span class="n">b</span><span class="o">.</span><span class="n">genXlf</span><span class="p">()</span>
+</span><span class="line">    <span class="c">#b.runCmd(&#39;ls&#39;)</span>
+</span><span class="line">    <span class="n">b</span><span class="o">.</span><span class="n">closeConn</span><span class="p">()</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>这里安装的module的声明规则是 <code>github "{name}", "{version}"</code>。 其中 <code>name</code> 的取法是在 <code>Puppetfile</code> 里面定义的：</p>
+</div>
+  
+  
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-</pre></td><td class="code"><pre><code class="ruby"><span class="line"><span class="k">def</span> <span class="nf">github</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="n">version</span><span class="p">,</span> <span class="n">options</span> <span class="o">=</span> <span class="kp">nil</span><span class="p">)</span>
-</span><span class="line">  <span class="n">options</span> <span class="o">||=</span> <span class="p">{}</span>
-</span><span class="line">  <span class="n">options</span><span class="o">[</span><span class="ss">:repo</span><span class="o">]</span> <span class="o">||=</span> <span class="s2">&quot;boxen/puppet-</span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span class="line">  <span class="n">mod</span> <span class="nb">name</span><span class="p">,</span> <span class="n">version</span><span class="p">,</span> <span class="ss">:github_tarball</span> <span class="o">=&gt;</span> <span class="n">options</span><span class="o">[</span><span class="ss">:repo</span><span class="o">]</span>
-</span><span class="line"><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>因此<a href="https://github.com/boxen/puppet-skype">puppet-skype</a>对应的就是 <code>skype</code> 。</p>
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/01/on-my-way-home/">起飞之前</a></h1>
+    
+    
+      <p class="meta">
+        
 
-<p>而 <code>version</code> 则是对应具体repo的tag，比如<a href="https://github.com/boxen/puppet-skype">puppet-skype</a>对应的<a href="https://github.com/boxen/puppet-skype/tags">tag</a>有：</p>
 
-<p><img src="/downloads/images/version_tag.png" alt="Version and tags" title="Don't touch me..." /></p>
 
-<p>如果你的repo不是在github也很简单，只需要指定repo的位置即可。比如如果你自己的Skype是放在Bitbucket上的:</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="ruby"><span class="line">   <span class="n">mod</span> <span class="s2">&quot;skype&quot;</span><span class="p">,</span> <span class="ss">:git</span> <span class="o">=&gt;</span> <span class="s2">&quot;git@bitbucket.org:yourusername/puppet-skype.git&quot;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>在 <code>Puppetfile</code> 里面完成的声明主要是让Boxen（实际上是Puppet）知道去哪里找安装和配置文件。要告诉Boxen安装Skype还需要在 <code>manifests/site.pp</code> 里面 <code>include</code> 需要安装的module：</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-</pre></td><td class="code"><pre><code class="ruby"><span class="line"><span class="o">.</span><span class="n">.</span><span class="o">.</span>
-</span><span class="line">    <span class="n">node</span> <span class="n">default</span> <span class="p">{</span>
-</span><span class="line">        <span class="kp">include</span> <span class="n">dnsmasq</span>
-</span><span class="line">        <span class="kp">include</span> <span class="n">ruby</span>
-</span><span class="line">        <span class="kp">include</span> <span class="n">git</span>
-</span><span class="line">        <span class="kp">include</span> <span class="n">hub</span>
-</span><span class="line">        <span class="kp">include</span> <span class="n">homebrew</span>
-</span><span class="line">        <span class="kp">include</span> <span class="n">skype</span>
-</span><span class="line">    <span class="p">}</span>
-</span><span class="line"><span class="o">.</span><span class="n">.</span><span class="o">.</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>接下来只需要运行 <code>boxen</code> (如果你运行了 <code>boxen --env</code> 命令会在可执行路径里)或者是 <code>boxen --debug</code> (如果你需要更多的verbose信息)，指定的软件就安装上了。</p>
 
-<h2 id="whats-next">What’s Next</h2>
+  
 
-<p>目前为止主要是解释了如何使用Boxen来安装一些基本软件。目前本座机器上使用Boxen安装的软件包括：</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-</pre></td><td class="code"><pre><code class="ruby"><span class="line"><span class="n">github</span> <span class="s2">&quot;ccleaner&quot;</span><span class="p">,</span> <span class="s2">&quot;1.0.1&quot;</span>
-</span><span class="line"><span class="n">github</span> <span class="s2">&quot;iterm2&quot;</span><span class="p">,</span>   <span class="s2">&quot;1.0.2&quot;</span>
-</span><span class="line"><span class="n">github</span> <span class="s2">&quot;skype&quot;</span><span class="p">,</span>    <span class="s2">&quot;1.0.2&quot;</span>
-</span><span class="line"><span class="n">github</span> <span class="s2">&quot;chrome&quot;</span><span class="p">,</span>   <span class="s2">&quot;1.1.0&quot;</span>
-</span><span class="line"><span class="n">github</span> <span class="s2">&quot;sublime_text_2&quot;</span><span class="p">,</span>   <span class="s2">&quot;1.1.0&quot;</span>
-</span><span class="line"><span class="n">github</span> <span class="s2">&quot;jumpcut&quot;</span><span class="p">,</span>   <span class="s2">&quot;1.0.0&quot;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+<time datetime="2009-01-18T11:50:00+08:00" pubdate data-updated="true">Jan 18<span>th</span>, 2009</time>
+        
+         | <a href="/2009/01/on-my-way-home/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
 
-<p>接下来的计划就是建立项目组自己的repo，把诸如输入法、dotfiles、Java开发环境和Django开发环境这些东西的安装和配置都自动化了。</p>
 
+  <div class="entry-content"><blockquote>
+  <p><strong>英语教员</strong>：Have you watched “<a href="http://www.google.com/url?sa=t&amp;source=web&amp;ct=res&amp;cd=7&amp;url=http%3A%2F%2Fwww.moviexclusive.com%2Freview%2Fredcliff%2Fredcliff.htm&amp;ei=u6FySbmAJJ6GsgLM9qWsBw&amp;usg=AFQjCNFzLu3coQFVzqJeIQFsbu7cYbgycQ&amp;sig2=Bq1O9_ciqzxXqJf4cuVDTA" target="_blank">Red Cliff</a>”? <br />
+<strong>本组天才</strong>：Yes, long time ago. It’s a story in the war time.   <br />
+<strong>英语教员</strong>：Yeah, tell us about the story…   <br />
+<strong>本座</strong>（心里）：What the fuck….There is no story in that shit… <br />
+<strong>本组天才</strong>：A revolution woman, Jiang Jie, she … <br />
+<strong>英语教员</strong>：Who？ <br />
+<strong>本座</strong>：Who？ <br />
+<strong>本组天才</strong>：Jiang Jie！</p>
+
+  <p>教员和本座面面相觑。然后大家终于憋不住要祭出中文了：   </p>
+
+  <p><strong>教员</strong>：Jiang Jie是谁啊？《赤壁》里面好像没有啊。 <br />
+<strong>本组天才</strong>：啊，Red Cliff是《赤壁》？我以为是《红岩》。   </p>
+</blockquote>
+
+<p>然后，人家就准备坐上机机回成都鸟。宰小涛同学专门贡献了一砣采访事故，抄送给所有坚持观看在与业余球员比赛中折戟沉沙的中国男足的壮士：</p>
+
+<blockquote>
+  <p><strong>CCAV记者</strong>：请问为虾米要换下表现一直非常出色的17号队员？<br />
+<strong>叙利亚主帅</strong>（非常诚恳滴）：因为别个明天早上还要上班。</p>
+</blockquote>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/10/the-cheator/">骗子</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-10-26T23:36:00+08:00" pubdate data-updated="true">Oct 26<span>th</span>, 2008</time>
+        
+         | <a href="/2008/10/the-cheator/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img height="184" alt="71" src="/downloads/images/dark_forest.jpg" width="198" align="left" /> 夏天还是到了尾声，天气变得阴冷。阳光像老人们的睡眠一样变得不知所踪。和往常一样，我被他们晨练的声音吵醒后，就在床上躺十来分钟，听他们在我的窗台下讨论股票和房价、政府和人民、过去和未来。</p>
+
+<p>然后我骑车去上班。我是个怕热不怕冷的人，所以整个夏天都没有骑车。到龙阳路的时候，我看到汽车、摩托车、电瓶车、自行车、行人、协管和警察，混合着漫天的灰尘，像污水一样沿着面目全非的道路争先恐后的缓缓流淌，就好像我是在摩西为以色列人划开的红海一样。</p>
+
+<p>“这里什么时候变成这样了？”我问旁边的人。</p>
+
+<p>他白了我一眼，说：“这里早就这样了。”</p>
+
+<p>这个时候，我的肩膀被人轻轻的拍了一下，一个女孩子从我背后走到面前，说：</p>
+
+<p>“你要不要古董？”</p>
+
+<p>“什么古董？”</p>
+
+<p>“很多。”</p>
+
+<p>她说她是在建筑队打工的。一个星期以前，在挖龙阳路的某个部分时，她找到了不少的铜器和玉器。</p>
+
+<p>“不想要。”</p>
+
+<p>她观察着我的脸色，还观察着从我们身边的路人。她汗津津的鼻尖在并不炎热的天气里显得有些唐突。</p>
+
+<p>“真不想要？你看看这个。”</p>
+
+<p>她又从怀里掏出一个东西，在阳光下泛起闪闪的蓝光。原来是一个鼻烟壶。我接到手里，看到它的色调好像广告牌上的女人一样艳丽而庸俗，有色处和无色处截然分开，还带着数量不少的猪鬃毛眼，一看就是玻璃料做的。</p>
+
+<p>“这是一个翡翠的鼻烟壶。”她把东西从我手里面拿回去，“如果不是因为修路，我们就不可能发现它，你也就没有这么好的机会了。”</p>
+
+<p>“你有多少这样的东西。”</p>
+
+<p>“可多了。”她显然并不善于骗人。在我逼视她的时候，她的眼睛总是不安的转向一边。她搓手的动作也过于频繁，脚还不停的踢着路沿。</p>
+
+<p>“这个鼻烟壶应该有几百年历史了，你应该带回家当传家宝。”</p>
+
+<p>“我没有家里人，我需要钱，我想买一套新衣服。”</p>
+
+<p>“卖了它就为买衣服？要知道这可以卖好几千块钱。”</p>
+
+<p>“我只想卖几百块钱，我只想买一套衣服。这本来也不是我的，我不贪心。”</p>
+
+<p>“可是我只有四十块钱”，我想，我应该帮她一下。</p>
+
+<p>“这怎么可能，你开玩笑吧。”她露出很不老到的夸张的表情，也许是在港产片里面学来的。然后她训练有素的转身就走，脚步却很慢。走了没多远就停下来了。</p>
+
+<p>我饶有兴致的看着她再次转过身来。她的眉头轻轻的皱着，嘴唇随着起伏的胸脯微微的上翘。她的表情和她的处境一样尴尬，这一切都让我着迷。我骑车追上她：</p>
+
+<p>“还是卖给我吧，我身上就这么四十块钱。”</p>
+
+<p>“你真的没带多余的钱？”</p>
+
+<p>她的眉头舒展了，但她却希望自己表现得更加出色。所以她并没有立刻答应，而是装 模作样的抚弄了一下手里的鼻烟壶，才用豁达的江湖语气说：</p>
+
+<p>“好吧，看在你这么诚心的份上，这也是一种缘分。”</p>
+
+<p>缘分果然是所有骗子都要仰仗的东西，我边给她钱边想。我抬手看了看表，离主任开会的时间已经不多了，于是我愉快的揣起鼻烟壶，往科苑路拐去。拐角的地方竖起了施工的围墙，上面大号的隶书显得触目惊心：</p>
+
+<p>“上海欢迎您，世博欢迎您！”</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/10/memo-of-the-old-man/">魂飞魄散</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-10-09T03:22:00+08:00" pubdate data-updated="true">Oct 9<span>th</span>, 2008</time>
+        
+         | <a href="/2008/10/memo-of-the-old-man/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="/downloads/images/memo_of_the_old_man.jpg" alt="Memo of the old man" title="Don't touch me..." /></p>
+
+<p>我已经四十一岁了。</p>
+
+<p>现在看来，我在上海那几年是一个巨大的错误:文字和歌曲中的上海正在绝迹。它和中国任何一个被匆忙的现代化了的城市一样，到处爬满了垃圾一样的高楼和广场。我原本指望能住进一个幽深的弄堂里，并在昏暗的拐角处邂逅一些身段妖娆的女人。结果，我只能在花木路旁的一个阴冷潮湿的搬迁小区里面，和三个素不相识的人合住。</p>
+
+<p>我的室友们个个都年富力强。只要他们晚上不手淫，早上我就会被他们气宇轩昂的关门声惊醒。这并不奇怪。一旦没有了永无止境的欲望所激起的期待，也就没有什么东西能支撑你在这样一座城市里生活下去了。你会像我一样，“过得魂飞魄散”。</p>
+
+<p>“过得魂飞魄散”是一次电视征婚节目结束过后，我带回家的那位女朋友评价我的。我知道她也是因为那一屋子胡乱堆放着的书。实际上，因为年龄大的缘故，单位里面每次有机会参加这样的节目都会介绍我去。所有的女人，都会在看过我的住处之后消失得无影无踪。开始我觉得奇怪：无论她们在这间屋子里面和我讨论的是股票期货，电影音乐，还是诗词歌赋，她们都会在离开后失去联系。甚至有几个特别聊得来的女孩，在度过了愉快的夜晚后，第二天还是会从我的生活中消失。</p>
+
+<p>现在，我并不为她们的离去觉得沮丧。这些流光般掠过的姑娘，虽然只在我脑海中留下斑驳的印象，但就像一个古玩爱好者总是在支离破碎的青铜残片里找到一小块精华一样，我对仅仅记得那些美好的，各有所属的体味、发型、乳房和小腿感到心满意足。</p>
+
+<p>只有一次。那是个昏暗的下午，一个来自高邮的女孩在我怀里延绵不绝的讲述着扬州的兴衰。虽然对《广陵对》里面的歌颂早就感到怀疑，但是女孩的叙述却详尽的无可挑剔。同时，她带来的高邮咸鸭蛋也让我无暇和她争论。</p>
+
+<p>“康乾盛世之后，盐业衰落，扬州就衰败了。扬州被人们记住的，也只有玉人何处教吹箫了。”</p>
+
+<p>在我完全徜徉在那虚幻的拱桥回廊，那带运河的城市时，她选择了嘎然而止。</p>
+
+<p>“这就是你来上海的原因？”</p>
+
+<p>她没有回答，而是有些不由分说的拉起我的手，朝她的身上按过去。我的手指紧张的扣在她那桔红色连衣裙的领口上，掌心刚刚碰到胸罩那柔软的海绵，脑门上激荡的巨大力量就让我感到眩晕。</p>
+
+<p>“不用怕。”她向我古怪的笑了一下，随后掀起了胸罩。</p>
+
+<h2 id="coffee-break"><strong>Coffee Break</strong></h2>
+
+<p>你们觉得Lenciel的结尾是，请投票：<br />
+[A]她的胸部有巨大的伤疤，原来她得过乳腺癌，丢，在这个奶粉不靠谱的年代，只能忍痛割爱。<br />
+[B]她的胸部怎么形状有些奇怪，原来是块健硕的胸大肌。再往下一看，丢，我发现他是个男人。<br />
+[C]还是不要搞笑，好好结个尾：</p>
+
+<blockquote>
+  <p>这一次，我感到了真正的魂飞魄散。</p>
+</blockquote>
 </div>
   
   
