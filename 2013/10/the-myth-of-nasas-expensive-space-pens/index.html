@@ -34,16 +34,55 @@
 <meta property="og:description" content="在软件开发中我们一说到避免过度设计，经常有两个例子会被抬出来，其中一个就是NASA造了昂贵的太空笔，然后俄罗斯用很简单的方案解决问题的故事（另一个大概就是传送带旁边放电风扇的故事）。NASA造笔的故事大概是这样的: 太空竞赛开始的1960年代，NASA面临一大难题，宇航员需要用笔在真空环境下写字 &hellip;" />
 
 <meta property="og:site_name" content="http://lenciel.cn" />
-<meta property="article:author" content="https://plus.google.com/114787528537231301324">
+<meta property="article:author" content="http://lenciel.cn">
 <meta property="article:published_time" content="2013-10-12 12:46:00 +0800" />
 
 <meta property="article:section" content="history" />
 <meta itemprop="description" content="在软件开发中我们一说到避免过度设计，经常有两个例子会被抬出来，其中一个就是NASA造了昂贵的太空笔，然后俄罗斯用很简单的方案解决问题的故事（另一个大概就是传送带旁边放电风扇的故事）。NASA造笔的故事大概是这样的: 太空竞赛开始的1960年代，NASA面临一大难题，宇航员需要用笔在真空环境下写字 &hellip;" />
 
 <!-- Combine multiple fonts into one request -->
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic|Patua+One|Yanone+Kaffeesatz" rel="stylesheet" type="text/css">
+<!--<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic|Patua+One|Yanone+Kaffeesatz" rel="stylesheet" type="text/css">-->
+<style>
+  @font-face {
+  font-family: 'PT Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('PT Sans'), local('PTSans-Regular'), url('fonts/PTSans-Regular.woff') format('woff');
+}
+@font-face {
+  font-family: 'PT Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: local('PT Sans Bold'), local('PTSans-Bold'), url('fonts/PTSans-Bold.woff') format('woff');
+}
+@font-face {
+  font-family: 'PT Sans';
+  font-style: italic;
+  font-weight: 400;
+  src: local('PT Sans Italic'), local('PTSans-Italic'), url('fonts/PTSans-Italic.woff') format('woff');
+}
+@font-face {
+  font-family: 'PT Sans';
+  font-style: italic;
+  font-weight: 700;
+  src: local('PT Sans Bold Italic'), local('PTSans-BoldItalic'), url('fonts/PTSans-BoldItalic.woff') format('woff');
+}
+@font-face {
+  font-family: 'Patua One';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Patua One'), local('PatuaOne-Regular'), url('fonts/PatuaOne-Regular.woff') format('woff');
+}
+@font-face {
+  font-family: 'Yanone Kaffeesatz';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Yanone Kaffeesatz Regular'), local('YanoneKaffeesatz-Regular'), url('fonts/YanoneKaffeesatz-Regular.woff') format('woff');
+}
+</style>
 <!-- jQuery -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>-->
+<script src="//upcdn.b0.upaiyun.com/libs/jquery/jquery-1.7.2.min.js">
 
   <script type="text/javascript">
     var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
