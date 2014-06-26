@@ -4,7 +4,7 @@
   <title><![CDATA[@Lenciel]]></title>
   <link href="http://lenciel.cn/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2014-06-23T14:33:29+08:00</updated>
+  <updated>2014-06-27T00:09:26+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -12,6 +12,39 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Quartz Composer和Origami试玩]]></title>
+    <link href="http://lenciel.cn/2014/06/quartz-composer-and-origami/"/>
+    <updated>2014-06-26T22:57:05+08:00</updated>
+    <id>http://lenciel.cn/2014/06/quartz-composer-and-origami</id>
+    <content type="html"><![CDATA[<p>这篇不是教程，不会讲述怎么安装需要的软件，怎么用它们来做软件原型。只是记录分享一下我对这套东西的感受和评价。</p>
+
+<p>动态设计，也就是<a href="http://v.youku.com/v_show/id_XMzIyNTk1NTMy.html">Motion Design</a>或者是<a href="http://en.wikipedia.org/wiki/Motion_graphic_design">Motion Graphic Design</a>其实已经火了很长一段时间了：你只要经常去Dribble上逛就可以看到很多非常优秀的作品。国内的团队经过一段时间的学习和追赶，目前这方面的水平也很不错：从去年开始，BAT的大多数App的splash或者tutorial都已经不再是静态的图片而是动态图了。</p>
+
+<p>当然，除开看起来更加狂炫帅富屌的splash、tutorial，本座看重动态设计的原因其实是它在原型阶段的作用：如果UX的团队会制作动态图，就能展示软件实际的操作流程，效果比传统的需要脑补的静态Wireframe要好太多。</p>
+
+<p>不过从本座开始关注这种设计方法到现在，主流的动态设计流程一直是先在PS里面做静态资源，然后在AE里面导入静态资源做动画，最后生成mp4格式视频，然后配合QuickTime或者别的什么软件生成gif（比较详细的描述可以看看<a href="http://www.uisdc.com/the-internet-motion-graphic">这篇文章</a>)。</p>
+
+<p>这种方式对本座来说上手就略显太重，换句话说，不是财大气粗的BAT，需要考虑：</p>
+
+<ol>
+  <li>PS+AE很贵</li>
+  <li>会这两个东西的UX人才很贵</li>
+</ol>
+
+<p>接下来事情似乎有了转机：<a href="http://quartzcomposer.com/">Quartz Composer</a>和<a href="http://facebook.github.io/origami/">Origami</a>的组合自从Facebook的Paper推出之后在网络上被风风火火的讨论了一把，然后不久<a href="http://www.fastcodesign.com/3025932/facebook-develops-a-photoshop-for-interaction-design-and-its-free-for-anyone-to-use">Facebook就开源了后者</a>。</p>
+
+<p>在有Origami之前，本座就看Facebook的设计主管说他们内部用QC做原型设计就去学习了一下，结果感觉实在是云里雾里。这次又了Origami之后，经过几个小时的试玩，我得到的感受如下。</p>
+
+<p>首先，这套免费的工具非常给力：除开不要钱，不难用之外，给力主要是因为QC的patch设计带来的高度可重用性：其实Origami从根本上来说就是一堆patch而已。</p>
+
+<p>其次，这套工具也称不上“photoshop for interaction design”。你仍然需要使用PS（或者Sketch等等做图的软件）做上游，把静态资源做好，然后导入到QC里面完成动态效果。这种”设计-切图-导入-动态化”的模式其实还蛮像一度风靡网络的flash的制作流程。</p>
+
+<p>最后，如果你是程序员，习惯了写CSS/JS来控制界面，要适应QC的图形化编程（类似VB那样先选控件再改属性然后绑事件）还是蛮蛋疼的。比如它里面的设定偏移量来定位元素的方式，就让本座觉得用起来非常虐心。</p>
+<p><img src="http://lenciel.cn/downloads/images/2014_06/qc_yx_intro.gif" title="intro" alt="Don't touch me" width="35%" style="margin-left:30px" /><img src="http://lenciel.cn/downloads/images/2014_06/qc_yx_bd.gif" title="bd" alt="Don't touch me" width="38%" style="margin-left:30px" /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Tricky Bugs are tricky]]></title>
@@ -1159,166 +1192,6 @@
 <p>于是马尔克斯更进一步，他告诉你那份孤独恰恰是爱的最意味深长的赠品。你接受了这份赠品，就能学会理解别的孤独的灵魂和深藏于它们之中的深邃的爱。读懂他你会明白，是否一起生活一起死去并不重要，能够在他/她到来的时候好好去爱，其充实感是任何体验都无法比拟的。从某种意义上说，那么强烈的感情正是人的一生中最美好的东西。</p>
 
 <p>所以，并没有像电池一样的东西在持续供给着让你对抗孤独。那些某个瞬间点燃的火花，就足够照亮我们漫长的日常生活。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Openssl Heartbleed Bug]]></title>
-    <link href="http://lenciel.cn/2014/04/openssl-heartbleed-bug/"/>
-    <updated>2014-04-10T11:29:15+08:00</updated>
-    <id>http://lenciel.cn/2014/04/openssl-heartbleed-bug</id>
-    <content type="html"><![CDATA[<p>连某宝都中招的<a href="http://heartbleed.com/">Heartbleed bug</a>究竟是个什么东西？简单地说就是攻击者可以读最多64KB内存的内容。</p>
-
-<p>读了这64KB能干嘛？用报这个bug的人的话来说：</p>
-
-<blockquote><p>Without using any privileged information or credentials we were able steal from ourselves the secret keys used for our X.509 certificates, user names and passwords, instant messages, emails and business critical documents and communication.</p></blockquote>
-
-<p>那么读取64KB内存和获取这么多关键信息究竟有什么关系呢？</p>
-
-<h2 id="the-bug">The bug</h2>
-<p>先来看看<a href="http://git.openssl.org/gitweb/?p=openssl.git;a=commitdiff;h=96db9023b881d7cd9f379b0c154650d6c108e9a3">patch</a>里面的<code>ssl/d1_both.c</code>:</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-</pre></td><td class="code"><pre><code class="c"><span class="line"><span class="kt">int</span>
-</span><span class="line"><span class="nf">dtls1_process_heartbeat</span><span class="p">(</span><span class="n">SSL</span> <span class="o">*</span><span class="n">s</span><span class="p">)</span>
-</span><span class="line">    <span class="p">{</span>
-</span><span class="line">    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">s3</span><span class="o">-&gt;</span><span class="n">rrec</span><span class="p">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">*</span><span class="n">pl</span><span class="p">;</span>
-</span><span class="line">    <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">hbtype</span><span class="p">;</span>
-</span><span class="line">    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">payload</span><span class="p">;</span>
-</span><span class="line">    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">padding</span> <span class="o">=</span> <span class="mi">16</span><span class="p">;</span> <span class="cm">/* Use minimum padding */</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>可以看到，heartbeat里有一个 <a href="http://en.wikipedia.org/wiki/Transport_Layer_Security">SSLv3</a>  record的指针，这个<code>record</code>的代码如下:</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-</pre></td><td class="code"><pre><code class="c"><span class="line"><span class="k">typedef</span> <span class="k">struct</span> <span class="n">ssl3_record_st</span>
-</span><span class="line">    <span class="p">{</span>
-</span><span class="line">        <span class="kt">int</span> <span class="n">type</span><span class="p">;</span>               <span class="cm">/* type of record */</span>
-</span><span class="line">        <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">length</span><span class="p">;</span>    <span class="cm">/* How many bytes available */</span>
-</span><span class="line">        <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">off</span><span class="p">;</span>       <span class="cm">/* read/write offset into &#39;buf&#39; */</span>
-</span><span class="line">        <span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="n">data</span><span class="p">;</span>    <span class="cm">/* pointer to the record data */</span>
-</span><span class="line">        <span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="n">input</span><span class="p">;</span>   <span class="cm">/* where the decode bytes are */</span>
-</span><span class="line">        <span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="n">comp</span><span class="p">;</span>    <span class="cm">/* only used with decompression - malloc()ed */</span>
-</span><span class="line">        <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">epoch</span><span class="p">;</span>    <span class="cm">/* epoch number, needed by DTLS1 */</span>
-</span><span class="line">        <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">seq_num</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span> <span class="cm">/* sequence number, needed by DTLS1 */</span>
-</span><span class="line">    <span class="p">}</span> <span class="n">SSL3_RECORD</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-<p>可以看到，每个<code>record</code>有它的<code>type</code>、<code>length</code>和<code>data</code>，规规矩矩。</p>
-
-<p>回到<code>dtls1_process_heartbeat</code>：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class="c"><span class="line"><span class="cm">/* Read type and payload length first */</span>
-</span><span class="line"><span class="n">hbtype</span> <span class="o">=</span> <span class="o">*</span><span class="n">p</span><span class="o">++</span><span class="p">;</span>
-</span><span class="line"><span class="n">n2s</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">payload</span><span class="p">);</span>
-</span><span class="line"><span class="n">pl</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>可以看到<code>SSLv3 record</code>的第一个byte就是放这个<code>heartbeat</code>的<code>type</code>。 宏<code>n2s</code> 则是从<code>p</code>里面取两个byte放到payload里面，被用来作为payload的长度。 <strong>注意这里并没有检查<code>SSLv3 record</code> 实际的长度。</strong> </p>
-
-<p>接下来在这个函数里面干了下面这些事情：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-</pre></td><td class="code"><pre><code class="c"><span class="line"><span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="n">buffer</span><span class="p">,</span> <span class="o">*</span><span class="n">bp</span><span class="p">;</span>
-</span><span class="line"><span class="kt">int</span> <span class="n">r</span><span class="p">;</span>
-</span><span class="line">
-</span><span class="line"><span class="cm">/* Allocate memory for the response, size is 1 byte</span>
-</span><span class="line"><span class="cm"> * message type, plus 2 bytes payload length, plus</span>
-</span><span class="line"><span class="cm"> * payload, plus padding</span>
-</span><span class="line"><span class="cm"> */</span>
-</span><span class="line"><span class="n">buffer</span> <span class="o">=</span> <span class="n">OPENSSL_malloc</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">payload</span> <span class="o">+</span> <span class="n">padding</span><span class="p">);</span>
-</span><span class="line"><span class="n">bp</span> <span class="o">=</span> <span class="n">buffer</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>可以看到，用户要多少程序就分配多少，最多可以分配到<code>65535+1+2+16</code>，指针bp被用来操作这块内存。然后：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class="c"><span class="line"><span class="cm">/* Enter response type, length and copy payload */</span>
-</span><span class="line"><span class="o">*</span><span class="n">bp</span><span class="o">++</span> <span class="o">=</span> <span class="n">TLS1_HB_RESPONSE</span><span class="p">;</span>
-</span><span class="line"><span class="n">s2n</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">bp</span><span class="p">);</span>
-</span><span class="line"><span class="n">memcpy</span><span class="p">(</span><span class="n">bp</span><span class="p">,</span> <span class="n">pl</span><span class="p">,</span> <span class="n">payload</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>宏<code> s2n</code>把<code>n2s</code>做的操作恢复出来：先拿16个bit的值放到2个byte里面，也就是原来请求的payload的长度。然后把<code>pl</code>里面放的payload(请求者提交的data)拷贝到新分配的<code>bp</code>里面。</p>
-
-<p>看起来是很平常的操作，只不过没有认真的检查用户输入而已，但问题也就在这里了。</p>
-
-<h2 id="where-is-the-bug">Where is the bug</h2>
-
-<p>如果用户并没有正在提交声称的那么多个bytes的payload，那么memcpy就会读到同一个process里面SSLv3 record附近的内存内容。</p>
-
-<p>这附近有哪些内容呢？</p>
-
-<p>首先要明白在linux上，内存的动态分配主要是通过<a href="http://linux.die.net/man/2/sbrk">sbrk</a> 或者是 <a href="http://man7.org/linux/man-pages/man2/mmap.2.html">mmap</a>。如果内存是通过sbrk分配的，它会使用<code>heap-grows-up</code>规则，泄露出来的东西不会那么多（但是如果是同时并发请求<a href="http://blog.existentialize.com/diagnosis-of-the-openssl-heartbleed-bug.html#fn:update">还是有东西会漏</a>）。</p>
-
-<p>在这里，<code>pl</code>因为malloc里面的mmap_threshhold多半是sbrk分配的，但是，那些关键的用户数据，则多半是通过mmap分配内存。于是这些数据就会被攻击者用<code>pl</code>拿到。如果再考虑并发请求，就…</p>
-
-<h2 id="the-fix">The fix</h2>
-
-<p>所以，整个patch里面最主要的fix就是：
-* 检查是否有长度为0的虚假heartbeat
-* 检查record的真实长度</p>
-
-<p>代码如下：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-</pre></td><td class="code"><pre><code class="c"><span class="line"><span class="cm">/* Read type and payload length first */</span>
-</span><span class="line"><span class="k">if</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">16</span> <span class="o">&gt;</span> <span class="n">s</span><span class="o">-&gt;</span><span class="n">s3</span><span class="o">-&gt;</span><span class="n">rrec</span><span class="p">.</span><span class="n">length</span><span class="p">)</span>
-</span><span class="line">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> <span class="cm">/* silently discard */</span>
-</span><span class="line"><span class="n">hbtype</span> <span class="o">=</span> <span class="o">*</span><span class="n">p</span><span class="o">++</span><span class="p">;</span>
-</span><span class="line"><span class="n">n2s</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">payload</span><span class="p">);</span>
-</span><span class="line"><span class="k">if</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">payload</span> <span class="o">+</span> <span class="mi">16</span> <span class="o">&gt;</span> <span class="n">s</span><span class="o">-&gt;</span><span class="n">s3</span><span class="o">-&gt;</span><span class="n">rrec</span><span class="p">.</span><span class="n">length</span><span class="p">)</span>
-</span><span class="line">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> <span class="cm">/* silently discard per RFC 6520 sec. 4 */</span>
-</span><span class="line"><span class="n">pl</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="so">So?</h2>
-
-<p>这个bug大概算是影响这么剧烈的bug里面最好明白的一个，所以居然我也看明白了。感受：</p>
-
-<ul>
-  <li>为了可扩展性引入了复杂度，经常都会带来恶梦</li>
-  <li>用户的输入，无论如何都不能相信，一定要check</li>
-  <li>C语言的确是大牛小牛都会踩到坑啊</li>
-</ul>
-
 ]]></content>
   </entry>
   
