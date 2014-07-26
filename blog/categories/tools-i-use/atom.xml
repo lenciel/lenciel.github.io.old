@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tools-i-use | @Lenciel]]></title>
   <link href="http://lenciel.cn/blog/categories/tools-i-use/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2014-07-13T19:36:28+08:00</updated>
+  <updated>2014-07-26T14:58:21+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -12,6 +12,55 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Mac上使用Suite Fusion管理字体]]></title>
+    <link href="http://lenciel.cn/2014/07/manage-fonts-on-your-mac/"/>
+    <updated>2014-07-26T11:36:48+08:00</updated>
+    <id>http://lenciel.cn/2014/07/manage-fonts-on-your-mac</id>
+    <content type="html"><![CDATA[<p>对于从事设计工作的人员，难免要和字体打交道：因为<a href="http://lenciel.cn/2013/08/buttericks-practical-typography/">设计主要就是Typography的设计</a>，而Typography的基础就是字体。</p>
+
+<p>随着完成的项目越来越多，机器上的字体也就慢慢多起来，如何快速的找到自己想要的字体变成了问题。特别是大多数设计软件里，字体选择的界面都是一个下拉框：如果你有几百个字体加载到系统，几乎每次选择字体都是一场灾难。</p>
+
+<p>这种情况下，难免会希望：</p>
+
+<ul>
+  <li>对于特定的项目，能够选择特定的字体库</li>
+  <li>对于特定的文档类型，能够选择特定的字体库</li>
+</ul>
+
+<p>使用Suite Fusion管理字体就可以到达这两个目的。</p>
+
+<h2 id="mac">Mac上的字体集和安装路径</h2>
+
+<p>过去在Windows平台上工作的时候，字体都是放在一个地方的，而在Mac下面字体主要是下面三部分字体集组成：</p>
+
+<ul>
+  <li>System：位于<code>/System/Library/Fonts</code>， 是系统的字体库，所有登录的用户都可以使用，最好不要随便改动</li>
+  <li>Local：位于 <code>/Library/Fonts</code>，和System字体一样也是所有登录的用户都可以使用的。只是它们基本不是随系统安装，而是其他软件装上去的，比如MS Word等等</li>
+  <li>User：位于 <code>~/Library/Fonts</code>，仅对当前登录的用户可用，可以是第三方软件安装的时候安装的（如果你选择了只对当前用户可用），也可以是用户自己安装的字体</li>
+</ul>
+
+<h2 id="suite-fusionfont-vault">启用Suite Fusion的Font Vault</h2>
+
+<p>Suite Fusion提供了一个可以自己定义路径的Font Vault。然后你如果在<code>Preferences</code>里面把<code>Copy added fonts into the vault</code>勾上，那么所有添加到Suite Fusion的字体都会被放在一个地方。这样的好处是管理方便：保证字体没有重复，并且很容易备份。</p>
+
+<p>一旦你的字体都在Font Vault里面了，就可以使用Suitcase Fusion删除原来放在各个地方的字体了。在字体清理好之后，你就可以根据不同的项目或者是文档类型建立Set，根据需要来激活它们。</p>
+
+<h2 id="section">添加字体和创建字体库</h2>
+
+<p>只需要使用快捷键”Cmd+L”就可以添加字体到字体库。如果默认的字体库不符合你的要求还可以自己新建。添加字体的过程中，SF会扫描字体，提取字体信息，检测是否有错（注意，Suite Fusion不支持orphan outline和orphan bitmap字体）。</p>
+
+<p>并且，如果你本来是用目录来组织字体的，Suite Fusion在支持顶级目录导入，再自动以子目录名创建相应的字体库。</p>
+
+<p>整理字体的界面可以参考下面的截图：</p>
+
+<p><img src="/downloads/images/2014_07/suite_fusion_5.png" alt="suite fusion 5" title="Don't touch me..." /></p>
+
+<p>建立的这些字体库可以根据你打开的文档类型来进行激活和去激活。并且Suite Fusion提供了很多常见设计软件（比如Photoshop、Sketch等）的插件，让你直接在这些软件里面操作字体库。</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Retina屏幕上的最佳编程字体]]></title>
@@ -177,123 +226,6 @@
 
 <p>最后，这些词典其实都是linux上著名的国产软件<a href="http://en.wikipedia.org/wiki/StarDict">stardict</a>的文件格式（写到这里，又想起stardict的作者<a href="http://www.huzheng.org/aboutme.php">胡正</a>），所以要在<a href="https://itunes.apple.com/us/app/dictionary-universal/id312088272?mt=8">手机上使用</a>也是很容易的事情。</p>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Pomodoro Technique]]></title>
-    <link href="http://lenciel.cn/2014/04/pomodoroda-tech/"/>
-    <updated>2014-04-03T13:44:35+08:00</updated>
-    <id>http://lenciel.cn/2014/04/pomodoroda-tech</id>
-    <content type="html"><![CDATA[<p><img src="/downloads/images/2014_04/pomodoro_tech.jpg" alt="Pomodoro Technique" title="Don't touch me..." /></p>
-
-<p>时间管理对每个人都是非常重要的，相关的理论和工具都有很多。本座试过很轻量的<a href="https://github.com/vim-scripts/todolist.vim">todolist.vim</a>，也试过很大气的<a href="https://www.omnigroup.com/omnifocus">OmniFocus</a>，但可能因为自己比较爱随意乱来的性格，这些工具最终都被本座慢慢荒弃。</p>
-
-<p>倒是从E公司就一直用到现在的<a href="http://pomodorotechnique.com">Pomodoro Technique</a><sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>，因为规则简单上手迅捷疗效明显，最终成为了日常生活的一部分。</p>
-
-<h2 id="section">起</h2>
-
-<p>Francesco Cirillo在1992年正式提出了<code>Pomodoro Technique</code>，命名似乎来源于手边的番茄形状的烹调定时器。简单的说，Pomodoro就是：</p>
-
-<ul>
-  <li>一天开始的时候规划今天要完成的几项任务</li>
-  <li>设定你的番茄钟（软件、闹钟、whatever），时间是25分钟</li>
-  <li>开始完成第一项任务，直到番茄钟响铃或提醒</li>
-  <li>停止工作，休息3~5分钟</li>
-  <li>开始下一个番茄钟，继续该任务。一直循环下去，直到完成该任务，并在列表里将该任务划掉。</li>
-  <li>如此这般完成今天所有的事情。</li>
-  <li>每四个番茄钟后，休息25分钟。</li>
-</ul>
-
-<p>在工作的25分钟周期里面，什么样的中断都置之不理当然是最好的。但如果有中断进来：</p>
-
-<ul>
-  <li>非得马上做不可的话，停止当前这个番茄钟并宣告它作废（哪怕还剩5分钟就结束了），完成带来中断的事情，之后再重新开始同一个番茄钟；</li>
-  <li>不是必须马上去做的话，将带来中断的事情记在另一个列表里（比如叫”Exception”或者”Unplanned”什么的），然后接着完成这个番茄钟。</li>
-</ul>
-
-<p>接下来，一天结束的时候，你可以回忆一下今天完成了几个钟，并且反思：</p>
-
-<ul>
-  <li>你受到了哪些中断？</li>
-  <li>你最能集中注意力的地方是哪里？</li>
-  <li>你如何避免开始做一个无趣的工作？</li>
-  <li>什么类型的活动会花去超过你估计的时间？</li>
-  <li>你是否因为处理管理性质的事务而没时间做该做的事情？</li>
-</ul>
-
-<h2 id="section-1">承</h2>
-
-<p>为什么这种办法是有效的呢？个人觉得主要是两方面的原因。</p>
-
-<h3 id="section-2">心理层面</h3>
-
-<h4 id="section-3">分解过的任务更具体</h4>
-
-<p>我们做一件事情，复杂度太高的话，兴奋度就会降低，你就会选择拖延。一件事情在被分解成很小的部分之后，才会变得清晰。甚至在操作中，如果你一个任务需要7、8个钟都迭代不完，你可能还应该把这件事情先分解成更小的子任务。</p>
-
-<h4 id="section-4">分解过的任务更可控</h4>
-
-<p>休息和工作之间的心境切换起来很难。有时候你来上班或者吃过饭之后，要进入真正做事的状态花的时间会比你想象的要多很多。番茄大法是动作导向的：上好闹钟，订好提示音，可以让你更好控制自己。</p>
-
-<p>完美主义也是妨碍你按时完成任务的一大原因。想出一个完美的解决方案，那不就是拖延么？在Pomodoro大法中有很多迭代开发的禅意：你不能用25分钟内的时间去考虑完美的方案，乖乖上好闹钟，完成25分钟的任务，然后5分钟休息时间里面去想那些改进的方案吧。</p>
-
-<h4 id="section-5">分解过的任务更有趣</h4>
-
-<p>如果任务无趣时，拖延的时间会增加。比如做项目做到最后的收尾工作之类时，常常非常无趣。分解它们，让你知道你多快就能完成它，可以激励自己。</p>
-
-<p>别人催你完成你不想完成的事情时，你多半也做不好。”have-to”和”want-to”之间的矛盾简直就是<a href="http://en.wikipedia.org/wiki/Terrible_twosX">the-terrible-two</a>终生梦魇版。通过使用番茄大法，你每天确信自己能够完成的事情能够做到心中有数。</p>
-
-<h3 id="section-6">生理层面</h3>
-
-<p>如果你常看球赛的话，就会知道一些关于<strong>模式</strong>的八卦。</p>
-
-<p>比如穆图为多家球队效力都表现不错，对于这种成功他解释说：“诅咒对我是无效的，因为我总是把内裤穿在外面。”</p>
-
-<p>约翰特里，切尔西的队长，国家队的中坚，问下他怎么做到集中精力？他会告诉你他每次比赛前都听同一张CD，在同一个地方停车，把鞋带系三次。</p>
-
-<p>我大学球队的主教练，从来不许老婆和女儿坐进替补席。</p>
-
-<p>我们的大脑在一定环境下，会进入某种模式，处理某些问题特别迅速。这种受后天训练得到的反应是Conditioned Reflexes（条件反射）。而简短且固定的专注时间，可以训练你进入这种模式。</p>
-
-<h2 id="section-7">转</h2>
-
-<p>Pomodoro说到底是一种轻量的<a href="http://zh.wikipedia.org/wiki/GTD">GTD</a>规则。</p>
-
-<p>如果是工作内容高度碎片化的人，比如高管，其实是没法做到动不动就入定30分钟不理人间事的。</p>
-
-<p>如果是对创意要求很高的工种，比如画家，作家，好像也不太适合这种非常规律的迭代。</p>
-
-<h2 id="section-8">合</h2>
-
-<p>拿出纸笔，写下你很想完成的一些事情。从里面挑一个最重要的，你最想马上完成的。然后：</p>
-
-<ol>
-  <li>定一个10分钟的闹钟</li>
-  <li>集中精力完成</li>
-  <li>当闹钟到时立刻停止</li>
-  <li>休息三分钟</li>
-</ol>
-
-<p>结果怎样？你多久看一次闹钟？有没有被其他事情打断？</p>
-
-<p>如果觉得10分钟自己能轻松搞定，就可以慢慢延长这个时间了。有不少软件可以帮助你自由的定时和统计：</p>
-
-<ul>
-  <li><a href="https://fnd.io/#/search?mediaType=all&amp;term=Pomodoro">iOS应用</a></li>
-  <li><a href="http://www.publicspace.net/Vitamin-R/index.html">Mac应用</a></li>
-  <li><a href="http://www.focusboosterapp.com/">Windows应用</a></li>
-</ul>
-
-<p>各种浏览器插件那就不说了满坑满谷都是。</p>
-
-<div class="footnotes">
-  <ol>
-    <li id="fn:1">
-      <p>http://pomodorotechnique.com/。<a href="#fnref:1" rel="reference">&#8617;</a></p>
-    </li>
-  </ol>
-</div>
 ]]></content>
   </entry>
   
