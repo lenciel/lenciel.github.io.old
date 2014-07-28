@@ -4,7 +4,7 @@
   <title><![CDATA[@Lenciel]]></title>
   <link href="http://lenciel.cn/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2014-07-27T16:38:23+08:00</updated>
+  <updated>2014-07-29T01:33:24+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -12,6 +12,48 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[从你的全世界错过-白日焰火]]></title>
+    <link href="http://lenciel.cn/2014/07/black-coal-thin-ice/"/>
+    <updated>2014-07-28T23:37:51+08:00</updated>
+    <id>http://lenciel.cn/2014/07/black-coal-thin-ice</id>
+    <content type="html"><![CDATA[<p><img height="200" width="300" alt="spark" src="http://lenciel.cn/downloads/images/2014_07/Black_Coal_Thin_Ice.jpg" align="left" style="margin:0px 20px;" /> “你不要再来找我了。”文慧这么说的时候，柳徽不敢看她的眼睛。</p>
+
+<p>当然，我们也可以说这是因为文慧身后的工地上高高的塔吊顶端那盏不可一世的探照灯：当时是凌晨一点，那工地又相隔甚远，本来应该是从天而降的灯光变得和视线平行。惨白的光线在茫茫夜色中显得异常刺眼，让人根本不敢看向她所在的方位。</p>
+
+<p>他们常常在夜里聊天，这是有原因的。白天让人们变得循规蹈矩，不敢轻举妄动。放眼望去，每个人的额头上似乎贴上了符咒，世俗的规则在所有人身上发挥着魔法般的控制力，消磨掉生活本该有的神奇之处。无论扮演着紧张呆板，还是飞扬跋扈的角色，一切言谈举止一切思绪梦想，都仿佛在执行预设的程序而已。     </p>
+
+<p>只有在夜里，他们才会感觉摆脱了现实的控制，让自己任性地随心游走。</p>
+
+<p>“你说，那盏灯有没有200米远啊？”</p>
+
+<p>“可能有吧，那又怎样？”</p>
+
+<p>“如果，有一个地方离我们很远很远，比如十光年，二十光年。站在那个地方，往我们这里看，过去的十年、二十年就会一幕幕重现的，对吧？”</p>
+
+<p>“啊？”</p>
+
+<p>“就好比，你看，天上这些星星。很多说不定老早就已经挂掉了。只不过是因为和我们隔了几十万光年，我们就以为它还在一闪一闪亮晶晶呢。”</p>
+
+<p>“我现在说的事情，跟这有什么关系？”</p>
+
+<p>“你看，是活着还是已经死掉都可能只是站在哪里看的问题。”</p>
+
+<p>“嗯，继续。”</p>
+
+<p>“对一个时间旅行者来说，没有你们所谓生和死的区别，当然也没有在一起和分开的区别。不光是周围的人，我生活的地点也一直在变，在这里几年，到那里几年。但在这个城市里面，我知道有你，会觉得对它格外熟悉和依恋：那是因为在需要温暖的时候，我知道能躲到你的怀抱里面。据蔡先生说，这就是本地人和旅行者最大的区别。”</p>
+
+<p>柳徽说这些的时候，认真地看着文慧。当然，还是看不清她是什么表情，就只好继续说下去：</p>
+
+<p>“你说不要再见了，那我会听你的话。我只是想让你知道，人肯定是有能够吸引某个特定的人的线，即使没有太多话想聊，也能把对方拉过来。呆呆看着也好，默默守着也罢，就是想感受着有这个人的存在。”</p>
+
+<p>然后，柳徽就慢慢变得透明起来，不一会儿就混淆在无边的夜色之中。</p>
+
+<p>这是为什么女孩儿们从小就被教育不要招惹时间旅行者的原因：据说他们总是离开得过于匆忙，好像白日焰火，一下就消失得无影无踪。</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[中国式创新]]></title>
@@ -1094,119 +1136,6 @@
 
 <blockquote><p>&#8220;It’s just that it may change the light.&#8221;</p><footer><strong>Tracy Chevalier</strong> <cite><a href="http://www.imdb.com/title/tt0335119/">Girl With a Pearl Earring(2003)</a></cite></footer></blockquote>
 <hr />
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[使用dnsmasq配置本地开发环境]]></title>
-    <link href="http://lenciel.cn/2014/04/dnsmasq-on-mac/"/>
-    <updated>2014-04-25T14:53:37+08:00</updated>
-    <id>http://lenciel.cn/2014/04/dnsmasq-on-mac</id>
-    <content type="html"><![CDATA[<p>做Web开发的时候经常需要修改<code>/etc/hosts</code>文件把<code>dev.cool.project</code>或者<code>cool.project.dev</code>这样的域名指向127.0.0.1(如果你从来没有这么做过那你可以跳过后面的内容了但, seriously? you are a web dev and never did this before?）。这样做有些麻烦：</p>
-
-<ul>
-  <li>每个项目需要修改hosts文件</li>
-  <li>需要root权限才能修改这个文件</li>
-</ul>
-
-<p>这里记一下如何用<a href="http://www.thekelleys.org.uk/dnsmasq/doc.html">dnsmasq</a>把所有<code>dev</code>结尾的域名都指向<code>127.0.0.1</code>。</p>
-
-<h4 id="dnsmasq">安装dnsmasq</h4>
-
-<p>在Mac下安装什么东西本座都用<a href="http://brew.sh/">homebrew</a>，先更新brew:</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>brew up
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>然后安装dnsmasq。注意安装命令的输出，结尾是有配置的简单说明的。因为我用了<a href="http://lenciel.cn/2013/03/boxen-introduction/">boxen</a>所以路径不一定对每个人都适用，以你自己的输出为准：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>brew install <span class="nv">dnsmasq</span>
-</span><span class="line"><span class="o">==</span>&gt; make install <span class="nv">PREFIX</span><span class="o">=</span>/opt/boxen/homebrew/Cellar/dnsmasq/2.69
-</span><span class="line"><span class="o">==</span>&gt; Caveats
-</span><span class="line">To configure dnsmasq, copy the example configuration to /opt/boxen/homebrew/etc/dnsmasq.conf
-</span><span class="line">and edit to taste.
-</span><span class="line">  cp /opt/boxen/homebrew/opt/dnsmasq/dnsmasq.conf.example /opt/boxen/homebrew/etc/dnsmasq.conf
-</span><span class="line">To have launchd start dnsmasq at startup:
-</span><span class="line">sudo cp -fv /opt/boxen/homebrew/opt/dnsmasq/*.plist /Library/LaunchDaemons
-</span><span class="line">Then to load dnsmasq now:
-</span><span class="line">sudo launchctl load /Library/LaunchDaemons/homebrew.mxcl.dnsmasq.plist
-</span><span class="line"><span class="o">==</span>&gt; Summary
-</span><span class="line">/opt/boxen/homebrew/Cellar/dnsmasq/2.69: 7 files, 488K, built in 22 seconds
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h4 id="dnsmasq-1">配置dnsmasq</h4>
-
-<p>在<code>dnsmasq.conf</code>里面添加一个配置<code>dev</code>的配置：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">address</span><span class="o">=</span>/dev/127.0.0.1
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>重启dnsmasq服务:</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>sudo launchctl stop homebrew.mxcl.dnsmasq
-</span><span class="line"><span class="nv">$ </span>sudo launchctl start homebrew.mxcl.dnsmasq
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h4 id="osx">配置OSX</h4>
-
-<p>安装了dnsmasq之后你有两个选择：</p>
-
-<ol>
-  <li>把操作系统所有的DNS查询都由dnsmasq处理</li>
-  <li>把<code>.dev</code>的DNS查询交给dnsmasq处理</li>
-</ol>
-
-<p>第一个比较简单，在<code>System Preferences</code>里面配置一下就可以了。
-第二个需要用/etc/reslov.conf文件来更精细的控制DNS查询:</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>sudo mkdir -p /etc/resolver
-</span><span class="line"><span class="nv">$ </span>sudo touch /etc/resolver/dev
-</span><span class="line"><span class="nv">$ </span>sudo vi /etc/resolver/dev
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>在<code>/etc/resolver/dev</code>里面添加一行<code>nameserver 127.0.0.1</code>就可以了。</p>
-
-<h3 id="section">测试效果</h3>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">    <span class="nv">$ </span>ping -c 1 www.sina.com.cn
-</span><span class="line">    PING newscd.sina.com.cn <span class="o">(</span>221.236.31.145<span class="o">)</span>: 56 data bytes
-</span><span class="line">
-</span><span class="line">    <span class="nv">$ </span>ping -c 1 this.is.a.test.dev
-</span><span class="line">    PING this.is.a.test.dev <span class="o">(</span>127.0.0.1<span class="o">)</span>: 56 data bytes
-</span><span class="line">
-</span><span class="line">    <span class="nv">$ </span>ping -c 1 this.is.cool.dev
-</span><span class="line">    PING this.is.cool.dev <span class="o">(</span>127.0.0.1<span class="o">)</span>: 56 data bytes
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>嗯哼~</p>
-
 ]]></content>
   </entry>
   
