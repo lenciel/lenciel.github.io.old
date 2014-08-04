@@ -4,7 +4,7 @@
   <title><![CDATA[@Lenciel]]></title>
   <link href="http://lenciel.cn/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2014-07-29T02:07:26+08:00</updated>
+  <updated>2014-08-04T23:57:57+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -12,6 +12,18 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[It's August now, boy...]]></title>
+    <link href="http://lenciel.cn/2014/08/before-sunrise/"/>
+    <updated>2014-08-04T23:47:03+08:00</updated>
+    <id>http://lenciel.cn/2014/08/before-sunrise</id>
+    <content type="html"><![CDATA[<p><img src="http://lenciel.cn/downloads/images/2014_08/before_sunrise_1.jpg" alt="before sunrise1" title="Don't touch me..." />
+<img src="http://lenciel.cn/downloads/images/2014_08/before_sunrise_2.jpg" alt="before sunrise2" title="Don't touch me..." /></p>
+
+<blockquote><p>&#8220;I believe if there’s any kind of God it wouldn’t be in any of us, not you or me but just this little space in between. If there’s any kind of magic in this world it must be in the attempt of understanding someone, sharing something.&#8221;</p><footer><strong>Ethan Hawke</strong> <cite><a href="http://www.imdb.com/title/tt0112471/">Before Sunrise(1995)</a></cite></footer></blockquote>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[白日焰火]]></title>
@@ -1124,18 +1136,6 @@
     new ElastiStack( document.getElementById( 'elasticstack' ) );
 </script>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Change The Light]]></title>
-    <link href="http://lenciel.cn/2014/04/change-the-light/"/>
-    <updated>2014-04-27T18:31:55+08:00</updated>
-    <id>http://lenciel.cn/2014/04/change-the-light</id>
-    <content type="html"><![CDATA[<p><img src="http://lenciel.cn/downloads/images/iwdrm/change_the_light.gif" alt="Change the light" title="Don't touch me..." /></p>
-
-<blockquote><p>&#8220;It’s just that it may change the light.&#8221;</p><footer><strong>Tracy Chevalier</strong> <cite><a href="http://www.imdb.com/title/tt0335119/">Girl With a Pearl Earring(2003)</a></cite></footer></blockquote>
-<hr />
 ]]></content>
   </entry>
   
