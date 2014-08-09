@@ -4,7 +4,7 @@
   <title><![CDATA[@Lenciel]]></title>
   <link href="http://lenciel.cn/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2014-08-05T23:36:02+08:00</updated>
+  <updated>2014-08-09T21:29:39+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -12,6 +12,73 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[如何不正确的殴打企鹅]]></title>
+    <link href="http://lenciel.cn/2014/08/how-to-beat-the-penguin/"/>
+    <updated>2014-08-09T20:32:58+08:00</updated>
+    <id>http://lenciel.cn/2014/08/how-to-beat-the-penguin</id>
+    <content type="html"><![CDATA[<p>今天在微信朋友圈里面看了20来条这游戏的成绩分享，还有的群开始讨论心得。打开链接一看，原来是当年那个小范围流行了一下的<a href="https://www.google.com/search?q=Penguin+Ball&amp;oq=Penguin+Ball&amp;aqs=chrome..69i57j69i60.972j0j4&amp;sourceid=chrome&amp;es_sm=91&amp;ie=UTF-8">Penguin Ball</a>嘛（我记得后来有些人开始玩那个<a href="http://www.bloody-penguin.com/">血腥版</a>，正常人就慢慢不玩这游戏了）。</p>
+
+<p>不过，链接指向的那山寨游戏仍然在用flash，而且，对手势的响应也处理得有问题，所以确实还蛮难打的：我打了五六次，最好成绩6000多一点。</p>
+
+<p>然后，那个页面除开嵌入了一个“教你如何调情”的广告之外，一直在不停的要你分享，分享，分享……</p>
+
+<p>那我就分享嘛~去看了一下微信的分享是怎么弄出去的，原来有个非官方的叫<code>WeixinJSBridge</code>的东西：只要是通过微信应用内置的Webview打开的网页就可以调用到一组特别的接口，比如分享链接到朋友圈或者发送链接给朋友。这两个接口的参数非常类似：</p>
+
+<ul>
+  <li>分享链接消息里面的title image</li>
+  <li>title image的宽度和高度</li>
+  <li>标题</li>
+  <li>描述</li>
+  <li>url</li>
+  <li>微信APPID</li>
+</ul>
+
+<p>分享出来的链接，以这个“打企鹅”的游戏为例，是长成下面这样子的一条链接消息：</p>
+
+<p><img src="http://lenciel.cn/downloads/images/2014_08/wechat_share_msg.jpg" alt="Wechat Message" title="Don't touch me..." /></p>
+
+<p>所以，要伪装一个“打企鹅”的高分数链接就只需要找到图片和链接，因为title和描述照着编就是了。本座觉得，那么山寨的游戏作者，肯定是把所有的东西都放在页面上的吧，于是用Chrome打开了那个页面，果然没有被拒绝（一般来说，给微信浏览的页面至少应该根据访问上报的user-agent等参数判断它是不是移动设备浏览的，如果不是应该reject），并且源码里面我想要的都在（所以比较敏感的js什么的minify一下会好一些）：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+</pre></td><td class="code"><pre><code class="javascript"><span class="line">    <span class="kd">var</span> <span class="nx">mebtnopenurl</span> <span class="o">=</span> <span class="s1">&#39;http://game.2sky.cn/game/&#39;</span><span class="p">;</span>
+</span><span class="line">    <span class="kd">var</span> <span class="nx">rankurl</span> <span class="o">=</span> <span class="nx">mebtnopenurl</span><span class="p">;</span>
+</span><span class="line">    <span class="nx">dataForWeixin</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class="line">        <span class="s2">&quot;appId&quot;</span><span class="o">:</span> <span class="s2">&quot;wx60c8c12f639f3ef4&quot;</span><span class="p">,</span>
+</span><span class="line">        <span class="s2">&quot;imgUrl&quot;</span><span class="o">:</span> <span class="s2">&quot;http://game.2sky.cn/vapp/52/3.jpg&quot;</span><span class="p">,</span>
+</span><span class="line">        <span class="s2">&quot;url&quot;</span><span class="o">:</span> <span class="s2">&quot;http://bingkafei.hnsdcpa.com/game/52/&quot;</span><span class="p">,</span>
+</span><span class="line">        <span class="s2">&quot;tTitle&quot;</span><span class="o">:</span> <span class="s2">&quot;打企鹅-6e游戏&quot;</span><span class="p">,</span>
+</span><span class="line">        <span class="s2">&quot;tContent&quot;</span><span class="o">:</span> <span class="s2">&quot;打企鹅-6e游戏&quot;</span>
+</span><span class="line">    <span class="p">};</span>
+</span><span class="line">
+</span><span class="line">    <span class="kd">function</span> <span class="nx">dp_share</span><span class="p">(){</span>
+</span><span class="line">        <span class="nb">document</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span><span class="s2">&quot;你简直霸气侧漏，把企鹅击飞出&quot;</span><span class="o">+</span><span class="nx">myData</span><span class="p">.</span><span class="nx">scoreName</span><span class="o">+</span><span class="s2">&quot;，谁还能超越我？&quot;</span><span class="p">;</span>
+</span><span class="line">        <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;share&quot;</span><span class="p">).</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+</span><span class="line">        <span class="nx">dataForWeixin</span><span class="p">.</span><span class="nx">tTitle</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">title</span><span class="p">;</span>
+</span><span class="line">    <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>当然，拿到这些了之后，也不是马上一句<code>WeixinJSBridge.invoke('shareTimeline',data,callback)</code>就能撸出你想要的消息分享出去：前面说了，微信那边还是会检查整个事情是不是发生在微信内置的webview里面。
+但是要绕开也不是那么麻烦，你懂的。</p>
+
+<p>在家带娃没球踢的人真是好无聊啊…</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Data Migration in Django 1.7 (1)]]></title>
@@ -1393,63 +1460,6 @@
 <p>照片上的她衣着并不见得昂贵却十分得体，轻轻松松地就和背景里的山水融在了一起。留着齐脖子的短发，有着形状娇美的薄薄嘴唇，纤细而秀美的鼻翼，眼睛黑漆漆的但并不给人深不可测的感觉。当然，最让我难以忘怀的是她的笑容：那么放松而自然的笑容，是城市生活中绝少见到的清澈爽朗的人才能有的笑容。大概是因为常常在笑，下眼睑有了一条细细的纹路，彷佛可以看到太阳升起的海岸上一直延绵到远方的地平线，令人心醉。</p>
 
 <p>那张照片从公司的公告板上拿下不久，我就在公司里面遇到了她。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[请输入密码]]></title>
-    <link href="http://lenciel.cn/2014/05/better-password-form-field/"/>
-    <updated>2014-05-04T09:33:43+08:00</updated>
-    <id>http://lenciel.cn/2014/05/better-password-form-field</id>
-    <content type="html"><![CDATA[<p>午饭之前的这点儿垃圾时间闲着也是闲着，大多数网站让用户输入密码都做得不够温柔。什么样是温柔呢？不打扰就是温柔…</p>
-
-<link rel="stylesheet" href="http://lenciel.cn/downloads/static/css/flip_animations.css" />
-
-<link rel="stylesheet" href="http://lenciel.cn/downloads/static/css/better_password_form_field.css" />
-
-<div id="better-password-container">
-    <div class="top"></div>
-    <div class="middle">
-      <div class="left"></div>
-      <div class="middle">
-        <div id="form-container">
-
-          <div id="all-done">谢谢</div>
-
-          <form id="verify-new-password">
-            <label for="verify-password">请再次输入你的密码</label>
-            <input placeholder="请再次输入你的密码" type="password" id="verify-password" name="password-to-verify" />
-            <ul>
-              <li id="matches-password">输入正确</li>
-            </ul>
-
-            <input type="submit" id="verify-password-submit" value="确认" disabled="disabled" />
-            <button id="go-back">返回</button>
-          </form>
-
-          <form id="new-password">
-            <label for="password">请输入密码</label>
-            <input placeholder="请输入密码" type="password" id="password" name="password" />
-            <ul>
-              <li id="eight-plus">最少8位</li>
-              <li id="uppercase">必须包含大写字母</li>
-              <li id="lowercase">必须包含小写字母</li>
-              <li id="numbers">必须包含数字</li>
-              <li id="punctuation">必须包含符号</li>
-            </ul>
-
-            <input type="submit" id="password-submit" value="下一步" disabled="disabled" />
-          </form>
-
-        </div>
-      </div>
-      <div class="right"></div>
-    </div>
-    <div class="bottom"></div>
-  </div>
-
-<script src="http://lenciel.cn/downloads/static/js/better_password_form_field.js"></script>
-
 ]]></content>
   </entry>
   
