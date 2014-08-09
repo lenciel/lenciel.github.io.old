@@ -9,7 +9,7 @@
   <meta name="author" content="Lenciel Li">
 
   
-  <meta name="description" content="今天在微信朋友圈里面看了20来条这游戏的成绩分享，还有的群开始讨论心得。打开链接一看，原来是当年那个小范围流行了一下的Penguin Ball嘛（我记得后来有些人开始玩那个血腥版，正常人就慢慢不玩这游戏了）。 不过，链接指向的那山寨游戏仍然在用flash，而且，对手势的响应也处理得有问题， &hellip;">
+  <meta name="description" content="今天在微信朋友圈里面看了20来条这游戏的成绩分享，还有的群开始讨论心得。打开链接一看，原来是当年那个小范围流行了一下的Penguin Ball嘛（我记得后来有些人开始玩那个血腥版，正常人就慢慢不玩这游戏了）。 不过，链接指向的那山寨游戏虽然没有再用flash，但是对手势事件的处理得有问题（ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -31,14 +31,14 @@
 <meta property="og:title" content="如何不正确的殴打企鹅" /><meta itemprop="name" content="如何不正确的殴打企鹅" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://lenciel.cn/2014/08/how-to-beat-the-penguin/" />
-<meta property="og:description" content="今天在微信朋友圈里面看了20来条这游戏的成绩分享，还有的群开始讨论心得。打开链接一看，原来是当年那个小范围流行了一下的Penguin Ball嘛（我记得后来有些人开始玩那个血腥版，正常人就慢慢不玩这游戏了）。 不过，链接指向的那山寨游戏仍然在用flash，而且，对手势的响应也处理得有问题， &hellip;" />
+<meta property="og:description" content="今天在微信朋友圈里面看了20来条这游戏的成绩分享，还有的群开始讨论心得。打开链接一看，原来是当年那个小范围流行了一下的Penguin Ball嘛（我记得后来有些人开始玩那个血腥版，正常人就慢慢不玩这游戏了）。 不过，链接指向的那山寨游戏虽然没有再用flash，但是对手势事件的处理得有问题（ &hellip;" />
 
 <meta property="og:site_name" content="http://lenciel.cn" />
 <meta property="article:author" content="http://lenciel.cn">
 <meta property="article:published_time" content="2014-08-09 20:32:58 +0800" />
 
 <meta property="article:section" content="just-4-fun" />
-<meta itemprop="description" content="今天在微信朋友圈里面看了20来条这游戏的成绩分享，还有的群开始讨论心得。打开链接一看，原来是当年那个小范围流行了一下的Penguin Ball嘛（我记得后来有些人开始玩那个血腥版，正常人就慢慢不玩这游戏了）。 不过，链接指向的那山寨游戏仍然在用flash，而且，对手势的响应也处理得有问题， &hellip;" />
+<meta itemprop="description" content="今天在微信朋友圈里面看了20来条这游戏的成绩分享，还有的群开始讨论心得。打开链接一看，原来是当年那个小范围流行了一下的Penguin Ball嘛（我记得后来有些人开始玩那个血腥版，正常人就慢慢不玩这游戏了）。 不过，链接指向的那山寨游戏虽然没有再用flash，但是对手势事件的处理得有问题（ &hellip;" />
 
 <!-- Combine multiple fonts into one request -->
 <!--<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic|Patua+One|Yanone+Kaffeesatz" rel="stylesheet" type="text/css">-->
@@ -168,18 +168,20 @@
 
 <div class="entry-content"><p>今天在微信朋友圈里面看了20来条这游戏的成绩分享，还有的群开始讨论心得。打开链接一看，原来是当年那个小范围流行了一下的<a href="https://www.google.com/search?q=Penguin+Ball&amp;oq=Penguin+Ball&amp;aqs=chrome..69i57j69i60.972j0j4&amp;sourceid=chrome&amp;es_sm=91&amp;ie=UTF-8">Penguin Ball</a>嘛（我记得后来有些人开始玩那个<a href="http://www.bloody-penguin.com/">血腥版</a>，正常人就慢慢不玩这游戏了）。</p>
 
-<p>不过，链接指向的那山寨游戏仍然在用flash，而且，对手势的响应也处理得有问题，所以确实还蛮难打的：我打了五六次，最好成绩6000多一点。</p>
+<p>不过，链接指向的那山寨游戏虽然没有再用flash，但是对手势事件的处理得有问题（他们还是挺<a href="http://game.2sky.cn/js/52/index.js">大方的</a>），所以确实还蛮难的：我打了五六次，最好成绩6000多一点。</p>
 
 <p>然后，那个页面除开嵌入了一个“教你如何调情”的广告之外，一直在不停的要你分享，分享，分享……</p>
 
-<p>那我就分享嘛~去看了一下微信的分享是怎么弄出去的，原来有个非官方的叫<code>WeixinJSBridge</code>的东西：只要是通过微信应用内置的Webview打开的网页就可以调用到一组特别的接口，比如分享链接到朋友圈或者发送链接给朋友。这两个接口的参数非常类似：</p>
+<p>那我就分享嘛~~~</p>
+
+<p>去看了一下微信的分享是怎么弄出去的，原来有个非官方的叫<code>WeixinJSBridge</code>的东西：只要是通过微信应用内置的Webview打开的网页就可以调用到一组特别的接口，比如分享链接到朋友圈或者发送链接给朋友。这两个接口的参数非常类似：</p>
 
 <ul>
-  <li>分享链接消息里面的title image</li>
+  <li>分享链接消息里面的title image的url </li>
   <li>title image的宽度和高度</li>
   <li>标题</li>
   <li>描述</li>
-  <li>url</li>
+  <li>链接指向的url</li>
   <li>微信APPID</li>
 </ul>
 
@@ -187,7 +189,9 @@
 
 <p><img src="/downloads/images/2014_08/wechat_share_msg.jpg" alt="Wechat Message" title="Don't touch me..." /></p>
 
-<p>所以，要伪装一个“打企鹅”的高分数链接就只需要找到图片和链接，因为title和描述照着编就是了。本座觉得，那么山寨的游戏作者，肯定是把所有的东西都放在页面上的吧，于是用Chrome打开了那个页面，果然没有被拒绝（一般来说，给微信浏览的页面至少应该根据访问上报的user-agent等参数判断它是不是移动设备浏览的，如果不是应该reject），并且源码里面我想要的都在（所以比较敏感的js什么的minify一下会好一些）：</p>
+<p>所以，要伪装一个“打企鹅”的高分数链接就只需要找到title image的url和链接指向的url（因为标题和描述照着编就是了）。</p>
+
+<p>本座觉得，那么山寨的游戏作者，肯定是把所有的东西都放在页面上的吧，于是用Chrome打开了那个页面，果然没有被拒绝（一般来说，给微信浏览的页面至少应该根据访问上报的user-agent等参数判断它是不是移动设备浏览的，如果不是应该reject），并且源码里面我想要的都在（所以比较敏感的js什么的minify一下会好一些）：</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -204,6 +208,9 @@
 <span class="line-number">13</span>
 <span class="line-number">14</span>
 <span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
 </pre></td><td class="code"><pre><code class="javascript"><span class="line">    <span class="kd">var</span> <span class="nx">mebtnopenurl</span> <span class="o">=</span> <span class="s1">&#39;http://game.2sky.cn/game/&#39;</span><span class="p">;</span>
 </span><span class="line">    <span class="kd">var</span> <span class="nx">rankurl</span> <span class="o">=</span> <span class="nx">mebtnopenurl</span><span class="p">;</span>
 </span><span class="line">    <span class="nx">dataForWeixin</span> <span class="o">=</span> <span class="p">{</span>
@@ -214,6 +221,9 @@
 </span><span class="line">        <span class="s2">&quot;tContent&quot;</span><span class="o">:</span> <span class="s2">&quot;打企鹅-6e游戏&quot;</span>
 </span><span class="line">    <span class="p">};</span>
 </span><span class="line">
+</span><span class="line">    <span class="nx">dataForWeixin</span><span class="p">.</span><span class="nx">appId</span> <span class="o">=</span> <span class="s2">&quot;wx8820cdf5db680ffa&quot;</span><span class="p">;</span>
+</span><span class="line">    <span class="nx">dataForWeixin</span><span class="p">.</span><span class="nx">url</span> <span class="o">=</span> <span class="s2">&quot;http://weiapp.552200.com/game/&quot;</span><span class="o">+</span><span class="nx">_con</span><span class="p">[</span><span class="s2">&quot;num&quot;</span><span class="p">]</span><span class="o">+</span><span class="s2">&quot;/&quot;</span><span class="p">;</span>
+</span><span class="line">
 </span><span class="line">    <span class="kd">function</span> <span class="nx">dp_share</span><span class="p">(){</span>
 </span><span class="line">        <span class="nb">document</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span><span class="s2">&quot;你简直霸气侧漏，把企鹅击飞出&quot;</span><span class="o">+</span><span class="nx">myData</span><span class="p">.</span><span class="nx">scoreName</span><span class="o">+</span><span class="s2">&quot;，谁还能超越我？&quot;</span><span class="p">;</span>
 </span><span class="line">        <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;share&quot;</span><span class="p">).</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">;</span>
@@ -221,8 +231,15 @@
 </span><span class="line">    <span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>当然，拿到这些了之后，也不是马上一句<code>WeixinJSBridge.invoke('shareTimeline',data,callback)</code>就能撸出你想要的消息分享出去：前面说了，微信那边还是会检查整个事情是不是发生在微信内置的webview里面。
-但是要绕开也不是那么麻烦，你懂的。</p>
+<p>当然，拿到这些了之后，也不是马上一句：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="nx">WeixinJSBridge</span><span class="p">.</span><span class="nx">invoke</span><span class="p">(</span><span class="s1">&#39;shareTimeline&#39;</span><span class="p">,</span><span class="nx">data</span><span class="p">,</span><span class="nx">callback</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>就能把你装神弄鬼消息分享出去的。前面说了，微信那边还是会检查整个事情是不是发生在微信内置的webview里面。但是，要绕开也不是那么麻烦，你懂的…</p>
+
+<p>总体感觉微信的这儿api还是挺扯的，本来可以作为身份校验的所以朋友圈里面的链接点起来还是谨慎一点儿吧，骚年们。</p>
 
 <p>在家带娃没球踢的人真是好无聊啊…</p>
 </div>
