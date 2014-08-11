@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tutorial | @Lenciel]]></title>
   <link href="http://lenciel.cn/blog/categories/tutorial/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2014-08-09T22:31:00+08:00</updated>
+  <updated>2014-08-11T10:26:24+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -12,6 +12,78 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Data Migration in Django 1.7 (2)]]></title>
+    <link href="http://lenciel.cn/2014/08/django-1-dot-7-migrations-part-2/"/>
+    <updated>2014-08-11T03:59:47+08:00</updated>
+    <id>http://lenciel.cn/2014/08/django-1-dot-7-migrations-part-2</id>
+    <content type="html"><![CDATA[<p>在应用开发的过程中，我们会遇到migration主要分为：</p>
+
+<ol>
+  <li>Schema Migrations：数据库schema的变化，也就是我们前面<a href="http://lenciel.cn/2014/08/django-1-dot-7-migrations/">讨论的内容</a></li>
+  <li>Data Migrations：数据的变化，比如需要批量变更数据或者备份在其他地方的历史数据</li>
+</ol>
+
+<p>第二种是没法敲几条命令让Django自动帮你完成其他的事情的，而是需要手动使用<code>RunPython</code>，这里具体说一下做法。</p>
+
+<p>还是以之前的那个项目来作为例子，我们首先创建一个migration file：</p>
+
+<p>```bash
+$ python manage.py makemigrations –empty ts_data</p>
+
+<p>Migrations for ts_data:
+  0003<em>auto</em>20140811_0110.py:
+```</p>
+
+<p>它的内容如下：</p>
+
+<p>```python
+# -<em>- coding: utf-8 -</em>-
+from <strong>future</strong> import unicode_literals</p>
+
+<p>from django.db import models, migrations</p>
+
+<p>class Migration(migrations.Migration):</p>
+
+<pre><code>dependencies = [
+    ('ts_data', '0002_auto_20140805_1525'),
+]
+
+operations = [
+] ```
+</code></pre>
+
+<p>我们在里面加入一个<code>RunPython</code>的部分，来导入数据：</p>
+
+<p>```python
+# -<em>- coding: utf-8 -</em>-
+from <strong>future</strong> import unicode_literals</p>
+
+<p>from django.db import models, migrations
+from ts_data.models import PingPongPrice</p>
+
+<p>def load_data(apps, schema_editor):
+    PingPongPrice(date=date(2014,07,29),
+         price=12.00,
+         ).save()
+    PingPongPrice(date=date(2014,01,29),
+         price=8.00,
+         ).save()</p>
+
+<p>class Migration(migrations.Migration):</p>
+
+<pre><code>dependencies = [
+    ('ts_data', '0002_auto_20140805_1525'),
+]
+
+operations = [migrations.RunPython(load_data)] ```
+</code></pre>
+
+<p>如果你觉得：咦，这样导入数据不是有点儿像用<code>syncdb</code>然后导入<code>fixture</code>么？的确，从效果上它们是一样的，个人觉得，对于测试环境我们可以继续使用fixture来保存mock的测试数据，然后使用<code>loaddata</code>命令手动加载测试数据。对生产环境使用migration来导入数据更好，和使用<code>loaddata</code>命令来导入fixture相比，它不需要手动操作，并且由于是通过<code>RunPython</code>来进行，实际上可以对数据进行各种需要的处理。</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Data Migration in Django 1.7 (1)]]></title>
