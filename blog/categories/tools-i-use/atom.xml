@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tools-i-use | @Lenciel]]></title>
   <link href="http://lenciel.cn/blog/categories/tools-i-use/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2014-09-02T01:39:06+08:00</updated>
+  <updated>2014-09-02T01:42:24+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[update android sdk with shadowsocks proxy]]></title>
     <link href="http://lenciel.cn/2014/09/update-android-sdk-with-proxy/"/>
-    <updated>2014-09-02T00:30:35+08:00</updated>
+    <updated>2014-09-02T02:30:35+08:00</updated>
     <id>http://lenciel.cn/2014/09/update-android-sdk-with-proxy</id>
     <content type="html"><![CDATA[<p>博格坎普说，我们android项目的build挂了。</p>
 
@@ -129,10 +129,12 @@ shadowsocks 2.1.0
 
 <p><code>bash
 $ export _JAVA_OPTIONS="-DsocksProxyHost=127.0.0.1"
-$ android update sdk -u -s
+$ android update sdk -u -s --all
 </code></p>
 
 <p>注意<code>socksProxyHost</code>的默认端口就是1080，如果你使用了其他端口不能只配ip。</p>
+
+<p>另外，<code>--all</code>是比较猛烈的选项（人家的硬盘就是大，人家的代理就是快嘛），你可以在命令行里面通过filter来安装你需要的东西。</p>
 
 <h2 id="when-shit-happens">When shit happens</h2>
 
