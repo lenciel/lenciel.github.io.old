@@ -4,7 +4,7 @@
   <title><![CDATA[@Lenciel]]></title>
   <link href="http://lenciel.cn/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2014-09-03T16:55:11+08:00</updated>
+  <updated>2014-09-03T16:57:24+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -400,15 +400,6 @@
 <p>“那我每次榨完汁，究竟应该立即去清洗，还是应该立即去饮用果汁呢？”</p>
 
 <p>他问完这个问题，我和导购小姐都笑了。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Shadowsocks on google compute engine]]></title>
-    <link href="http://lenciel.cn/2014/08/shadowsocks-on-google-compute-engine/"/>
-    <updated>2014-08-17T21:55:44+08:00</updated>
-    <id>http://lenciel.cn/2014/08/shadowsocks-on-google-compute-engine</id>
-    <content type="html"><![CDATA[
 ]]></content>
   </entry>
   
@@ -1399,6 +1390,18 @@
 <p>另外，词典的样式其实是用css定义的，就在每个字典文件的Contetns目录，比如：<code>~/Library/Dictionaries/dictd_www.dict.org_web1913.dictionary/Contents/DefaultStyle.css</code>。如果你不满意字典出来的样子，可以自定义格式。</p>
 
 <p>最后，这些词典其实都是linux上著名的国产软件<a href="http://en.wikipedia.org/wiki/StarDict">stardict</a>的文件格式（写到这里，又想起stardict的作者<a href="http://www.huzheng.org/aboutme.php">胡正</a>），所以要在<a href="https://itunes.apple.com/us/app/dictionary-universal/id312088272?mt=8">手机上使用</a>也是很容易的事情。</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[This isn't happiness]]></title>
+    <link href="http://lenciel.cn/2014/05/this-is-not-happiness/"/>
+    <updated>2014-05-18T21:29:11+08:00</updated>
+    <id>http://lenciel.cn/2014/05/this-is-not-happiness</id>
+    <content type="html"><![CDATA[<p><img src="http://lenciel.cn/downloads/images/iwdrm/false_start.gif" alt="this isn't happiness" title="Don't touch me..." /></p>
+
+<blockquote><p>&#8220;Simplicity is comlexity resolved.&#8221;</p><footer><strong>Constantin Brancusi</strong> <cite><a href="http://en.wikipedia.org/wiki/Constantin_Br%C3%A2ncu%C8%99i">Yatzer(1911)</a></cite></footer></blockquote>
 
 ]]></content>
   </entry>
