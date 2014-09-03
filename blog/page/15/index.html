@@ -9,7 +9,9 @@
   <meta name="author" content="Lenciel Li">
 
   
-  <meta name="description" content="一瓶Lafite Rothschild Bordeaux最少要几千块，一瓶Charles Shaw或者Franzia卖十几块。我们经常可以看到那些红酒的广告宣扬着高档红酒的品质和口感是多么美妙。但其实很多人不知道，按照”酒类经济学家”的说法，葡萄酒的价格和口感之间的关系可能不是那么紧密。 &hellip;">
+  <meta name="description" content="Python的标准库实在是不够用，所以一个很常见的情况是我们需要在每个项目使用的virtualenv里面都安装一些常用的库。 为了加速安装的过程，有两个小窍门。 一个是使用国内的源，比如v2ex提供的。只需要新建或者编辑~/.pip/pip.conf，加入一行： 1
+2
+[global] &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -31,14 +33,18 @@
 
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://lenciel.cn/blog/page/15/" />
-<meta property="og:description" content="一瓶Lafite Rothschild Bordeaux最少要几千块，一瓶Charles Shaw或者Franzia卖十几块。我们经常可以看到那些红酒的广告宣扬着高档红酒的品质和口感是多么美妙。但其实很多人不知道，按照”酒类经济学家”的说法，葡萄酒的价格和口感之间的关系可能不是那么紧密。 &hellip;" />
+<meta property="og:description" content="Python的标准库实在是不够用，所以一个很常见的情况是我们需要在每个项目使用的virtualenv里面都安装一些常用的库。 为了加速安装的过程，有两个小窍门。 一个是使用国内的源，比如v2ex提供的。只需要新建或者编辑~/.pip/pip.conf，加入一行： 1
+2
+[global] &hellip;" />
 
 <meta property="og:site_name" content="http://lenciel.cn" />
 <meta property="article:author" content="http://lenciel.cn">
 
 
 
-<meta itemprop="description" content="一瓶Lafite Rothschild Bordeaux最少要几千块，一瓶Charles Shaw或者Franzia卖十几块。我们经常可以看到那些红酒的广告宣扬着高档红酒的品质和口感是多么美妙。但其实很多人不知道，按照”酒类经济学家”的说法，葡萄酒的价格和口感之间的关系可能不是那么紧密。 &hellip;" />
+<meta itemprop="description" content="Python的标准库实在是不够用，所以一个很常见的情况是我们需要在每个项目使用的virtualenv里面都安装一些常用的库。 为了加速安装的过程，有两个小窍门。 一个是使用国内的源，比如v2ex提供的。只需要新建或者编辑~/.pip/pip.conf，加入一行： 1
+2
+[global] &hellip;" />
 
 <!-- Combine multiple fonts into one request -->
 <!--<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic|Patua+One|Yanone+Kaffeesatz" rel="stylesheet" type="text/css">-->
@@ -144,7 +150,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2013/07/is-wine-bullshit/">Is Wine Bullshit</a></h1>
+      <h1 class="entry-title"><a href="/2013/10/pip-download-cache/">打开pip的download Cache</a></h1>
     
     
       <p class="meta">
@@ -160,66 +166,33 @@
   
 
 
-<time datetime="2013-07-01T15:05:00+08:00" pubdate data-updated="true">2013/07/01 15:05</time>
+<time datetime="2013-10-17T13:25:00+08:00" pubdate data-updated="true">2013/10/17 13:25</time>
         
-         | <a href="/2013/07/is-wine-bullshit/#disqus_thread">Comments</a>
+         | <a href="/2013/10/pip-download-cache/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p><img src="/downloads/images/wine.jpeg" alt="Raw git log output" title="Don't touch me..." /></p>
+  <div class="entry-content"><p>Python的标准库实在是<a href="http://lenciel.cn/2013/10/recharging-the-python-standard-library/">不够用</a>，所以一个很常见的情况是我们需要在每个项目使用的<code>virtualenv</code>里面都安装一些常用的库。</p>
 
-<p>一瓶Lafite Rothschild Bordeaux最少要几千块，一瓶Charles Shaw或者Franzia卖十几块。我们经常可以看到那些红酒的广告宣扬着高档红酒的品质和口感是多么美妙。但其实很多人不知道，按照”酒类经济学家”的说法，葡萄酒的价格和口感之间的关系可能不是那么紧密。他们中不少人甚至声称，葡萄酒的价格根本就是乱来的，而那些号称能被品出来的万千滋味不过是付钱过后脑袋里面的自我安慰。</p>
+<p>为了加速安装的过程，有两个小窍门。</p>
 
-<p>比如，一份2008年发表在《The Journal of Wine Economics》上的<a href="http://www.wine-economics.org/aawe/wp-content/uploads/2012/10/Vol.3-No.1-2008-Evidence-from-a-Large-Sample-of-Blind-Tastings.pdf">文章</a>说，当消费者不知道自己的酒的价格时，他们对实际上更便宜的酒的口感评价甚至稍稍好过那些更贵的酒。而且不光是一般消费者，即使是那些专家也不会对更贵的酒评价更高：</p>
+<p>一个是使用国内的源，比如<a href="http://www.v2ex.com/">v2ex</a>提供的。只需要新建或者编辑<code>~/.pip/pip.conf</code>，加入一行：</p>
 
-<blockquote><p>“In sum, we ﬁnd a non-negative relationship between price and overall rating for experts. Due to the poor statistical signiﬁcance of the price coefﬁcient for experts, it remains an open question whether this coefﬁcient is in fact positive.”</p></blockquote>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">[global]
+</span><span class="line">index-url = http://pypi.v2ex.com/simple
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>在<a href="http://www.newyorker.com/online/blogs/frontal-cortex/2012/06/wine-taste.html">另一项实验</a>中，被试者喝过red wine和white wine之后，对两种酒的评价就分别是一些典型的red wine和white wine的评价。而实际上用于测试的酒都是white wine，所谓的red wine只是加了一些对口感没有影响的食用色素。</p>
+<p>另一个就是打开pip的<code>download cache</code>，这样可以避免pip每次都去下载相同的东西。只需要在<code>.bashrc</code>或者是<code>.zshrc</code>里面加入一行：</p>
 
-<p>另一类的研究着眼于品酒师Robert M. Parker Jr.发明的风靡全球的100制评分标准的准确度。退休的统计学家Robert Hodgson也是一位业余的酿酒爱好者。他发现同样的酒多次让品酒师打分，分数非常不稳定：</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">export PIP_DOWNLOAD_CACHE=$HOME/.pip-download-cache
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<blockquote><p>“The judges’ wine ratings typically varied by ±4 points on a standard ratings scale running from 80 to 100. A wine rated 91 on one tasting would often be rated an 87 or 95 on the next. Some of the judges did much worse, and only about one in 10 regularly rated the same wine within a range of ±2 points.”</p></blockquote>
-
-<p>随着类似的研究结果不断被刷新，越来越多的主流媒体开始质疑酒究竟是如何定价的。</p>
-
-<p>酿酒工业的巨头们也出来承认：酒定价的主要影响因素不是宣传中的那些有关酒的口感等品质相关的要点，而是产量、品牌、大量中间环节的成本以及人们对浪漫或华贵生活的期许。但酒商们仍然坚持，即便是这些因素造成了有的酒很昂贵，但是卖得贵的酒通常也确实是口感上佳的酒。问题是和批评者相比，他们拿不出任何有效的数据说明这点。</p>
-
-<p>于是有些媒体就出现了“<a href="http://io9.com/wine-tasting-is-bullshit-heres-why-496098276">品红酒就是扯淡</a>”这样的文章。</p>
-
-<p>但这么说公平吗？</p>
-
-<h1 id="section">口感其实并不是仅仅来自味蕾</h1>
-
-<p>要明白这是为什么你首先要知道味蕾只是舌头上让你感知食物的酸甜苦辣的部分，这些是味觉但不是口感。口感的形成是视觉、嗅觉、味觉等五官都有参与的。</p>
-
-<p>要试验这点儿你可以试试捏着鼻子吃饭，或者你想想为什么自己上次感冒的时候吃东西不香。和味蕾一样，人的感觉器官特别是嗅觉和视觉会在你对酒的口感做出评价时起到非常巨大的作用，这点对于其他食物和饮料也一样适用。</p>
-
-<p>以颜色为例，类似前面说的在white wine里面加色素可以让品酒师都犯错认为它是red wine一样，New York Times报道过：</p>
-
-<blockquote><p>When tasteless yellow coloring is added to vanilla pudding, consumers say it tastes like banana or lemon pudding. And when mango or lemon flavoring is added to white pudding, most consumers say that it tastes like vanilla pudding. Color creates a psychological expectation for a certain flavor that is often impossible to dislodge, [food chemist] Dr. Shelke said.</p></blockquote>
-
-<p>味蕾之外的其他感觉影响口感的例子还有很多。比如环境，<a href="http://www.amsciepub.com/doi/abs/10.2466/01.PR0.111.4.228-232">研究表明</a>人们在柔光的环境下就餐觉得更舒服。比如预期，我们过往的<a href="http://www.huffingtonpost.com/Menuism/does-the-way-we-see-food-affect-taste_b_1872204.html">经验</a>，食物的<a href="http://www.jstor.org/discover/10.2307/3152198?uid=3739560&amp;uid=2&amp;uid=4&amp;uid=3739256&amp;sid=21102447342477">品牌</a>，<a href="http://www.griffithhack.com.au/mediacentre-Canafoodsbrandaffectyourperceptionsoftaste">包装</a>和<a href="http://www.psychologytoday.com/blog/evolved-primate/201002/does-price-tag-have-taste">价格</a>都会影响我们对它的口感。</p>
-
-<h1 id="section-1">并非所有的酒都一样</h1>
-
-<p>公认的最好的品酒师，被称为 <code>Master Sommeliers</code> ，在全世界只有不到200名。这些人要获得 <code>Master Sommeliers</code> 的称号，必须蒙上眼睛鉴别出6种不同葡萄酒的葡萄品种、产地和年份。如果这些人不是酒行业养的神棍，而是真有这样的本领，那么是否意味着不同的酒确实口感是不一样的呢？</p>
-
-<p>《今日心理学》上面<a href="http://www.psychologytoday.com/blog/sensory-superpowers/200908/you-drink-what-you-think">有篇文章</a>对此做了解答，认为专业品酒师主要靠的是良好的分析能力和大量的练习积累的知识：</p>
-
-<blockquote><p>Research shows that contrary to common thought, wine experts do not have more sensitive palates, per se. They don’t, for example, have lower thresholds for detecting a wine’s tannin and alcohol content. Experts are also no better than novices at tasting whether two wines are the same or different. </p><p>What makes [Master Sommelier] Steven Poe an expert is how he brings his formal knowledge of wine production to what he tastes. For example, Poe would be familiar with the flavor outcomes of malolactic fermentation —a process of secondary wine fermentation. In a blind tasting, he might notice one of the flavors associated with the process—a buttery texture, for example—and then attend to the other likely flavor results of malolactic fermentation including hints of yogurt and sauerkraut. This could help Poe narrow down a wine’s region and vintage.</p></blockquote>
-
-<p>换句话说即使是Master Sommelier也有可能把染色的white wine搞成red wine，或者是在盲测的时候觉得一种便宜的酒比贵的酒还好喝。他们像福尔摩斯一样，是根据线索和知识解开口中的酒是什么样的酒的谜题，而不可能像广告里面一口入喉，就击掌高呼：“哇，这酒太好喝了，这一定是xxx年份的xxx。” </p>
-
-<h1 id="so">So?</h1>
-
-<p>人们知道十几块一瓶的红酒和几万块的味道没太大的区别后，反应是非常激烈的。特别是因为众所知周的原因，品红酒这种本来没啥大不了的活动在天朝更容易因为和“小资”甚至“奢侈”挂钩而备受非议。</p>
-
-<p>而看完本文我们应该要明白，实际上我们的口感本来就是由各种各样因素影响的假象。不仅是品红酒，任何食物的口感都可以被人为因素改变：特别是食品添加剂和食品加工如此“发达”的天朝，如果你说昂贵的红酒是扯淡，那深究起来，有哪样吃的东西不扯淡呢？</p>
-
-<p>因此，我觉得首先你应该鼓励自己和身边的人都试试没那么贵的酒，可能喝起来也相当不错。然后，如果别人花了大价钱买来一支，你也不要觉得这就是装逼：喝起来痛不痛快，本来就是别人自己的事情。</p>
 </div>
   
   
@@ -232,7 +205,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2013/06/vagrant-on-mac-os-x/">Vagrant for Django I: Basic</a></h1>
+      <h1 class="entry-title"><a href="/2013/10/recharging-the-python-standard-library/">给Python标准库充电</a></h1>
     
     
       <p class="meta">
@@ -248,93 +221,38 @@
   
 
 
-<time datetime="2013-06-19T15:19:00+08:00" pubdate data-updated="true">2013/06/19 15:19</time>
+<time datetime="2013-10-17T12:27:00+08:00" pubdate data-updated="true">2013/10/17 12:27</time>
         
-         | <a href="/2013/06/vagrant-on-mac-os-x/#disqus_thread">Comments</a>
+         | <a href="/2013/10/recharging-the-python-standard-library/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>Vagrant<a href="http://www.vagrantup.com/vmware">最近支持了VMWare</a>，但是要钱的东西我们玩不起。本系列主要分享一下Vagrant+VirtualBox搭配起来如何使用。</p>
+  <div class="entry-content"><p>Python的自荐页面<a href="http://www.python.org/about/">About Python</a>上号称自家的标准库是”batteries included”的，但实际情况却不是这样。对Python标准库的批评几乎从来没有中断过。著名的Python包<a href="http://docs.python-requests.org/en/latest/">Requests</a>的作者甚至决定永久把Requests保持为第三方库而拒绝加入标准库，他的理由是：<a href="http://www.leancrew.com/all-this/2012/04/where-modules-go-to-die/">加入标准库就会死翘翘</a>。</p>
 
-<h2 id="virtualbox">安装VirtualBox</h2>
+<p>再举个例子，我们最近的项目里面都用到了<a href="https://pypi.python.org/pypi/pytz/">pytz</a>。标准库里面的datetime是支持时区的（tzinfo类），但是并没有包含时区信息（tzinfo是抽象类需要自己实现）。遵照前人的经验使用pytz是最好的办法<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup><sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>。</p>
 
-<p>VirtualBox是Oracle的动态创建、可配置、可移植的轻量虚拟机系统。在Windows、MacOSX、Linux和Solaris上都发行了相应版本。</p>
+<p>所以不奇怪的是，几乎所有的Python项目都会引用一堆优秀的第三方库。为了管理这些依赖一般都会用上pip:</p>
 
-<p>目前Vagrant支持的是VirtualBox4.0.x、4.1.x和4.2.x版本</p>
+<ul>
+  <li>在项目里面用pip freeze生成一个<code>requirement.txt</code>文件</li>
+  <li>在创建<code>virtualenv</code>的时候使用之前生成的文件安装所有的依赖</li>
+</ul>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">http://www.virtualbox.org/wiki/Downloads
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p>为了不在每次运行<code>pip install -r requirements.txt</code>的时候都下载一堆依赖，你还可以打开pip的<a href="http://lenciel.cn/2013/10/pip-download-cache/">download cache</a>。如果整个公司在做项目的时候都需要经常使用一些包，甚至可以考虑<a href="https://github.com/wolever/pip2pi">做一个Pypi</a>的库来共享，类似于Maven的Repo。</p>
 
-<h2 id="vagrant">安装Vagrant</h2>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">http://downloads.vagrantup.com/
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>Windows和Mac OS X下面安装完毕后要把 <code>vagrant</code> 命令放到 <code>PATH</code> 下面，而其他系统下面需要把整个 <code>/opt/vagrant/bin</code> 放到PATH下面。
-完成后可以先安装一个32位的ubuntu10.04版本来测试一下：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">vagrant box add lucid32 http://files.vagrantup.com/lucid32.box
-</span><span class="line">vagrant init lucid32
-</span><span class="line">vagrant up
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="vagrant-1">Vagrant的好处</h2>
-
-<p>软件开发，特别是Web应用的开发正处于环境异常复杂的年代。为了在开发和实际部署的环境直接做到无缝切换，虚拟化技术被大规模的使用。与此同时，自动的配置管理，如 <code>Chef</code> 或者 <code>Puppet</code> 也在发挥着巨大的作用。Vagrant就是在这些技术的基础上进行了集成，从而完成（虚拟化+自动配置管理）的效果。</p>
-
-<p><em>对个人开发者</em></p>
-
-<p>对于开发者来说要想使用一个开发环境应付所有的开发任务变得非常困难了。每个项目都有自己独特的依赖，如类库，消息队列，数据库，框架等等。每个依赖也常常有版本上的差异。Vagrant提供了方便，可以为每个项目创建独立的开发环境，并且只在项目需要的时候把这些环境运行起来。</p>
-
-<p><em>对项目组</em></p>
-
-<p>同一个项目组的组员理论上都是有相同的开发环境的：同样的依赖，每个依赖都是同样的版本，采用同样的配置等等。但是现实往往不是这样。比如采用了ORM框架的Django，同一个项目组可能有人用着 <code>sqlite3</code> ，有人用 <code>mysql</code> 。而且每个人自己开发环境中服务器的配置也常常是不同的。这种异构的环境往往最终会带来大大小小的麻烦。Vagrant提供了一个方便，让大家都被强制的使用统一的开发环境。</p>
-
-<p><em>对公司</em></p>
-
-<p>如果管理过大型项目，你就知道新人和新设计的引入往往是非常大的考验。大量的环境搭建工作，都可以由Vagrant来代替。并且Vagrant的配置只需要写一次，然后分发给大家用就行了，省掉了大量的时间。</p>
-
-<h2 id="vagrant-2">Vagrant可执行文件</h2>
-
-<p>Vagrant安装好之后，主要是通过命令行使用。 <code>vagrant</code> 命令带很多子命令，如 <code>vagrant up</code> ， <code>vagrant ssh</code> ， <code>vagrant package</code> 等等。敲 <code>vagrant</code> 就可以看到有哪些可用的命令。</p>
-
-<h2 id="vagrantfile">Vagrantfile配置文件</h2>
-
-<p><code>Vagrantfile</code> 对于Vagrant就像 <code>Makefile</code> 对Make的作用一样：它被放置在每个Vagrant项目的根目录，用来配置Vagrant以及它创建的虚拟机的行为。一个最简单的配置文件如下：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class="ruby"><span class="line"><span class="ss">Vagrant</span><span class="p">:</span><span class="no">Config</span><span class="o">.</span><span class="n">run</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
-</span><span class="line">     <span class="c1"># setup the box</span>
-</span><span class="line">     <span class="n">config</span><span class="o">.</span><span class="n">vim</span><span class="o">.</span><span class="n">box</span><span class="o">=</span><span class="s2">&quot;my_box&quot;</span>
-</span><span class="line"><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>可以看到，<code>Vagrantfile</code> 是用标准的Ruby代码写成的。需要注意的是在大版本之间<code> Vagrantfile</code> 是不兼容的。</p>
-
-<h2 id="setup">基本setup</h2>
-
-<p>首选创建项目目录，然后在项目目录中初始化：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">mkdir vagrant_guide
-</span><span class="line"><span class="nb">cd </span>vagrant_guide
-</span><span class="line">vagrant init
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>init命令会创建一个基本的Vagrantfile，暂时先不修改它。下一篇我们来看如何添加Django开发需要的配置以及如果build一个 <code>base box</code> 来给其他人使用。</p>
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p><a href="http://stackoverflow.com/questions/2532729/daylight-saving-time-and-time-zone-best-practices/3404919#3404919">保存时间和时区的最佳实践</a>.   <a href="#fnref:1" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p><a href="http://stackoverflow.com/questions/14762518/python-datetime-strptime-and-strftime-how-to-preserve-the-timezone-informat">如何在datetime转换中保存时区信息</a>.    <a href="#fnref:2" rel="reference">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
 </div>
   
   
@@ -347,7 +265,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2013/06/better-git-log/">Better Git Log</a></h1>
+      <h1 class="entry-title"><a href="/2013/10/the-myth-of-nasas-expensive-space-pens/">NASA造笔的事情也是假的</a></h1>
     
     
       <p class="meta">
@@ -363,52 +281,27 @@
   
 
 
-<time datetime="2013-06-08T23:42:00+08:00" pubdate data-updated="true">2013/06/08 23:42</time>
+<time datetime="2013-10-12T12:46:00+08:00" pubdate data-updated="true">2013/10/12 12:46</time>
         
-         | <a href="/2013/06/better-git-log/#disqus_thread">Comments</a>
+         | <a href="/2013/10/the-myth-of-nasas-expensive-space-pens/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>看烦了 <code>git log</code> 的白净输出？</p>
+  <div class="entry-content"><p><img src="/downloads/images/space-pen.jpg" alt="Space Pen" title="Don't touch me..." /></p>
 
-<p><img src="/downloads/images/git_raw.png" alt="Raw git log output" title="Don't touch me..." /></p>
+<p>在软件开发中我们一说到避免过度设计，经常有两个例子会被抬出来，其中一个就是NASA造了昂贵的太空笔，然后俄罗斯用很简单的方案解决问题的故事（另一个大概就是传送带旁边放电风扇的故事）。<a href="http://www.snopes.com/business/genius/spacepen.asp">NASA造笔的故事</a>大概是这样的:</p>
 
-<p>这个看起来如何？</p>
+<blockquote><p>太空竞赛开始的1960年代，NASA面临一大难题，宇航员需要用笔在真空环境下写字。NASA于是展开了研究，花了150万美元开发出了“宇航员笔”，并在商业市场上取得了小小的成功。</p><p>俄罗斯人遇到了同样的问题。</p><p>他们用铅笔搞定。</p></blockquote>
 
-<p><img src="/downloads/images/git_graph.png" alt="Git graph log output" title="Don't touch me..." /></p>
+<p>非常有启发意义的故事，不是吗？只不过这不是真相。其实NASA一开始就在太空中使用铅笔，但是铅笔在零重力下会造成粉尘特别是石墨这类导电的粉尘飘散，所以被替代了。替代品是<a href="http://www.scientificamerican.com/article.cfm?id=fact-or-fiction-nasa-spen">Fisher公司开发的一款可以在极端条件下使用的笔</a>:</p>
 
-<p>用起来其实很简单，只需要：</p>
+<blockquote><p>Paul C. Fisher and his company, the Fisher Pen Company, reportedly invested $1 million to create what is now commonly known as the space pen. None of this investment money came from NASA&#8217;s coffers &#8211; the agency only became involved after the pen was dreamed into existence. In 1965 Fisher patented a pen that could write upside-down, in frigid or roasting conditions (down to minus 50 degrees Fahrenheit or up to 400 degrees F), and even underwater or in other liquids. If too hot, though, the ink turned green instead of its normal blue.</p></blockquote>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">git log --graph --pretty<span class="o">=</span>format:<span class="s1">&#39;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#39;</span> --abbrev-commit
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p>在测试之后，NASA订购了400支Fisher笔，总共花费在一千美元以下。俄罗斯在一年之后也开始订这种笔了。Fisher公司目前仍然在<a href="http://www.spacepen.com/originalastronautspacepen.aspx">销售这种太空笔</a>，并且你可以很方便的买到：<a href="http://www.amazon.com/exec/obidos/ASIN/B0015ZP2AC/ref=nosim/0sil8">Amazon上</a>30来刀，甚至还有一个一看就不是官方网站的<a href="http://www.spacepen.cn/index.php">中文官方网站</a>。</p>
 
-<p>这么长当然是记不住的，可以建shell的alias，也可以添加一个git alias：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">git config --global alias.lg <span class="err">&quot;</span>log --color --graph --pretty<span class="o">=</span>format:<span class="s1">&#39;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#39;</span> --abbrev-commit
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>这样每次只需要：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">git lg
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>如果你是想知道具体发生了哪些修改可以：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">git lg -p
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p><img src="/downloads/images/git_p.png" alt="Git graph log output with p" title="Don't touch me..." /></p>
-
-<p>不过我现在更喜欢的是直接用<a href="https://github.com/jonas/tig">tig</a>：</p>
-
-<p><img src="/downloads/images/tig.png" alt="Tig output" title="Don't touch me..." /></p>
 </div>
   
   
@@ -421,7 +314,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2013/05/the-importance-of-deploy-as-will/">The Importance of Deploy as Will</a></h1>
+      <h1 class="entry-title"><a href="/2013/10/no-clock-on-my-business/">No Clock on My Business</a></h1>
     
     
       <p class="meta">
@@ -437,46 +330,18 @@
   
 
 
-<time datetime="2013-05-29T22:41:00+08:00" pubdate data-updated="true">2013/05/29 22:41</time>
+<time datetime="2013-10-09T00:37:00+08:00" pubdate data-updated="true">2013/10/09 00:37</time>
         
-         | <a href="/2013/05/the-importance-of-deploy-as-will/#disqus_thread">Comments</a>
+         | <a href="/2013/10/no-clock-on-my-business/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>最近公司里面两个比较资深的开发兄弟在我座位旁边进行了一场关于“代码优化到什么程度才算好”的争论。</p>
+  <div class="entry-content"><p><img src="/downloads/images/no_clock_on_my_business.gif" alt="No Clock On My Business" title="Don't touch me..." /></p>
 
-<p>他们一起工作的项目是一个比较小的python模块（几百行的规模吧），用来在嵌入式设备对接入的手机进行一些操作。其中一个人希望把这部分代码重构到“如果需求有这样那样的改变能够承受。并且即便不是我们两个来继续这个模块，任何一个人拿到都能很容易的扩展和维护”；而另一个人则认为“这个模块的规模很小不需要那么大精力做重构，并且在需求出现的时候再开始在现有代码基础上重构比先设想可能的需求来重构有意义”。</p>
-
-<p>他们争的时候都有眼神投射到小弟这边，但是我没有加入：因为其实两个人的说法都还挺有道理的，他们的分歧我感觉是因为背景不同：一个是在我大M出道的（慢工出细活的平台中间件公司），一个是在互联网公司出道的。</p>
-
-<h2 id="dev">追求品质是成为优秀dev的不二法门</h2>
-
-<p>首先，作为一个dev，最优秀的品质大概就是一直想要优化自己的产出(扎克伯格的致员工信里面特别强调了这个很多次）。程序员的产出可以优化的东西是很多的：大到设计、算法、接口、自动化测试和部署，小到变量名、函数名、注释等等。自觉地重构和优化可以给你在技能和思考方式上带来很大的提升。而在自己入行的早期有幸遇到一个严格要求品质的mentor逼着被动的追求重构和优化，并且挺过来（挺过来很重要，要有学习能力并且有胸怀），更是能在工作方式和思考方式上得到很多非常正面的影响。我大M在我呆过的公司里面，这方面绝对是做得最好的。</p>
-
-<h2 id="deploy">什么时候够好要看你的deploy成本</h2>
-
-<p>但是，就这个项目而言，我个人是比较同意后面这位弟兄的看法的。软件项目可以做的重构和优化几乎是没有止境的，如何来衡量什么时候就“够好了”，业界其实有很多标准。但是我自己最喜欢的是Martin Fowler在一个演讲的时候提到的例子。他说：</p>
-
-<blockquote>
-  <p>假设你被要求设计一个电脑控制的手枪，要求在50米内自动瞄准并击中目标。需求只有这么一个。一种做法是设计一个复杂的系统，采集并计算各种可能的变量(风速、海拔、温度等等)，以这些变量为基础瞄准并最后击发。还有一种是设计一个简单的系统，可以快速的击发，并且能够统计每一击距离目标多远。然后它根据收集回来的距离数据校正并迅速击中目标。</p>
-</blockquote>
-
-<p>你可能会因为上下文觉得第二种方式当然是最好的，但其实上面两种方式是没有绝对的最优的：决定性的因素在于子弹的价钱。如果一个测量风速的模块都贵得可以买一车的子弹了，那么谁更好是显而易见的。</p>
-
-<p>对于软件项目而言，Martin Fowler的例子中的目标就是你的用户，子弹的价钱就是你软件的deploy成本(当然，不要忘记了健全的用户反馈机制也很重要)。如果我们在造一个高可靠性的系统，比如发射火箭，显然是没法承受射出去一颗不行再来一颗的；如果我们在做一个小模块或者是小项目，那么一开始就很完美地设计并不断重构它，可能性价比确实不高。</p>
-
-<p>对于Web开发者，理解Martin Fowler的例子显得特别重要。一般来说网站上线的初期(一年左右)，是属于deploy成本比较低的时候。这时候在线的用户一般是抱着试玩的心态，对新功能的渴望远远超过对稳定性的要求，并且能够给出很多反馈意见。这个阶段迅速的deploy新功能，迅速的处理反馈并设计下一个新功能非常重要，而有一定时间的宕机或者回退用户并不那么在乎。所以那位互联网公司出道的兄弟有他那样的想法，也就不足为奇了。</p>
-
-<p>到了用户量上去，或者重要的用户进场之后，deploy的成本就变得很高了。这个时候如果没有一整套严格的测试和运维流程，可能系统就玩不转。</p>
-
-<h2 id="section">结论</h2>
-
-<p>对于我司而言，目前和很长一段时间内的大多数产品都处于子弹不那么贵的阶段。个人感觉目前我们的CI和收集处理反馈这两方面是需要加强的，只有做到了”deploy as will”，我们才有底气来以做互联网的方式来开发我们自己的产品。</p>
-
-<p>而从长期来看，全面的提高项目品质，不仅需要dev自己有重构的自觉性，还需要我们有健全的融入到CI的测试以及成熟的运维团队。</p>
+<blockquote><p>&#8220;There is no clock on my business!&#8221;</p><footer><strong>Coen Brothers</strong> <cite><a href="http://www.imdb.com/title/tt1403865/">True Grit (2010)</a></cite></footer></blockquote>
 </div>
   
   

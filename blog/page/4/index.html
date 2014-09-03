@@ -9,7 +9,7 @@
   <meta name="author" content="Lenciel Li">
 
   
-  <meta name="description" content="最近接连遇到非常tricky的bug。 首先是跟CORS有关的。话说自从google被墙，我们使用了google map或者google font的网站就被客户不停投诉各种打不开。本座只好去找国内可用的CDN，居然发现360的CDN不但有常用的jquery库和fontawsome这些资源， &hellip;">
+  <meta name="description" content="对于从事设计工作的人员，难免要和字体打交道：因为设计主要就是Typography的设计，而Typography的基础就是字体。 随着完成的项目越来越多，机器上的字体也就慢慢多起来，如何快速的找到自己想要的字体变成了问题。特别是大多数设计软件里，字体选择的界面都是一个下拉框： &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -31,14 +31,14 @@
 
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://lenciel.cn/blog/page/4/" />
-<meta property="og:description" content="最近接连遇到非常tricky的bug。 首先是跟CORS有关的。话说自从google被墙，我们使用了google map或者google font的网站就被客户不停投诉各种打不开。本座只好去找国内可用的CDN，居然发现360的CDN不但有常用的jquery库和fontawsome这些资源， &hellip;" />
+<meta property="og:description" content="对于从事设计工作的人员，难免要和字体打交道：因为设计主要就是Typography的设计，而Typography的基础就是字体。 随着完成的项目越来越多，机器上的字体也就慢慢多起来，如何快速的找到自己想要的字体变成了问题。特别是大多数设计软件里，字体选择的界面都是一个下拉框： &hellip;" />
 
 <meta property="og:site_name" content="http://lenciel.cn" />
 <meta property="article:author" content="http://lenciel.cn">
 
 
 
-<meta itemprop="description" content="最近接连遇到非常tricky的bug。 首先是跟CORS有关的。话说自从google被墙，我们使用了google map或者google font的网站就被客户不停投诉各种打不开。本座只好去找国内可用的CDN，居然发现360的CDN不但有常用的jquery库和fontawsome这些资源， &hellip;" />
+<meta itemprop="description" content="对于从事设计工作的人员，难免要和字体打交道：因为设计主要就是Typography的设计，而Typography的基础就是字体。 随着完成的项目越来越多，机器上的字体也就慢慢多起来，如何快速的找到自己想要的字体变成了问题。特别是大多数设计软件里，字体选择的界面都是一个下拉框： &hellip;" />
 
 <!-- Combine multiple fonts into one request -->
 <!--<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic|Patua+One|Yanone+Kaffeesatz" rel="stylesheet" type="text/css">-->
@@ -144,7 +144,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2014/06/tricky-bugs/">Tricky Bugs Are Tricky</a></h1>
+      <h1 class="entry-title"><a href="/2014/07/manage-fonts-on-your-mac/">Mac上使用Suite Fusion管理字体</a></h1>
     
     
       <p class="meta">
@@ -160,80 +160,139 @@
   
 
 
-<time datetime="2014-06-23T13:05:33+08:00" pubdate data-updated="true">2014/06/23 13:05</time>
+<time datetime="2014-07-26T11:36:48+08:00" pubdate data-updated="true">2014/07/26 11:36</time>
         
-         | <a href="/2014/06/tricky-bugs/#disqus_thread">Comments</a>
+         | <a href="/2014/07/manage-fonts-on-your-mac/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>最近接连遇到非常tricky的bug。</p>
+  <div class="entry-content"><p>对于从事设计工作的人员，难免要和字体打交道：因为<a href="http://lenciel.cn/2013/08/buttericks-practical-typography/">设计主要就是Typography的设计</a>，而Typography的基础就是字体。</p>
 
-<p>首先是跟<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS">CORS</a>有关的。话说自从google被墙，我们使用了google map或者google font的网站就被客户不停投诉各种打不开。本座只好去找国内可用的CDN，居然发现<a href="http://libs.useso.com/">360的CDN</a>不但有常用的jquery库和fontawsome这些资源，还对google font做了镜像，于是就用了它。</p>
+<p>随着完成的项目越来越多，机器上的字体也就慢慢多起来，如何快速的找到自己想要的字体变成了问题。特别是大多数设计软件里，字体选择的界面都是一个下拉框：如果你有几百个字体加载到系统，几乎每次选择字体都是一场灾难。</p>
 
-<p>结果用了CDN之后，<a href="fortawesome.github.io/">fontawsome</a>的图标在firefox下显示不正常。curl了一下，发现360的基友们没有正确添加”Access-Control-Allow-Origin”的Header：这就使得像Firefox这样的默认不支持CORS的浏览器拒绝加载不在网站自己域名下的CORS资源。</p>
+<p>这种情况下，难免会希望：</p>
 
-<p>把fontawsome切换到<a href="http://www.staticfile.org/">staticfiles的CDN</a>，问题解决了。</p>
+<ul>
+  <li>对于特定的项目，能够选择特定的字体库</li>
+  <li>对于特定的文档类型，能够选择特定的字体库</li>
+</ul>
 
-<p>接下来的一个更加tricky，我们的蔡天王在写代码的过程中发现表单被填了怪怪的内容，如下图：</p>
+<p>使用Suite Fusion管理字体就可以到达这两个目的。</p>
 
-<p><img src="/downloads/images/2014_06/chrome_auto_fill.png" alt="chrome auto fill" title="Don't touch me..." /></p>
+<h2 id="mac">Mac上的字体集和安装路径</h2>
 
-<p>他检查了js和html，发现这些值不是我们处理表单的时候填的，WTF？</p>
+<p>过去在Windows平台上工作的时候，字体都是放在一个地方的，而在Mac下面字体主要是下面三部分字体集组成：</p>
 
-<p>专治各种疑难杂症的小弟拿到这个bug，首先怀疑的是浏览器那些自动填表的插件，比如<a href="https://lastpass.com/">LastPass</a>，结果用一个禁用了所有插件的Chrome重现了，WTF？</p>
+<ul>
+  <li>System：位于<code>/System/Library/Fonts</code>， 是系统的字体库，所有登录的用户都可以使用，最好不要随便改动</li>
+  <li>Local：位于 <code>/Library/Fonts</code>，和System字体一样也是所有登录的用户都可以使用的。只是它们基本不是随系统安装，而是其他软件装上去的，比如MS Word等等</li>
+  <li>User：位于 <code>~/Library/Fonts</code>，仅对当前登录的用户可用，可以是第三方软件安装的时候安装的（如果你选择了只对当前用户可用），也可以是用户自己安装的字体</li>
+</ul>
 
-<p>于是我尝试着把<code>form</code>和里面的<code>input</code>声明成<code>autocomplete="off"</code>的，结果仍然能重现，WTFFFF？</p>
+<h2 id="suite-fusionfont-vault">启用Suite Fusion的Font Vault</h2>
 
-<p>但是试过了几下变换表单里面的项的位置发现bug的行为模式是：</p>
+<p>Suite Fusion提供了一个可以自己定义路径的Font Vault。然后你如果在<code>Preferences</code>里面把<code>Copy added fonts into the vault</code>勾上，那么所有添加到Suite Fusion的字体都会被放在一个地方。这样的好处是管理方便：保证字体没有重复，并且很容易备份。</p>
 
-<ol>
-  <li>password这个input总是会被用户的密码填写</li>
-  <li>password上面那个input总是会被用用户的用户名填写（哪怕那个input是别的）</li>
-</ol>
+<p>一旦你的字体都在Font Vault里面了，就可以使用Suitcase Fusion删除原来放在各个地方的字体了。在字体清理好之后，你就可以根据不同的项目或者是文档类型建立Set，根据需要来激活它们。</p>
 
-<p>于是就感觉是Chrome的password mananger在干坏事了。google了一下，发现<a href="http://www.theregister.co.uk/2014/04/09/chrome_makes_new_password_grab_in_version_34/">这么个消息</a>：</p>
+<h2 id="section">添加字体和创建字体库</h2>
 
-<blockquote><p>Chrome 34 will now offer to remember and fill password fields in the presence of autocomplete=off.” That means that if a website turns off automatic password collection, Chrome will offer to do it anyway if password manager is enabled.</p></blockquote>
+<p>只需要使用快捷键”Cmd+L”就可以添加字体到字体库。如果默认的字体库不符合你的要求还可以自己新建。添加字体的过程中，SF会扫描字体，提取字体信息，检测是否有错（注意，Suite Fusion不支持orphan outline和orphan bitmap字体）。</p>
 
-<p>古德，瓦力瓦力古德。看了如果一个网站你选择了“记住密码”，Chrome的密码管理器就会被这个域名下包含了<code>$('input[name=password]')</code>的表单激活。并且它居然蠢到直接去找<code>password</code>上面一个input来填入用户名，how convenient…</p>
+<p>并且，如果你本来是用目录来组织字体的，Suite Fusion在支持顶级目录导入，再自动以子目录名创建相应的字体库。</p>
 
-<p>要fix这种行为只能通过在出事的表单里面加上占位用的<code>input</code>来欺骗浏览器。比如我们是在django里面使用<code>django-crispy-form</code>生成表单，就可以重载它的Layout：</p>
+<p>整理字体的界面可以参考下面的截图：</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="bp">self</span><span class="o">.</span><span class="n">helper</span><span class="o">.</span><span class="n">layout</span> <span class="o">=</span>  <span class="n">Layout</span><span class="p">(</span>
-</span><span class="line">    <span class="n">HTML</span><span class="p">(</span><span class="s">&#39;&lt;input style=&quot;display:none&quot; type=&quot;text&quot; name=&quot;fakeusernameremembered&quot;/&gt;&lt;input style=&quot;display:none&quot; type=&quot;password&quot; name=&quot;fakepasswordremembered&quot;/&gt;&#39;</span><span class="p">),</span>
-</span><span class="line">    <span class="s">&#39;name&#39;</span><span class="p">,</span>
-</span><span class="line">    <span class="s">&#39;email&#39;</span><span class="p">,</span>
-</span><span class="line">    <span class="s">&#39;phone&#39;</span><span class="p">,</span>
-</span><span class="line">    <span class="s">&#39;qq&#39;</span><span class="p">,</span>
-</span><span class="line">    <span class="n">InlineCheckboxes</span><span class="p">(</span><span class="s">&#39;user_permissions&#39;</span><span class="p">),</span>
-</span><span class="line">    <span class="s">&#39;password&#39;</span><span class="p">,</span> <span class="s">&#39;confirm_password&#39;</span>
-</span><span class="line"><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p><img src="/downloads/images/2014_07/suite_fusion_5.png" alt="suite fusion 5" title="Don't touch me..." /></p>
 
-<p>更多的相关信息（我希望你知道怎么翻墙），可以看看这里<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>，或者这里<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>，或者这里<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup>。</p>
+<p>建立的这些字体库可以根据你打开的文档类型来进行激活和去激活。并且Suite Fusion提供了很多常见设计软件（比如Photoshop、Sketch等）的插件，让你直接在这些软件里面操作字体库。</p>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/07/font-for-programming/">Retina屏幕上的最佳编程字体</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-13T18:45:27+08:00" pubdate data-updated="true">2014/07/13 18:45</time>
+        
+         | <a href="/2014/07/font-for-programming/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>关于编程使用什么样的字体比较好是一个由来已久的话题 <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> <sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup> <sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup>，但其实在不同分辨率和操作系统的屏幕上，字体的表现也不一样，所以并不应该有一统天下的字体。比如Retina的屏幕上，字体越细滑看起来似乎就好（当然这也是个体感觉），所以本座最近把所有的开发环境默认字体都换成了<a href="http://mplus-fonts.sourceforge.jp/">M+</a>。</p>
+
+<p>除开字体给人的感觉很细腻之外，M+还满足了本座心中好字体的几大标准。</p>
+
+<h2 id="section">窄</h2>
+
+<p><img src="/downloads/images/2014_07/fonts_comparision.png" alt="fonts comparision" title="Don't touch me..." /></p>
+
+<p>可以看到，它比大多数的等宽字体都要窄。这样在本座13寸的笔记本屏幕上，也能在显示80个字符宽度的标线的同时，完整看到最少两个水平分割的编辑区。</p>
+
+<p><img src="/downloads/images/2014_07/pycharm_split.png" alt="pycharm split" title="Don't touch me..." /></p>
+
+<p>当然，如果你对码农们为什么需要显示一根80个字符宽度的标线有疑问：这一方面是<a href="http://programmers.stackexchange.com/questions/148677/why-is-80-characters-the-standard-limit-for-code-width">处女座程序员对历史的坚持</a>，另一方面，如果你经常写出很长的语句，也意味着你的代码质量有问题。</p>
+
+<h2 id="section-1">全</h2>
+
+<p>除开基本的字符，M+因为是出自日本设计师的关系，字符很全。</p>
+
+<p><img src="/downloads/images/2014_07/fonts_map.png" alt="fonts map" title="Don't touch me..." /></p>
+
+<h2 id="section-2">清</h2>
+
+<p>对程序员来说，清楚的字体主要是指：</p>
+
+<ul>
+  <li>要能很方便的区别开大写的字母<code>O</code>和数字<code>0</code></li>
+  <li>要能很方便的区别开数字<code>1</code>，大写的<code>I</code>和小写的<code>l</code></li>
+  <li>要能很方便的区别开<code>.</code>和IDE显示的Whitespace</li>
+</ul>
+
+<p>M+在这方面也是非常棒的：</p>
+
+<p><img src="/downloads/images/2014_07/fonts_clear.png" alt="fonts clear" title="Don't touch me..." /></p>
+
+<p>因为是开源字体，M+是可以自由下载和使用的。但因为你在中国，可能访问不了Sourceforge，不如下载<a href="http://pan.baidu.com/s/1gdgk6VT">我分享的zip包</a>吧，lol。</p>
 
 <div class="footnotes">
   <ol>
     <li id="fn:1">
-      <p><a href="https://groups.google.com/a/chromium.org/forum/#!msg/security-dev/wYGThW5WRrE/qiWrKwJ79S4J">PSA: Ignoring autocomplete=’off’ by default for password manager</a>.<a href="#fnref:1" rel="reference">&#8617;</a></p>
+      <p><a href="http://hivelogic.com/articles/top-10-programming-fonts">top 10 programming fonts</a>.<a href="#fnref:1" rel="reference">&#8617;</a></p>
     </li>
     <li id="fn:2">
-      <p><a href="https://groups.google.com/a/chromium.org/forum/#!topic/chromium-dev/zhhj7hCip5c">Issue 352347 - chromium - Don’t autofill passwords where autocomplete=’off’</a>.<a href="#fnref:2" rel="reference">&#8617;</a></p>
+      <p><a href="http://hivelogic.com/articles/anonymous-pro-programming-monospace-font">Anonymous pro programming font</a>.<a href="#fnref:2" rel="reference">&#8617;</a></p>
     </li>
     <li id="fn:3">
-      <p><a href="https://blog.0xbadc0de.be/archives/124">The war against autocomplete=off: let my browser remember passwords</a>.<a href="#fnref:3" rel="reference">&#8617;</a></p>
+      <p><a href="http://www.slant.co/topics/67/~what-are-the-best-programming-fonts">What are the best programming fonts</a>.<a href="#fnref:3" rel="reference">&#8617;</a></p>
     </li>
   </ol>
 </div>
@@ -249,7 +308,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2014/05/better-dictionary-on-mac/">Better Dictionary on Mac</a></h1>
+      <h1 class="entry-title"><a href="/2014/07/fuck-the-gfw-with-ssh-tunnel/">Mac上自启动autossh</a></h1>
     
     
       <p class="meta">
@@ -265,479 +324,111 @@
   
 
 
-<time datetime="2014-05-23T14:02:14+08:00" pubdate data-updated="true">2014/05/23 14:02</time>
+<time datetime="2014-07-11T20:14:20+08:00" pubdate data-updated="true">2014/07/11 20:14</time>
         
-         | <a href="/2014/05/better-dictionary-on-mac/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Mac上很贴心的提供了词典，并且还绑定了快捷键：在任何页面按下”Ctrl+Cmd+D”，就会有词义解释的界面弹出。不过内置的<code>New Oxford American Dictionary</code>比较的弱，给人的感觉词条的水准就像《新华字典》一样单薄，所以换成了编了好几十年又修订了好几十年的<a href="http://zh.wikipedia.org/wiki/%E9%9F%A6%E6%B0%8F%E8%AF%8D%E5%85%B8">韦氏词典</a>，两者的差距还是明显的。</p>
-
-<p>这是自带词典对pathos的解释：</p>
-
-<blockquote><p>pathos /ˈpāˌTHäs/, a quality that evokes pity or sadness</p></blockquote>
-
-<p>这是《韦氏词典》的：</p>
-
-<blockquote><p>pathos /ˈpāˌTHäs/, n. </p><p>1. The quality or character of those emotions, traits, or experiences which are personal, and therefore restricted and evanescent; transitory and idiosyncratic dispositions or feelings as distinguished from those which are universal and deep-seated in character; — opposed to ethos.</p><p>2. That quality or property of anything which touches the feelings or excites emotions and passions, esp., that which awakens tender emotions, such as pity, sorrow, and the like; contagious warmth of feeling, action, or expression; pathetic quality; as, the pathos of a picture, of a poem, or of a cry.</p></blockquote>
-
-<p>安装的方法也挺简单：</p>
-
-<ul>
-  <li>如果下载的是<a href="http://pan.baidu.com/s/1o6z67dK#dir/path=%2Fdictionary">这样</a>的<code>dictionary</code>文件，直接拷贝到<code>~/Library/Dictionaries</code></li>
-  <li>如果是<a href="http://pan.baidu.com/s/1i35ik7N">这样</a>的raw文件，需要运行DictUnifier应用编译</li>
-</ul>
-
-<p>安装完毕运行<code>Dictionary</code>应用，勾选你期望出现的字典和顺序即可，我启用了《朗道英汉词典》、《韦氏词典》和《维基百科》:</p>
-
-<p><img src="/downloads/images/2014_05/apple_dict_effect.png" title="Apple Dict" alt="Don't touch me" width="60%" /></p>
-
-<p>另外，词典的样式其实是用css定义的，就在每个字典文件的Contetns目录，比如：<code>~/Library/Dictionaries/dictd_www.dict.org_web1913.dictionary/Contents/DefaultStyle.css</code>。如果你不满意字典出来的样子，可以自定义格式。</p>
-
-<p>最后，这些词典其实都是linux上著名的国产软件<a href="http://en.wikipedia.org/wiki/StarDict">stardict</a>的文件格式（写到这里，又想起stardict的作者<a href="http://www.huzheng.org/aboutme.php">胡正</a>），所以要在<a href="https://itunes.apple.com/us/app/dictionary-universal/id312088272?mt=8">手机上使用</a>也是很容易的事情。</p>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2014/05/fix-gist-style-in-octopress/">Octopress里插入带中文Gist的问题和解决</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-05-17T13:00:38+08:00" pubdate data-updated="true">2014/05/17 13:00</time>
-        
-         | <a href="/2014/05/fix-gist-style-in-octopress/#disqus_thread">Comments</a>
+         | <a href="/2014/07/fuck-the-gfw-with-ssh-tunnel/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p><a href="https://gist.github.com/">Gist</a>是Github提供用来管理和分享<a href="https://gist.github.com/lenciel/4105165">代码片断</a>或者<a href="https://gist.github.com/lenciel/3462897">文档片断</a>的服务。和传统的<a href="http://en.wikipedia.org/wiki/Snippet_(programming)">snippet</a>管理系统相比，Gist因为实际上依托了Github的实现技术，所以具有存储在云端、自动的版本化、语法高亮支持的语言种类齐全、分享的便利性高等等优势。</p>
+  <div class="entry-content"><p>If you know what it is then you know what it is. Let’s fuck the GFW.</p>
 
-<p><a href="http://octopress.org">Octopress</a>里面引用你创建的gist的好处是显而易见的：你需要分享的<strong>内容</strong>在Gist那边被更好的管理了，而在日志里面用下面这样的语句就可以很容易的插入gist里面的内容:</p>
-
-<div class="highlight"><pre><code class="text">{% gist gist_id [filename] %}
-</code></pre></div>
-
-<p>比如<a href="http://lenciel.cn/2014/05/web-development-skill-set-and-reading-list/">上篇文章</a>，理论上源代码就是这么一句：</p>
-
-<div class="highlight"><pre><code class="text">{% gist lenciel/637812a7dcbe8341b07b web_skill_list.md %}
-</code></pre></div>
-
-<p>当然之所以说理论上，是因为首先Octopress的markdown插件对unicode的支持<a href="http://tokkonopapa.github.io/blog/2013/02/23/octopress-toc/">是有bug</a>的。所以直接插入带中文的gist在build的时候会看到<code>Liquid Exception</code>:</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">&gt;&gt;&gt; Compass is watching <span class="k">for </span>changes. Press Ctrl-C to Stop.
-</span><span class="line">Liquid Exception: incompatible character encodings: UTF-8 and ASCII-8BIT in 2014-05-16-web-development-skill-set-and-reading-list.markdown
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>解决起来也很简单，只需要在<code>lib/jekyll/converters/markdown.rb</code>里面强制设定encoding就可以了：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>lib/jekyll/converters/markdown.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-</pre></td><td class="code"><pre><code class="diff"><span class="line"><span class="gu">@@ -120,7 +120,7 @@ def convert(content)</span>
-</span><span class="line">           rd = RDiscount.new(content, *@rdiscount_extensions)
-</span><span class="line">           html = rd.to_html
-</span><span class="line">           if rd.generate_toc and html.include?(@config[&#39;rdiscount&#39;][&#39;toc_token&#39;])
-</span><span class="line"><span class="gd">-            html.gsub!(@config[&#39;rdiscount&#39;][&#39;toc_token&#39;], rd.toc_content)</span>
-</span><span class="line"><span class="gi">+            html.gsub!(@config[&#39;rdiscount&#39;][&#39;toc_token&#39;], rd.toc_content.force_encoding(&#39;utf-8&#39;))</span>
-</span><span class="line">           end
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>接下来就是render出来的效果，样子丑到让人无法直视：</p>
-
-<p><img src="/downloads/images/2014_05/gist_render_output_orig.jpg" alt="original gist render output" title="Don't touch me..." /></p>
-
-<p>大概看了一下Octopress的文档，原来代码片断的样式（包括gist的渲染样式）都在<a href="https://github.com/imathis/octopress/blob/master/.themes/classic/sass/partials/_syntax.scss">_syntax.scss</a>里面。这个文件2012年就没有更新过了，但是github的gist输出在2013年有过变化，所以就有些不匹配了。</p>
-
-<p>打开自己的模板，大概调了一下这个sass，主要是和其他的代码高亮一致：</p>
-
-<p><img src="/downloads/images/2014_05/gist_render_output.jpg" alt="current gist render output" title="Don't touch me..." /></p>
-
-<p>调整的地方见<a href="https://gist.github.com/lenciel/ecc8b3805ed346727abe">这里</a>:</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>_sass/partials/_syntax.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span>
-<span class="line-number">30</span>
-<span class="line-number">31</span>
-<span class="line-number">32</span>
-<span class="line-number">33</span>
-<span class="line-number">34</span>
-<span class="line-number">35</span>
-<span class="line-number">36</span>
-<span class="line-number">37</span>
-<span class="line-number">38</span>
-<span class="line-number">39</span>
-<span class="line-number">40</span>
-<span class="line-number">41</span>
-<span class="line-number">42</span>
-<span class="line-number">43</span>
-<span class="line-number">44</span>
-<span class="line-number">45</span>
-<span class="line-number">46</span>
-<span class="line-number">47</span>
-<span class="line-number">48</span>
-<span class="line-number">49</span>
-<span class="line-number">50</span>
-<span class="line-number">51</span>
-<span class="line-number">52</span>
-<span class="line-number">53</span>
-<span class="line-number">54</span>
-<span class="line-number">55</span>
-<span class="line-number">56</span>
-<span class="line-number">57</span>
-<span class="line-number">58</span>
-<span class="line-number">59</span>
-<span class="line-number">60</span>
-<span class="line-number">61</span>
-<span class="line-number">62</span>
-<span class="line-number">63</span>
-<span class="line-number">64</span>
-<span class="line-number">65</span>
-<span class="line-number">66</span>
-<span class="line-number">67</span>
-<span class="line-number">68</span>
-<span class="line-number">69</span>
-<span class="line-number">70</span>
-<span class="line-number">71</span>
-<span class="line-number">72</span>
-<span class="line-number">73</span>
-<span class="line-number">74</span>
-<span class="line-number">75</span>
-<span class="line-number">76</span>
-<span class="line-number">77</span>
-<span class="line-number">78</span>
-</pre></td><td class="code"><pre><code class="diff"><span class="line"><span class="gh">diff --git a/46501e4:sass/partials/_syntax.scss b/02b0441:sass/partials/_syntax.scss</span>
-</span><span class="line"><span class="gh">index 137d475..5465286 100644</span>
-</span><span class="line"><span class="gd">--- a/46501e4:sass/partials/_syntax.scss</span>
-</span><span class="line"><span class="gi">+++ b/02b0441:sass/partials/_syntax.scss</span>
-</span><span class="line"><span class="gu">@@ -22,10 +22,6 @@</span>
-</span><span class="line">   @include border-radius(0);
-</span><span class="line"> }
-</span><span class="line">
-</span><span class="line"><span class="gd">-.line-data {</span>
-</span><span class="line"><span class="gd">-   font-size: 13px;</span>
-</span><span class="line"><span class="gd">-}</span>
-</span><span class="line"><span class="gd">-</span>
-</span><span class="line"> figure.code, .gist-file, pre {
-</span><span class="line">   @include box-shadow(rgba(#000, .06) 0 0 10px);
-</span><span class="line">   .highlight pre { @include box-shadow(none); }
-</span><span class="line"><span class="gu">@@ -43,10 +39,8 @@ html .gist .gist-file {</span>
-</span><span class="line">     margin-bottom: 0;
-</span><span class="line">   }
-</span><span class="line">   .gist-syntax {
-</span><span class="line"><span class="gd">-    background: #01222d !important;</span>
-</span><span class="line"><span class="gd">-    color: #d5dee2 !important;</span>
-</span><span class="line"><span class="gd">-    padding: 0 2em;</span>
-</span><span class="line">     border-bottom: 0 !important;
-</span><span class="line"><span class="gi">+    background: none !important;</span>
-</span><span class="line">     .gist-highlight {
-</span><span class="line">       background: $base03 !important;
-</span><span class="line">     }
-</span><span class="line"><span class="gu">@@ -57,17 +51,15 @@ html .gist .gist-file {</span>
-</span><span class="line">   }
-</span><span class="line">   .gist-meta {
-</span><span class="line">    padding: .6em 0.8em;
-</span><span class="line"><span class="gi">+   border: 1px solid lighten($base02, 2) !important;</span>
-</span><span class="line"><span class="gi">+   color: $base01;</span>
-</span><span class="line">    font-size: .7em !important;
-</span><span class="line">    @if $solarized == light {
-</span><span class="line"><span class="gd">-     color: $base01;</span>
-</span><span class="line"><span class="gd">-     border: 1px solid lighten($base02, 2) !important;</span>
-</span><span class="line">      background: lighten($base03, 2) $noise-bg;
-</span><span class="line">      border: 1px solid $pre-border !important;
-</span><span class="line">      border-top: 1px solid lighten($base03, 2) !important;
-</span><span class="line">    } @else {
-</span><span class="line"><span class="gd">-     background: #01222d $noise-bg;</span>
-</span><span class="line"><span class="gd">-     text-shadow: none !important;</span>
-</span><span class="line"><span class="gd">-     color: #d5dee2;</span>
-</span><span class="line"><span class="gi">+     background: $base02 $noise-bg;</span>
-</span><span class="line">    }
-</span><span class="line">    @extend .sans;
-</span><span class="line">    line-height: 1.5em;
-</span><span class="line"><span class="gu">@@ -77,7 +69,7 @@ html .gist .gist-file {</span>
-</span><span class="line">       &amp;:hover { color: $base1 !important; }
-</span><span class="line">     }
-</span><span class="line">     a[href*=&#39;#file&#39;] {
-</span><span class="line"><span class="gd">-      position: absolute; top: 0; left:0; right:0px;</span>
-</span><span class="line"><span class="gi">+      position: absolute; top: 0; left:0; right:-10px;</span>
-</span><span class="line">       color: #474747 !important;
-</span><span class="line">       @extend .code-title;
-</span><span class="line">       &amp;:hover { color: $link-color !important; }
-</span><span class="line"><span class="gu">@@ -221,7 +213,7 @@ pre, .highlight, .gist-highlight {</span>
-</span><span class="line">   &amp;::-webkit-scrollbar-thumb:horizontal { background: $solar-scroll-thumb;  -webkit-border-radius: 4px; border-radius: 4px }
-</span><span class="line"> }
-</span><span class="line">
-</span><span class="line"><span class="gd">-.highlight code {</span>
-</span><span class="line"><span class="gi">+.highlight code { </span>
-</span><span class="line">   @extend .pre-code; background: #000;
-</span><span class="line"> }
-</span><span class="line"> figure.code {
-</span><span class="line"><span class="gu">@@ -267,11 +259,3 @@ figure.code {</span>
-</span><span class="line">   text-shadow: #cbcccc 0 1px 0;
-</span><span class="line">   padding-left: 3em;
-</span><span class="line"> }
-</span><span class="line"><span class="gd">-</span>
-</span><span class="line"><span class="gd">-.gist-file {</span>
-</span><span class="line"><span class="gd">-  font-size:.8em !important;</span>
-</span><span class="line"><span class="gd">-}</span>
-</span><span class="line"><span class="gd">-</span>
-</span><span class="line"><span class="gd">-table.lines{</span>
-</span><span class="line"><span class="gd">-  width: 100%;</span>
-</span><span class="line"><span class="gd">-}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2014/05/web-development-skill-set-and-reading-list/">Web开发知识结构</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-05-16T14:28:04+08:00" pubdate data-updated="true">2014/05/16 14:28</time>
-        
-         | <a href="/2014/05/web-development-skill-set-and-reading-list/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>这个list保存在了一个专门的<a href="https://gist.github.com/lenciel/637812a7dcbe8341b07b">Gist里面</a>，方便更新。</p>
-
-<div><script src="https://gist.github.com/637812a7dcbe8341b07b.js?file=web_skill_list.md"></script>
-<noscript><pre><code>## 基础知识
-- 计算机软硬件基础
-- 计算机网络
-- 操作系统
-- 数据结构和算法
-- 设计模式
-- 以及其他各种你应该懂的东西
-
-## 前端开发
-- 前端标准/规范
-    - [HTTP1.1](http://www.w3.org/Protocols/rfc2616/rfc2616.html)
-    - [ECMAScript3/5](http://www.ecma-international.org/publications/standards/Ecma-262.htm)
-    - [W3C/DOM/BOM/XHTML/XML/JSON/JSONP](http://www.w3.org/TR/)
-    - [CommonJS Modules](http://wiki.commonjs.org/wiki/Modules/1.0)/[AMD](https://github.com/amdjs/amdjs-api/wiki/AMD)
-    - [HTML5](http://www.w3.org/html/wg/drafts/html/master/)/[CSS3](http://www.w3.org/Style/CSS/specs.en.html)
-- 前端库/框架
-    - [jQuery](http://jquery.com/)/[Underscore](http://underscorejs.org/)/[Mootools](http://mootools.net/)/[Prototype.js](http://www.prototypejs.org/)
-    - [YUI3](http://yuilibrary.com/projects/yui3/)/[Dojo](http://dojotoolkit.org/)/[ExtJS](http://www.sencha.com/products/extjs)/[KISSY](http://docs.kissyui.com/)
-    - [Backbone](http://backbonejs.org/)/[KnockoutJS](http://knockoutjs.com/)/[Emberjs](http://emberjs.com/)
-    - [AngularJS](http://angularjs.org/)
-        - [Batarang](https://chrome.google.com/webstore/detail/angularjs-batarang/ighdmehidhipcmcojjgiloacoafjmpfk)
-    - [Bootstrap](http://getbootstrap.com/)
-    - [Semantic UI](http://www.semantic-ui.com/)
-    - [Juice UI](http://juiceui.com/)
-    - [Web Atoms](http://webatomsjs.neurospeech.com/)
-- 模板引擎(TBA)
-- 静态站点生成器(TBA)
-- 编程语言
-    - [JavaScript](https://developer.mozilla.org/en-US/docs/JavaScript)/[Node.js](http://nodejs.org/)
-    - [CoffeeScript](http://coffeescript.org/)
-    - [TypeScript](http://www.typescriptlang.org/)        
-    - [HTML](http://www.w3.org/html/)/[HTML5](http://www.w3.org/TR/html5/)
-    - [CSS/CSS3](http://www.w3.org/Style/CSS/)
-- 做图切图
-    - [PhotoShop](http://www.photoshop.com/products/photoshop)/[Paint.net](http://www.getpaint.net/)/[Fireworks](http://www.adobe.com/cn/products/fireworks.html)/[GIMP](http://www.gimp.org/)
-- 代码质量
-    - Coding style
-        - [JSLint](http://www.jslint.com/)/[JSHint](http://www.jshint.com/)/[jscs](https://github.com/mdevils/node-jscs)
-        - [CSSLint](http://csslint.net/)
-        - [Markup Validation Service](http://validator.w3.org/)
-    - 单元测试
-        - [QUnit](http://qunitjs.com/)/[Jasmine](http://pivotal.github.com/jasmine/)/[Jest](http://facebook.github.io/jest/index.html)
-        - [Mocha](http://visionmedia.github.com/mocha/)/[Should](https://github.com/visionmedia/should.js/)/[Chai](http://chaijs.com/)/[Expect](https://github.com/LearnBoost/expect.js/)
-        - [Unit JS](http://unitjs.com/)
-    - 自动化测试
-        - [Selenium WebDriver](http://docs.seleniumhq.org/docs/03_webdriver.jsp)/[Karma Runner](https://github.com/karma-runner/karma)/[Sahi](http://sahi.co.in/)
-        - [phantomjs](http://phantomjs.org/)
-- 性能
-    - [JSPerf](http://jsperf.com/)
-    - [YSlow 35 rules](http://developer.yahoo.com/performance/rules.html)
-    - [PageSpeed](https://developers.google.com/speed/pagespeed/)
-    - [HTTPWatch](http://www.httpwatch.com/)
-    - [DynaTrace's Ajax](http://www.compuware.com/application-performance-management/dynatrace-ajax-download.html)
-    - [高性能JavaScript](http://book.douban.com/subject/5362856/)
-- 部署流程
-    - 压缩合并
-        - [YUI Compressor](http://developer.yahoo.com/yui/compressor/)
-        - [Google Clousure Complier](https://developers.google.com/closure/compiler/)
-        - [UglifyJS](https://github.com/mishoo/UglifyJS)
-        - [CleanCSS](https://github.com/GoalSmashers/clean-css)
-    - 文档输出
-        - [JSDoc](http://code.google.com/p/jsdoc-toolkit/)
-        - [Dox](https://github.com/visionmedia/dox)/[Doxmate](https://github.com/JacksonTian/doxmate)/[Grunt-Doxmate](https://github.com/luozhihua/grunt-doxmate)
-    - 项目构建工具
-        - [make](http://www.gnu.org/software/make/)/[Ant](http://ant.apache.org/)
-        - [GYP](http://code.google.com/p/gyp/)
-        - [Gulp](http://gulpjs.com)
-        - [Grunt](http://gruntjs.com/)
-        - [Yeoman](http://yeoman.io/)
-        - [FIS](http://fis.baidu.com/)
-        - [Mod](https://github.com/modulejs/modjs)
-- 代码组织
-    - 类库模块化
-        - [CommonJS](http://www.commonjs.org/)/AMD
-        - [YUI3模块](http://yuilibrary.com/projects/yui3/)
-    - 业务逻辑模块化
-        - [bower](https://github.com/twitter/bower)/[component](https://github.com/component/component)
-    - 文件加载
-        - [LABjs](http://labjs.com/)
-        - [SeaJS](http://seajs.org/)/[Require.js](http://requirejs.org/)
-    - 模块化预处理器
-        - [Browserify](https://github.com/substack/node-browserify)
-- 安全
-    - [CSRF](http://en.wikipedia.org/wiki/Cross-site_request_forgery)/[XSS](http://en.wikipedia.org/wiki/Cross-site_scripting)
-    - ADsafe/Caja/Sandbox
-- 移动Web
-    - HTML5/CSS3
-    - [响应式网页设计](http://zh.wikipedia.org/wiki/%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BD%91%E9%A1%B5%E8%AE%BE%E8%AE%A1)
-    - [Zeptojs](http://zeptojs.com/)/[iScroll](http://cubiq.org/iscroll)
-    - V5/[Sencha Touch](http://www.sencha.com/products/touch)
-    - [PhoneGap](http://phonegap.com/)
-    - [jQuery Mobile](http://jquerymobile.com/)
-- 可视化
-    - SVG/Canvas/VML
-    - SVG: [D3](http://d3js.org/)/[Raphaël](http://raphaeljs.com/)/[Snap.svg](http://snapsvg.io/)/[DataV](http://datavlab.org/datavjs/)
-    - Canvas: [CreateJS](http://www.createjs.com/)/[KineticJS](http://kineticjs.com/)
-
-## 后端开发(TBA)
-- 编程语言
-- 网页服务器
-    - [Nginx](http://nginx.org/en/)
-    - [Apache](http://httpd.apache.org/)
-    - [Lighttpd](http://www.lighttpd.net/)
-- 数据库
-    - SQL
-    - [MySQL](http://www.mysql.com/)/[PostgreSQL](http://www.postgresql.org/)/[Oracle](http://www.oracle.com/us/products/database/overview/index.html)
-    - [MongoDB](http://www.mongodb.org/)/[CouchDB](http://couchdb.apache.org/)
-
-## 开发工具
-- 浏览器
-    - IE6/[7](http://www.microsoft.com/en-US/download/details.aspx?id=2)/[8](http://windows.microsoft.com/en-US/internet-explorer/downloads/ie-8)/[9](http://windows.microsoft.com/en-US/internet-explorer/downloads/ie-9/worldwide-languages)/[10](http://windows.microsoft.com/en-US/internet-explorer/ie-10-worldwide-languages)/[11](http://windows.microsoft.com/en-US/internet-explorer/ie-11-worldwide-languages) (Trident)
-    - [Firefox](http://www.mozilla.org/en-US/) (Gecko)
-    - [Chrome](http://www.google.com/chrome)/[Chromium](http://www.chromium.org/) (Blink)
-    - [Safari](http://www.apple.com/safari/) (WebKit)
-    - [Opera](http://www.opera.com/) (Blink)
-- 编辑器和IDE
-    - [VIM](http://www.vim.org/)/[Sublime Text2](http://www.sublimetext.com/)
-    - [Notepad++](http://notepad-plus-plus.org/)/[EditPlus](http://www.editplus.com/)
-    - [WebStorm](http://www.jetbrains.com/webstorm/)
-    - [Emacs](http://www.gnu.org/software/emacs/)  [EmacsWiki](http://emacswiki.org)
-    - [Brackets](http://brackets.io)
-    - [Komodo IDE / Edit](http://www.activestate.com/komodo-edit)
-    - [Eclipse](http://www.eclipse.org/)
-    - [Visual Studio](http://www.visualstudio.com/)
-    - [NetBeans](https://netbeans.org/)
-    - [Cloud9 IDE](http://c9.io/)
-- 调试工具
-    - [Firebug](http://getfirebug.com/)/[Firecookie](https://addons.mozilla.org/en-US/firefox/addon/firecookie/)
-    - [YSlow](http://developer.yahoo.com/yslow/)
-    - [IEDeveloperToolbar](http://www.microsoft.com/en-us/download/details.aspx?id=18359)/[IETester](http://www.my-debugbar.com/wiki/IETester/HomePage)
-    - [Fiddler](http://www.fiddler2.com/fiddler2/)
-    - [Chrome Dev Tools](https://developers.google.com/chrome-developer-tools/)
-    - [Dragonfly](http://www.opera.com/dragonfly/)
-    - [DebugBar](http://www.debugbar.com/)
-    - [Venkman](https://developer.mozilla.org/en-US/docs/Venkman)
-- 版本管理
-    - [Git](git-scm.com/)/[SVN](http://subversion.apache.org/)/[Mercurial](http://mercurial.selenic.com/)
-    - [Github](https://github.com/)/[Bitbucket](https://bitbucket.org/)/[Google Code](http://code.google.com/hosting/)/[Gitorious](https://gitorious.org/)/[GNU Savannah](http://savannah.gnu.org/)/[Launchpad](https://launchpad.net/)/[SourceForge](http://sourceforge.net/)/[Gitlab](http://gitlab.org/)
-    
-## 部署运维(TBA)
-- 代码编译与发布
-- 服务器部署
-- 服务器监控
-- 服务器日志分析
-
-## Softskill(TBA)
-- 知识管理/总结分享
-- 沟通技巧/团队协作
-- 需求管理/PM
-- 交互设计/可用性/可访问性知识
-
-## 书籍推荐(TBA)
+<div><script src="https://gist.github.com/d353a04a3a7bc0278ec6.js?file=autossh.lenciel.plist"></script>
+<noscript><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;
+&lt;plist version=&quot;1.0&quot;&gt;
+&lt;dict&gt;
+  &lt;key&gt;KeepAlive&lt;/key&gt;
+  &lt;true/&gt;
+  &lt;key&gt;Label&lt;/key&gt;
+  &lt;string&gt;autossh.lenciel&lt;/string&gt;
+  &lt;key&gt;ProgramArguments&lt;/key&gt;
+  &lt;array&gt;
+    &lt;string&gt;/opt/boxen/homebrew/bin/autossh&lt;/string&gt;
+    &lt;string&gt;-M&lt;/string&gt;
+    &lt;string&gt;20000&lt;/string&gt;
+    &lt;string&gt;-f&lt;/string&gt;
+    &lt;string&gt;-i&lt;/string&gt;
+    &lt;string&gt;~/.ssh/fuckgfw&lt;/string&gt;
+    &lt;string&gt;-N&lt;/string&gt;
+    &lt;string&gt;-L&lt;/string&gt;
+    &lt;string&gt;0.0.0.0:3189:localhost:31280&lt;/string&gt;
+    &lt;string&gt;remotehost&lt;/string&gt;
+  &lt;/array&gt;
+  &lt;key&gt;RunAtLoad&lt;/key&gt;
+  &lt;true/&gt;
+  &lt;key&gt;WorkingDirectory&lt;/key&gt;
+  &lt;string&gt;/opt/boxen/&lt;/string&gt;
+  &lt;key&gt;StandardErrorPath&lt;/key&gt;
+  &lt;string&gt;/opt/boxen/log/autossh/autossh.log&lt;/string&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;
 </code></pre></noscript></div>
 
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/06/quartz-composer-and-origami/">Quartz Composer和Origami试玩</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-26T22:57:05+08:00" pubdate data-updated="true">2014/06/26 22:57</time>
+        
+         | <a href="/2014/06/quartz-composer-and-origami/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>这篇不是教程，不会讲述怎么安装需要的软件，怎么用它们来做软件原型。只是记录分享一下我对这套东西的感受和评价。</p>
+
+<p>动态设计，也就是<a href="http://v.youku.com/v_show/id_XMzIyNTk1NTMy.html">Motion Design</a>或者是<a href="http://en.wikipedia.org/wiki/Motion_graphic_design">Motion Graphic Design</a>其实已经火了很长一段时间了：你只要经常去Dribble上逛就可以看到很多非常优秀的作品。国内的团队经过一段时间的学习和追赶，目前这方面的水平也很不错：从去年开始，BAT的大多数App的splash或者tutorial都已经不再是静态的图片而是动态图了。</p>
+
+<p>当然，除开看起来更加狂炫帅富屌的splash、tutorial，本座看重动态设计的原因其实是它在原型阶段的作用：如果UX的团队会制作动态图，就能展示软件实际的操作流程，效果比传统的需要脑补的静态Wireframe要好太多。</p>
+
+<p>不过从本座开始关注这种设计方法到现在，主流的动态设计流程一直是先在PS里面做静态资源，然后在AE里面导入静态资源做动画，最后生成mp4格式视频，然后配合QuickTime或者别的什么软件生成gif（比较详细的描述可以看看<a href="http://www.uisdc.com/the-internet-motion-graphic">这篇文章</a>)。</p>
+
+<p>这种方式对本座来说上手就略显太重，换句话说，不是财大气粗的BAT，需要考虑：</p>
+
+<ol>
+  <li>PS+AE很贵</li>
+  <li>会这两个东西的UX人才很贵</li>
+</ol>
+
+<p>接下来事情似乎有了转机：<a href="http://quartzcomposer.com/">Quartz Composer</a>和<a href="http://facebook.github.io/origami/">Origami</a>的组合自从Facebook的Paper推出之后在网络上被风风火火的讨论了一把，然后不久<a href="http://www.fastcodesign.com/3025932/facebook-develops-a-photoshop-for-interaction-design-and-its-free-for-anyone-to-use">Facebook就开源了后者</a>。</p>
+
+<p>在有Origami之前，本座就看Facebook的设计主管说他们内部用QC做原型设计就去学习了一下，结果感觉实在是云里雾里。这次又了Origami之后，经过几个小时的试玩，我得到的感受如下。</p>
+
+<p>首先，这套免费的工具非常给力：除开不要钱，不难用之外，给力主要是因为QC的patch设计带来的高度可重用性：其实Origami从根本上来说就是一堆patch而已。</p>
+
+<p>其次，这套工具也称不上“photoshop for interaction design”。你仍然需要使用PS（或者Sketch等等做图的软件）做上游，把静态资源做好，然后导入到QC里面完成动态效果。这种”设计-切图-导入-动态化”的模式其实还蛮像一度风靡网络的flash的制作流程。</p>
+
+<p>最后，如果你是程序员，习惯了写CSS/JS来控制界面，要适应QC的图形化编程（类似VB那样先选控件再改属性然后绑事件）还是蛮蛋疼的。比如它里面的设定偏移量来定位元素的方式，就让本座觉得用起来非常虐心。</p>
+<p><img src="/downloads/images/2014_06/qc_yx_intro.gif" title="intro" alt="Don't touch me" width="35%" style="margin-left:30px" /><img src="/downloads/images/2014_06/qc_yx_bd.gif" title="bd" alt="Don't touch me" width="38%" style="margin-left:30px" /></p>
 </div>
   
   
