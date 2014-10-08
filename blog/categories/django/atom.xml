@@ -4,7 +4,7 @@
   <title><![CDATA[Category: django | @Lenciel]]></title>
   <link href="http://lenciel.cn/blog/categories/django/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2014-09-22T03:04:55+08:00</updated>
+  <updated>2014-10-08T20:41:09+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -29,16 +29,16 @@
 
 <p>还是以之前的那个项目来作为例子，我们首先创建一个migration file：</p>
 
-<p>```bash
+<p>&#8220;`bash
 $ python manage.py makemigrations –empty ts_data</p>
 
 <p>Migrations for ts_data:
-  0003<em>auto</em>20140811_0110.py:
-```</p>
+  0003_auto_20140811_0110.py:
+&#8220;`</p>
 
 <p>它的内容如下：</p>
 
-<p>```python
+<p>&#8220;`python
 # -<em>- coding: utf-8 -</em>-
 from <strong>future</strong> import unicode_literals</p>
 
@@ -56,7 +56,7 @@ operations = [
 
 <p>我们在里面加入一个<code>RunPython</code>的部分，来导入数据：</p>
 
-<p>```python
+<p>&#8220;`python
 # -<em>- coding: utf-8 -</em>-
 from <strong>future</strong> import unicode_literals</p>
 
@@ -125,14 +125,14 @@ $ python manage.py startapp ts_data
 
 <p>然后创建一个model到subl ts_data/models.py：</p>
 
-<p>```python
+<p>&#8220;`python
 from django.db import models</p>
 
 <h1 id="create-your-models-here">Create your models here.</h1>
 <p>class PingPongPrice(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     price = models.DecimalField(max_digits=5, decimal_places=2)
-```</p>
+&#8220;`</p>
 
 <p>subl django_migration_test/settings.py</p>
 
@@ -254,7 +254,7 @@ Running migrations:
 
 <p>在我们运行<code>python manage.py migrate &lt;app_name&gt;</code>究竟发生了什么？实际上，Django会创建一个python文件来描述如何完成这个migration，以前面的ts_data为例，这个文件位于<code>ts_data/migrations/0001_initial.py</code>，内容如下：</p>
 
-<p>```python
+<p>&#8220;`python
 # -<em>- coding: utf-8 -</em>-
 from <strong>future</strong> import unicode_literals</p>
 
@@ -341,7 +341,7 @@ Migrations for 'ts_data':
 
 <p>可以看到这次生成的migration文件里面有<code>AlterField</code>操作：</p>
 
-<p>```python
+<p>&#8220;`python
 # -<em>- coding: utf-8 -</em>-
 from <strong>future</strong> import unicode_literals</p>
 

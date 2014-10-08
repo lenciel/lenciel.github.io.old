@@ -4,7 +4,7 @@
   <title><![CDATA[Category: pip | @Lenciel]]></title>
   <link href="http://lenciel.cn/blog/categories/pip/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2014-09-22T03:04:55+08:00</updated>
+  <updated>2014-10-08T20:41:09+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -24,18 +24,18 @@
 
 <p>一个是使用国内的源，比如<a href="http://www.v2ex.com/">v2ex</a>提供的。只需要新建或者编辑<code>~/.pip/pip.conf</code>，加入一行：</p>
 
-<p>```
+<p>&#8220;`
 [global]
 index-url = http://pypi.v2ex.com/simple</p>
 
-<p>```</p>
+<p>&#8220;`</p>
 
 <p>另一个就是打开pip的<code>download cache</code>，这样可以避免pip每次都去下载相同的东西。只需要在<code>.bashrc</code>或者是<code>.zshrc</code>里面加入一行：</p>
 
-<p>```
+<p>&#8220;`
 export PIP_DOWNLOAD_CACHE=$HOME/.pip-download-cache</p>
 
-<p>```</p>
+<p>&#8220;`</p>
 
 ]]></content>
   </entry>

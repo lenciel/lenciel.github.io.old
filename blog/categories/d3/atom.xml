@@ -4,7 +4,7 @@
   <title><![CDATA[Category: d3 | @Lenciel]]></title>
   <link href="http://lenciel.cn/blog/categories/d3/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2014-09-22T03:04:55+08:00</updated>
+  <updated>2014-10-08T20:41:09+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -37,7 +37,7 @@
 
 <div class="main-content" ng-app="app" ng-controller="MainCtrl" ng-style="styles.content" ng-class="{ sm : w &lt; 650 }" ng-init="init()">
     <div id="panel1" class="panel" ng-style="styles.panel1">
-      <stage selected-shape="selectedShape" ng-mouseover="selectedShape = null" />
+      <stage selected-shape="selectedShape" ng-mouseover="selectedShape = null"></stage>
     </div>
     <div id="panel2" class="panel" ng-style="styles.panel2">
       <div class="details">

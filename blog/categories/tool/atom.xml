@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tool | @Lenciel]]></title>
   <link href="http://lenciel.cn/blog/categories/tool/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2014-09-22T03:04:55+08:00</updated>
+  <updated>2014-10-08T20:41:09+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -124,14 +124,14 @@ Warning: Host is missing hostname and/or domain: suttlemac
 
 <p>比如我们要安装Chrome和Skype，打开 <code>/opt/boxen/repo/Puppetfile</code> 并添加两行：</p>
 
-<p>``` ruby
+<p>&#8220;` ruby
 …
 github “sudo”,     “1.0.0”</p>
 
 <h1 id="add-new-modules">Add new modules</h1>
 <p>github “skype”,    “1.0.2”
 github “chrome”,   “1.1.0”
-```</p>
+&#8220;`</p>
 
 <p>这里安装的module的声明规则是 <code>github "{name}", "{version}"</code>。 其中 <code>name</code> 的取法是在 <code>Puppetfile</code> 里面定义的：</p>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | @Lenciel]]></title>
   <link href="http://lenciel.cn/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2014-09-22T03:04:55+08:00</updated>
+  <updated>2014-10-08T20:41:09+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -22,7 +22,9 @@
 
 <p>读了这64KB能干嘛？用报这个bug的人的话来说：</p>
 
-<p><blockquote><p>Without using any privileged information or credentials we were able steal from ourselves the secret keys used for our X.509 certificates, user names and passwords, instant messages, emails and business critical documents and communication.</p></blockquote></p>
+<p>{% blockquote %}
+Without using any privileged information or credentials we were able steal from ourselves the secret keys used for our X.509 certificates, user names and passwords, instant messages, emails and business critical documents and communication.
+{% endblockquote %}</p>
 
 <p>那么读取64KB内存和获取这么多关键信息究竟有什么关系呢？</p>
 
@@ -69,7 +71,7 @@ pl = p;
 
 <p>接下来在这个函数里面干了下面这些事情：</p>
 
-<p>``` c
+<p>&#8220;` c
 unsigned char *buffer, *bp;
 int r;</p>
 
@@ -79,7 +81,7 @@ int r;</p>
  */
 buffer = OPENSSL_malloc(1 + 2 + payload + padding);
 bp = buffer;
-```</p>
+&#8220;`</p>
 
 <p>可以看到，用户要多少程序就分配多少，最多可以分配到<code>65535+1+2+16</code>，指针bp被用来操作这块内存。然后：</p>
 
@@ -149,7 +151,9 @@ memcpy(bp, pl, payload);
 
 <p>iowait的定义为：</p>
 
-<p><blockquote><p>iowait is time that the processor/processors are waiting (i.e. is in an idle state and does nothing), during which there in fact was outstanding disk I/O requests.</p></blockquote></p>
+<p>{% blockquote %}
+iowait is time that the processor/processors are waiting (i.e. is in an idle state and does nothing), during which there in fact was outstanding disk I/O requests.
+{% endblockquote %}</p>
 
 <p>也就是至少有一个I/O在进行时CPU处于<code>idle</code>状态的比例。</p>
 
@@ -262,7 +266,7 @@ memcpy(bp, pl, payload);
 
 <p>去日志里面查看：</p>
 
-<p>```
+<p>&#8220;`
 $ cat /var/log/ps.log | grep D</p>
 
 <p>root      7585  7.9  0.0   5904   812 ?        D    06:34   0:02                  _ /usr/bin/updatedb.mlocate
@@ -293,9 +297,9 @@ root      7585  7.7  0.0   5944   944 ?        D    06:34   0:04                
 root      7585  7.6  0.0   5944   944 ?        D    06:34   0:04                  _ /usr/bin/updatedb.mlocate
 root      7585  7.6  0.0   6000   968 ?        D    06:34   0:04                  _ /usr/bin/updatedb.mlocate
 root      7585  7.6  0.0   6000   968 ?        D    06:34   0:04                  _ /usr/bin/updatedb.mlocate
-```</p>
+&#8220;`</p>
 
-<p>嗯，原来是<code>/usr/bin/updatedb.mlocate</code>。Google了一下<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup><sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>发现其实关掉也没什么：</p>
+<p>嗯，原来是<code>/usr/bin/updatedb.mlocate</code>。Google了一下<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup><sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup>发现其实关掉也没什么：</p>
 
 <p><code>
 sudo killall updatedb.mlocate
@@ -307,10 +311,10 @@ sudo chmod -x /etc/cron.daily/mlocate
 <div class="footnotes">
   <ol>
     <li id="fn:1">
-      <p>http://www.iasptk.com/ubuntuwp/can-i-disable-updatedb-mlocate/<a href="#fnref:1" rel="reference">&#8617;</a></p>
+      <p>http://www.iasptk.com/ubuntuwp/can-i-disable-updatedb-mlocate/ <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:2">
-      <p>http://ubuntuforums.org/showthread.php?t=1243951&amp;page=2&amp;p=7844783#post7844783<a href="#fnref:2" rel="reference">&#8617;</a></p>
+      <p>http://ubuntuforums.org/showthread.php?t=1243951&amp;page=2&amp;p=7844783#post7844783 <a href="#fnref:2" class="reversefootnote">&#8617;</a></p>
     </li>
   </ol>
 </div>

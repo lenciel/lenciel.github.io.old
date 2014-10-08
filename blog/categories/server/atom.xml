@@ -4,7 +4,7 @@
   <title><![CDATA[Category: server | @Lenciel]]></title>
   <link href="http://lenciel.cn/blog/categories/server/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2014-09-22T03:04:55+08:00</updated>
+  <updated>2014-10-08T20:41:09+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -26,7 +26,9 @@
 
 <p>iowait的定义为：</p>
 
-<p><blockquote><p>iowait is time that the processor/processors are waiting (i.e. is in an idle state and does nothing), during which there in fact was outstanding disk I/O requests.</p></blockquote></p>
+<p>{% blockquote %}
+iowait is time that the processor/processors are waiting (i.e. is in an idle state and does nothing), during which there in fact was outstanding disk I/O requests.
+{% endblockquote %}</p>
 
 <p>也就是至少有一个I/O在进行时CPU处于<code>idle</code>状态的比例。</p>
 
@@ -139,7 +141,7 @@
 
 <p>去日志里面查看：</p>
 
-<p>```
+<p>&#8220;`
 $ cat /var/log/ps.log | grep D</p>
 
 <p>root      7585  7.9  0.0   5904   812 ?        D    06:34   0:02                  _ /usr/bin/updatedb.mlocate
@@ -170,9 +172,9 @@ root      7585  7.7  0.0   5944   944 ?        D    06:34   0:04                
 root      7585  7.6  0.0   5944   944 ?        D    06:34   0:04                  _ /usr/bin/updatedb.mlocate
 root      7585  7.6  0.0   6000   968 ?        D    06:34   0:04                  _ /usr/bin/updatedb.mlocate
 root      7585  7.6  0.0   6000   968 ?        D    06:34   0:04                  _ /usr/bin/updatedb.mlocate
-```</p>
+&#8220;`</p>
 
-<p>嗯，原来是<code>/usr/bin/updatedb.mlocate</code>。Google了一下<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup><sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>发现其实关掉也没什么：</p>
+<p>嗯，原来是<code>/usr/bin/updatedb.mlocate</code>。Google了一下<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup><sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup>发现其实关掉也没什么：</p>
 
 <p><code>
 sudo killall updatedb.mlocate
@@ -184,10 +186,10 @@ sudo chmod -x /etc/cron.daily/mlocate
 <div class="footnotes">
   <ol>
     <li id="fn:1">
-      <p>http://www.iasptk.com/ubuntuwp/can-i-disable-updatedb-mlocate/<a href="#fnref:1" rel="reference">&#8617;</a></p>
+      <p>http://www.iasptk.com/ubuntuwp/can-i-disable-updatedb-mlocate/ <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:2">
-      <p>http://ubuntuforums.org/showthread.php?t=1243951&amp;page=2&amp;p=7844783#post7844783<a href="#fnref:2" rel="reference">&#8617;</a></p>
+      <p>http://ubuntuforums.org/showthread.php?t=1243951&amp;page=2&amp;p=7844783#post7844783 <a href="#fnref:2" class="reversefootnote">&#8617;</a></p>
     </li>
   </ol>
 </div>

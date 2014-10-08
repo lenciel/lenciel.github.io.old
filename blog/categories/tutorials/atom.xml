@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tutorials | @Lenciel]]></title>
   <link href="http://lenciel.cn/blog/categories/tutorials/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2014-09-22T03:04:55+08:00</updated>
+  <updated>2014-10-08T20:41:09+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -138,7 +138,7 @@
 
 <p>时间管理对每个人都是非常重要的，相关的理论和工具都有很多。本座试过很轻量的<a href="https://github.com/vim-scripts/todolist.vim">todolist.vim</a>，也试过很大气的<a href="https://www.omnigroup.com/omnifocus">OmniFocus</a>，但可能因为自己比较爱随意乱来的性格，这些工具最终都被本座慢慢荒弃。</p>
 
-<p>倒是从E公司就一直用到现在的<a href="http://pomodorotechnique.com">Pomodoro Technique</a><sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>，因为规则简单上手迅捷疗效明显，最终成为了日常生活的一部分。</p>
+<p>倒是从E公司就一直用到现在的<a href="http://pomodorotechnique.com">Pomodoro Technique</a><sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup>，因为规则简单上手迅捷疗效明显，最终成为了日常生活的一部分。</p>
 
 <h2 id="section">起</h2>
 
@@ -239,7 +239,7 @@
 <div class="footnotes">
   <ol>
     <li id="fn:1">
-      <p>http://pomodorotechnique.com/。<a href="#fnref:1" rel="reference">&#8617;</a></p>
+      <p>http://pomodorotechnique.com/。 <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
     </li>
   </ol>
 </div>
@@ -253,7 +253,7 @@
     <id>http://lenciel.cn/2013/07/cryptography-and-python</id>
     <content type="html"><![CDATA[<p>这周我们的一个项目里面需要调用第三方接口。对方的安全机制是调用时要进行加密和校验，但它们的文档没有描述具体是怎么加密的，而是给了一段代码：</p>
 
-<p>```java
+<p>&#8220;`java
     private static BASE64Encoder base64 = new BASE64Encoder();
 //  private static byte[] myIV = { 50, 51, 52, 53, 54, 55, 56, 57 };
 //  private static byte[] myIV = null;
@@ -325,7 +325,7 @@ private static String desDecrypt(String cipherText) throws Exception
 
 <p>接着这份文档的后面还有另一个对加密的描述也是代码，不过这次比较明显是MD5：</p>
 
-<p>```java
+<p>&#8220;`java
 public static final String MD5(String s)
 {
   char hexDigits[] = {
@@ -355,11 +355,11 @@ public static final String MD5(String s)
 
 <p>return new String(str);
 }
-```</p>
+&#8220;`</p>
 
 <p>这些算法用python来实现当然就简单多了:MD5就是一句话，看起来非常复杂的DES3也不过几句话:</p>
 
-<p>```python
+<p>&#8220;`python
 from pyDes import triple_des, ECB, PAD_PKCS5
 import base64
 import datetime</p>
@@ -371,7 +371,7 @@ key_bytes = key_base64_str.encode(‘utf-8’)
 k = triple_des(key_bytes, ECB, pad=None, padmode=PAD_PKCS5)
 d = base64.b64encode(k.encrypt(input_str))
 print d
-```</p>
+&#8220;`</p>
 
 <p>当然，要明白这些算法究竟怎么回事才叫认真负责的态度。</p>
 
@@ -405,7 +405,7 @@ print d
 
 <p>在python中使用MD5:</p>
 
-<p>```python
+<p>&#8220;`python
 import os
 from Crypto.Hash import MD5</p>
 
@@ -419,7 +419,7 @@ from Crypto.Hash import MD5</p>
                 break
             h.update(chunk)
     return h.hexdigest()
-```</p>
+&#8220;`</p>
 
 <h2 id="section"><strong>加密算法</strong></h2>
 
@@ -486,7 +486,7 @@ from Crypto.Hash import MD5</p>
 
 <p>在程序里面我们常常使用DES3对文件进行加密解密操作。一般来说操作对象是文件时，总是分成一个个chunck来处理以免占用太多内存。如果读入的chunck少于16bytes，就需要扩展它才能进行加密。</p>
 
-<p>```python
+<p>&#8220;`python
 import os
 from Crypto.Cipher import DES3</p>
 
@@ -533,13 +533,13 @@ with open('to_enc.dec', 'r') as f:
 
 <p>程序的输出如下：</p>
 
-<p>```bash
+<p>&#8220;`bash
 to_enc.txt: this content needs to be encrypted.</p>
 
 <p>to_enc.enc: ??~?E??.??]!=)??”t?
                                 JpDw???R?UN0?=??R?UN0?}0r?FV9
 to_enc.dec: this content needs to be encrypted.
-```</p>
+&#8220;`</p>
 
 <h2 id="public-key-algorithms"><strong>Public-key algorithms</strong></h2>
 
@@ -765,152 +765,7 @@ set -sg escape-time 1
 
 <p>完整的配置文件在<a href="https://github.com/lenciel/oh-my-zsh/blob/master/dot_files/tmux.conf">这里</a>：</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (tmux.conf)</span> <a href='/downloads/code/tmux.conf'>download</a></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-<span class='line-number'>64</span>
-<span class='line-number'>65</span>
-<span class='line-number'>66</span>
-<span class='line-number'>67</span>
-<span class='line-number'>68</span>
-<span class='line-number'>69</span>
-<span class='line-number'>70</span>
-<span class='line-number'>71</span>
-<span class='line-number'>72</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># zsh is kinda tight</span>
-</span><span class='line'><span class="nb">set</span>-option -g default-shell <span class="nv">$SHELL</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># copy and paster</span>
-</span><span class='line'><span class="nb">set</span>-option -g default-command <span class="s2">&quot;reattach-to-user-namespace -l zsh&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># look good</span>
-</span><span class='line'><span class="nb">set</span> -g default-terminal <span class="s2">&quot;screen-256color&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># act like GNU screen</span>
-</span><span class='line'><span class="nb">set</span> -g prefix C-a
-</span><span class='line'>unbind C-b
-</span><span class='line'>
-</span><span class='line'><span class="nb">set</span> -sg escape-time 1
-</span><span class='line'><span class="nb">set</span> -g base-index 1
-</span><span class='line'>setw -g pane-base-index 1
-</span><span class='line'>
-</span><span class='line'><span class="nb">bind </span>r <span class="nb">source</span>-file ~/.tmux.conf <span class="se">\;</span> display <span class="s2">&quot;Reloaded!&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">bind</span> - split-window -v
-</span><span class='line'><span class="nb">bind</span> | split-window -h
-</span><span class='line'>
-</span><span class='line'><span class="c"># act like vim</span>
-</span><span class='line'>setw -g mode-keys vi
-</span><span class='line'><span class="nb">bind </span>h <span class="k">select</span>-pane -L
-</span><span class='line'><span class="nb">bind </span>j <span class="k">select</span>-pane -D
-</span><span class='line'><span class="nb">bind </span>k <span class="k">select</span>-pane -U
-</span><span class='line'><span class="nb">bind </span>l <span class="k">select</span>-pane -R
-</span><span class='line'><span class="nb">bind</span> -r C-h <span class="k">select</span>-window -t :-
-</span><span class='line'><span class="nb">bind</span> -r C-l <span class="k">select</span>-window -t :+
-</span><span class='line'>unbind <span class="o">[</span>
-</span><span class='line'><span class="nb">bind</span> <span class="sb">`</span> copy-mode
-</span><span class='line'>unbind p
-</span><span class='line'><span class="nb">bind </span>p paste-buffer
-</span><span class='line'><span class="nb">bind</span> -t vi-copy v begin-selection
-</span><span class='line'><span class="nb">bind</span> -t vi-copy y copy-selection
-</span><span class='line'>
-</span><span class='line'><span class="c"># after copying to a tmux buffer, hit y again to copy to clipboard</span>
-</span><span class='line'><span class="nb">bind </span>y run <span class="s2">&quot;tmux save-buffer - | reattach-to-user-namespace pbcopy&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># resize pane</span>
-</span><span class='line'><span class="nb">bind</span> -r H resize-pane -L 5
-</span><span class='line'><span class="nb">bind</span> -r J resize-pane -D 5
-</span><span class='line'><span class="nb">bind</span> -r K resize-pane -U 5
-</span><span class='line'><span class="nb">bind</span> -r L resize-pane -R 5
-</span><span class='line'>
-</span><span class='line'><span class="c"># enable mouse</span>
-</span><span class='line'>setw -g mode-mouse on
-</span><span class='line'><span class="nb">set</span> -g mouse-select-pane on
-</span><span class='line'><span class="nb">set</span> -g mouse-resize-pane on
-</span><span class='line'><span class="nb">set</span> -g mouse-select-window on
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>setw -g window-status-fg cyan
-</span><span class='line'>setw -g window-status-bg default
-</span><span class='line'>setw -g window-status-attr dim
-</span><span class='line'>setw -g window-status-current-fg white
-</span><span class='line'>setw -g window-status-current-bg red
-</span><span class='line'>setw -g window-status-current-att bright
-</span><span class='line'>
-</span><span class='line'><span class="nb">set</span> -g status-interval 60
-</span><span class='line'><span class="nb">set</span> -g status-justify centre
-</span><span class='line'>setw -g monitor-activity on
-</span><span class='line'><span class="nb">set</span> -g visual-activity on
-</span><span class='line'>
-</span><span class='line'><span class="nb">set</span> -g terminal-overrides <span class="s2">&quot;xterm*:XT:smcup@:rmcup@:kUPS=\eOA:kDN5=\eOB:kLFT5=\eOD:kRIT5=\eOC&quot;</span>
-</span><span class='line'><span class="nb">set</span> -g <span class="nb">history</span>-limit 30000
-</span><span class='line'>setw -g alternate-screen on
-</span><span class='line'><span class="nb">set</span> -s escape-time 50
-</span><span class='line'>
-</span><span class='line'><span class="nb">set</span>-window-option -g window-status-current-format <span class="s2">&quot;#[fg=colour235, bg=colour27]⮀#[fg=colour255, bg=colour27] #I ⮁ #W #[fg=colour27, bg=colour235]⮀&quot;</span>
-</span><span class='line'><span class="nb">source</span> <span class="s2">&quot;/Users/lenciel/Library/Python/2.7/lib/python/site-packages/powerline/bindings/tmux/powerline.conf&quot;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% include_code tmux.conf lang:bash %}</p>
 ]]></content>
   </entry>
   

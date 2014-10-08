@@ -4,7 +4,7 @@
   <title><![CDATA[Category: just-4-fun | @Lenciel]]></title>
   <link href="http://lenciel.cn/blog/categories/just-4-fun/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2014-09-22T03:04:55+08:00</updated>
+  <updated>2014-10-08T20:41:09+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -45,7 +45,7 @@
 
 <p>本座觉得，那么山寨的游戏作者，肯定是把所有的东西都放在页面上的吧，于是用Chrome打开了那个页面，果然没有被拒绝（一般来说，给微信浏览的页面至少应该根据访问上报的user-agent等参数判断它是不是移动设备浏览的，如果不是应该reject），并且源码里面我想要的都在（所以比较敏感的js什么的minify一下会好一些）：</p>
 
-<p>```javascript
+<p>&#8220;`javascript
         var mebtnopenurl = ‘http://game.2sky.cn/game/’;
         var rankurl = mebtnopenurl;
         dataForWeixin = {

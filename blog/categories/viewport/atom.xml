@@ -4,7 +4,7 @@
   <title><![CDATA[Category: viewport | @Lenciel]]></title>
   <link href="http://lenciel.cn/blog/categories/viewport/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2014-09-22T03:04:55+08:00</updated>
+  <updated>2014-10-08T20:41:09+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -46,7 +46,7 @@
 
 <h4 id="section-1"><strong>窗口大小</strong></h4>
 
-<h4 id="section-2"></h4>
+<p>####  </p>
 
 <p>窗口大小表示了当前你的CSS layout可以占用的空间大小。可以通过<code>window.innerWidth</code>和<code>window.innerHeight</code>来获取它们。</p>
 
@@ -72,7 +72,7 @@
 
 <p>那么<code>&lt;html&gt;</code>的宽度是怎么来的呢？所有的网页开发者都默认它就是浏览器的宽度。的确如此——在桌面浏览器上就是这样。实际上，就像我们已经提到过的，&lt;html&gt;的宽度是viewport限定的。在桌面上它就是整个浏览器窗口的宽度，而在手机上则要复杂得多。 </p>
 
-<h4 id="section-3"><strong>手机浏览器</strong></h4>
+<h4 id="section-2"><strong>手机浏览器</strong></h4>
 
 <p>手机一个显而易见的特点就是屏幕小。如果我们原封不动的使用为桌面版浏览器开发的网站的文件，就会发现它们在手机浏览器上面目全非。但是大多数网站开发者是没有精力给手机用户专门维护另外一个网站的。因此手机浏览器制造商尽可能的通过技术手段让网站在手机上和在桌面浏览器里看起来“差不多”。 </p>
 
@@ -92,7 +92,7 @@
 
 <p>那么layout viewport究竟有多宽？这个要看具体的手机浏览器。Safari的iPhone版为980px，Opera是850px，Android的Webkit是800px，而IE是974px。还有一些其他的浏览器除开特别的宽度之外有特别的行为，比如Symbian上的Webkit会尽量保持layout viewport和visual viewport相同。当layout viewport超过了850px的时候，两者才会变得不同。 </p>
 
-<h4 id="section-4"><strong>缩放</strong></h4>
+<h4 id="section-3"><strong>缩放</strong></h4>
 
 <p>很明显，visual和layout两种viewport都使用了CSS像素，但是layout viewport是不会因为缩放操作变化的，而visual viewport会。很多的移动设备上的浏览器，在默认情况下都是以完全zoom-out的尺寸来显示页面的——结合前面的对两种viewport的简介，你可以认为这种时候你是把头伸到窗口(visual viewport)外在看窗外那副大图片(layout viewport)，这种情况下两个viewport也是相等的（没有被窗框遮住的部分）。</p>
 
@@ -181,7 +181,7 @@
   </ol>
 </blockquote>
 
-<h4 id="section-5"><strong>手机屏幕大小</strong></h4>
+<h4 id="section-4"><strong>手机屏幕大小</strong></h4>
 
 <p>前面提到过，在桌面系统，screen.width/hieght返回屏幕的大小，但是和桌面系统一样，开发者都不关心这个值：因为物理上屏幕多大并不重要，我们更关心多少个CSS像素能弄进这个屏幕。 </p>
 
@@ -189,7 +189,7 @@
 
 <p>通过<code>document.documentElement.offsetWidth/Height</code>可以获取<code>&lt;html&gt;</code>元素的CSS像素单位的尺寸。 </p>
 
-<h4 id="section-6"><strong>缩放比例</strong></h4>
+<h4 id="section-5"><strong>缩放比例</strong></h4>
 
 <p>当screen.width和window.innerWidth在你工作的平台都得到了正确实现的时候，两者相除就可以得到缩放的比例大小。 </p>
 
@@ -197,7 +197,7 @@
 
 <p>Media query的思想就是定义只在页面大于，等于或者是小于一定尺寸的时候，才被执行的CSS规则。比如：</p>
 
-<p>```css
+<p>&#8220;`css
 div.sidebar { 
     width: 300px; 
 } </p>
@@ -209,7 +209,7 @@ div.sidebar {
     } </p>
 
 <p>}
-```
+&#8220;`
 规则指定了当宽度小于400px的时候sidebar是100px，其余时候是300px。</p>
 
 <p>需要注意的是在定义media query的时候可以用两套长宽：css里的width/height表示的是documentElement. clientWidth/Height取值，也就是viewport，单位是css像素。css里的device-width/height表示的是screen.width/height，单位是物理像素。</p>

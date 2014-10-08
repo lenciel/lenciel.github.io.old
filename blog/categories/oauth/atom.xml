@@ -4,7 +4,7 @@
   <title><![CDATA[Category: oauth | @Lenciel]]></title>
   <link href="http://lenciel.cn/blog/categories/oauth/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2014-09-22T03:04:55+08:00</updated>
+  <updated>2014-10-08T20:41:09+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -113,12 +113,12 @@
       <li>使用普通文本作为Signature的保存方式</li>
     </ul>
   </li>
-  <li>HMAC-SHA1 <sup id="fnref:8"><a href="#fn:8" rel="footnote">1</a></sup>
+  <li>HMAC-SHA1 <sup id="fnref:8"><a href="#fn:8" class="footnote">1</a></sup>
     <ul>
       <li>Signature的保存方式，基于Secure Hash Algorithm(1)，是加密的文本</li>
     </ul>
   </li>
-  <li>RSA-SHA1 <sup id="fnref:9"><a href="#fn:9" rel="footnote">2</a></sup>
+  <li>RSA-SHA1 <sup id="fnref:9"><a href="#fn:9" class="footnote">2</a></sup>
     <ul>
       <li>Signature的保存方式，基于Secure Hash Algorithm(1)，由一对public/ private的key组成。</li>
     </ul>
@@ -222,7 +222,7 @@ Authorization:
 
 <p>下面是一个<code>response</code>的例子：</p>
 
-<p>```http
+<p>&#8220;`http
 HTTP/1.1 200 OK
 Date: Thu, 13 Oct 2011 00:57:06 GMT
 Status: 200 OK
@@ -237,11 +237,11 @@ Server: tfe</p>
 <p>oauth_token=NPcudxy0yU5T3tBzho7iCotZ3cnetKwcTIRlX0iwRl0&amp;
 oauth_token_secret=veNRnAWe6inFuo8o2u8SLLZLjolYDmDP7SzL0YfYI&amp;
 oauth_callback_confirmed=true
-```</p>
+&#8220;`</p>
 
 <p>可以看到, <code>200</code> response 以及 <code>oauth_token</code>, <code>oauth_token_secret</code> 和 <code>oauth_callback_confirmed</code> 参数表示这次OAuth请求是成功的。接下来你就可以用 <code>oauth_token_secret</code> 来生成你的签名作为 <code>access token</code> 然后使用 <code>oauth_token</code>参数发送出去进行认证。</p>
 
-<p>一般来说, <code>oauth_token</code> 发送的格式是 <code>?oauth_token=[token]</code> ，在认证的endpoint收到之后会进行一次 <code>3-Legged OAuth 1.0a</code> 并返回 <code>oauth_token</code> 和 <code>oauth_verifier</code>。返回的参数也会被用到 <code>Access Token</code> request<sup id="fnref:1"><a href="#fn:1" rel="footnote">3</a></sup>中去。</p>
+<p>一般来说, <code>oauth_token</code> 发送的格式是 <code>?oauth_token=[token]</code> ，在认证的endpoint收到之后会进行一次 <code>3-Legged OAuth 1.0a</code> 并返回 <code>oauth_token</code> 和 <code>oauth_verifier</code>。返回的参数也会被用到 <code>Access Token</code> request<sup id="fnref:1"><a href="#fn:1" class="footnote">3</a></sup>中去。</p>
 
 <h2 id="oauth-10a-one-legged">OAuth 1.0a (one-legged)</h2>
 
@@ -269,7 +269,7 @@ oauth_callback_confirmed=true
 
 <hr />
 
-<p><strong>Note:</strong> Google 要求请求里面要带一个不是<code>oauth</code>开头的参数叫 <code>xoauth_requester_id</code><sup id="fnref:2"><a href="#fn:2" rel="footnote">4</a></sup>，这个要求在OAuth2里面过期了。</p>
+<p><strong>Note:</strong> Google 要求请求里面要带一个不是<code>oauth</code>开头的参数叫 <code>xoauth_requester_id</code><sup id="fnref:2"><a href="#fn:2" class="footnote">4</a></sup>，这个要求在OAuth2里面过期了。</p>
 
 <hr />
 
@@ -424,7 +424,7 @@ oauth_callback_confirmed=true
  - <code>x_auth_mode</code> = <code>client_auth</code>
  - <code>x_auth_username</code>
  - <code>x_auth_password</code>
- - <code>x_auth_permission</code> <em>可选;</em><sup id="fnref:3"><a href="#fn:3" rel="footnote">5</a></sup></p>
+ - <code>x_auth_permission</code> <em>可选;</em><sup id="fnref:3"><a href="#fn:3" class="footnote">5</a></sup></p>
   </li>
   <li>服务提供商验证用户的Credentials之后返回Access Token
     <ul>
@@ -437,7 +437,7 @@ oauth_callback_confirmed=true
 
 <h2 id="oauth-2-two-legged">OAuth 2 (two-legged)</h2>
 
-<p>目前为止最容易解释的一种流程，也被称为 <em>Client Credentials</em> 认证流程<sup id="fnref:4"><a href="#fn:4" rel="footnote">6</a></sup>，也有一种 <em>Resource Owner Password</em> 流程属于这类。</p>
+<p>目前为止最容易解释的一种流程，也被称为 <em>Client Credentials</em> 认证流程<sup id="fnref:4"><a href="#fn:4" class="footnote">6</a></sup>，也有一种 <em>Resource Owner Password</em> 流程属于这类。</p>
 
 <h3 id="client-credentials">Client Credentials</h3>
 
@@ -509,8 +509,8 @@ oauth_callback_confirmed=true
     <ul>
       <li><code>client_id</code></li>
       <li><code>redirect_uri</code></li>
-      <li><code>response_type</code><sup id="fnref:5"><a href="#fn:5" rel="footnote">7</a></sup></li>
-      <li><code>state</code> <em>可选;</em> 防止CSRF<sup id="fnref:6"><a href="#fn:6" rel="footnote">8</a></sup></li>
+      <li><code>response_type</code><sup id="fnref:5"><a href="#fn:5" class="footnote">7</a></sup></li>
+      <li><code>state</code> <em>可选;</em> 防止CSRF<sup id="fnref:6"><a href="#fn:6" class="footnote">8</a></sup></li>
       <li><code>scope</code> <em>可选;</em> 你可以获取的资源范围</li>
     </ul>
 
@@ -532,8 +532,8 @@ https://oauth_service/login/oauth/authorize?client_id=3MVG9lKcPoNINVB&amp;redire
       <li><code>client_id</code></li>
       <li><code>client_secret</code></li>
       <li><code>code</code></li>
-      <li><code>redirect_uri</code> <em>可选;</em><sup id="fnref:7"><a href="#fn:7" rel="footnote">9</a></sup></li>
-      <li><code>grant_type</code> = <code>"authorization_code"</code> [^7]</li>
+      <li><code>redirect_uri</code> <em>可选;</em><sup id="fnref:7"><a href="#fn:7" class="footnote">9</a></sup></li>
+      <li><code>grant_type</code> = <code>"authorization_code"</code> <sup id="fnref:7:1"><a href="#fn:7" class="footnote">9</a></sup></li>
     </ul>
   </li>
   <li>如果 <code>client_id</code> 和 <code>client_secret</code> 正确，服务提供商调用回调到 <code>redirect_url</code> 返回 <code>access_token</code>等信息:
@@ -626,31 +626,31 @@ var OAuth = require('mashape-oauth').OAuth,
 <div class="footnotes">
   <ol>
     <li id="fn:8">
-      <p><a href="http://en.wikipedia.org/wiki/Hash-based_message_authentication_code">Hash based message authentication code</a>.<a href="#fnref:8" rel="reference">&#8617;</a></p>
+      <p><a href="http://en.wikipedia.org/wiki/Hash-based_message_authentication_code">Hash based message authentication code</a>. <a href="#fnref:8" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:9">
-      <p><a href="http://en.wikipedia.org/wiki/RSA_(algorithm\)">RSA Algorithm</a>.<a href="#fnref:9" rel="reference">&#8617;</a></p>
+      <p><a href="http://en.wikipedia.org/wiki/RSA_(algorithm\)">RSA Algorithm</a>. <a href="#fnref:9" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:1">
-      <p><a href="https://dev.twitter.com/docs/auth/implementing-sign-twitter">Implementing sign twitter</a>.<a href="#fnref:1" rel="reference">&#8617;</a></p>
+      <p><a href="https://dev.twitter.com/docs/auth/implementing-sign-twitter">Implementing sign twitter</a>. <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:2">
-      <p><a href="https://developers.google.com/google-apps/gmail/oauth_protocol#oauth_request_url">Oauth request url</a>.<a href="#fnref:2" rel="reference">&#8617;</a></p>
+      <p><a href="https://developers.google.com/google-apps/gmail/oauth_protocol#oauth_request_url">Oauth request url</a>. <a href="#fnref:2" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:3">
-      <p><a href="http://developer.vimeo.com/apis/advanced">Vimeo API Advanced</a><a href="#fnref:3" rel="reference">&#8617;</a></p>
+      <p><a href="http://developer.vimeo.com/apis/advanced">Vimeo API Advanced</a> <a href="#fnref:3" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:4">
-      <p><a href="https://tools.ietf.org/html/draft-ietf-oauth-v2-31#section-4.4">IETF OATUH V2 Section 4.4</a>.<a href="#fnref:4" rel="reference">&#8617;</a></p>
+      <p><a href="https://tools.ietf.org/html/draft-ietf-oauth-v2-31#section-4.4">IETF OATUH V2 Section 4.4</a>. <a href="#fnref:4" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:5">
-      <p><a href="http://tools.ietf.org/html/draft-ietf-oauth-v2-31#section-4.1.1">IETF OATUH V2 Section 4.1.1</a>.<a href="#fnref:5" rel="reference">&#8617;</a></p>
+      <p><a href="http://tools.ietf.org/html/draft-ietf-oauth-v2-31#section-4.1.1">IETF OATUH V2 Section 4.1.1</a>. <a href="#fnref:5" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:6">
-      <p><a href="http://blog.springsource.org/2011/11/30/10317/">CROSS SITE REQUEST FORGERY AND OAUTH2</a>.<a href="#fnref:6" rel="reference">&#8617;</a></p>
+      <p><a href="http://blog.springsource.org/2011/11/30/10317/">CROSS SITE REQUEST FORGERY AND OAUTH2</a>. <a href="#fnref:6" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:7">
-      <p><a href="http://tools.ietf.org/html/rfc6749#section-4.1.3">RFC6749</a>.<a href="#fnref:7" rel="reference">&#8617;</a></p>
+      <p><a href="http://tools.ietf.org/html/rfc6749#section-4.1.3">RFC6749</a>. <a href="#fnref:7" class="reversefootnote">&#8617;</a> <a href="#fnref:7:1" class="reversefootnote">&#8617;<sup>2</sup></a></p>
     </li>
   </ol>
 </div>

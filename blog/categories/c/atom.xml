@@ -4,7 +4,7 @@
   <title><![CDATA[Category: c | @Lenciel]]></title>
   <link href="http://lenciel.cn/blog/categories/c/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2014-09-22T03:04:55+08:00</updated>
+  <updated>2014-10-08T20:41:09+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -22,7 +22,9 @@
 
 <p>读了这64KB能干嘛？用报这个bug的人的话来说：</p>
 
-<p><blockquote><p>Without using any privileged information or credentials we were able steal from ourselves the secret keys used for our X.509 certificates, user names and passwords, instant messages, emails and business critical documents and communication.</p></blockquote></p>
+<p>{% blockquote %}
+Without using any privileged information or credentials we were able steal from ourselves the secret keys used for our X.509 certificates, user names and passwords, instant messages, emails and business critical documents and communication.
+{% endblockquote %}</p>
 
 <p>那么读取64KB内存和获取这么多关键信息究竟有什么关系呢？</p>
 
@@ -69,7 +71,7 @@ pl = p;
 
 <p>接下来在这个函数里面干了下面这些事情：</p>
 
-<p>``` c
+<p>&#8220;` c
 unsigned char *buffer, *bp;
 int r;</p>
 
@@ -79,7 +81,7 @@ int r;</p>
  */
 buffer = OPENSSL_malloc(1 + 2 + payload + padding);
 bp = buffer;
-```</p>
+&#8220;`</p>
 
 <p>可以看到，用户要多少程序就分配多少，最多可以分配到<code>65535+1+2+16</code>，指针bp被用来操作这块内存。然后：</p>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: development | @Lenciel]]></title>
   <link href="http://lenciel.cn/blog/categories/development/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2014-09-22T03:04:55+08:00</updated>
+  <updated>2014-10-08T20:41:09+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -45,7 +45,11 @@
 
 <p>于是就感觉是Chrome的password mananger在干坏事了。google了一下，发现<a href="http://www.theregister.co.uk/2014/04/09/chrome_makes_new_password_grab_in_version_34/">这么个消息</a>：</p>
 
-<p><blockquote><p></p></p><p><p>Chrome 34 will now offer to remember and fill password fields in the presence of autocomplete=off.” That means that if a website turns off automatic password collection, Chrome will offer to do it anyway if password manager is enabled.</p></p><p><p></p></blockquote></p>
+<p>{% blockquote %}</p>
+
+<p>Chrome 34 will now offer to remember and fill password fields in the presence of autocomplete=off.” That means that if a website turns off automatic password collection, Chrome will offer to do it anyway if password manager is enabled.</p>
+
+<p>{% endblockquote %}</p>
 
 <p>古德，瓦力瓦力古德。看了如果一个网站你选择了“记住密码”，Chrome的密码管理器就会被这个域名下包含了<code>$('input[name=password]')</code>的表单激活。并且它居然蠢到直接去找<code>password</code>上面一个input来填入用户名，how convenient…</p>
 
@@ -63,18 +67,18 @@
     )
 </code></p>
 
-<p>更多的相关信息（我希望你知道怎么翻墙），可以看看这里<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>，或者这里<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>，或者这里<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup>。</p>
+<p>更多的相关信息（我希望你知道怎么翻墙），可以看看这里<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup>，或者这里<sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup>，或者这里<sup id="fnref:3"><a href="#fn:3" class="footnote">3</a></sup>。</p>
 
 <div class="footnotes">
   <ol>
     <li id="fn:1">
-      <p><a href="https://groups.google.com/a/chromium.org/forum/#!msg/security-dev/wYGThW5WRrE/qiWrKwJ79S4J">PSA: Ignoring autocomplete=’off’ by default for password manager</a>.<a href="#fnref:1" rel="reference">&#8617;</a></p>
+      <p><a href="https://groups.google.com/a/chromium.org/forum/#!msg/security-dev/wYGThW5WRrE/qiWrKwJ79S4J">PSA: Ignoring autocomplete=’off’ by default for password manager</a>. <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:2">
-      <p><a href="https://groups.google.com/a/chromium.org/forum/#!topic/chromium-dev/zhhj7hCip5c">Issue 352347 - chromium - Don’t autofill passwords where autocomplete=’off’</a>.<a href="#fnref:2" rel="reference">&#8617;</a></p>
+      <p><a href="https://groups.google.com/a/chromium.org/forum/#!topic/chromium-dev/zhhj7hCip5c">Issue 352347 - chromium - Don’t autofill passwords where autocomplete=’off’</a>. <a href="#fnref:2" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:3">
-      <p><a href="https://blog.0xbadc0de.be/archives/124">The war against autocomplete=off: let my browser remember passwords</a>.<a href="#fnref:3" rel="reference">&#8617;</a></p>
+      <p><a href="https://blog.0xbadc0de.be/archives/124">The war against autocomplete=off: let my browser remember passwords</a>. <a href="#fnref:3" class="reversefootnote">&#8617;</a></p>
     </li>
   </ol>
 </div>

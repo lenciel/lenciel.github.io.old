@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tip | @Lenciel]]></title>
   <link href="http://lenciel.cn/blog/categories/tip/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2014-09-22T03:04:55+08:00</updated>
+  <updated>2014-10-08T20:41:09+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -43,7 +43,7 @@ var constructorFalse = new Boolean(false);
 
 <p>比较tricky的地方在于，上面这种constructor返回的不是primitive，而是对象：</p>
 
-<p>```javascript
+<p>&#8220;`javascript
 // Outputs: true
 console.log(primitiveTrue);</p>
 
@@ -52,7 +52,7 @@ console.log(functionTrue);</p>
 
 <p>// Outputs: Boolean {}
 console.log(constructorTrue);
-```</p>
+&#8220;`</p>
 
 <p>由于javascript的类型转换比较aggressive，比如你把一个int和string相加，这个int会自动转成string：</p>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 浮光掠影 | @Lenciel]]></title>
   <link href="http://lenciel.cn/blog/categories/fu-guang-lue-ying/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2014-09-22T03:04:55+08:00</updated>
+  <updated>2014-10-08T20:41:09+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -48,7 +48,9 @@
     <id>http://lenciel.cn/2014/02/the-sochi-2014-winter-olympics</id>
     <content type="html"><![CDATA[<p><img src="/downloads/images/sochi_winter_olympics.gif" alt="Turn the worst" title="Don't touch me..." /></p>
 
-<p><blockquote><p>“Let’s meet in Sochi, they said…Like brothers and sisters, they said…”</p><footer><strong>Lenciel (2014)</strong></footer></blockquote></p>
+<p>{% blockquote Lenciel (2014)%}
+“Let’s meet in Sochi, they said…Like brothers and sisters, they said…”
+{% endblockquote %}</p>
 ]]></content>
   </entry>
   
@@ -59,7 +61,9 @@
     <id>http://lenciel.cn/2014/01/next-subject</id>
     <content type="html"><![CDATA[<p><img src="/downloads/images/next_subject_in_blade_runner.gif" alt="Next Subject" title="Don't touch me..." /></p>
 
-<p><blockquote><p>“Next subject: Kowalski, Leon.”</p><footer><strong>Ridley Scott</strong> <cite><a href='http://www.imdb.com/title/tt0083658/'>Blade Runner(1982)</a></cite></footer></blockquote></p>
+<p>{% blockquote Ridley Scott http://www.imdb.com/title/tt0083658/ Blade Runner(1982)%}
+“Next subject: Kowalski, Leon.”
+{% endblockquote %}</p>
 ]]></content>
   </entry>
   
@@ -70,7 +74,9 @@
     <id>http://lenciel.cn/2013/11/a-lot-of-healing-to-do</id>
     <content type="html"><![CDATA[<p><img src="/downloads/images/healing_to_do.gif" alt="Should do more healing" title="Don't touch me..." /></p>
 
-<p><blockquote><p>“I guess I’ve still got a lot of healing to do.”</p><footer><strong>Owen Wilson</strong> <cite><a href='http://www.imdb.com/title/tt0838221/'>The Darjeeling Limited(2007)</a></cite></footer></blockquote></p>
+<p>{% blockquote Owen Wilson  http://www.imdb.com/title/tt0838221/ The Darjeeling Limited(2007)%}
+“I guess I’ve still got a lot of healing to do.”
+{% endblockquote %}</p>
 ]]></content>
   </entry>
   
@@ -81,7 +87,9 @@
     <id>http://lenciel.cn/2013/10/no-clock-on-my-business</id>
     <content type="html"><![CDATA[<p><img src="/downloads/images/no_clock_on_my_business.gif" alt="No Clock On My Business" title="Don't touch me..." /></p>
 
-<p><blockquote><p>“There is no clock on my business!”</p><footer><strong>Coen Brothers</strong> <cite><a href='http://www.imdb.com/title/tt1403865/'>True Grit (2010)</a></cite></footer></blockquote></p>
+<p>{% blockquote Coen Brothers  http://www.imdb.com/title/tt1403865/ True Grit (2010)%}
+“There is no clock on my business!”
+{% endblockquote %}</p>
 ]]></content>
   </entry>
   

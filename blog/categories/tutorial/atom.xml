@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tutorial | @Lenciel]]></title>
   <link href="http://lenciel.cn/blog/categories/tutorial/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2014-09-22T03:04:55+08:00</updated>
+  <updated>2014-10-08T20:41:09+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -29,16 +29,16 @@
 
 <p>还是以之前的那个项目来作为例子，我们首先创建一个migration file：</p>
 
-<p>```bash
+<p>&#8220;`bash
 $ python manage.py makemigrations –empty ts_data</p>
 
 <p>Migrations for ts_data:
-  0003<em>auto</em>20140811_0110.py:
-```</p>
+  0003_auto_20140811_0110.py:
+&#8220;`</p>
 
 <p>它的内容如下：</p>
 
-<p>```python
+<p>&#8220;`python
 # -<em>- coding: utf-8 -</em>-
 from <strong>future</strong> import unicode_literals</p>
 
@@ -56,7 +56,7 @@ operations = [
 
 <p>我们在里面加入一个<code>RunPython</code>的部分，来导入数据：</p>
 
-<p>```python
+<p>&#8220;`python
 # -<em>- coding: utf-8 -</em>-
 from <strong>future</strong> import unicode_literals</p>
 
@@ -125,14 +125,14 @@ $ python manage.py startapp ts_data
 
 <p>然后创建一个model到subl ts_data/models.py：</p>
 
-<p>```python
+<p>&#8220;`python
 from django.db import models</p>
 
 <h1 id="create-your-models-here">Create your models here.</h1>
 <p>class PingPongPrice(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     price = models.DecimalField(max_digits=5, decimal_places=2)
-```</p>
+&#8220;`</p>
 
 <p>subl django_migration_test/settings.py</p>
 
@@ -254,7 +254,7 @@ Running migrations:
 
 <p>在我们运行<code>python manage.py migrate &lt;app_name&gt;</code>究竟发生了什么？实际上，Django会创建一个python文件来描述如何完成这个migration，以前面的ts_data为例，这个文件位于<code>ts_data/migrations/0001_initial.py</code>，内容如下：</p>
 
-<p>```python
+<p>&#8220;`python
 # -<em>- coding: utf-8 -</em>-
 from <strong>future</strong> import unicode_literals</p>
 
@@ -341,7 +341,7 @@ Migrations for 'ts_data':
 
 <p>可以看到这次生成的migration文件里面有<code>AlterField</code>操作：</p>
 
-<p>```python
+<p>&#8220;`python
 # -<em>- coding: utf-8 -</em>-
 from <strong>future</strong> import unicode_literals</p>
 
@@ -589,14 +589,14 @@ Warning: Host is missing hostname and/or domain: suttlemac
 
 <p>比如我们要安装Chrome和Skype，打开 <code>/opt/boxen/repo/Puppetfile</code> 并添加两行：</p>
 
-<p>``` ruby
+<p>&#8220;` ruby
 …
 github “sudo”,     “1.0.0”</p>
 
 <h1 id="add-new-modules">Add new modules</h1>
 <p>github “skype”,    “1.0.2”
 github “chrome”,   “1.1.0”
-```</p>
+&#8220;`</p>
 
 <p>这里安装的module的声明规则是 <code>github "{name}", "{version}"</code>。 其中 <code>name</code> 的取法是在 <code>Puppetfile</code> 里面定义的：</p>
 
@@ -842,7 +842,9 @@ python setup.py install
 
 <p><code>virtualenv</code>无疑是当前Python开发者心中“必知必会”类的工具了。<code>virtualenv</code>主要就是提供一个“独立的”Python开发环境。为什么需要“独立”的开发环境？在不知道<code>virtualenv</code>之前Python包满坑满谷的本座自然是有很多槽可以吐，不过最好的答案是<code>virtualenv</code>的文档里面说的：</p>
 
-<p><blockquote><p>The basic problem being addressed is one of dependencies and versions, and indirectly permissions. Imagine you have an application that needs version 1 of LibFoo, but another application requires version 2. How can you use both these applications? If you install everything into /usr/lib/python2.7/site-packages (or whatever your platform’s standard location is), it’s easy to end up in a situation where you unintentionally upgrade an application that shouldn’t be upgraded.</p></blockquote></p>
+<p>{% blockquote %}
+The basic problem being addressed is one of dependencies and versions, and indirectly permissions. Imagine you have an application that needs version 1 of LibFoo, but another application requires version 2. How can you use both these applications? If you install everything into /usr/lib/python2.7/site-packages (or whatever your platform’s standard location is), it’s easy to end up in a situation where you unintentionally upgrade an application that shouldn’t be upgraded.
+{% endblockquote %}</p>
 
 <p>简单来说，就是每个工程使用自己独立的<code>virtualenv</code>进行开发，所有该工程需要依赖的Package都安装在这个<code>virutalenv</code>里面。<code>virutalenv</code>的安装同样是使用<code>pip</code>：</p>
 
@@ -852,14 +854,14 @@ $ pip install virtualenv
 
 <p>然后就可以建立属于自己项目的开发环境：</p>
 
-<p>``` bash
+<p>&#8220;` bash
 D:\Lenciel\Temp mkdir my_project_env</p>
 
 <p>D:\Lenciel\Temp\virtualenv –distribute my_project_env</p>
 
 <p>New python executable in my_project_env\Scripts\python.exe
   Installing distribute……………..done.
-```</p>
+&#8220;`</p>
 
 <p>建立的目录下面会自动的安装好<code>pip</code>等工具：</p>
 
@@ -906,7 +908,7 @@ $ virtualenv my_project_venv --no-site-packages
 
 <p>最后是每个Pythoner都津津乐道的Zen Of Python送给刚开始学习的朋友。</p>
 
-<p>``` python
+<p>&#8220;` python
 »&gt;import this
 The Zen of Python, by Tim Peters</p>
 
@@ -929,7 +931,7 @@ Although never is often better than <em>right</em> now.
 If the implementation is hard to explain, it’s a bad idea.
 If the implementation is easy to explain, it may be a good idea.
 Namespaces are one honking great idea – let’s do more of those!
-```</p>
+&#8220;`</p>
 
 <p>Happy Pythoning…!!</p>
 

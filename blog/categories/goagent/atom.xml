@@ -4,7 +4,7 @@
   <title><![CDATA[Category: goagent | @Lenciel]]></title>
   <link href="http://lenciel.cn/blog/categories/goagent/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2014-09-22T03:04:55+08:00</updated>
+  <updated>2014-10-08T20:41:09+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -36,13 +36,13 @@ $ mux new goagent
 
 <p>项目配置文件（假设你的goagent放在<code>~/bin/goagent/local</code>）：</p>
 
-<p>```ruby
+<p>&#8220;`ruby
 name: goagent
 root: ~/bin/goagent/local</p>
 
 <p>windows:
   - shell: python proxy.py
-```</p>
+&#8220;`</p>
 
 <p>这样就只需要你在需要翻墙的时候<code>mux goagent</code>一下即可，detach或者attach到这个session也非常方便。当然不使用tmuxinator而是直接用shell脚本写一堆tmux命令也可以达到一样的效果，用tmuxinator是因为本座自己还有一堆别的Django项目的tmuxinator项目。</p>
 ]]></content>

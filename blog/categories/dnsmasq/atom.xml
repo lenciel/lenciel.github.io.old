@@ -4,7 +4,7 @@
   <title><![CDATA[Category: dnsmasq | @Lenciel]]></title>
   <link href="http://lenciel.cn/blog/categories/dnsmasq/atom.xml" rel="self"/>
   <link href="http://lenciel.cn/"/>
-  <updated>2014-09-22T03:04:55+08:00</updated>
+  <updated>2014-10-08T20:41:09+08:00</updated>
   <id>http://lenciel.cn/</id>
   <author>
     <name><![CDATA[Lenciel Li]]></name>
@@ -89,7 +89,7 @@ $ sudo vi /etc/resolver/dev
 
 <h3 id="section">测试效果</h3>
 
-<p>```bash</p>
+<p>&#8220;`bash</p>
 
 <pre><code>$ ping -c 1 www.sina.com.cn
 PING newscd.sina.com.cn (221.236.31.145): 56 data bytes
